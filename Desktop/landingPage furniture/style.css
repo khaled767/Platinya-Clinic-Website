@@ -7,7 +7,14 @@
 
 body{
   background:#f8f5f0;
+  /* padding-top: 10px; */
   color:#333;
+}
+
+h2{
+  font-size:32px;
+  margin-bottom:20px;
+  color:#5a3921;
 }
 
 /* NAVBAR */
@@ -36,15 +43,8 @@ body{
   color:#333;
   font-weight:bold;
 }
-
-.language-switcher button{
-  padding:8px 12px;
-  margin-left:5px;
-  border:none;
-  background:#7b4f2c;
-  color:white;
-  border-radius:5px;
-  cursor:pointer;
+.nav-links a:hover{
+  color:#7b4f2c;
 }
 
 /* HERO */
@@ -70,7 +70,7 @@ body{
   color:#5a3921;
 }
 
-.hero-btn{
+ .hero-btn{
   display:inline-block;
   margin-top:20px;
   background:#25D366;
@@ -78,122 +78,9 @@ body{
   padding:14px 24px;
   text-decoration:none;
   border-radius:8px;
-}
+} 
 
-/* GALLERY */
-.gallery{
-  padding:80px 20px;
-  text-align:center;
-}
-
-.gallery-container{
-  display:flex;
-  gap:20px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:30px;
-}
-
-.card{
-  width:220px;
-  background:white;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 4px 15px rgba(0,0,0,0.1);
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-}
-
-.card img{
-  width:100%;
-  height:160px;
-  object-fit:cover;
-}
-
-.card p{
-  padding:15px;
-  font-weight:bold;
-}
-/* Seo-text */
-.seo-text{
-  padding: 60px 60px;
-  background: #f8f5f0;
-  text-align: center;
-}
-.seo-text h2 {
-  padding: 20px;
-  
-}
-
-
-/* AREAS */
-.areas{
-  padding:80px 20px;
-  background:#f8f5f0;
-  text-align:center;
-}
-
-.area-list{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:15px;
-  margin-top:30px;
-}
-
-.area-item{
-  background:white;
-  padding:15px 25px;
-  border-radius:10px;
-  box-shadow:0 3px 10px rgba(0,0,0,0.08);
-  font-weight:bold;
-  color:#5a3921;
-  transition:0.3s;
-}
-
-.area-item:hover{
-  transform:translateY(-5px);
-}
-
-/* ABOUT */
-.about,.testimonials{
-  padding:80px 20px;
-  text-align:center;
-}
-
-.about p,.testimonial-box{
-  max-width:700px;
-  margin:auto;
-  line-height:1.8;
-}
-
-/* FOOTER */
-footer{
-  background:#7b4f2c;
-  color:white;
-  text-align:center;
-  padding:20px;
-}
-
-/* FLOATING WHATSAPP */
-.floating-whatsapp{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  width:60px;
-  height:60px;
-  background:#25D366;
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-radius:50%;
-  font-size:30px;
-  text-decoration:none;
-}
+/* FEATURES */
 .features{
   padding:80px 20px;
   display:flex;
@@ -236,6 +123,141 @@ footer{
   color:#666;
 }
 
+/* GALLERY */
+.gallery{
+  padding:80px 20px;
+  text-align:center;
+}
+
+.gallery-container{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+
+.card{
+  width:220px;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+.card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+}
+
+.card p{
+  padding:15px;
+  font-weight:bold;
+}
+
+/* Seo-text */
+ .seo-text{
+  padding:60px 20px;
+  max-width:800px;
+  margin:auto;
+  line-height:1.9;
+}
+
+.seo-text p{
+  margin-bottom:15px;
+}
+
+/* AREAS */
+.areas{
+  padding:80px 20px;
+  background:#f8f5f0;
+  text-align:center;
+}
+
+.area-list{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
+  margin-top:30px;
+}
+
+.area-item{
+  background:white;
+  padding:15px 25px;
+  border-radius:10px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+  font-weight:bold;
+  color:#5a3921;
+  transition:0.3s;
+}
+
+.area-item:hover{
+  transform:translateY(-5px);
+}
+
+/* ABOUT */
+.about,.testimonials{
+  padding:80px 20px;
+  text-align:center;
+}
+
+.about p,.testimonial-box{
+  max-width:700px;
+  margin:auto;
+  line-height:1.8;
+}
+
+/* FAQ */
+.faq{
+  padding:80px 20px;
+  max-width:800px;
+  margin:auto;
+}
+
+.faq h3{
+  margin-top:20px;
+  color:#5a3921;
+}
+
+.faq p{
+  color:#555;
+}
+
+/* FOOTER */
+footer{
+  background:#7b4f2c;
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+
+/* FLOATING WHATSAPP */
+.floating-whatsapp{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:60px;
+  height:60px;
+  background:#25D366;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:50%;
+  font-size:30px;
+  text-decoration:none;
+}
+.floating-whatsapp{
+  animation:float 2s infinite;
+}
+
 /* REVEAL ANIMATION */
 .reveal{
   opacity:0;
@@ -258,9 +280,6 @@ footer{
   padding:12px 40px;
   background:white;
   box-shadow:0 3px 10px rgba(0,0,0,0.1);
-}
-.floating-whatsapp{
-  animation:float 2s infinite;
 }
 
 @keyframes float{
