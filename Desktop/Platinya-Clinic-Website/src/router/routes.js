@@ -9,3 +9,4 @@ const routes = {
 
 export { notFoundPage };
 export default routes;
+

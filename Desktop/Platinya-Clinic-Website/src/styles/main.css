@@ -1,3 +1,54 @@
-body{
-    background:#46cd2b;
-}
+/* ==========================
+   Base
+========================== */
+
+@import "./base/reset.css";
+@import "./base/typography.css";
+@import "./base/globals.css";
+
+ /* ==========================
+   Abstracts
+==========================  */
+
+@import "./abstracts/variables.css";
+@import "./abstracts/colors.css";
+@import "./abstracts/spacing.css";
+@import "./abstracts/breakpoints.css";
+
+/* ==========================
+   Layout
+========================== */
+
+@import "./layout/grid.css";
+@import "./layout/container.css";
+@import "./layout/header.css";
+
+/* ==========================
+   Components
+========================== */
+
+/* Component styles will be imported here */
+
+/* ==========================
+   Pages
+========================== */
+
+/* Page styles will be imported here */
+
+/* ==========================
+   Utilities
+========================== */
+
+@import "./utilities/utilities.css";
+
+/* ==========================
+   Themes
+========================== */
+
+@import "./themes/default.css";
+
+/* ==========================
+   Vendors
+========================== */
+
+/* Third-party styles will be imported here */

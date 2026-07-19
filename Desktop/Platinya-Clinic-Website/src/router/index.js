@@ -13,3 +13,4 @@ function resolveRoute() {
 }
 
 export { getCurrentPath, resolveRoute };
+

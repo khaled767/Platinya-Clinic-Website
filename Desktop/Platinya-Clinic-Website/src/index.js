@@ -1,4 +1,5 @@
 import "./styles/main.css";
 
-const message = "babel is working"
-console.log(message)
+import renderApp from "./renderApp";
+
+renderApp();

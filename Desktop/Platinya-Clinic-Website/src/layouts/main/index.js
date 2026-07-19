@@ -1,15 +1,19 @@
+import header from "../../components/header";
+import footer from "../../components/footer";
+
+
+
+
 export default function mainLayout(pageContent) {
   return `
-    <header>
-      <!-- Header Placeholder -->
-    </header>
+    <div class="app-layout">
+      ${header()}
 
-    <main>
-      ${pageContent}
-    </main>
+      <main>
+        ${pageContent}
+      </main>
 
-    <footer>
-      <!-- Footer Placeholder -->
-    </footer>
+      ${footer()}
+    </div>
   `;
 }
