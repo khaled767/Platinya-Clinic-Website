@@ -1,0 +1,49 @@
+/* ==========================================================================
+   Platinya Clinic — Color System (Luxury Healthcare Concierge Palette)
+   ========================================================================== */
+
+:root {
+  /* Brand Primary — Deep Obsidian / Slate */
+  --color-primary-900: #090D16;
+  --color-primary-800: #0F172A;
+  --color-primary-700: #1E293B;
+  --color-primary-600: #334155;
+  --color-primary-500: #475569;
+
+  /* Brand Secondary — Champagne Gold (Luxury Accent) */
+  --color-accent-gold-700: #9A7B2C;
+  --color-accent-gold-600: #B89535;
+  --color-accent-gold-500: #D4AF37;
+  --color-accent-gold-400: #E5C358;
+  --color-accent-gold-100: #FAF5E4;
+
+  /* Medical Authority — Calm Emerald / Sage Accent */
+  --color-medical-700: #0F766E;
+  --color-medical-600: #0D9488;
+  --color-medical-500: #14B8A6;
+  --color-medical-100: #CCFBF1;
+
+  /* Neutral Backgrounds — Warm Alabaster / Cream */
+  --color-bg-base: #F8FAFC;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-surface-elevated: #F1F5F9;
+  --color-bg-dark: #0F172A;
+
+  /* Text & Content */
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748B;
+  --color-text-inverse: #F8FAFC;
+  --color-text-accent: #D4AF37;
+
+  /* Borders & Dividers */
+  --color-border-light: #E2E8F0;
+  --color-border-medium: #CBD5E1;
+  --color-border-accent: rgba(212, 175, 55, 0.3);
+
+  /* Status Colors */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+}
