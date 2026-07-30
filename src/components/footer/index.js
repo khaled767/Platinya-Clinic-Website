@@ -9,7 +9,7 @@ export default function footer() {
           <!-- Column 1: Brand & Concierge Statement -->
           <div class="footer-col footer-brand">
             <a href="/" data-route class="logo-link">
-              <img src="/assets/images/logo.png" alt="Platinya Clinic Logo" class="brand-logo-img-footer" />
+              <img src="/assets/images/logo.svg" alt="Platinya Clinic Logo" class="brand-logo-img-footer" />
               <div class="logo-text">
                 <span class="logo-title">PLATINYA</span>
                 <span class="logo-subtitle">HEALTHCARE CONCIERGE</span>

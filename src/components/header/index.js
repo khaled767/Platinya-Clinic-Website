@@ -6,7 +6,7 @@ export default function header() {
       <div class="container header-container">
         <div class="header-logo">
           <a href="/" data-route class="logo-link">
-            <img src="/assets/images/logo.png" alt="Platinya Clinic Logo" class="brand-logo-img" />
+            <img src="/assets/images/logo.svg" alt="Platinya Clinic Logo" class="brand-logo-img" />
             <div class="logo-text">
               <span class="logo-title">PLATINYA</span>
               <span class="logo-subtitle">HEALTHCARE CONCIERGE</span>
