@@ -1,9 +1,7 @@
 // Services Page Module (High-Fidelity)
 
-import mainLayout from "../../layouts/main";
-
 export default function servicesPage() {
-  const content = `
+  return `
     <div class="page-services">
       <!-- Internal Page Banner -->
       <section class="page-banner bg-dark-obsidian">
@@ -120,6 +118,4 @@ export default function servicesPage() {
       </section>
     </div>
   `;
-
-  return mainLayout(content);
 }

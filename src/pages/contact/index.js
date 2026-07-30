@@ -1,10 +1,9 @@
 // Contact Page Module (High-Fidelity)
 
-import mainLayout from "../../layouts/main";
 import contactSection from "../../components/contact";
 
 export default function contactPage() {
-  const content = `
+  return `
     <div class="page-contact">
       <section class="page-banner bg-dark-obsidian">
         <div class="container">
@@ -19,6 +18,4 @@ export default function contactPage() {
       ${contactSection()}
     </div>
   `;
-
-  return mainLayout(content);
 }

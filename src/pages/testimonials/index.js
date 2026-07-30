@@ -1,7 +1,5 @@
 // Testimonials Page Module (High-Fidelity)
 
-import mainLayout from "../../layouts/main";
-
 export default function testimonialsPage() {
   const journeys = [
     {
@@ -24,7 +22,7 @@ export default function testimonialsPage() {
     }
   ];
 
-  const content = `
+  return `
     <div class="page-testimonials">
       <section class="page-banner bg-dark-obsidian">
         <div class="container">
@@ -55,6 +53,4 @@ export default function testimonialsPage() {
       </section>
     </div>
   `;
-
-  return mainLayout(content);
 }

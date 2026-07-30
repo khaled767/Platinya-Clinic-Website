@@ -1,7 +1,5 @@
 // Doctors Page Module (High-Fidelity)
 
-import mainLayout from "../../layouts/main";
-
 export default function doctorsPage() {
   const doctors = [
     {
@@ -34,7 +32,7 @@ export default function doctorsPage() {
     }
   ];
 
-  const content = `
+  return `
     <div class="page-doctors">
       <section class="page-banner bg-dark-obsidian">
         <div class="container">
@@ -69,6 +67,4 @@ export default function doctorsPage() {
       </section>
     </div>
   `;
-
-  return mainLayout(content);
 }

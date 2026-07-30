@@ -9,7 +9,7 @@ export default function footer() {
           <!-- Column 1: Brand & Concierge Statement -->
           <div class="footer-col footer-brand">
             <a href="/" data-route class="logo-link">
-              <span class="logo-mark">◆</span>
+              <img src="/assets/images/logo.png" alt="Platinya Clinic Logo" class="brand-logo-img-footer" />
               <div class="logo-text">
                 <span class="logo-title">PLATINYA</span>
                 <span class="logo-subtitle">HEALTHCARE CONCIERGE</span>
@@ -54,7 +54,7 @@ export default function footer() {
             <div class="contact-info">
               <p class="contact-item">
                 <span class="contact-label">24/7 European VIP Line:</span>
-                <a href="tel:+905550000000" class="contact-link">+90 555 000 0000</a>
+                <a href="tel:+905****0000" class="contact-link">+90 555 000 0000</a>
               </p>
               <p class="contact-item">
                 <span class="contact-label">Email Assistance:</span>

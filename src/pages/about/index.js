@@ -1,9 +1,7 @@
 // About Page Module (High-Fidelity)
 
-import mainLayout from "../../layouts/main";
-
 export default function aboutPage() {
-  const content = `
+  return `
     <div class="page-about">
       <!-- Internal Page Banner -->
       <section class="page-banner bg-dark-obsidian">
@@ -49,6 +47,4 @@ export default function aboutPage() {
       </section>
     </div>
   `;
-
-  return mainLayout(content);
 }
