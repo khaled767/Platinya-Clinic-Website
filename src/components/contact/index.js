@@ -1,4 +1,5 @@
 // Contact Component (High-Fidelity Concierge Form)
+import { icons } from "../icons";
 
 export default function contact() {
   return `
@@ -14,7 +15,7 @@ export default function contact() {
 
           <div class="contact-channels">
             <div class="channel-card">
-              <span class="channel-icon">📞</span>
+              <span class="channel-icon">${icons.phone}</span>
               <div>
                 <span class="channel-label">24/7 VIP Concierge Hotlines</span>
                 <a href="tel:+905****0000" class="channel-value">+90 555 000 0000</a>
@@ -22,7 +23,7 @@ export default function contact() {
             </div>
 
             <div class="channel-card">
-              <span class="channel-icon">✉</span>
+              <span class="channel-icon">${icons.email}</span>
               <div>
                 <span class="channel-label">Direct Coordinator Desk</span>
                 <a href="mailto:concierge@platinyaclinic.com" class="channel-value">concierge@platinyaclinic.com</a>
@@ -30,7 +31,7 @@ export default function contact() {
             </div>
 
             <div class="channel-card">
-              <span class="channel-icon">📍</span>
+              <span class="channel-icon">${icons.mapPin}</span>
               <div>
                 <span class="channel-label">International Relations HQ</span>
                 <span class="channel-value">Nisantasi, Istanbul, Turkey</span>

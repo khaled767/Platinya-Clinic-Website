@@ -19,7 +19,7 @@
   height: 88px;
 }
 
-/* Logo Styling */
+/* Logo Styling & Blend */
 .logo-link {
   display: flex;
   align-items: center;
@@ -27,29 +27,32 @@
   text-decoration: none;
 }
 
+.logo-img-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
 .brand-logo-img {
   height: 48px;
   width: auto;
   object-fit: contain;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.3));
   transition: transform var(--transition-fast);
-  filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.2));
 }
 
 .brand-logo-img-footer {
   height: 52px;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.25));
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.35));
 }
 
 .logo-link:hover .brand-logo-img {
-  transform: scale(1.04);
-}
-
-.logo-mark {
-  color: var(--color-accent-gold-500);
-  font-size: var(--font-size-xl);
-  line-height: 1;
+  transform: scale(1.05);
 }
 
 .logo-text {
@@ -112,11 +115,83 @@
   width: 100%;
 }
 
-/* Luxury Action Button */
+/* Luxury Action & Language Switcher */
 .header-actions {
   display: flex;
   align-items: center;
   gap: var(--space-4);
+}
+
+.lang-switcher {
+  position: relative;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.5rem 0.85rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.lang-btn:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--color-accent-gold-500);
+  color: var(--color-accent-gold-500);
+}
+
+.lang-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-accent-gold-500);
+}
+
+.lang-arrow {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: var(--color-primary-800);
+  border: 1px solid var(--color-border-accent);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-dropdown);
+  min-width: 140px;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1100;
+}
+
+.lang-switcher:hover .lang-dropdown {
+  display: flex;
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.lang-option:hover, .lang-option.active {
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--color-accent-gold-500);
 }
 
 .btn-luxury-gold {

@@ -1,4 +1,5 @@
 // Services Section Component (High-Fidelity)
+import { icons } from "../icons";
 
 export default function services() {
   const medicalSpecialties = [
@@ -79,19 +80,19 @@ export default function services() {
           </div>
           <div class="concierge-features-grid">
             <div class="feature-chip">
-              <span class="chip-icon">✈</span>
+              <span class="chip-icon">${icons.plane}</span>
               <span class="chip-text">VIP Airport Transfers</span>
             </div>
             <div class="feature-chip">
-              <span class="chip-icon">🏨</span>
+              <span class="chip-icon">${icons.hotel}</span>
               <span class="chip-text">5-Star Hotel Accommodations</span>
             </div>
             <div class="feature-chip">
-              <span class="chip-icon">👤</span>
+              <span class="chip-icon">${icons.user}</span>
               <span class="chip-text">Personal Patient Coordinator</span>
             </div>
             <div class="feature-chip">
-              <span class="chip-icon">🗣</span>
+              <span class="chip-icon">${icons.translate}</span>
               <span class="chip-text">Multi-Lingual Interpreter</span>
             </div>
           </div>
