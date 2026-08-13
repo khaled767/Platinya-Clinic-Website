@@ -207,4 +207,21 @@
   .concierge-features-grid {
     grid-template-columns: 1fr;
   }
+
+  .concierge-banner-luxury {
+    padding: var(--space-6);
+  }
+
+  .services-grid {
+    gap: var(--space-5);
+  }
+
+  .service-card-luxury {
+    padding: var(--space-6);
+  }
+
+  .section-services {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
 }

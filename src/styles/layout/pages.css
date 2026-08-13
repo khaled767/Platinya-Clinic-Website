@@ -279,3 +279,45 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 640px) {
+  .page-banner {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-12);
+  }
+
+  .page-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .service-detail-card {
+    padding: var(--space-6);
+  }
+
+  .detail-grid {
+    gap: var(--space-6);
+  }
+
+  .doctors-grid,
+  .testimonials-catalog-grid {
+    gap: var(--space-5);
+  }
+
+  .doctor-card-luxury,
+  .journey-card {
+    padding: var(--space-6);
+  }
+
+  .section-services-catalog,
+  .section-doctors-list,
+  .section-about-story,
+  .section-testimonials-catalog {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .stat-num {
+    font-size: var(--font-size-2xl);
+    min-width: 60px;
+  }
+}

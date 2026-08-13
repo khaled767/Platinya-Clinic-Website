@@ -225,6 +225,11 @@
 }
 
 @media (max-width: 640px) {
+  .hero-section {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
@@ -237,5 +242,13 @@
 
   .trust-divider {
     display: none;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-4xl);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-base);
   }
 }

@@ -11,8 +11,16 @@ export default function header() {
           </a>
         </div>
 
-        <div class="header-navigation">
-          ${navigation()}
+        <div class="navbar-collapse">
+          <nav class="main-nav">
+            ${navigation()}
+          </nav>
+
+          <div class="navbar-actions">
+            <a href="/contact" data-route class="btn-luxury-gold header-contact-cta">
+              <span>VIP Consultation</span>
+            </a>
+          </div>
         </div>
 
         <div class="header-actions">
@@ -31,7 +39,7 @@ export default function header() {
             </div>
           </div>
 
-          <a href="/contact" data-route class="btn-luxury-gold">
+          <a href="/contact" data-route class="btn-luxury-gold header-cta-desktop">
             <span>VIP Consultation</span>
           </a>
 

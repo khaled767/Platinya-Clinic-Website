@@ -334,4 +334,34 @@
   .form-grid-2 {
     grid-template-columns: 1fr;
   }
+
+  /* Tighter section rhythm on small screens */
+  .section-about,
+  .section-why-us,
+  .section-testimonials,
+  .section-contact,
+  .contact-info-col,
+  .about-story-grid {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .luxury-form {
+    padding: var(--space-6);
+  }
+
+  .channel-card {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .about-story-grid {
+    gap: var(--space-8);
+  }
+}
+
+/* Extra-small phones: single column trust & tighter stats */
+@media (max-width: 400px) {
+  .contact-channels {
+    gap: var(--space-4);
+  }
 }

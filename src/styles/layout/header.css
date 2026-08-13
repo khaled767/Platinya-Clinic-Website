@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Header & Navigation (High Fidelity Luxury Styling)
+   Header & Navigation (Responsive Luxury Styling)
    ========================================================================== */
 
 .site-header {
@@ -8,79 +8,64 @@
   z-index: 1000;
   background: rgba(15, 23, 42, 0.94);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(212, 175, 55, 0.2);
   transition: all var(--transition-normal);
+}
+
+.site-header.is-scrolled {
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.25);
 }
 
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 88px;
+  height: 96px;
 }
 
-/* Logo Styling & Blend */
+/* Logo Styling — Model 3 vertical stack */
 .logo-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--space-3);
   text-decoration: none;
-}
-
-.logo-img-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
+  flex-shrink: 0;
 }
 
 .brand-logo-img {
-  height: 64px;
+  height: 72px;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 2px 10px rgba(15, 23, 42, 0.4));
+  filter: drop-shadow(0 2px 12px rgba(15, 23, 42, 0.4));
   transition: transform var(--transition-fast);
 }
 
 .brand-logo-img-footer {
-  height: 76px;
+  height: 88px;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 2px 14px rgba(15, 23, 42, 0.45));
+  filter: drop-shadow(0 2px 16px rgba(15, 23, 42, 0.45));
 }
 
 .logo-link:hover .brand-logo-img {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
-.logo-text {
+/* Desktop Navigation — inside .navbar-collapse */
+.navbar-collapse {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: var(--space-10);
 }
 
-.logo-title {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: var(--letter-spacing-widest);
-  color: var(--color-bg-base);
-  line-height: 1;
-}
-
-.logo-subtitle {
-  font-family: var(--font-family-body);
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
-  color: var(--color-accent-gold-500);
-  margin-top: 3px;
-  text-transform: uppercase;
-}
-
-/* Navigation Links */
 .main-nav .nav-list {
   display: flex;
   align-items: center;
   gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .nav-link {
@@ -92,6 +77,7 @@
   padding: var(--space-2) 0;
   position: relative;
   transition: color var(--transition-fast);
+  white-space: nowrap;
 }
 
 .nav-link::after {
@@ -113,11 +99,16 @@
   width: 100%;
 }
 
+/* Hide the in-menu CTA on desktop (CTA lives in header-actions) */
+.navbar-actions {
+  display: none;
+}
+
 /* Luxury Action & Language Switcher */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-8); /* increased space between language button and Contact CTA */
+  gap: var(--space-6);
 }
 
 .lang-switcher {
@@ -139,6 +130,7 @@
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   transition: all var(--transition-fast);
+  white-space: nowrap;
 }
 
 .lang-btn:hover {
@@ -171,7 +163,7 @@
   top: 100%;
   left: 0;
   right: 0;
-  height: 16px; /* bridge the gap between button and dropdown */
+  height: 16px;
   z-index: 2;
 }
 
@@ -179,7 +171,6 @@
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
-  right: 0;
   min-width: 168px;
   background: var(--color-primary-800);
   border: 1px solid var(--color-border-accent);
@@ -196,7 +187,8 @@
 }
 
 .lang-switcher:hover .lang-dropdown,
-.lang-switcher:focus-within .lang-dropdown {
+.lang-switcher:focus-within .lang-dropdown,
+.lang-switcher.is-open .lang-dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -206,11 +198,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.65rem 1rem;
+  padding: 0.7rem 1rem;
   font-size: var(--font-size-xs);
   color: var(--color-text-muted);
   transition: all var(--transition-fast);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .lang-option:hover, .lang-option.active {
@@ -218,6 +211,7 @@
   color: var(--color-accent-gold-500);
 }
 
+/* Luxury Action Buttons */
 .btn-luxury-gold {
   display: inline-flex;
   align-items: center;
@@ -234,6 +228,7 @@
   box-shadow: var(--shadow-subtle);
   transition: all var(--transition-normal);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
 }
 
 .btn-luxury-gold:hover {
@@ -247,26 +242,155 @@
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 28px;
-  height: 20px;
+  width: 30px;
+  height: 22px;
   background: transparent;
   border: none;
   cursor: pointer;
+  padding: 0;
 }
 
-.hamburger-line {
+.mobile-toggle .hamburger-line {
   width: 100%;
   height: 2px;
   background-color: var(--color-bg-base);
+  border-radius: 2px;
   transition: all var(--transition-fast);
 }
 
+.mobile-toggle.is-active .hamburger-line:first-child {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.mobile-toggle.is-active .hamburger-line:last-child {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+/* Large tablet / small desktop: tighten spacing */
+@media (max-width: 1200px) {
+  .main-nav .nav-list {
+    gap: var(--space-6);
+  }
+  .navbar-collapse {
+    gap: var(--space-6);
+  }
+  .nav-link {
+    font-size: var(--font-size-xs);
+  }
+  .header-actions {
+    gap: var(--space-4);
+  }
+}
+
+/* Tablet & Mobile: switch to collapsible drawer menu */
 @media (max-width: 1024px) {
-  .main-nav {
+  .header-container {
+    height: 84px;
+  }
+
+  .brand-logo-img {
+    height: 62px;
+  }
+
+  /* Hide desktop navigation + desktop CTA, show toggle + in-menu CTA */
+  .navbar-collapse {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(320px, 82vw);
+    background: var(--color-primary-900);
+    border-left: 1px solid var(--color-border-accent);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 96px var(--space-8) var(--space-8);
+    transform: translateX(100%);
+    transition: transform var(--transition-smooth);
+    z-index: 998;
+    box-shadow: var(--shadow-dropdown);
+    overflow-y: auto;
+  }
+
+  .navbar-collapse.is-open {
+    transform: translateX(0);
+  }
+
+  .navbar-collapse .main-nav {
+    width: 100%;
+  }
+
+  .navbar-collapse .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+    width: 100%;
+  }
+
+  .navbar-collapse .nav-link {
+    display: block;
+    padding: var(--space-3) var(--space-2);
+    font-size: var(--font-size-base);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .navbar-collapse .nav-link::after {
     display: none;
+  }
+
+  /* In-menu CTA visible only on mobile drawer */
+  .navbar-actions {
+    display: block;
+    width: 100%;
+    margin-top: var(--space-8);
+  }
+
+  .navbar-actions .header-contact-cta {
+    width: 100%;
+  }
+
+  /* Hide the desktop CTA copy in the header actions on mobile */
+  .header-cta-desktop {
+    display: none;
+  }
+
+  /* Raise the header above the drawer */
+  .site-header {
+    z-index: 1000;
+  }
+
+  .header-container {
+    position: relative;
+    z-index: 1001;
   }
 
   .mobile-toggle {
     display: flex;
+  }
+}
+
+/* Small phone: shrink logo a touch, keep spacing tight */
+@media (max-width: 480px) {
+  .header-container {
+    height: 76px;
+    padding-right: var(--space-3);
+    padding-left: var(--space-3);
+  }
+
+  .brand-logo-img {
+    height: 52px;
+  }
+
+  .lang-btn {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .header-actions {
+    gap: var(--space-3);
   }
 }
