@@ -35,7 +35,7 @@
 }
 
 .brand-logo-img {
-  height: 48px;
+  height: 44px;
   width: auto;
   object-fit: contain;
   mix-blend-mode: screen;
@@ -44,11 +44,11 @@
 }
 
 .brand-logo-img-footer {
-  height: 52px;
+  height: 60px;
   width: auto;
   object-fit: contain;
   mix-blend-mode: screen;
-  filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.35));
+  filter: drop-shadow(0 2px 12px rgba(212, 175, 55, 0.35));
 }
 
 .logo-link:hover .brand-logo-img {
@@ -119,11 +119,13 @@
 .header-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-8); /* increased space between language button and Contact CTA */
 }
 
 .lang-switcher {
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .lang-btn {
@@ -158,24 +160,48 @@
   opacity: 0.7;
 }
 
-.lang-dropdown {
+/* The invisible bridge element keeps the button and dropdown connected on hover,
+   eliminating the gap where the menu previously disappeared. */
+.lang-btn {
+  position: relative;
+  z-index: 3;
+}
+
+.lang-switcher::after {
+  content: '';
   position: absolute;
   top: 100%;
+  left: 0;
   right: 0;
-  margin-top: 8px;
+  height: 16px; /* bridge the gap between button and dropdown */
+  z-index: 2;
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  min-width: 168px;
   background: var(--color-primary-800);
   border: 1px solid var(--color-border-accent);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-dropdown);
-  min-width: 140px;
-  display: none;
+  display: flex;
   flex-direction: column;
   overflow: hidden;
-  z-index: 1100;
+  z-index: 4;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
 }
 
-.lang-switcher:hover .lang-dropdown {
-  display: flex;
+.lang-switcher:hover .lang-dropdown,
+.lang-switcher:focus-within .lang-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .lang-option {

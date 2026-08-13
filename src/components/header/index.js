@@ -7,13 +7,7 @@ export default function header() {
       <div class="container header-container">
         <div class="header-logo">
           <a href="/" data-route class="logo-link">
-            <div class="logo-img-wrapper">
-              <img src="/assets/images/logo.png" alt="Platinya Clinic Logo" class="brand-logo-img" />
-            </div>
-            <div class="logo-text">
-              <span class="logo-title">PLATINYA</span>
-              <span class="logo-subtitle">HEALTHCARE CONCIERGE</span>
-            </div>
+            <img src="/assets/images/logo.png" alt="Platinya Clinic Logo" class="brand-logo-img" />
           </a>
         </div>
 
@@ -30,10 +24,10 @@ export default function header() {
               <span class="lang-arrow">▾</span>
             </button>
             <div class="lang-dropdown">
-              <a href="#" class="lang-option active"><span>English</span> <span class="flag">🇬🇧</span></a>
-              <a href="#" class="lang-option"><span>العربية</span> <span class="flag">🇸🇦</span></a>
-              <a href="#" class="lang-option"><span>Français</span> <span class="flag">🇫🇷</span></a>
-              <a href="#" class="lang-option"><span>Español</span> <span class="flag">🇪🇸</span></a>
+              <a href="#" class="lang-option active" data-lang="en"><span>English</span> <span class="flag">🇬🇧</span></a>
+              <a href="#" class="lang-option" data-lang="ar"><span>العربية</span> <span class="flag">🇸🇦</span></a>
+              <a href="#" class="lang-option" data-lang="fr"><span>Français</span> <span class="flag">🇫🇷</span></a>
+              <a href="#" class="lang-option" data-lang="es"><span>Español</span> <span class="flag">🇪🇸</span></a>
             </div>
           </div>
 
