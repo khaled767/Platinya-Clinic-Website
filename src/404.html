@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Platinya Clinic</title>
+  <meta http-equiv="refresh" content="0; url=./" />
+  <script>
+    // SPA fallback for GitHub Pages: send any unknown route back to the hash root.
+    (function () {
+      var path = location.pathname;
+      if (path && !path.endsWith("/")) {
+        // keep any existing hash, else go home
+        location.replace("./" + location.search + (location.hash || "#/"));
+      } else if (!location.hash) {
+        location.replace("./#/");
+      }
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirecting to Platinya Clinic…</p>
+</body>
+</html>

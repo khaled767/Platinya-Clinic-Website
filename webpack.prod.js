@@ -9,7 +9,7 @@ module.exports = merge(common, {
 
   output: {
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
+    publicPath: "./", // relative paths so the site works under a GitHub Pages subpath
     clean: true,
   },
 

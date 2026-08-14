@@ -2,6 +2,7 @@ import "./styles/main.css";
 
 import renderApp from "./renderApp";
 import {
+  initRouting,
   initMobileMenu,
   initLanguageSwitcher,
   initHeaderScroll,
@@ -9,6 +10,7 @@ import {
 
 renderApp();
 
+initRouting();
 initMobileMenu();
 initLanguageSwitcher();
 initHeaderScroll();

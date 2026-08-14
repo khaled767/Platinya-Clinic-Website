@@ -1,5 +1,7 @@
-// UI Interactions Module (Mobile Menu, Language Switcher, header behaviours)
+// UI Interactions Module (Routing, Mobile Menu, Language Switcher, header behaviours)
 // Kept in a single-responsibility module so it can be reused everywhere.
+
+import renderApp from "../renderApp";
 
 export function initMobileMenu() {
   const toggle = document.querySelector(".mobile-toggle");
@@ -36,7 +38,7 @@ export function initLanguageSwitcher() {
     }
   });
 
-  // Prevent the button toggling when hovering (hover opens, click keeps open on touch)
+  // Hover opens; click keeps open on touch devices
   btn.addEventListener("click", (e) => {
     e.stopPropagation();
     switcher.classList.toggle("is-open");
@@ -52,4 +54,32 @@ export function initHeaderScroll() {
   };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
+}
+
+// Hash-based SPA routing: intercept data-route clicks, navigate via location.hash,
+// and re-render the app plus re-bind UI interactions after each view change.
+export function initRouting() {
+  const reloadApp = () => {
+    renderApp();
+    initMobileMenu();
+    initLanguageSwitcher();
+    initHeaderScroll();
+  };
+
+  // Delegate all data-route clicks
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("a[data-route]");
+    if (!link) return;
+    e.preventDefault();
+    const href = link.getAttribute("href") || "/";
+    if ("#" + href === window.location.hash || (href === "/" && (window.location.hash === "" || window.location.hash === "#/"))) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    window.location.hash = href;
+    reloadApp();
+  });
+
+  // Handle browser back/forward and manual hash changes
+  window.addEventListener("hashchange", reloadApp);
 }

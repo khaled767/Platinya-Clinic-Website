@@ -9,7 +9,7 @@ export default function footer() {
           <!-- Column 1: Brand & Concierge Statement -->
           <div class="footer-col footer-brand">
             <a href="/" data-route class="logo-link">
-              <img src="/assets/images/logo.png" alt="Platinya Clinic Logo" class="brand-logo-img-footer" />
+              <img src="./assets/images/logo.png" alt="Platinya Clinic Logo" class="brand-logo-img-footer" />
             </a>
             <p class="brand-description">
               Curating premier medical journeys for European patients with end-to-end luxury hospitality, accredited surgical excellence, and dedicated personal coordinators.

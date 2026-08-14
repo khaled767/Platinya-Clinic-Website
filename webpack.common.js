@@ -9,6 +9,7 @@ module.exports = {
     filename: "bundle.[contenthash].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    publicPath: "./", // relative paths so the site works under a GitHub Pages subpath
     assetModuleFilename: "assets/[name][ext]",
   },
 
