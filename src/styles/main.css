@@ -1,0 +1,23 @@
+/* ==========================================================================
+   Platinya Clinic — Main Stylesheet
+   ========================================================================== */
+
+/* 1. Abstracts */
+@import './abstracts/variables.css';
+
+/* 2. Base */
+@import './base/reset.css';
+@import './base/globals.css';
+
+/* 3. Layout */
+@import './layout/container.css';
+@import './layout/grid.css';
+@import './layout/header.css';
+@import './layout/hero.css';
+@import './layout/services.css';
+@import './layout/sections.css';
+@import './layout/pages.css';
+@import './layout/footer.css';
+
+/* 4. Utilities */
+@import './utilities/utilities.css';

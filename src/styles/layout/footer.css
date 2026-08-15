@@ -1,0 +1,148 @@
+/* ==========================================================================
+   Footer Layout (High Fidelity Luxury Styling)
+   ========================================================================== */
+
+.site-footer {
+  background-color: var(--color-primary-900);
+  color: var(--color-text-inverse);
+  padding-top: var(--space-20);
+  padding-bottom: var(--space-8);
+  border-top: 1px solid var(--color-border-accent);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: var(--space-12);
+  margin-bottom: var(--space-16);
+}
+
+.footer-brand .brand-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.accreditation-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.badge-tag {
+  font-size: var(--font-size-xs);
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--color-border-accent);
+  border-radius: var(--radius-full);
+  color: var(--color-accent-gold-500);
+  background: rgba(212, 175, 55, 0.05);
+  font-weight: var(--font-weight-medium);
+}
+
+.footer-heading {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold-500);
+  margin-bottom: var(--space-6);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer-links a {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--color-bg-base);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.contact-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.contact-link {
+  font-size: var(--font-size-sm);
+  color: var(--color-bg-base);
+  font-weight: var(--font-weight-medium);
+}
+
+.contact-link:hover {
+  color: var(--color-accent-gold-500);
+}
+
+.contact-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-8);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.legal-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.legal-links a {
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.legal-links a:hover {
+  color: var(--color-accent-gold-500);
+}
+
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .site-footer {
+    padding-top: var(--space-16);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-4);
+    text-align: center;
+  }
+}
