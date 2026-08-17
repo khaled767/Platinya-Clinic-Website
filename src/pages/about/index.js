@@ -9,7 +9,7 @@ export default function aboutPage() {
           <span class="section-subtitle text-gold">Our Philosophy & Authority</span>
           <h1 class="page-title text-inverse">The Platinya Heritage</h1>
           <p class="page-description text-muted">
-            We are a premier international healthcare concierge headquartered in Istanbul, bridging European standards of hospitality with world-renowned surgical excellence.
+            We are a premier international healthcare concierge headquartered in Istanbul, bridging world-class hospitality with renowned surgical excellence.
           </p>
         </div>
       </section>
@@ -25,7 +25,7 @@ export default function aboutPage() {
                 Platinya Clinic was established to eliminate the stress, uncertainty, and transactional nature often associated with medical tourism. We believe that receiving world-class medical treatment should feel like a bespoke 5-star journey.
               </p>
               <p class="section-description" style="margin-top: 1rem;">
-                Our team of over 15 on-ground healthcare coordinators, personal interpreters, and VIP logistics managers works exclusively with JCI-accredited surgical hospitals in Turkey to ensure every patient receives personalized care.
+                Our team of over 15 on-ground healthcare coordinators, personal interpreters, and VIP logistics managers works exclusively with premier surgical hospitals in Turkey to ensure every patient receives personalized care.
               </p>
             </div>
             <div class="story-stats-card card-luxury">
@@ -38,8 +38,8 @@ export default function aboutPage() {
                 <span class="stat-text">Tailored VIP Logistics</span>
               </div>
               <div class="stat-row">
-                <span class="stat-num">JCI</span>
-                <span class="stat-text">Accredited Surgical Facilities</span>
+                <span class="stat-num">50+</span>
+                <span class="stat-text">Partner Hospitals & Clinics</span>
               </div>
             </div>
           </div>

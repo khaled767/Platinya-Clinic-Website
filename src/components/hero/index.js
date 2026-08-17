@@ -17,7 +17,7 @@ export default function hero() {
           </h1>
 
           <p class="hero-description">
-            Partnering with Turkey’s top accredited surgical institutions to deliver bespoke medical journeys. Complete with 5-star accommodations, private VIP transport, and dedicated European coordinators.
+            Partnering with Turkey’s leading surgical institutions to deliver bespoke medical journeys. Complete with 5-star accommodations, private VIP transport, and dedicated European coordinators.
           </p>
 
           <div class="hero-actions">
@@ -36,8 +36,8 @@ export default function hero() {
             </div>
             <div class="trust-divider"></div>
             <div class="trust-item">
-              <span class="trust-value">JCI</span>
-              <span class="trust-label">Accredited Facilities</span>
+              <span class="trust-value">15+</span>
+              <span class="trust-label">Medical Specialists</span>
             </div>
             <div class="trust-divider"></div>
             <div class="trust-item">

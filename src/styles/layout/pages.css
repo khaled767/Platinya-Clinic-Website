@@ -52,7 +52,7 @@
 
 .detail-title {
   font-size: var(--font-size-3xl);
-  color: var(--color-primary-800);
+  color: var(--color-ink);
   margin-top: var(--space-2);
   margin-bottom: var(--space-4);
 }
@@ -70,7 +70,7 @@
   gap: var(--space-2);
   margin-bottom: var(--space-8);
   font-size: var(--font-size-xs);
-  color: var(--color-primary-800);
+  color: var(--color-ink);
   font-weight: var(--font-weight-medium);
 }
 
@@ -129,7 +129,7 @@
 
 .doctor-name {
   font-size: var(--font-size-xl);
-  color: var(--color-primary-800);
+  color: var(--color-ink);
   margin-bottom: 2px;
 }
 
@@ -213,7 +213,7 @@
 
 .journey-author .author-name {
   font-size: var(--font-size-base);
-  color: var(--color-primary-800);
+  color: var(--color-ink);
 }
 
 .author-location {

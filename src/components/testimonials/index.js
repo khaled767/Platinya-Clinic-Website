@@ -17,7 +17,7 @@ export default function testimonials() {
       rating: "★★★★★"
     },
     {
-      quote: "The 5-star hotel recovery and private driver made all the difference after my surgery. Impeccable European standards and genuine care.",
+      quote: "The 5-star hotel recovery and private driver made all the difference after my surgery. Impeccable care and genuine attention.",
       author: "Jean-Luc Moreau",
       origin: "France",
       treatment: "Body Sculpting Procedure",

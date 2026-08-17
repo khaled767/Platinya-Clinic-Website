@@ -21,7 +21,7 @@ export default function services() {
       id: "plastic",
       number: "03",
       title: "Plastic & Reconstructive",
-      description: "Bespoke facial and body sculpting procedures performed by board-certified plastic surgeons in accredited facilities.",
+      description: "Bespoke facial and body sculpting procedures performed by board-certified plastic surgeons in leading surgical facilities.",
       tag: "Surgical"
     },
     {
@@ -46,9 +46,9 @@ export default function services() {
         
         <div class="section-header text-center">
           <span class="section-subtitle">Surgical & Aesthetic Portfolio</span>
-          <h2 class="section-title">Accredited Medical Specialties</h2>
+          <h2 class="section-title">Medical Specialties</h2>
           <p class="section-description">
-            Every medical procedure is conducted in JCI-accredited hospitals by internationally trained medical specialists, supported by full concierge logistics.
+            Every medical procedure is conducted by internationally trained surgical specialists, supported by full concierge logistics.
           </p>
         </div>
 

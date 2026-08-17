@@ -14,7 +14,7 @@ export default function doctorsPage() {
       title: "Chief Aesthetic Dentist",
       experience: "12+ Years Experience",
       specialty: "Digital Smile Design & E-Max Veneers",
-      memberships: "European Academy of Esthetic Dentistry"
+      memberships: "Academy of Aesthetic Dentistry"
     },
     {
       name: "Prof. Dr. Arda Kaya",
