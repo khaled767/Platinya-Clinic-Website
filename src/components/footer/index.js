@@ -12,12 +12,8 @@ export default function footer() {
               <img src="./assets/images/logo.png" alt="Platinya Clinic Logo" class="brand-logo-img-footer" />
             </a>
             <p class="brand-description">
-              Curating premier medical journeys for European patients with end-to-end luxury hospitality, accredited surgical excellence, and dedicated personal coordinators.
+              Curating premier medical journeys for European patients with end-to-end luxury hospitality, medical expertise, and dedicated personal coordinators.
             </p>
-            <div class="accreditation-badges">
-              <span class="badge-tag">JCI Accredited Partners</span>
-              <span class="badge-tag">European Standard</span>
-            </div>
           </div>
 
           <!-- Column 2: Navigation Links -->

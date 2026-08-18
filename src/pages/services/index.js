@@ -9,7 +9,7 @@ export default function servicesPage() {
           <span class="section-subtitle text-gold">World-Class Specialties</span>
           <h1 class="page-title text-inverse">Surgical & Aesthetic Excellence</h1>
           <p class="page-description text-muted">
-            Explore our comprehensive range of accredited medical procedures performed by renowned specialists in Istanbul, supported by end-to-end European concierge logistics.
+            Explore our comprehensive range of advanced medical procedures performed by renowned specialists in Istanbul, supported by end-to-end concierge logistics.
           </p>
         </div>
       </section>
@@ -73,7 +73,7 @@ export default function servicesPage() {
                 <span class="detail-tag">03 • Cosmetic & Reconstructive</span>
                 <h2 class="detail-title">Plastic & Aesthetic Body Surgery</h2>
                 <p class="detail-text">
-                  Precision facial and body reshaping procedures including Rhinoplasty, Mommy Makeover, Breast Surgery, and Vaser Liposuction performed in JCI-accredited surgical centers.
+                  Precision facial and body reshaping procedures including Rhinoplasty, Mommy Makeover, Breast Surgery, and Vaser Liposuction performed in leading surgical centers.
                 </p>
                 <ul class="detail-features">
                   <li>✓ Board-Certified Aesthetic Surgeons</li>
@@ -84,7 +84,7 @@ export default function servicesPage() {
               </div>
               <div class="detail-media">
                 <div class="media-box-luxury">
-                  <span class="media-badge">JCI Accredited Suites</span>
+                  <span class="media-badge">Advanced Surgical Suites</span>
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@ export default function servicesPage() {
                 <span class="detail-tag">04 • Metabolic Health</span>
                 <h2 class="detail-title">Laparoscopic Bariatric Surgery</h2>
                 <p class="detail-text">
-                  Safe, minimally invasive weight-loss solutions including Sleeve Gastrectomy and Gastric Bypass, supervised by senior bariatric surgeons and dedicated European nutritionists.
+                  Safe, minimally invasive weight-loss solutions including Sleeve Gastrectomy and Gastric Bypass, supervised by senior bariatric surgeons and dedicated clinical nutritionists.
                 </p>
                 <ul class="detail-features">
                   <li>✓ Minimally Invasive Laparoscopic Surgery</li>

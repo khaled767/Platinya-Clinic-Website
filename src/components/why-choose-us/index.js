@@ -9,8 +9,8 @@ export default function whyChooseUs() {
     },
     {
       icon: "🛡",
-      title: "Accredited Excellence",
-      description: "Every procedure is executed in JCI-certified hospitals using world-renowned surgical techniques and medical safety protocols."
+      title: "Medical Excellence",
+      description: "Every procedure is executed in leading surgical facilities using world-renowned techniques and strict medical safety protocols."
     },
     {
       icon: "💎",

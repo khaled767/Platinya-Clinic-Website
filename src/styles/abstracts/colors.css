@@ -3,12 +3,14 @@
    ========================================================================== */
 
 :root {
-  /* Brand Primary — Deep Obsidian / Slate */
-  --color-primary-900: #090D16;
-  --color-primary-800: #0F172A;
-  --color-primary-700: #1E293B;
-  --color-primary-600: #334155;
-  --color-primary-500: #475569;
+  /* Brand Primary — Deep Violet (dark grounds only)
+     Replaces the former obsidian/slate for ALL dark backgrounds. */
+  --color-primary-950: #1A0F2E;
+  --color-primary-900: #1E1233;
+  --color-primary-800: #241640; /* Deep Violet — main dark brand */
+  --color-primary-700: #2E1B50;
+  --color-primary-600: #3A245F;
+  --color-primary-500: #48316F;
 
   /* Brand Secondary — Champagne Gold (Luxury Accent) */
   --color-accent-gold-700: #9A7B2C;
@@ -23,13 +25,16 @@
   --color-medical-500: #14B8A6;
   --color-medical-100: #CCFBF1;
 
-  /* Neutral Backgrounds — Warm Alabaster / Cream */
+  /* Neutral Backgrounds — Warm Alabaster / Cream (light grounds, unchanged) */
   --color-bg-base: #F8FAFC;
   --color-bg-surface: #FFFFFF;
   --color-bg-surface-elevated: #F1F5F9;
-  --color-bg-dark: #0F172A;
+  --color-bg-dark: #241640; /* Deep Violet */
 
   /* Text & Content */
+  /* --color-ink stays near-black for TEXT on LIGHT backgrounds (unchanged look).
+     Deep Violet (--color-primary-*) is reserved for DARK backgrounds only. */
+  --color-ink: #0F172A;
   --color-text-primary: #0F172A;
   --color-text-secondary: #475569;
   --color-text-muted: #64748B;

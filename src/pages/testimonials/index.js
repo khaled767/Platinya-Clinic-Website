@@ -18,7 +18,7 @@ export default function testimonialsPage() {
       name: "Jean-Luc Moreau",
       country: "Paris, France",
       treatment: "Rhinoplasty & Facial Contouring",
-      quote: "Absolute professionalism. The JCI surgical facility and 5-star Bosphorus hotel recovery made the entire trip smooth and stress-free."
+      quote: "Absolute professionalism. The advanced surgical facility and 5-star Bosphorus hotel recovery made the entire trip smooth and stress-free."
     }
   ];
 
