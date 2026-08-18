@@ -1,5 +1,6 @@
 // About Page Module (High-Fidelity)
 import turkishLicenses from "../../components/turkish-licenses";
+import partnerFacilities from "../../components/partner-facilities";
 
 export default function aboutPage() {
   return `
@@ -49,6 +50,9 @@ export default function aboutPage() {
 
       <!-- Official Turkish Licenses -->
       ${turkishLicenses()}
+
+      <!-- Partner Hospitals & Clinics (shown without names) -->
+      ${partnerFacilities()}
     </div>
   `;
 }
