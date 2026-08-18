@@ -1,4 +1,5 @@
 // About Page Module (High-Fidelity)
+import turkishLicenses from "../../components/turkish-licenses";
 
 export default function aboutPage() {
   return `
@@ -45,6 +46,9 @@ export default function aboutPage() {
           </div>
         </div>
       </section>
+
+      <!-- Official Turkish Licenses -->
+      ${turkishLicenses()}
     </div>
   `;
 }
