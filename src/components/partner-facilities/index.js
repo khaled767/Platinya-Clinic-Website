@@ -1,27 +1,32 @@
-// Partner Facilities Section (collaborating hospitals/clinics, shown without names)
-// Displays the calibre of facilities we work with — as proof, never revealing identities.
+// Partner Facilities Section (collaborating hospitals/clinics)
+// Shows each partner's logo + a facility photo for credibility, but the
+// written descriptions NEVER name the hospitals — only describe the facility type.
 
 export default function partnerFacilities() {
-  const shots = [
+  const partners = [
     {
+      logo: "./assets/images/partner-clinics/bm-logo.png",
+      logoAlt: "Partner clinic logo",
       img: "./assets/images/partner-clinics/bm-treatment-web.jpg",
-      alt: "Advanced dental treatment suite",
-      caption: "State-of-the-art dental treatment suites with ergonomic, high-precision equipment",
+      imgAlt: "Advanced dental treatment suite",
+      module: "Dental Excellence",
+      caption: "A leading specialist in advanced aesthetic and implant dentistry.",
     },
     {
-      img: "./assets/images/partner-clinics/hlc-treatment-web.jpg",
-      alt: "Modern surgical treatment room",
-      caption: "Advanced treatment and procedure rooms equipped to international standards",
-    },
-    {
-      img: "./assets/images/partner-clinics/hlc-waiting-web.jpg",
-      alt: "Contemporary clinic waiting lounge",
-      caption: "Refined, calming interiors designed for patient comfort and privacy",
-    },
-    {
+      logo: "./assets/images/partner-clinics/efc-logo.png",
+      logoAlt: "Partner clinic logo",
       img: "./assets/images/partner-clinics/efc-waiting-web.jpg",
-      alt: "Elegant clinic reception and waiting area",
-      caption: "Five-star standard reception and patient-waiting environments",
+      imgAlt: "Modern surgical medical centre reception",
+      module: "Surgical & Medical Centre",
+      caption: "A contemporary multi-specialty surgical centre with full hospital-grade care.",
+    },
+    {
+      logo: "./assets/images/partner-clinics/hlc-logo.png",
+      logoAlt: "Partner clinic logo",
+      img: "./assets/images/partner-clinics/hlc-waiting-web.jpg",
+      imgAlt: "Modern dental clinic waiting lounge",
+      module: "Oral & Aesthetic Care",
+      caption: "A modern oral-health clinic renowned for patient comfort and precision.",
     },
   ];
 
@@ -32,21 +37,24 @@ export default function partnerFacilities() {
           <span class="section-subtitle text-gold">The Facilities Behind The Journey</span>
           <h2 class="section-title text-inverse">Our Partner Hospitals & Clinics</h2>
           <p class="section-description text-muted">
-            We partner exclusively with leading private hospitals and specialist clinics in Istanbul. Every treatment is delivered within world-class, modern medical environments — selected for their standards, discretion, and comfort.
+            We partner exclusively with leading private hospitals and specialist clinics in Istanbul. Each collaboration is selected for clinical excellence, modern facilities, discretion, and patient comfort.
           </p>
         </div>
 
-        <div class="partner-gallery">
-          ${shots.map((s) => `
-            <figure class="partner-card">
+        <div class="partner-grid">
+          ${partners.map((p) => `
+            <article class="partner-card">
               <div class="partner-media">
-                <img src="${s.img}" alt="${s.alt}" class="partner-img" loading="lazy" />
+                <img src="${p.img}" alt="${p.imgAlt}" class="partner-img" loading="lazy" />
               </div>
-              <figcaption class="partner-caption">
-                <span class="partner-dot"></span>
-                <span class="partner-text">${s.caption}</span>
-              </figcaption>
-            </figure>
+              <div class="partner-body">
+                <div class="partner-logo-wrap">
+                  <img src="${p.logo}" alt="${p.logoAlt}" class="partner-logo" loading="lazy" />
+                </div>
+                <span class="partner-module">${p.module}</span>
+                <p class="partner-caption">${p.caption}</p>
+              </div>
+            </article>
           `).join('')}
         </div>
       </div>
