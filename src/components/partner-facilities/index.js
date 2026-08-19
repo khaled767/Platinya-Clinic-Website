@@ -1,6 +1,6 @@
-// Partner Facilities Section (collaborating hospitals/clinics)
-// Shows each partner's logo + a facility photo for credibility, but the
-// written descriptions NEVER name the hospitals — only describe the facility type.
+// Partner Facilities (contracted hospitals & clinics)
+// Displays each partner's logo + a facility photo for credibility.
+// Written descriptions describe the facility type (not used to hide — logos are shown).
 
 export default function partnerFacilities() {
   const partners = [
@@ -15,8 +15,8 @@ export default function partnerFacilities() {
     {
       logo: "./assets/images/partner-clinics/efc-logo.png",
       logoAlt: "Partner clinic logo",
-      img: "./assets/images/partner-clinics/efc-waiting-web.jpg",
-      imgAlt: "Modern surgical medical centre reception",
+      img: "./assets/images/partner-clinics/efc-building-web.jpg",
+      imgAlt: "Modern surgical medical centre building",
       module: "Surgical & Medical Centre",
       caption: "A contemporary multi-specialty surgical centre with full hospital-grade care.",
     },

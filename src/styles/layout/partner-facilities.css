@@ -62,25 +62,26 @@
   flex-grow: 1;
 }
 
-/* Logo sits on a subtle light plaque so any logo's colours stay true */
+/* Logo sits on a dark plaque so LIGHT-coloured logos remain clearly visible */
 .partner-logo-wrap {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-bg-surface);
-  border: 1px solid var(--color-border-light);
+  background: var(--color-primary-950);
+  border: 1px solid rgba(212, 175, 55, 0.25);
   border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-4);
   margin-bottom: var(--space-2);
-  min-height: 64px;
+  min-height: 72px;
 }
 
 .partner-logo {
-  max-height: 48px;
+  max-height: 56px;
   max-width: 100%;
   width: auto;
   object-fit: contain;
+  filter: none; /* no transparency/opacity washing */
 }
 
 .partner-module {

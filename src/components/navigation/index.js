@@ -1,5 +1,4 @@
 // Navigation Component (High-Fidelity)
-
 export default function navigation() {
   return `
     <nav class="main-nav">
@@ -14,7 +13,7 @@ export default function navigation() {
           <a data-route href="/about" class="nav-link">About Us</a>
         </li>
         <li class="nav-item">
-          <a data-route href="/doctors" class="nav-link">Medical Team</a>
+          <a data-route href="/hospitals" class="nav-link">المستشفيات المتعاقد معها</a>
         </li>
         <li class="nav-item">
           <a data-route href="/testimonials" class="nav-link">Experiences</a>

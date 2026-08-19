@@ -22,7 +22,7 @@ export default function footer() {
             <ul class="footer-links">
               <li><a href="/" data-route>Home</a></li>
               <li><a href="/about" data-route>About Our Agency</a></li>
-              <li><a href="/doctors" data-route>Surgical Experts</a></li>
+              <li><a href="/hospitals" data-route>المستشفيات المتعاقد معها</a></li>
               <li><a href="/testimonials" data-route>Patient Journeys</a></li>
               <li><a href="/contact" data-route>VIP Consultation</a></li>
             </ul>
