@@ -1,5 +1,6 @@
 // Contact Component (High-Fidelity Concierge Form)
 import { icons } from "../icons";
+import { t } from "../../i18n";
 
 export default function contact() {
   return `
@@ -7,17 +8,15 @@ export default function contact() {
       <div class="container contact-container">
         
         <div class="contact-info-col">
-          <span class="section-subtitle">Discreet & Confidential</span>
-          <h2 class="contact-title">Begin Your Private Consultation</h2>
-          <p class="contact-description">
-            Connect directly with a dedicated European Patient Coordinator for a complimentary, zero-obligation medical evaluation and customized itinerary proposal.
-          </p>
+          <span class="section-subtitle">${t("contact.sub")}</span>
+          <h2 class="contact-title">${t("contact.title")}</h2>
+          <p class="contact-description">${t("contact.desc")}</p>
 
           <div class="contact-channels">
             <div class="channel-card">
               <span class="channel-icon">${icons.phone}</span>
               <div>
-                <span class="channel-label">24/7 VIP Concierge Hotlines</span>
+                <span class="channel-label">${t("contact.hotline")}</span>
                 <a href="tel:+905****0000" class="channel-value">+90 555 000 0000</a>
               </div>
             </div>
@@ -25,7 +24,7 @@ export default function contact() {
             <div class="channel-card">
               <span class="channel-icon">${icons.email}</span>
               <div>
-                <span class="channel-label">Direct Coordinator Desk</span>
+                <span class="channel-label">${t("contact.desk")}</span>
                 <a href="mailto:concierge@platinyaclinic.com" class="channel-value">concierge@platinyaclinic.com</a>
               </div>
             </div>
@@ -33,8 +32,8 @@ export default function contact() {
             <div class="channel-card">
               <span class="channel-icon">${icons.mapPin}</span>
               <div>
-                <span class="channel-label">International Relations HQ</span>
-                <span class="channel-value">Nisantasi, Istanbul, Turkey</span>
+                <span class="channel-label">${t("contact.hq")}</span>
+                <span class="channel-value">${t("contact.location")}</span>
               </div>
             </div>
           </div>
@@ -42,44 +41,44 @@ export default function contact() {
 
         <div class="contact-form-col">
           <form class="luxury-form card-luxury" onsubmit="event.preventDefault();">
-            <h3 class="form-title">Request Private Assessment</h3>
-            <p class="form-subtitle">Your medical details remain strictly confidential under GDPR standards.</p>
+            <h3 class="form-title">${t("contact.formTitle")}</h3>
+            <p class="form-subtitle">${t("contact.privacy")}</p>
 
             <div class="form-group">
-              <label class="form-label" for="full-name">Full Name</label>
-              <input type="text" id="full-name" class="form-input" placeholder="e.g. Lord Alexander Wright" required />
+              <label class="form-label" for="full-name">${t("contact.name")}</label>
+              <input type="text" id="full-name" class="form-input" required />
             </div>
 
             <div class="form-grid-2">
               <div class="form-group">
-                <label class="form-label" for="email">Email Address</label>
-                <input type="email" id="email" class="form-input" placeholder="name@domain.com" required />
+                <label class="form-label" for="email">${t("contact.email")}</label>
+                <input type="email" id="email" class="form-input" required />
               </div>
               <div class="form-group">
-                <label class="form-label" for="phone">Phone Number (with Country Code)</label>
-                <input type="tel" id="phone" class="form-input" placeholder="+44 7000 000000" required />
+                <label class="form-label" for="phone">${t("contact.phone")}</label>
+                <input type="tel" id="phone" class="form-input" required />
               </div>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="specialty">Interested Medical Specialty</label>
+              <label class="form-label" for="specialty">${t("contact.treatment")}</label>
               <select id="specialty" class="form-select" required>
-                <option value="" disabled selected>Select a treatment...</option>
-                <option value="hair">Hair Transplantation</option>
-                <option value="dental">Aesthetic Dentistry</option>
-                <option value="plastic">Plastic & Reconstructive Surgery</option>
-                <option value="bariatric">Bariatric & Metabolic Surgery</option>
-                <option value="aesthetics">Medical Aesthetics</option>
+                <option value="" disabled selected>${t("contact.treatmentPlaceholder")}</option>
+                <option value="hair">${t("sv.hair")}</option>
+                <option value="dental">${t("sv.dental")}</option>
+                <option value="plastic">${t("sv.plastic")} ${t("sv.surgery")}</option>
+                <option value="bariatric">${t("sv.bariatric")} ${t("sv.surgery")}</option>
+                <option value="aesthetics">${t("sv.aesth")}</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="message">How can our concierge team assist you?</label>
-              <textarea id="message" class="form-textarea" rows="4" placeholder="Mention preferred dates, medical history, or specific questions..."></textarea>
+              <label class="form-label" for="message">${t("contact.message")}</label>
+              <textarea id="message" class="form-textarea" rows="4"></textarea>
             </div>
 
             <button type="submit" class="btn-submit-luxury">
-              <span>Submit Confidential Request</span>
+              <span>${t("contact.submit")}</span>
             </button>
           </form>
         </div>

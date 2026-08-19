@@ -1,69 +1,37 @@
 // Services Section Component (High-Fidelity)
 import { icons } from "../icons";
+import { t } from "../../i18n";
 
 export default function services() {
-  const medicalSpecialties = [
-    {
-      id: "hair",
-      number: "01",
-      title: "Hair Transplantation",
-      description: "Painless Sapphire FUE & DHI techniques delivering high-density, natural hair restoration with lifetime guarantee support.",
-      tag: "Most Popular"
-    },
-    {
-      id: "dental",
-      number: "02",
-      title: "Aesthetic Dentistry",
-      description: "Precision-crafted Hollywood Smile transformations, E-max veneers, and Swiss dental implants with digital smile design.",
-      tag: "Cosmetic"
-    },
-    {
-      id: "plastic",
-      number: "03",
-      title: "Plastic & Reconstructive",
-      description: "Bespoke facial and body sculpting procedures performed by board-certified plastic surgeons in leading surgical facilities.",
-      tag: "Surgical"
-    },
-    {
-      id: "bariatric",
-      number: "04",
-      title: "Bariatric & Metabolic",
-      description: "Advanced laparoscopic gastric sleeve and bypass procedures guided by multidisciplinary medical teams and nutritionists.",
-      tag: "Health & Vitality"
-    },
-    {
-      id: "aesthetics",
-      number: "05",
-      title: "Medical Aesthetics",
-      description: "Non-invasive anti-aging treatments, laser dermatology, and skin rejuvenation with minimal to zero downtime.",
-      tag: "Non-Surgical"
-    }
+  const specs = [
+    { id: "hair", number: "01", key: "hair", tagKey: "popular", tag: "" },
+    { id: "dental", number: "02", key: "dental", tagKey: "cosmetic" },
+    { id: "plastic", number: "03", key: "plastic", tagKey: "surgical" },
+    { id: "bariatric", number: "04", key: "bariatric", tagKey: "vital" },
+    { id: "aesthetics", number: "05", key: "aesth", tagKey: "nonsurgical" },
   ];
 
   return `
     <section class="section-services">
       <div class="container">
-        
         <div class="section-header text-center">
-          <span class="section-subtitle">Surgical & Aesthetic Portfolio</span>
-          <h2 class="section-title">Medical Specialties</h2>
-          <p class="section-description">
-            Every medical procedure is conducted by internationally trained surgical specialists, supported by full concierge logistics.
-          </p>
+          <span class="section-subtitle">${t("services.sub")}</span>
+          <h2 class="section-title">${t("services.title")}</h2>
+          <p class="section-description">${t("services.desc")}</p>
         </div>
 
         <div class="services-grid">
-          ${medicalSpecialties.map(spec => `
+          ${specs.map((s) => `
             <article class="service-card-luxury">
               <div class="card-header-meta">
-                <span class="service-number">${spec.number}</span>
-                <span class="service-tag">${spec.tag}</span>
+                <span class="service-number">${s.number}</span>
+                <span class="service-tag">${t("sv.tag." + s.tagKey)}</span>
               </div>
-              <h3 class="service-title">${spec.title}</h3>
-              <p class="service-description">${spec.description}</p>
+              <h3 class="service-title">${t("sv." + s.key)}</h3>
+              <p class="service-description">${t("sv." + s.key + ".d")}</p>
               <div class="card-footer-action">
                 <a href="/services" data-route class="link-luxury">
-                  <span>Explore Treatment</span>
+                  <span>${t("services.explore")}</span>
                   <span class="arrow">→</span>
                 </a>
               </div>
@@ -74,30 +42,29 @@ export default function services() {
         <!-- Concierge Package Banner -->
         <div class="concierge-banner-luxury">
           <div class="banner-content">
-            <span class="banner-badge">All-Inclusive Concierge Package</span>
-            <h3 class="banner-title">What Every Medical Journey Includes</h3>
-            <p class="banner-sub">We handle every detail so you can focus entirely on your transformation and recovery.</p>
+            <span class="banner-badge">${t("services.banner")}</span>
+            <h3 class="banner-title">${t("services.bannerTitle")}</h3>
+            <p class="banner-sub">${t("services.bannerSub")}</p>
           </div>
           <div class="concierge-features-grid">
             <div class="feature-chip">
               <span class="chip-icon">${icons.plane}</span>
-              <span class="chip-text">VIP Airport Transfers</span>
+              <span class="chip-text">${t("services.f1")}</span>
             </div>
             <div class="feature-chip">
               <span class="chip-icon">${icons.hotel}</span>
-              <span class="chip-text">5-Star Hotel Accommodations</span>
+              <span class="chip-text">${t("services.f2")}</span>
             </div>
             <div class="feature-chip">
               <span class="chip-icon">${icons.user}</span>
-              <span class="chip-text">Personal Patient Coordinator</span>
+              <span class="chip-text">${t("services.f3")}</span>
             </div>
             <div class="feature-chip">
               <span class="chip-icon">${icons.translate}</span>
-              <span class="chip-text">Multi-Lingual Interpreter</span>
+              <span class="chip-text">${t("services.f4")}</span>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   `;

@@ -1,4 +1,5 @@
 // Hero Component (High-Fidelity)
+import { t } from "../../i18n";
 
 export default function hero() {
   return `
@@ -9,40 +10,40 @@ export default function hero() {
         <div class="hero-content">
           <div class="hero-badge">
             <span class="badge-dot"></span>
-            <span class="badge-text">Premier International Healthcare Concierge</span>
+            <span class="badge-text">${t("hero.badge")}</span>
           </div>
 
           <h1 class="hero-title">
-            A Curated <span class="title-highlight">Luxury Healthcare</span> Experience
+            ${t("hero.title1")} <span class="title-highlight">${t("hero.title2")}</span> ${t("hero.title3")}
           </h1>
 
           <p class="hero-description">
-            Partnering with Turkey’s leading surgical institutions to deliver bespoke medical journeys. Complete with 5-star accommodations, private VIP transport, and dedicated European coordinators.
+            ${t("hero.desc")}
           </p>
 
           <div class="hero-actions">
             <a href="/contact" data-route class="btn-hero-primary">
-              <span>Request Private Assessment</span>
+              <span>${t("hero.cta1")}</span>
             </a>
             <a href="/services" data-route class="btn-hero-secondary">
-              <span>Explore Specialties</span>
+              <span>${t("hero.cta2")}</span>
             </a>
           </div>
 
           <div class="hero-trust-bar">
             <div class="trust-item">
               <span class="trust-value">100%</span>
-              <span class="trust-label">Tailored VIP Logistics</span>
+              <span class="trust-label">${t("hero.trust1")}</span>
             </div>
             <div class="trust-divider"></div>
             <div class="trust-item">
               <span class="trust-value">15+</span>
-              <span class="trust-label">Medical Specialists</span>
+              <span class="trust-label">${t("hero.trust2")}</span>
             </div>
             <div class="trust-divider"></div>
             <div class="trust-item">
               <span class="trust-value">24/7</span>
-              <span class="trust-label">Personal Coordinator</span>
+              <span class="trust-label">${t("hero.trust3")}</span>
             </div>
           </div>
         </div>
@@ -53,8 +54,8 @@ export default function hero() {
             <div class="concierge-preview-badge">
               <span class="badge-icon">★</span>
               <div class="badge-info">
-                <span class="badge-title">European Patient Relations</span>
-                <span class="badge-sub">Full Multilingual Concierge Support</span>
+                <span class="badge-title">${t("hero.badge2")}</span>
+                <span class="badge-sub">${t("hero.badge3")}</span>
               </div>
             </div>
           </div>
