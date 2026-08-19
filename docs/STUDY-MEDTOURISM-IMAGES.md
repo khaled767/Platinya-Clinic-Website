@@ -69,3 +69,24 @@ Consolidating the findings into rules that will drive AI image generation:
 - Keep the **hospital-partner + Turkish MoH licence** imagery we already integrated for credibility; add the **Istanbul/context** grounding per specialty.
 
 *Next: generate the specialty set following these rules, verify each against §4.*
+
+---
+
+## 6. Client Revision — "Authentic Procedure" Direction (Aug 2026)
+
+After reviewing the first generated portraits, the client rejected the posed/aspirational-into-uncomfortable approach ("human presence felt very uncomfortable") and supplied reference images of the style they actually want:
+
+**Client reference style (approved):**
+- **Mid-procedure candour:** gloved medical hands actively working (drawing a hairline, holding the patient's face, preparing gently) on a real, calm patient — the *actual treatment* in progress, not a posed marketing smile.
+- **Close-up clinical framing + bright, clean, even lighting** — sterile, professional, calm; no harsh shadows, no dim "spa" mood.
+- **Serene, trusting patient** (often eyes closed, relaxed) — conveys confidence and competence, not strain.
+- One clean, empty, well-equipped clinic room shot is also appreciated (sterile environment credibility).
+
+**Concrete approved brief (hair):** a handsome blonde man ~35 with thinning at the front hairline, the **new hairline drawn on his forehead**, lying back on the examination chair, about to begin the transplant.
+
+**Revised generation rules:**
+1. Show the treatment moment authentically (gloved hands, drawn hairline, gentle action) — not posed portraits.
+2. Keep the patient calm/serene (eyes relaxed/closed), natural skin, bright clinical light.
+3. Close-up framing over wide mid-shots; clean clinical background.
+4. No gore, no obvious pain, no needles piercing visibly, no blood; serene professional mood.
+
