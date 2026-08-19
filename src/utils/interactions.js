@@ -2,6 +2,7 @@
 // Kept in a single-responsibility module so it can be reused everywhere.
 
 import renderApp from "../renderApp";
+import { setLang } from "../i18n";
 
 export function initMobileMenu() {
   const toggle = document.querySelector(".mobile-toggle");
@@ -42,6 +43,21 @@ export function initLanguageSwitcher() {
   btn.addEventListener("click", (e) => {
     e.stopPropagation();
     switcher.classList.toggle("is-open");
+  });
+
+  // Perform the language switch
+  switcher.querySelectorAll(".lang-option[data-lang]").forEach((opt) => {
+    opt.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const lang = opt.getAttribute("data-lang");
+      setLang(lang);
+      // Re-render current route with the new language, then rebind UI
+      renderApp();
+      initMobileMenu();
+      initLanguageSwitcher();
+      initHeaderScroll();
+    });
   });
 }
 

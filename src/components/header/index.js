@@ -1,7 +1,10 @@
 import navigation from "../navigation";
 import { icons } from "../icons";
+import { LANGS, t, getLang } from "../../i18n";
 
 export default function header() {
+  const current = getLang();
+
   return `
     <header class="site-header">
       <div class="container header-container">
@@ -18,7 +21,7 @@ export default function header() {
 
           <div class="navbar-actions">
             <a href="/contact" data-route class="btn-luxury-gold header-contact-cta">
-              <span>VIP Consultation</span>
+              <span>${t("cta.vip")}</span>
             </a>
           </div>
         </div>
@@ -28,19 +31,20 @@ export default function header() {
           <div class="lang-switcher">
             <button type="button" class="lang-btn" aria-label="Select Language">
               <span class="lang-icon">${icons.globe}</span>
-              <span class="lang-current">EN</span>
+              <span class="lang-current">${t("lang")}</span>
               <span class="lang-arrow">▾</span>
             </button>
             <div class="lang-dropdown">
-              <a href="#" class="lang-option active" data-lang="en"><span>English</span> <span class="flag">🇬🇧</span></a>
-              <a href="#" class="lang-option" data-lang="ar"><span>العربية</span> <span class="flag">🇸🇦</span></a>
-              <a href="#" class="lang-option" data-lang="fr"><span>Français</span> <span class="flag">🇫🇷</span></a>
-              <a href="#" class="lang-option" data-lang="es"><span>Español</span> <span class="flag">🇪🇸</span></a>
+              ${LANGS.map((L) => `
+                <a href="#" class="lang-option ${L.code === current ? "active" : ""}" data-lang="${L.code}">
+                  <span>${L.label}</span> <span class="flag">${L.flag}</span>
+                </a>
+              `).join('')}
             </div>
           </div>
 
           <a href="/contact" data-route class="btn-luxury-gold header-cta-desktop">
-            <span>VIP Consultation</span>
+            <span>${t("cta.vip")}</span>
           </a>
 
           <button type="button" class="mobile-toggle" aria-label="Toggle Navigation">
