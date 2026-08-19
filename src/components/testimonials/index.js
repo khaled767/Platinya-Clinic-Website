@@ -1,55 +1,34 @@
 // Testimonials Component (High-Fidelity)
+import { t } from "../../i18n";
 
 export default function testimonials() {
   const reviews = [
-    {
-      quote: "From my VIP transport landing at Istanbul Airport to my Sapphire FUE procedure, Platinya made me feel like an honored guest rather than a patient. The results are life-changing.",
-      author: "Marcus Vance",
-      origin: "United Kingdom",
-      treatment: "Sapphire Hair Restoration",
-      rating: "★★★★★"
-    },
-    {
-      quote: "My Hollywood Smile transformation exceeded every expectation. My personal coordinator was with me at every appointment, translating and ensuring absolute comfort.",
-      author: "Elena Rostova",
-      origin: "Germany",
-      treatment: "Full Aesthetic Dentistry",
-      rating: "★★★★★"
-    },
-    {
-      quote: "The 5-star hotel recovery and private driver made all the difference after my surgery. Impeccable care and genuine attention.",
-      author: "Jean-Luc Moreau",
-      origin: "France",
-      treatment: "Body Sculpting Procedure",
-      rating: "★★★★★"
-    }
+    { qKey: "ts.q0", author: "Marcus Vance", originKey: "ts.c0", treatKey: "ts.t0", rating: "★★★★★" },
+    { qKey: "ts.q1", author: "Elena Rostova", origin: "Germany", treatKey: "ts.t1", rating: "★★★★★" },
+    { qKey: "ts.q2", author: "Jean-Luc Moreau", origin: "France", treatKey: "ts.t2", rating: "★★★★★" },
   ];
 
   return `
     <section class="section-testimonials">
       <div class="container">
-        
         <div class="section-header text-center">
-          <span class="section-subtitle">Verified Patient Journeys</span>
-          <h2 class="section-title">Refined Experiences & Stories</h2>
-          <p class="section-description">
-            Real stories from our European patients who trusted Platinya Clinic for their healthcare transformation.
-          </p>
+          <span class="section-subtitle">${t("testi.sub")}</span>
+          <h2 class="section-title">${t("testi.title")}</h2>
+          <p class="section-description">${t("testi.desc")}</p>
         </div>
 
         <div class="testimonials-grid">
-          ${reviews.map(r => `
+          ${reviews.map((r) => `
             <article class="testimonial-card-luxury">
               <div class="review-rating">${r.rating}</div>
-              <p class="review-quote">"${r.quote}"</p>
+              <p class="review-quote">"${t(r.qKey)}"</p>
               <div class="review-meta">
                 <h4 class="author-name">${r.author}</h4>
-                <p class="author-details">${r.treatment} • ${r.origin}</p>
+                <p class="author-details">${t(r.treatKey)} • ${r.origin ? r.origin : t(r.originKey)}</p>
               </div>
             </article>
           `).join('')}
         </div>
-
       </div>
     </section>
   `;

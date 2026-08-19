@@ -1,33 +1,31 @@
 // About Section Component (High-Fidelity)
+import { t } from "../../i18n";
 
 export default function about() {
   return `
     <section class="section-about">
       <div class="container about-container">
         <div class="about-content">
-          <span class="section-subtitle">International Medical Concierge</span>
-          <h2 class="about-title">Redefining International Healthcare Hospitality</h2>
-          <p class="about-description">
-            Platinya Clinic is not a hospital; we are an elite medical tourism concierge. Based in Istanbul, our team of over 15 healthcare and hospitality professionals manages every aspect of your surgical journey with discretion, precision, and warmth.
-          </p>
+          <span class="section-subtitle">${t("about.subtitle")}</span>
+          <h2 class="about-title">${t("about.title")}</h2>
           <div class="about-highlights">
             <div class="highlight-item">
               <span class="highlight-icon">✓</span>
               <div>
-                <h4 class="highlight-title">Exclusive Surgeon Network</h4>
-                <p class="highlight-text">We partner solely with leading board-certified specialists and premier hospitals.</p>
+                <h4 class="highlight-title">${t("about.f1")}</h4>
+                <p class="highlight-text">${t("about.f1d")}</p>
               </div>
             </div>
             <div class="highlight-item">
               <span class="highlight-icon">✓</span>
               <div>
-                <h4 class="highlight-title">1:1 Dedicated Coordinator</h4>
-                <p class="highlight-text">A personal coordinator accompanies you from pre-op to recovery.</p>
+                <h4 class="highlight-title">${t("about.f2")}</h4>
+                <p class="highlight-text">${t("about.f2d")}</p>
               </div>
             </div>
           </div>
           <a href="/about" data-route class="btn-about-luxury">
-            <span>Discover Our Story</span>
+            <span>${t("about.btn")}</span>
           </a>
         </div>
 
@@ -35,7 +33,7 @@ export default function about() {
           <div class="about-media-card card-luxury">
             <div class="media-stat-box">
               <span class="stat-number">15+</span>
-              <span class="stat-label">Healthcare Specialists On-Site</span>
+              <span class="stat-label">${t("about.stat")}</span>
             </div>
           </div>
         </div>
