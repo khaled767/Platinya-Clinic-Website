@@ -1,5 +1,13 @@
 // Services Page Module (High-Fidelity)
 
+const medias = {
+  hair: "./assets/images/ai/services/hair-APPROVED.png",
+  dental: "./assets/images/ai/services/dental-APPROVED-nolamp.png",
+  plastic: "./assets/images/ai/services/plastic/plastic-APPROVED.jpg",
+  bariatric: "./assets/images/ai/services/bariatric/bariatric-APPROVED.png",
+  aesthetics: "./assets/images/ai/services/aesthetics/aesthetics-APPROVED.png",
+};
+
 export default function servicesPage() {
   return `
     <div class="page-services">
@@ -17,7 +25,7 @@ export default function servicesPage() {
       <!-- Detailed Services Catalog -->
       <section class="section-services-catalog">
         <div class="container">
-          
+
           <!-- Treatment 1: Hair -->
           <article class="service-detail-card card-luxury" id="hair-transplant">
             <div class="detail-grid">
@@ -36,6 +44,7 @@ export default function servicesPage() {
               </div>
               <div class="detail-media">
                 <div class="media-box-luxury">
+                  <img src="${medias.hair}" alt="Hair transplantation in progress" class="detail-img" loading="lazy" />
                   <span class="media-badge">Lifetime Guarantee</span>
                 </div>
               </div>
@@ -60,6 +69,7 @@ export default function servicesPage() {
               </div>
               <div class="detail-media">
                 <div class="media-box-luxury">
+                  <img src="${medias.dental}" alt="Comfortable dental check-up" class="detail-img" loading="lazy" />
                   <span class="media-badge">3D Smile Simulation</span>
                 </div>
               </div>
@@ -84,6 +94,7 @@ export default function servicesPage() {
               </div>
               <div class="detail-media">
                 <div class="media-box-luxury">
+                  <img src="${medias.plastic}" alt="Plastic surgery consultation" class="detail-img" loading="lazy" />
                   <span class="media-badge">Advanced Surgical Suites</span>
                 </div>
               </div>
@@ -108,7 +119,33 @@ export default function servicesPage() {
               </div>
               <div class="detail-media">
                 <div class="media-box-luxury">
+                  <img src="${medias.bariatric}" alt="Healthy lifestyle after bariatric treatment" class="detail-img" loading="lazy" />
                   <span class="media-badge">12-Month Aftercare</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Treatment 5: Medical Aesthetics -->
+          <article class="service-detail-card card-luxury" id="aesthetics">
+            <div class="detail-grid">
+              <div class="detail-info">
+                <span class="detail-tag">05 • Aesthetic Medicine</span>
+                <h2 class="detail-title">Non-Invasive Medical Aesthetics</h2>
+                <p class="detail-text">
+                  Advanced non-surgical anti-aging, laser dermatology, and skin-rejuvenation treatments delivered in our partner clinics — naturally enhancing your beauty with minimal to zero downtime.
+                </p>
+                <ul class="detail-features">
+                  <li>✓ Non-Invasive Anti-Aging Treatments</li>
+                  <li>✓ Laser Dermatology & Skin Rejuvenation</li>
+                  <li>✓ Minimal to Zero Downtime</li>
+                </ul>
+                <a href="/contact" data-route class="btn-luxury-gold"><span>Book Aesthetic Consultation</span></a>
+              </div>
+              <div class="detail-media">
+                <div class="media-box-luxury">
+                  <img src="${medias.aesthetics}" alt="Serene medical-aesthetics facial treatment" class="detail-img" loading="lazy" />
+                  <span class="media-badge">Non-Surgical</span>
                 </div>
               </div>
             </div>

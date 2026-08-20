@@ -4,11 +4,31 @@ import { t } from "../../i18n";
 
 export default function services() {
   const specs = [
-    { id: "hair", number: "01", key: "hair", tagKey: "popular", tag: "" },
-    { id: "dental", number: "02", key: "dental", tagKey: "cosmetic" },
-    { id: "plastic", number: "03", key: "plastic", tagKey: "surgical" },
-    { id: "bariatric", number: "04", key: "bariatric", tagKey: "vital" },
-    { id: "aesthetics", number: "05", key: "aesth", tagKey: "nonsurgical" },
+    {
+      id: "hair", number: "01", key: "hair", tagKey: "popular",
+      img: "./assets/images/ai/services/hair-APPROVED.png",
+      imgAlt: "Hair transplantation in progress with drawn hairline",
+    },
+    {
+      id: "dental", number: "02", key: "dental", tagKey: "cosmetic",
+      img: "./assets/images/ai/services/dental-APPROVED-nolamp.png",
+      imgAlt: "Comfortable dental check-up with open mouth",
+    },
+    {
+      id: "plastic", number: "03", key: "plastic", tagKey: "surgical",
+      img: "./assets/images/ai/services/plastic/plastic-APPROVED.jpg",
+      imgAlt: "Plastic surgery consultation reviewing a facial plan",
+    },
+    {
+      id: "bariatric", number: "04", key: "bariatric", tagKey: "vital",
+      img: "./assets/images/ai/services/bariatric/bariatric-APPROVED.png",
+      imgAlt: "Healthy, energised lifestyle after bariatric treatment",
+    },
+    {
+      id: "aesthetics", number: "05", key: "aesth", tagKey: "nonsurgical",
+      img: "./assets/images/ai/services/aesthetics/aesthetics-APPROVED.png",
+      imgAlt: "Serene medical-aesthetics facial treatment",
+    },
   ];
 
   return `
@@ -23,17 +43,22 @@ export default function services() {
         <div class="services-grid">
           ${specs.map((s) => `
             <article class="service-card-luxury">
-              <div class="card-header-meta">
-                <span class="service-number">${s.number}</span>
-                <span class="service-tag">${t("sv.tag." + s.tagKey)}</span>
+              <div class="service-card-media">
+                <img src="${s.img}" alt="${s.imgAlt}" class="service-card-img" loading="lazy" />
               </div>
-              <h3 class="service-title">${t("sv." + s.key)}</h3>
-              <p class="service-description">${t("sv." + s.key + ".d")}</p>
-              <div class="card-footer-action">
-                <a href="/services" data-route class="link-luxury">
-                  <span>${t("services.explore")}</span>
-                  <span class="arrow">→</span>
-                </a>
+              <div class="service-card-body">
+                <div class="card-header-meta">
+                  <span class="service-number">${s.number}</span>
+                  <span class="service-tag">${t("sv.tag." + s.tagKey)}</span>
+                </div>
+                <h3 class="service-title">${t("sv." + s.key)}</h3>
+                <p class="service-description">${t("sv." + s.key + ".d")}</p>
+                <div class="card-footer-action">
+                  <a href="/services" data-route class="link-luxury">
+                    <span>${t("services.explore")}</span>
+                    <span class="arrow">→</span>
+                  </a>
+                </div>
               </div>
             </article>
           `).join('')}
