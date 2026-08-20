@@ -58,6 +58,33 @@
   overflow: hidden;
 }
 
+/* Approved service image — flush header at the top of the card */
+.service-card-media {
+  margin: calc(-1 * var(--space-8)) calc(-1 * var(--space-8)) var(--space-6);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--color-bg-surface-elevated);
+}
+
+.service-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-smooth);
+}
+
+.service-card-luxury:hover .service-card-img {
+  transform: scale(1.05);
+}
+
+.service-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex-grow: 1;
+}
+
 .service-card-luxury::before {
   content: '';
   position: absolute;
