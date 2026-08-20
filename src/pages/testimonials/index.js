@@ -1,53 +1,52 @@
 // Testimonials Page Module (High-Fidelity)
+import { t } from "../../i18n";
 
 export default function testimonialsPage() {
   const journeys = [
     {
       name: "Marcus Vance",
-      country: "London, United Kingdom",
-      treatment: "Sapphire FUE Hair Restoration (4,200 Grafts)",
-      quote: "From my VIP Mercedes driver waiting at Istanbul Airport to my personal coordinator helping me at every step, Platinya made me feel like royalty. My hair density looks 100% natural."
+      countryKey: "tj.c1",
+      treatmentKey: "tj.t1",
+      quoteKey: "ts.q0", // reuse hero-journey quote (VIP arrival)
     },
     {
       name: "Elena Rostova",
-      country: "Munich, Germany",
-      treatment: "Full Hollywood Smile (24 E-Max Veneers)",
-      quote: "The 3D smile design preview showed me exactly what my new teeth would look like before we started. The results in just 6 days are breathtaking."
+      countryKey: "tj.c2",
+      treatmentKey: "tj.t2",
+      quoteKey: "tj.q1",
     },
     {
       name: "Jean-Luc Moreau",
-      country: "Paris, France",
-      treatment: "Rhinoplasty & Facial Contouring",
-      quote: "Absolute professionalism. The advanced surgical facility and 5-star Bosphorus hotel recovery made the entire trip smooth and stress-free."
-    }
+      countryKey: "tj.c3",
+      treatmentKey: "tj.t3",
+      quoteKey: "tj.q2",
+    },
   ];
 
   return `
     <div class="page-testimonials">
       <section class="page-banner bg-dark-obsidian">
         <div class="container">
-          <span class="section-subtitle text-gold">Real Transformations</span>
-          <h1 class="page-title text-inverse">Patient Journeys & Experiences</h1>
-          <p class="page-description text-muted">
-            Read verified experiences and stories from international patients who chose Platinya Clinic for their healthcare journey.
-          </p>
+          <span class="section-subtitle text-gold">${t("tj.badge")}</span>
+          <h1 class="page-title text-inverse">${t("tj.title")}</h1>
+          <p class="page-description text-muted">${t("testi.desc")}</p>
         </div>
       </section>
 
       <section class="section-testimonials-catalog">
         <div class="container">
           <div class="testimonials-catalog-grid">
-            ${journeys.map(j => `
+            ${journeys.map((j) => `
               <article class="journey-card card-luxury">
                 <div class="journey-rating">★★★★★</div>
-                <blockquote class="journey-quote">"${j.quote}"</blockquote>
+                <blockquote class="journey-quote">"${t(j.quoteKey)}"</blockquote>
                 <div class="journey-author">
                   <h3 class="author-name">${j.name}</h3>
-                  <p class="author-location">${j.country}</p>
-                  <span class="treatment-badge">${j.treatment}</span>
+                  <p class="author-location">${t(j.countryKey)}</p>
+                  <span class="treatment-badge">${t(j.treatmentKey)}</span>
                 </div>
               </article>
-            `).join('')}
+            `).join("")}
           </div>
         </div>
       </section>

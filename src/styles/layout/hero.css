@@ -183,28 +183,25 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  /* Slight transparency lets the violet background gently unify tones,
-     while keeping the approved logo on the wall crisp and legible. */
-  opacity: 0.92;
+  opacity: 1; /* keep the approved bright image fully vibrant */
 }
 
-/* Gentle violet wash — harmonises the photo with the violet background
-   without obscuring the approved Platinya logo mounted on the wall. */
+/* Very light viole wash only — no multiply darkening, keeps sunlighter look */
 .hero-card-tint {
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, rgba(58, 36, 95, 0.16) 0%, rgba(36, 22, 64, 0.30) 60%, rgba(26, 15, 46, 0.42) 100%);
-  mix-blend-mode: multiply;
+  background: linear-gradient(160deg, rgba(58, 36, 95, 0.06) 0%, rgba(36, 22, 64, 0.06) 60%, transparent 100%);
   z-index: 1;
   pointer-events: none;
 }
 
-/* Dark scrim so the concierge badge stays readable over the photo */
+/* Minimal bottom scrim — only enough to keep the concierge badge readable,
+   leaving the rest of the bright lobby unobscured. */
 .hero-card-luxury::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.15) 55%, transparent 80%);
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.45) 0%, rgba(15, 23, 42, 0.0) 40%, transparent 70%);
   z-index: 1;
   pointer-events: none;
 }
