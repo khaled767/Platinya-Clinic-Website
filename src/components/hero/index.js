@@ -50,6 +50,13 @@ export default function hero() {
 
         <div class="hero-media">
           <div class="hero-card-luxury">
+            <img
+              src="./assets/images/ai/hero-APPROVED.png"
+              alt="Luxury medical concierge lounge"
+              class="hero-card-img"
+              loading="lazy"
+            />
+            <div class="hero-card-tint"></div>
             <div class="card-glow"></div>
             <div class="concierge-preview-badge">
               <span class="badge-icon">★</span>
