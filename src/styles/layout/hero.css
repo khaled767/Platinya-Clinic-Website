@@ -183,16 +183,17 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  /* Higher transparency so the violet background shows through */
-  opacity: 0.8;
+  /* Slight transparency lets the violet background gently unify tones,
+     while keeping the approved logo on the wall crisp and legible. */
+  opacity: 0.92;
 }
 
-/* Violet tint overlaid on the photo — pulls any blue tones toward the brand
-   violet, guaranteeing the hero harmonises with the violet site background. */
+/* Gentle violet wash — harmonises the photo with the violet background
+   without obscuring the approved Platinya logo mounted on the wall. */
 .hero-card-tint {
   position: absolute;
   inset: 0;
-  background: linear-gradient(160deg, rgba(58, 36, 95, 0.28) 0%, rgba(36, 22, 64, 0.55) 60%, rgba(26, 15, 46, 0.7) 100%);
+  background: linear-gradient(160deg, rgba(58, 36, 95, 0.16) 0%, rgba(36, 22, 64, 0.30) 60%, rgba(26, 15, 46, 0.42) 100%);
   mix-blend-mode: multiply;
   z-index: 1;
   pointer-events: none;
