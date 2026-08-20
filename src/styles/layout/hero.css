@@ -183,6 +183,19 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  /* Higher transparency so the violet background shows through */
+  opacity: 0.8;
+}
+
+/* Violet tint overlaid on the photo — pulls any blue tones toward the brand
+   violet, guaranteeing the hero harmonises with the violet site background. */
+.hero-card-tint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(58, 36, 95, 0.28) 0%, rgba(36, 22, 64, 0.55) 60%, rgba(26, 15, 46, 0.7) 100%);
+  mix-blend-mode: multiply;
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* Dark scrim so the concierge badge stays readable over the photo */
