@@ -99,6 +99,30 @@
   color: var(--color-text-muted);
 }
 
+/* Ministry of Health / Health Türkiye license strip */
+.footer-license {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  margin-top: var(--space-12);
+  padding: var(--space-6) var(--space-8);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+}
+
+.health-turkiye-logo {
+  width: 120px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.license-text {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+}
+
 .footer-bottom {
   display: flex;
   align-items: center;
@@ -144,5 +168,15 @@
     flex-direction: column;
     gap: var(--space-4);
     text-align: center;
+  }
+
+  .footer-license {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-3);
+  }
+
+  .health-turkiye-logo {
+    width: 100px;
   }
 }

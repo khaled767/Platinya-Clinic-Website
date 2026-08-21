@@ -1,4 +1,5 @@
 // Footer Component (High-Fidelity)
+import legalDisclaimer from "../legal-disclaimer";
 
 export default function footer() {
   return `
@@ -9,7 +10,7 @@ export default function footer() {
           <!-- Column 1: Brand & Concierge Statement -->
           <div class="footer-col footer-brand">
             <a href="/" data-route class="logo-link">
-              <img src="./assets/images/logo.png" alt="Platinya Clinic Logo" class="brand-logo-img-footer" />
+              <img src="./assets/images/logo.png" alt="Platinya Clinic Agency Logo" class="brand-logo-img-footer" />
             </a>
             <p class="brand-description">
               Curating premier medical journeys for European patients with end-to-end luxury hospitality, medical expertise, and dedicated personal coordinators.
@@ -61,9 +62,25 @@ export default function footer() {
 
         </div>
 
+        <!-- Ministry of Health / Health Turkiye license strip -->
+        <div class="footer-license">
+          <img
+            src="./assets/images/health-turkiye-logo.png"
+            alt="Health Türkiye — Turkish Ministry of Health"
+            class="health-turkiye-logo"
+            loading="lazy"
+          />
+          <p class="license-text">
+            Licensed Medical Tourism Facilitator — registered with the Turkish Ministry of Health (Health Türkiye).
+          </p>
+        </div>
+
+        <!-- Legal disclaimer (all languages) -->
+        ${legalDisclaimer()}
+
         <!-- Footer Bottom Bar -->
         <div class="footer-bottom">
-          <p class="copyright">&copy; ${new Date().getFullYear()} Platinya Clinic. All rights reserved. International Medical Concierge Services.</p>
+          <p class="copyright">&copy; ${new Date().getFullYear()} Platinya Clinic Agency. All rights reserved. International Medical Concierge Services.</p>
           <div class="legal-links">
             <a href="/privacy-policy" data-route>Privacy Policy</a>
             <span class="divider">•</span>

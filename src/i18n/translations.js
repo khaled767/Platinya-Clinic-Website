@@ -1,4 +1,4 @@
-// i18n translations dictionary — comprehensive coverage (178 keys/lang, 7 languages).
+// i18n translations dictionary — comprehensive coverage.
 
 export const LANGS = [
   { code: "en", label: "English", flag: "🇬🇧" },
@@ -190,6 +190,8 @@ const t = {
     "about.p2": "Our team of over 15 on-ground healthcare coordinators, personal interpreters, and VIP logistics managers works exclusively with premier surgical hospitals in Turkey to ensure every patient receives personalized care.",
     "about.partnerStat": "Partner Hospitals & Clinics",
     "about.h2": "More Than Medical Facilitation",
+    "pp.title": "Privacy Policy",
+    "pp.sub": "How Platinya Clinic Agency collects, uses, and protects your personal and medical information.",
   },
   ar: {
     "nav.home": "الرئيسية",
@@ -369,6 +371,8 @@ const t = {
     "about.p2": "يعمل فريقنا المكون من أكثر من 15 منسقاً للرعاية الصحية وشخصياً ومترجمين شخصيين ومديري لوجستيات VIP حصرياً مع أبرز المستشفيات الجراحية في تركيا لضمان حصول كل مريض على رعاية شخصية.",
     "about.partnerStat": "مستشفيات وعيادات شريكة",
     "about.h2": "أكثر من مجرد تسهيل طبي",
+    "pp.title": "سياسة الخصوصية",
+    "pp.sub": "كيف تقوم وكالة Platinya Clinic بجمع واستخدام وحماية معلوماتك الشخصية والطبية.",
   },
   fr: {
     "nav.home": "Accueil",
@@ -549,6 +553,8 @@ const t = {
     "about.p2": "Notre équipe de plus de 15 coordinateurs de soins sur place, interprètes personnels et gestionnaires logistiques VIP travaille exclusivement avec d'excellents hôpitaux chirurgicaux en Turquie pour garantir à chaque patient des soins personnalisés.",
     "about.partnerStat": "Hôpitaux et Cliniques Partenaires",
     "about.h2": "Bien Plus Qu'une Simple Facilitation Médicale",
+    "pp.title": "Politique de Confidentialité",
+    "pp.sub": "Comment Platinya Clinic Agency collecte, utilise et protège vos informations personnelles et médicales.",
   },
   es: {
     "nav.home": "Inicio",
@@ -729,6 +735,8 @@ const t = {
     "about.p2": "Nuestro equipo de más de 15 coordinadores sanitarios en el terreno, intérpretes personales y gestores de logística VIP trabaja exclusivamente con hospitales quirúrgicos de primer nivel en Turquía para garantizar una atención personalizada a cada paciente.",
     "about.partnerStat": "Hospitales y Clínicas Asociados",
     "about.h2": "Más que Simple Facilitación Médica",
+    "pp.title": "Política de Privacidad",
+    "pp.sub": "Cómo Platinya Clinic Agency recopila, utiliza y protege su información personal y médica.",
   },
   tr: {
     "nav.home": "Ana Sayfa",
@@ -909,6 +917,8 @@ const t = {
     "about.p2": "Sahada görevli 15'ten fazla sağlık koordinatörü, kişisel tercüman ve VIP lojistik yöneticisinden oluşan ekibimiz, her hastanın kişiselleştirilmiş bakım almasını sağlamak için Türkiye'deki seçkin cerrahi hastanelerle özel olarak çalışır.",
     "about.partnerStat": "Ortak Hastaneler ve Klinikler",
     "about.h2": "Tıbbi Kolaylaştırmanın Ötesinde",
+    "pp.title": "Gizlilik Politikası",
+    "pp.sub": "Platinya Clinic Agency kişisel ve tıbbi bilgilerinizi nasıl topladığını, kullandığını ve koruduğunu açıklar.",
   },
   it: {
     "nav.home": "Home",
@@ -1089,6 +1099,8 @@ const t = {
     "about.p2": "Il nostro team di oltre 15 coordinatori sanitari sul campo, interpreti personali e gestori di logistica VIP collabora esclusivamente con ospedali chirurgici di primo livello in Turchia per garantire cure personalizzate a ogni paziente.",
     "about.partnerStat": "Ospedali e Cliniche Partner",
     "about.h2": "Più di una Semplice Facilitazione Medica",
+    "pp.title": "Informativa sulla Privacy",
+    "pp.sub": "Come Platinya Clinic Agency raccoglie, utilizza e protegge le vostre informazioni personali e mediche.",
   },
   ru: {
     "nav.home": "Главная",
@@ -1269,6 +1281,8 @@ const t = {
     "about.p2": "Наша команда из более чем 15 медицинских координаторов на месте, личных переводчиков и VIP-менеджеров по логистике работает исключительно с ведущими хирургическими больницами Турции, чтобы каждый пациент получал индивидуальный уход.",
     "about.partnerStat": "Больницы и клиники-партнёры",
     "about.h2": "Больше, чем просто медицинское сопровождение",
+    "pp.title": "Политика конфиденциальности",
+    "pp.sub": "Как Platinya Clinic Agency собирает, использует и защищает вашу личную и медицинскую информацию.",
   },
 };
 
