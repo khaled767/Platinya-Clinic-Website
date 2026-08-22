@@ -80,6 +80,8 @@ export function initRouting() {
     initMobileMenu();
     initLanguageSwitcher();
     initHeaderScroll();
+    // Always jump to the top on route change so the new page is visible immediately
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
   // Delegate all data-route clicks

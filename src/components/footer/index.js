@@ -1,5 +1,6 @@
 // Footer Component (High-Fidelity)
 import legalDisclaimer from "../legal-disclaimer";
+import { t } from "../../i18n";
 
 export default function footer() {
   return `
@@ -19,13 +20,13 @@ export default function footer() {
 
           <!-- Column 2: Navigation Links -->
           <div class="footer-col">
-            <h4 class="footer-heading">Navigation</h4>
+            <h4 class="footer-heading">${t("footer.nav")}</h4>
             <ul class="footer-links">
-              <li><a href="/" data-route>Home</a></li>
-              <li><a href="/about" data-route>About Our Agency</a></li>
-              <li><a href="/hospitals" data-route>المستشفيات المتعاقد معها</a></li>
+              <li><a href="/" data-route>${t("nav.home")}</a></li>
+              <li><a href="/about" data-route>${t("nav.about")}</a></li>
+              <li><a href="/hospitals" data-route>${t("nav.hospitals")}</a></li>
               <li><a href="/testimonials" data-route>Patient Journeys</a></li>
-              <li><a href="/contact" data-route>VIP Consultation</a></li>
+              <li><a href="/contact" data-route>${t("contact.vip")}</a></li>
             </ul>
           </div>
 
