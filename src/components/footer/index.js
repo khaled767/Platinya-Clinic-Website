@@ -6,6 +6,21 @@ export default function footer() {
   return `
     <footer class="site-footer">
       <div class="container footer-container">
+
+        <!-- Ministry of Health / Health Türkiye license — top of footer,
+             sits between the testimonials section and the footer columns -->
+        <div class="footer-license">
+          <img
+            src="./assets/images/health-turkiye-logo.png"
+            alt="Health Türkiye — Turkish Ministry of Health"
+            class="health-turkiye-logo"
+            loading="lazy"
+          />
+          <p class="license-text">
+            Licensed Medical Tourism Facilitator — registered with the Turkish Ministry of Health (Health Türkiye).
+          </p>
+        </div>
+
         <div class="footer-grid">
           
           <!-- Column 1: Brand & Concierge Statement -->
@@ -61,19 +76,6 @@ export default function footer() {
             </div>
           </div>
 
-        </div>
-
-        <!-- Ministry of Health / Health Turkiye license strip -->
-        <div class="footer-license">
-          <img
-            src="./assets/images/health-turkiye-logo.png"
-            alt="Health Türkiye — Turkish Ministry of Health"
-            class="health-turkiye-logo"
-            loading="lazy"
-          />
-          <p class="license-text">
-            Licensed Medical Tourism Facilitator — registered with the Turkish Ministry of Health (Health Türkiye).
-          </p>
         </div>
 
         <!-- Legal disclaimer (all languages) -->

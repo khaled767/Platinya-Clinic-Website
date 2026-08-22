@@ -16,12 +16,19 @@ export default function turkishLicenses() {
           <!-- Health Tourism Authorization (Ministry of Health / Health Türkiye) -->
           <figure class="license-card">
             <div class="license-media">
-              <img
-                src="./assets/images/certifications/health-tourism-cert-web.jpg"
-                alt="Official Health Tourism Authorization Certificate — Turkish Ministry of Health (Health Türkiye)"
-                class="license-img"
-                loading="lazy"
-              />
+              <button
+                type="button"
+                class="license-zoom"
+                data-lightbox="./assets/images/certifications/health-tourism-cert.jpg"
+                aria-label="Expand Health Tourism Authorization Certificate"
+              >
+                <img
+                  src="./assets/images/certifications/health-tourism-cert-web.jpg"
+                  alt="Official Health Tourism Authorization Certificate — Turkish Ministry of Health (Health Türkiye)"
+                  class="license-img"
+                  loading="lazy"
+                />
+              </button>
             </div>
             <figcaption class="license-caption">
               <span class="license-badge">Ministry of Health — Health Türkiye</span>
@@ -35,12 +42,19 @@ export default function turkishLicenses() {
           <!-- Trademark Registration (TÜRKPATENT) -->
           <figure class="license-card">
             <div class="license-media">
-              <img
-                src="./assets/images/certifications/trademark-cert-p1-web.jpg"
-                alt="Registered Trademark Certificate for PLATINYA CLINIC — Turkish Patent and Trademark Office"
-                class="license-img"
-                loading="lazy"
-              />
+              <button
+                type="button"
+                class="license-zoom"
+                data-lightbox="./assets/images/certifications/trademark-cert-p1.jpg"
+                aria-label="Expand Registered Trademark Certificate"
+              >
+                <img
+                  src="./assets/images/certifications/trademark-cert-p1-web.jpg"
+                  alt="Registered Trademark Certificate for PLATINYA CLINIC — Turkish Patent and Trademark Office"
+                  class="license-img"
+                  loading="lazy"
+                />
+              </button>
             </div>
             <figcaption class="license-caption">
               <span class="license-badge">TÜRKPATENT</span>
