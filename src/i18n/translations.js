@@ -1,4 +1,4 @@
-// i18n translations dictionary — comprehensive coverage (209 keys/lang, 7 languages).
+// i18n translations dictionary — comprehensive coverage.
 
 export const LANGS = [
   { code: "en", label: "English", flag: "🇬🇧" },
@@ -221,6 +221,8 @@ const t = {
     "pp.updated": "Last updated",
     "tos.title": "Terms of Service",
     "tos.sub": "The terms governing Platinya Clinic Agency's international medical-tourism facilitation services.",
+    "moh.title": "Authorized by Turkish Ministry of Health",
+    "moh.sub": "Officially licensed to provide international health tourism services in Türkiye.",
   },
   ar: {
     "nav.home": "الرئيسية",
@@ -431,6 +433,8 @@ const t = {
     "pp.updated": "آخر تحديث",
     "tos.title": "شروط الخدمة",
     "tos.sub": "الشروط التي تحكم خدمات تيسير السياحة الطبية الدولية التي تقدمها وكالة Platinya Clinic Agency.",
+    "moh.title": "مرخصة من وزارة الصحة التركية",
+    "moh.sub": "مرخصة رسمياً لتقديم خدمات السياحة العلاجية الدولية في تركيا.",
   },
   fr: {
     "nav.home": "Accueil",
@@ -642,6 +646,8 @@ const t = {
     "pp.updated": "Dernière mise à jour",
     "tos.title": "Conditions de Service",
     "tos.sub": "Les conditions régissant les services internationaux de facilitation du tourisme médical de Platinya Clinic Agency.",
+    "moh.title": "Autorisé par le Ministère Turc de la Santé",
+    "moh.sub": "Officiellement agréé pour fournir des services internationaux de tourisme de santé en Türkiye.",
   },
   es: {
     "nav.home": "Inicio",
@@ -853,6 +859,8 @@ const t = {
     "pp.updated": "Última actualización",
     "tos.title": "Condiciones del Servicio",
     "tos.sub": "Los términos que rigen los servicios internacionales de facilitación de turismo médico de Platinya Clinic Agency.",
+    "moh.title": "Autorizado por el Ministerio de Salud de Turquía",
+    "moh.sub": "Oficialmente licenciado para prestar servicios internacionales de turismo de salud en Türkiye.",
   },
   tr: {
     "nav.home": "Ana Sayfa",
@@ -1064,6 +1072,8 @@ const t = {
     "pp.updated": "Son güncelleme",
     "tos.title": "Hizmet Şartları",
     "tos.sub": "Platinya Clinic Agency'nin uluslararası medikal turizm kolaylaştırma hizmetlerini yöneten şartlar.",
+    "moh.title": "Türkiye Sağlık Bakanlığı Tarafından Yetkilendirilmiştir",
+    "moh.sub": "Türkiye'de uluslararası sağlık turizmi hizmetleri sunmak üzere resmi olarak lisanslıdır.",
   },
   it: {
     "nav.home": "Home",
@@ -1275,6 +1285,8 @@ const t = {
     "pp.updated": "Ultimo aggiornamento",
     "tos.title": "Condizioni di Servizio",
     "tos.sub": "I termini che regolano i servizi internazionali di facilitazione del turismo medico di Platinya Clinic Agency.",
+    "moh.title": "Autorizzato dal Ministero della Salute Turco",
+    "moh.sub": "Ufficialmente autorizzato a fornire servizi internazionali di turismo sanitario in Türkiye.",
   },
   ru: {
     "nav.home": "Главная",
@@ -1486,6 +1498,8 @@ const t = {
     "pp.updated": "Последнее обновление",
     "tos.title": "Условия обслуживания",
     "tos.sub": "Условия, регулирующие услуги Platinya Clinic Agency по содействию международному медицинскому туризму.",
+    "moh.title": "Уполномочено Министерством здравоохранения Турции",
+    "moh.sub": "Официально лицензирован на предоставление услуг международного медицинского туризма в Турции.",
   },
 };
 

@@ -99,34 +99,6 @@
   color: var(--color-text-muted);
 }
 
-/* Ministry of Health / Health Türkiye license — prominent, frameless banner
-   at the top of the footer, right below the testimonials section. */
-.footer-license {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: var(--space-4);
-  margin-bottom: var(--space-12);
-  padding: var(--space-8) var(--space-4);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.health-turkiye-logo {
-  width: 180px;
-  height: auto;
-  flex-shrink: 0;
-}
-
-.license-text {
-  max-width: 560px;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  line-height: var(--line-height-relaxed);
-}
-
 .footer-bottom {
   display: flex;
   align-items: center;
@@ -172,13 +144,5 @@
     flex-direction: column;
     gap: var(--space-4);
     text-align: center;
-  }
-
-  .footer-license {
-    padding: var(--space-6) var(--space-2);
-  }
-
-  .health-turkiye-logo {
-    width: 130px;
   }
 }
