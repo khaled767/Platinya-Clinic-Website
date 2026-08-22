@@ -1,4 +1,6 @@
 // Footer Component (High-Fidelity)
+import legalDisclaimer from "../legal-disclaimer";
+import { t } from "../../i18n";
 
 export default function footer() {
   return `
@@ -9,7 +11,7 @@ export default function footer() {
           <!-- Column 1: Brand & Concierge Statement -->
           <div class="footer-col footer-brand">
             <a href="/" data-route class="logo-link">
-              <img src="./assets/images/logo.png" alt="Platinya Clinic Logo" class="brand-logo-img-footer" />
+              <img src="./assets/images/logo.png" alt="Platinya Clinic Agency Logo" class="brand-logo-img-footer" />
             </a>
             <p class="brand-description">
               Curating premier medical journeys for European patients with end-to-end luxury hospitality, medical expertise, and dedicated personal coordinators.
@@ -18,13 +20,13 @@ export default function footer() {
 
           <!-- Column 2: Navigation Links -->
           <div class="footer-col">
-            <h4 class="footer-heading">Navigation</h4>
+            <h4 class="footer-heading">${t("footer.nav")}</h4>
             <ul class="footer-links">
-              <li><a href="/" data-route>Home</a></li>
-              <li><a href="/about" data-route>About Our Agency</a></li>
-              <li><a href="/hospitals" data-route>المستشفيات المتعاقد معها</a></li>
+              <li><a href="/" data-route>${t("nav.home")}</a></li>
+              <li><a href="/about" data-route>${t("nav.about")}</a></li>
+              <li><a href="/hospitals" data-route>${t("nav.hospitals")}</a></li>
               <li><a href="/testimonials" data-route>Patient Journeys</a></li>
-              <li><a href="/contact" data-route>VIP Consultation</a></li>
+              <li><a href="/contact" data-route>${t("contact.vip")}</a></li>
             </ul>
           </div>
 
@@ -61,9 +63,12 @@ export default function footer() {
 
         </div>
 
+        <!-- Legal disclaimer (all languages) -->
+        ${legalDisclaimer()}
+
         <!-- Footer Bottom Bar -->
         <div class="footer-bottom">
-          <p class="copyright">&copy; ${new Date().getFullYear()} Platinya Clinic. All rights reserved. International Medical Concierge Services.</p>
+          <p class="copyright">&copy; ${new Date().getFullYear()} Platinya Clinic Agency. All rights reserved. International Medical Concierge Services.</p>
           <div class="legal-links">
             <a href="/privacy-policy" data-route>Privacy Policy</a>
             <span class="divider">•</span>

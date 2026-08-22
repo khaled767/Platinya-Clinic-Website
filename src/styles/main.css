@@ -17,10 +17,13 @@
 @import './layout/services.css';
 @import './layout/sections.css';
 @import './layout/licenses.css';
+@import './layout/lightbox.css';
 @import './layout/partner-facilities.css';
 @import './layout/legal.css';
+@import './layout/legal-pages.css';
 @import './layout/pages.css';
 @import './layout/notfound.css';
+@import './layout/health-turkiye.css';
 @import './layout/footer.css';
 
 /* 4. Utilities */

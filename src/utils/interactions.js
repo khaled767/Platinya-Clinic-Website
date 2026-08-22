@@ -72,6 +72,41 @@ export function initHeaderScroll() {
   window.addEventListener("scroll", onScroll, { passive: true });
 }
 
+// Lightbox — opens a fullscreen black viewer for certificate images.
+export function initLightbox() {
+  const close = () => {
+    const el = document.querySelector(".lightbox");
+    if (el) el.remove();
+  };
+
+  // Close on background click / close button / Escape
+  document.addEventListener("click", (e) => {
+    const trigger = e.target.closest("[data-lightbox]");
+    if (trigger) {
+      e.preventDefault();
+      const src = trigger.getAttribute("data-lightbox");
+      const overlay = document.createElement("div");
+      overlay.className = "lightbox";
+      overlay.innerHTML = `
+        <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+        <img src="${src}" alt="Enlarged certificate" class="lightbox-img" />
+      `;
+      document.body.appendChild(overlay);
+      document.body.classList.add("lightbox-open");
+      return;
+    }
+
+    // Close when clicking the dark backdrop or the close button
+    if (e.target.classList && (e.target.classList.contains("lightbox") || e.target.classList.contains("lightbox-close"))) {
+      close();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+}
+
 // Hash-based SPA routing: intercept data-route clicks, navigate via location.hash,
 // and re-render the app plus re-bind UI interactions after each view change.
 export function initRouting() {
@@ -80,6 +115,8 @@ export function initRouting() {
     initMobileMenu();
     initLanguageSwitcher();
     initHeaderScroll();
+    // Always jump to the top on route change so the new page is visible immediately
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
   // Delegate all data-route clicks

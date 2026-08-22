@@ -257,8 +257,18 @@
     gap: var(--space-12);
   }
 
+  /* Show the hero image below the text on mobile (was hidden) */
   .hero-media {
-    display: none;
+    display: block;
+    order: 2;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  .hero-card-luxury {
+    min-height: 300px;
   }
 }
 
