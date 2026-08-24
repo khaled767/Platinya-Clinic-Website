@@ -115,9 +115,9 @@
    divider line (bottom border of the header), on the right side, larger. */
 .health-badge {
   position: absolute;
-  right: clamp(16px, 4vw, 64px);
-  bottom: -30px; /* straddle the header bottom border (divider line) */
-  height: 60px;
+  right: clamp(8px, 2vw, 40px);
+  bottom: -140px; /* straddle the header bottom border (divider line) */
+  height: 160px;
   width: auto;
   object-fit: contain;
   z-index: 5;
@@ -129,12 +129,14 @@
   transform: scale(1.05);
 }
 
-/* On smaller screens, pull the badge onto the divider but keep it compact */
+/* Below 700px — keep the logo LARGE and properly scaled (not tiny),
+   reduce the bottom offset a little so it stays on the divider line. */
 @media (max-width: 700px) {
   .health-badge {
-    height: 44px;
-    bottom: -22px;
-    right: 12px;
+    right: 8px;
+    bottom: -90px;          /* keep it hovering on the divider line */
+    height: 120px;          /* large enough on mobile too */
+    max-width: 45vw;        /* never exceeds half the screen width */
   }
 }
 
