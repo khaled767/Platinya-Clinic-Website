@@ -77,19 +77,5 @@ export default function footer() {
         </div>
       </div>
     </footer>
-
-    <!-- Ministry of Health / Health Türkiye authorization — placed just ABOVE the
-         footer, aligned to the RIGHT edge -->
-    <div class="footer-auth">
-      <img
-        src="./assets/images/health-turkiye-logo.png"
-        alt="Health Türkiye — Turkish Ministry of Health"
-        class="footer-auth-logo"
-        loading="lazy"
-      />
-      <p class="footer-auth-badge" aria-hidden="true">✓</p>
-      <h4 class="footer-auth-title">${t("moh.title")}</h4>
-      <p class="footer-auth-text">${t("moh.sub")}</p>
-    </div>
   `;
 }

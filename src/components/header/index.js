@@ -47,6 +47,14 @@ export default function header() {
             <span>${t("cta.vip")}</span>
           </a>
 
+          <!-- Ministry of Health / Health Türkiye trust badge — after VIP CTA -->
+          <img
+            src="./assets/images/health-turkiye-logo.png"
+            alt="Health Türkiye — Turkish Ministry of Health"
+            class="health-badge"
+            loading="lazy"
+          />
+
           <button type="button" class="mobile-toggle" aria-label="Toggle Navigation">
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>

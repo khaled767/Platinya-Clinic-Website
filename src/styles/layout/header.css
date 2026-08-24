@@ -111,6 +111,32 @@
   gap: var(--space-6);
 }
 
+/* Ministry of Health / Health Türkiye trust badge — after the VIP CTA.
+   Per the study: a compact, elegant, frameless trust badge merged into the
+   dark header (no harsh rectangle) — the red heart logo sits cleanly. */
+.health-badge {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  padding: 0;
+  border: none;
+  background: transparent;
+  opacity: 0.95;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.health-badge:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Hide the health badge on small screens to keep the header uncluttered */
+@media (max-width: 1080px) {
+  .health-badge {
+    display: none;
+  }
+}
+
 .lang-switcher {
   position: relative;
   display: flex;

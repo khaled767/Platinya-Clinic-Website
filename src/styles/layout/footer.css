@@ -99,48 +99,7 @@
   color: var(--color-text-muted);
 }
 
-/* Ministry of Health / Health Türkiye authorization — just ABOVE the footer,
-   aligned to the RIGHT edge, merged into the dark background (frameless). */
-.footer-auth {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* align right as requested */
-  gap: var(--space-4);
-  padding: var(--space-5) var(--space-6);
-  background-color: var(--color-primary-900);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.footer-auth-logo {
-  width: 150px;
-  height: auto;
-  flex-shrink: 0;
-}
-
-.footer-auth-badge {
-  margin: 0;
-  font-size: 1.3rem;
-  color: var(--color-accent-gold-500);
-}
-
-.footer-auth-title {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-base);
-  color: var(--color-bg-base);
-  margin: 0;
-  line-height: var(--line-height-tight);
-  text-align: right;
-}
-
-.footer-auth-text {
-  max-width: 420px;
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-  line-height: var(--line-height-relaxed);
-  margin: 0;
-  text-align: right;
-}
-
+/* Ministry of Health / Health Türkiye trust badge lives in the header (see header.css) */
 .footer-bottom {
   display: flex;
   align-items: center;
@@ -186,9 +145,5 @@
     flex-direction: column;
     gap: var(--space-4);
     text-align: center;
-  }
-
-  .footer-auth-logo {
-    width: 130px;
   }
 }
