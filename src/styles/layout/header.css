@@ -111,6 +111,35 @@
   gap: var(--space-6);
 }
 
+/* Ministry of Health / Health Türkiye badge — floats on the header/body
+   divider line (bottom border of the header), on the right side, larger. */
+.health-badge {
+  position: absolute;
+  right: clamp(8px, 2vw, 40px);
+  bottom: -140px; /* straddle the header bottom border (divider line) */
+  height: 160px;
+  width: auto;
+  object-fit: contain;
+  z-index: 5;
+  pointer-events: auto;
+  filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.35));
+}
+
+.health-badge:hover {
+  transform: scale(1.05);
+}
+
+/* Below 700px — keep the logo LARGE and properly scaled (not tiny),
+   reduce the bottom offset a little so it stays on the divider line. */
+@media (max-width: 700px) {
+  .health-badge {
+    right: 8px;
+    bottom: -90px;          /* keep it hovering on the divider line */
+    height: 120px;          /* large enough on mobile too */
+    max-width: 45vw;        /* never exceeds half the screen width */
+  }
+}
+
 .lang-switcher {
   position: relative;
   display: flex;

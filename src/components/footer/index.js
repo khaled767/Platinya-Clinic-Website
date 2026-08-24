@@ -59,9 +59,9 @@ export default function footer() {
                 <span class="contact-text">Istanbul & European Patient Relations</span>
               </p>
             </div>
-          </div>
-
         </div>
+
+        </div><!-- /footer-grid -->
 
         <!-- Legal disclaimer (all languages) -->
         ${legalDisclaimer()}

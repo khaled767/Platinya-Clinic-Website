@@ -99,6 +99,7 @@
   color: var(--color-text-muted);
 }
 
+/* Ministry of Health / Health Türkiye trust badge lives in the header (see header.css) */
 .footer-bottom {
   display: flex;
   align-items: center;

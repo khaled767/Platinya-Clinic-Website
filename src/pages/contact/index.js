@@ -14,26 +14,6 @@ export default function contactPage() {
       </section>
 
       ${contactSection()}
-
-      <!-- Health Türkiye / Ministry of Health auth — below the consultation
-           section, above the footer -->
-      <section class="section-health-turkiye">
-        <div class="container health-turkiye-wrap">
-          <img
-            src="./assets/images/health-turkiye-logo.png"
-            alt="Health Türkiye — Turkish Ministry of Health"
-            class="health-turkiye-logo"
-            loading="lazy"
-          />
-          <p class="health-turkiye-badge">✓</p>
-          <h2 class="health-turkiye-title">
-            ${t("moh.title")}
-          </h2>
-          <p class="health-turkiye-text">
-            ${t("moh.sub")}
-          </p>
-        </div>
-      </section>
     </div>
   `;
 }
