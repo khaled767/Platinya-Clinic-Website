@@ -6,27 +6,27 @@ export default function services() {
   const specs = [
     {
       id: "hair", number: "01", key: "hair", tagKey: "popular",
-      img: "./assets/images/ai/services/hair-APPROVED.png",
+      img: "./assets/images/ai/services/hair-APPROVED.webp",
       imgAlt: "Hair transplantation in progress with drawn hairline",
     },
     {
       id: "dental", number: "02", key: "dental", tagKey: "cosmetic",
-      img: "./assets/images/ai/services/dental-APPROVED-nolamp.png",
+      img: "./assets/images/ai/services/dental-APPROVED-nolamp.webp",
       imgAlt: "Comfortable dental check-up with open mouth",
     },
     {
       id: "plastic", number: "03", key: "plastic", tagKey: "surgical",
-      img: "./assets/images/ai/services/plastic/plastic-APPROVED.jpg",
+      img: "./assets/images/ai/services/plastic/plastic-APPROVED.webp",
       imgAlt: "Plastic surgery consultation reviewing a facial plan",
     },
     {
       id: "bariatric", number: "04", key: "bariatric", tagKey: "vital",
-      img: "./assets/images/ai/services/bariatric/bariatric-APPROVED.png",
+      img: "./assets/images/ai/services/bariatric/bariatric-APPROVED.webp",
       imgAlt: "Healthy, energised lifestyle after bariatric treatment",
     },
     {
       id: "aesthetics", number: "05", key: "aesth", tagKey: "nonsurgical",
-      img: "./assets/images/ai/services/aesthetics/aesthetics-APPROVED.png",
+      img: "./assets/images/ai/services/aesthetics/aesthetics-APPROVED.webp",
       imgAlt: "Serene medical-aesthetics facial treatment",
     },
   ];

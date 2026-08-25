@@ -51,7 +51,7 @@ export default function hero() {
         <div class="hero-media">
           <div class="hero-card-luxury">
             <img
-              src="./assets/images/ai/hero-APPROVED.png"
+              src="./assets/images/ai/hero-APPROVED.webp"
               alt="Luxury medical concierge lounge"
               class="hero-card-img"
               loading="lazy"

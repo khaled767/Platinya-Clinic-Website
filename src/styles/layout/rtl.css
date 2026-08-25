@@ -1,0 +1,70 @@
+/* ==========================================================================
+   RTL → LTR support — smooth, readable layout when switching to Arabic (or
+   any RTL language). The <html dir="rtl"> attribute + this stylesheet keep
+   text, alignment, icons and spacing correct so translation reads naturally.
+   ========================================================================== */
+
+/* Base direction handled by the <html dir> attribute already. These rules
+   fix RTL-specific alignment quirks so Arabic reads comfortably. */
+
+html[dir="rtl"] body,
+html[dir="rtl"] p,
+html[dir="rtl"] li,
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] h5,
+html[dir="rtl"] h6 {
+  text-align: right;
+}
+
+/* Keep numbers/digits readable in RTL paragraphs */
+html[dir="rtl"] .stat-row,
+html[dir="rtl"] .trust-value,
+html[dir="rtl"] .service-number,
+html[dir="rtl"] .legal-index {
+  direction: ltr;
+  text-align: right;
+  unicode-bidi: isolate;
+}
+
+/* Center-aligned sections stay centered */
+html[dir="rtl"] .section-header,
+html[dir="rtl"] .text-center,
+html[dir="rtl"] .hero-content,
+html[dir="rtl"] .legal-statement,
+html[dir="rtl"] .health-turkiye-wrap {
+  text-align: center;
+}
+
+/* Flex rows flip naturally; ensure any that should flip do */
+html[dir="rtl"] .hero-actions,
+html[dir="rtl"] .hero-trust-bar,
+html[dir="rtl"] .card-header-meta,
+html[dir="rtl"] .feature-chip,
+html[dir="rtl"] .lang-btn {
+  flex-direction: row;
+}
+
+/* Comfortable line-height for long translated paragraphs */
+html[dir="rtl"] .section-description,
+html[dir="rtl"] .service-description,
+html[dir="rtl"] .detail-text,
+html[dir="rtl"] .legal-paragraph,
+html[dir="rtl"] .brand-description {
+  line-height: 1.9;
+}
+
+/* Arrow glyphs in buttons should point left in RTL */
+html[dir="rtl"] .arrow {
+  transform: rotate(180deg);
+  display: inline-flex;
+}
+
+/* Icons next to text should sit on the correct side automatically via
+   flex direction; keep spacing comfortable */
+html[dir="rtl"] .btn-luxury-gold,
+html[dir="rtl"] .link-luxury {
+  gap: var(--space-2);
+}

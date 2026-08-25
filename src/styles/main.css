@@ -25,5 +25,8 @@
 @import './layout/notfound.css';
 @import './layout/footer.css';
 
+/* RTL support — must come last so it can override layout rules */
+@import './layout/rtl.css';
+
 /* 4. Utilities */
 @import './utilities/utilities.css';
