@@ -35,7 +35,7 @@ export default function services() {
   const journey = [
     { icon: icons.plane, key: "j1" },
     { icon: icons.user, key: "j2" },
-    { icon: icons.hotel, key: "j3" },
+    { icon: icons.hotel, key: "j3", link: "/hotel" },
     { icon: icons.mapPin, key: "j4" },
     { icon: icons.translate, key: "j5" },
     { icon: icons.stethoscope, key: "j6" },
@@ -86,14 +86,19 @@ export default function services() {
 
           <div class="concierge-journey">
             ${journey.map((s, idx) => `
-              <div class="journey-step">
+              <a
+                href="${s.link || '#'}"
+                data-route
+                class="journey-step"
+                ${s.link ? '' : 'aria-disabled="true"'}
+              >
                 <div class="journey-marker">
                   <span class="journey-icon">${s.icon}</span>
                   <span class="journey-index">${String(idx + 1).padStart(2, "0")}</span>
                 </div>
                 <h4 class="journey-title">${t("services." + s.key)}</h4>
                 <p class="journey-desc">${t("services." + s.key + "d")}</p>
-              </div>
+              </a>
             `).join('')}
           </div>
         </div>
