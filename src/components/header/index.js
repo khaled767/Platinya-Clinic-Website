@@ -49,7 +49,7 @@ export default function header() {
 
           <!-- Ministry of Health / Health Türkiye trust badge — after VIP CTA -->
           <img
-            src="./assets/images/health-turkiye-logo.png"
+            src="./assets/images/health-turkiye-logo.webp"
             alt="Health Türkiye — Turkish Ministry of Health"
             class="health-badge"
             loading="lazy"

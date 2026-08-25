@@ -2,11 +2,11 @@
 import { t } from "../../i18n";
 
 const medias = {
-  hair: "./assets/images/ai/services/hair-APPROVED.png",
-  dental: "./assets/images/ai/services/dental-APPROVED-nolamp.png",
-  plastic: "./assets/images/ai/services/plastic/plastic-APPROVED.jpg",
-  bariatric: "./assets/images/ai/services/bariatric/bariatric-APPROVED.png",
-  aesthetics: "./assets/images/ai/services/aesthetics/aesthetics-APPROVED.png",
+  hair: "./assets/images/ai/services/hair-APPROVED.webp",
+  dental: "./assets/images/ai/services/dental-APPROVED-nolamp.webp",
+  plastic: "./assets/images/ai/services/plastic/plastic-APPROVED.webp",
+  bariatric: "./assets/images/ai/services/bariatric/bariatric-APPROVED.webp",
+  aesthetics: "./assets/images/ai/services/aesthetics/aesthetics-APPROVED.webp",
 };
 
 export default function servicesPage() {
