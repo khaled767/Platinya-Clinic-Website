@@ -11,6 +11,7 @@ import airportPage from "../pages/airport";
 import conciergePage from "../pages/concierge";
 import transfersPage from "../pages/transfers";
 import interpreterPage from "../pages/interpreter";
+import privacyServicePage from "../pages/privacy-service";
 import notFoundPage from "../pages/not-found";
 
 const routes = {
@@ -27,6 +28,7 @@ const routes = {
   "/concierge": conciergePage,
   "/transfers": transfersPage,
   "/interpreter": interpreterPage,
+  "/privacy": privacyServicePage,
 };
 
 export { notFoundPage };
