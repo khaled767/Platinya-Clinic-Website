@@ -34,7 +34,7 @@ export default function services() {
   // The bespoke concierge journey — a rich, staged luxury experience
   const journey = [
     { icon: icons.plane, key: "j1", link: "/airport" },
-    { icon: icons.user, key: "j2" },
+    { icon: icons.user, key: "j2", link: "/concierge" },
     { icon: icons.hotel, key: "j3", link: "/hotel" },
     { icon: icons.mapPin, key: "j4" },
     { icon: icons.translate, key: "j5" },
