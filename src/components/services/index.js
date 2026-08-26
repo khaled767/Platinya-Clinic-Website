@@ -31,16 +31,14 @@ export default function services() {
     },
   ];
 
-  // The bespoke concierge journey — a rich, staged luxury experience
+  // The bespoke concierge journey — a rich, staged luxury experience (6 stages)
   const journey = [
     { icon: icons.plane, key: "j1", link: "/airport" },
     { icon: icons.user, key: "j2", link: "/concierge" },
     { icon: icons.hotel, key: "j3", link: "/hotel" },
     { icon: icons.mapPin, key: "j4", link: "/transfers" },
     { icon: icons.translate, key: "j5", link: "/interpreter" },
-    { icon: icons.stethoscope, key: "j6" },
-    { icon: icons.shield, key: "j7" },
-    { icon: icons.phone, key: "j8" },
+    { icon: icons.shield, key: "j6", link: "/privacy" },
   ];
 
   return `
