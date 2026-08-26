@@ -9,6 +9,8 @@ import termsPage from "../pages/terms";
 import hotelPage from "../pages/hotel";
 import airportPage from "../pages/airport";
 import conciergePage from "../pages/concierge";
+import transfersPage from "../pages/transfers";
+import interpreterPage from "../pages/interpreter";
 import notFoundPage from "../pages/not-found";
 
 const routes = {
@@ -23,6 +25,8 @@ const routes = {
   "/hotel": hotelPage,
   "/airport": airportPage,
   "/concierge": conciergePage,
+  "/transfers": transfersPage,
+  "/interpreter": interpreterPage,
 };
 
 export { notFoundPage };
