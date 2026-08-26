@@ -232,8 +232,10 @@
 
 .journey-marker {
   display: flex;
+  flex-direction: column;         /* stack number above the icon */
   align-items: center;
-  justify-content: center; /* center the icon horizontally */
+  justify-content: center;        /* center the icon + number in the line */
+  gap: var(--space-2);
   margin-bottom: var(--space-4);
   width: 100%;
 }
@@ -250,13 +252,10 @@
 }
 
 .journey-index {
-  position: absolute;
   font-family: var(--font-family-heading);
-  font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.3);
-  letter-spacing: 0.1em;
-  top: var(--space-4);
-  right: var(--space-5);
+  font-size: var(--font-size-2xs, 0.7rem);
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.2em;
 }
 
 .journey-title {
