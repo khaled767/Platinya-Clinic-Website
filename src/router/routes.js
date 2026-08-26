@@ -8,6 +8,7 @@ import privacyPolicyPage from "../pages/privacy-policy";
 import termsPage from "../pages/terms";
 import hotelPage from "../pages/hotel";
 import airportPage from "../pages/airport";
+import conciergePage from "../pages/concierge";
 import notFoundPage from "../pages/not-found";
 
 const routes = {
@@ -21,6 +22,7 @@ const routes = {
   "/terms": termsPage,
   "/hotel": hotelPage,
   "/airport": airportPage,
+  "/concierge": conciergePage,
 };
 
 export { notFoundPage };
