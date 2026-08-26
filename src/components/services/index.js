@@ -31,6 +31,18 @@ export default function services() {
     },
   ];
 
+  // The bespoke concierge journey — a rich, staged luxury experience
+  const journey = [
+    { icon: icons.plane, key: "j1" },
+    { icon: icons.user, key: "j2" },
+    { icon: icons.hotel, key: "j3", link: "/hotel" },
+    { icon: icons.mapPin, key: "j4" },
+    { icon: icons.translate, key: "j5" },
+    { icon: icons.stethoscope, key: "j6" },
+    { icon: icons.shield, key: "j7" },
+    { icon: icons.phone, key: "j8" },
+  ];
+
   return `
     <section class="section-services">
       <div class="container">
@@ -64,30 +76,30 @@ export default function services() {
           `).join('')}
         </div>
 
-        <!-- Concierge Package Banner -->
+        <!-- All-Inclusive Concierge Package — the full bespoke journey -->
         <div class="concierge-banner-luxury">
-          <div class="banner-content">
+          <div class="concierge-heading">
             <span class="banner-badge">${t("services.banner")}</span>
             <h3 class="banner-title">${t("services.bannerTitle")}</h3>
             <p class="banner-sub">${t("services.bannerSub")}</p>
           </div>
-          <div class="concierge-features-grid">
-            <div class="feature-chip">
-              <span class="chip-icon">${icons.plane}</span>
-              <span class="chip-text">${t("services.f1")}</span>
-            </div>
-            <div class="feature-chip">
-              <span class="chip-icon">${icons.hotel}</span>
-              <span class="chip-text">${t("services.f2")}</span>
-            </div>
-            <div class="feature-chip">
-              <span class="chip-icon">${icons.user}</span>
-              <span class="chip-text">${t("services.f3")}</span>
-            </div>
-            <div class="feature-chip">
-              <span class="chip-icon">${icons.translate}</span>
-              <span class="chip-text">${t("services.f4")}</span>
-            </div>
+
+          <div class="concierge-journey">
+            ${journey.map((s, idx) => `
+              <a
+                href="${s.link || '#'}"
+                data-route
+                class="journey-step"
+                ${s.link ? '' : 'aria-disabled="true"'}
+              >
+                <div class="journey-marker">
+                  <span class="journey-icon">${s.icon}</span>
+                  <span class="journey-index">${String(idx + 1).padStart(2, "0")}</span>
+                </div>
+                <h4 class="journey-title">${t("services." + s.key)}</h4>
+                <p class="journey-desc">${t("services." + s.key + "d")}</p>
+              </a>
+            `).join('')}
           </div>
         </div>
       </div>
