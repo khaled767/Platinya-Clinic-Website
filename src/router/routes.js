@@ -7,6 +7,7 @@ import contactPage from "../pages/contact";
 import privacyPolicyPage from "../pages/privacy-policy";
 import termsPage from "../pages/terms";
 import hotelPage from "../pages/hotel";
+import airportPage from "../pages/airport";
 import notFoundPage from "../pages/not-found";
 
 const routes = {
@@ -19,6 +20,7 @@ const routes = {
   "/privacy-policy": privacyPolicyPage,
   "/terms": termsPage,
   "/hotel": hotelPage,
+  "/airport": airportPage,
 };
 
 export { notFoundPage };
