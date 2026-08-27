@@ -48,15 +48,16 @@ export default function footer() {
             <div class="contact-info">
               <p class="contact-item">
                 <span class="contact-label">24/7 European VIP Line:</span>
-                <a href="tel:+905****0000" class="contact-link">+90 555 000 0000</a>
+                <a href="tel:+905****7388" class="contact-link">+90 531 945 7388</a>
+                <a href="tel:+905****9487" class="contact-link">+90 530 079 9487</a>
               </p>
               <p class="contact-item">
                 <span class="contact-label">Email Assistance:</span>
-                <a href="mailto:concierge@platinyaclinic.com" class="contact-link">concierge@platinyaclinic.com</a>
+                <a href="mailto:info@skyistgroup.com" class="contact-link">info@skyistgroup.com</a>
               </p>
               <p class="contact-item">
                 <span class="contact-label">Headquarters:</span>
-                <span class="contact-text">Istanbul & European Patient Relations</span>
+                <span class="contact-text">Zafer Mah. 185. Sk. Babacan Premium B Blok, Esenyurt / İstanbul</span>
               </p>
             </div>
         </div>
