@@ -26,8 +26,8 @@ export default function contact() {
               <span class="channel-icon">${icons.email}</span>
               <div>
                 <span class="channel-label">${t("contact.desk")}</span>
-                <a href="mailto:info@platinyaclinic.com" class="channel-value">info@platinyaclinic.com</a>
-                <a href="mailto:info@skyistgroup.com" class="channel-value channel-second">info@skyistgroup.com</a>
+                <a href="mailto:info@skyistgroup.com" class="channel-value">info@skyistgroup.com</a>
+                
               </div>
             </div>
 
@@ -44,7 +44,7 @@ export default function contact() {
         <div class="contact-form-col">
           <form
             class="luxury-form card-luxury"
-            action="https://formsubmit.co/info@platinyaclinic.com"
+            action="https://formsubmit.co/info@skyistgroup.com"
             method="POST"
             target="_blank"
           >
@@ -54,8 +54,6 @@ export default function contact() {
             <input type="hidden" name="_subject" value="New VIP Assessment Request — Platinya Clinic Agency" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
-            <!-- notify the second inbox too -->
-            <input type="hidden" name="_cc" value="info@skyistgroup.com" />
 
             <div class="form-group">
               <label class="form-label" for="full-name">${t("contact.name")}</label>
