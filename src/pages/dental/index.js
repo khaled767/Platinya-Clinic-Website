@@ -1,12 +1,13 @@
 // Dental Page — Aesthetic Dentistry / Dental Veneers (Hollywood Smile)
 // Layout: fashion-forward hero (hotel-style) + luxury service cards for the sub-specialties.
-// NOTE: Images currently point to the existing approved dental asset until the
-// sub-specialty images are generated (user declined auto-generation).
 import { icons } from "../../components/icons";
 import { t } from "../../i18n";
 
-// Approved existing dental image used as placeholders until per-sub images are generated.
+// Existing approved image used as placeholder until implants/titanium are generated.
 const PLACEHOLDER_IMG = "./assets/images/ai/services/dental-APPROVED-nolamp.webp";
+
+// Generated images for the sub-specialties (implants & titanium pending OpenRouter credits).
+const MEDIA_BASE = "./assets/images/ai/services/dental/";
 
 // The five dental sub-specialties, each rendered as a luxury service card.
 const subs = [
@@ -15,7 +16,7 @@ const subs = [
     number: "01",
     tagKey: "smile",
     key: "sub1",
-    img: PLACEHOLDER_IMG,
+    img: MEDIA_BASE + "smile.png",
     imgAlt: "Hollywood smile veneers close-up",
   },
   {
@@ -23,7 +24,7 @@ const subs = [
     number: "02",
     tagKey: "cosmetic",
     key: "sub2",
-    img: PLACEHOLDER_IMG,
+    img: MEDIA_BASE + "emax.png",
     imgAlt: "Thin translucent E-max veneers being placed",
   },
   {
@@ -31,7 +32,7 @@ const subs = [
     number: "03",
     tagKey: "crowns",
     key: "sub3",
-    img: PLACEHOLDER_IMG,
+    img: MEDIA_BASE + "zirconium.png",
     imgAlt: "Polished zirconium dental crowns",
   },
   {
@@ -59,7 +60,7 @@ export default function dentalPage() {
       <!-- Hero banner (hotel-style) -->
       <section class="dental-hero">
         <img
-          src="./assets/images/ai/services/dental-APPROVED-nolamp.webp"
+          src="./assets/images/ai/services/dental/hero.png"
           alt="Aesthetic dentistry clinic"
           class="dental-hero-bg"
         />
@@ -82,7 +83,7 @@ export default function dentalPage() {
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
           </div>
           <div class="dental-intro-img">
-            <img src="./assets/images/ai/services/dental-APPROVED-nolamp.webp" alt="Hollywood smile model" loading="lazy" />
+            <img src="./assets/images/ai/services/dental/hero.png" alt="Hollywood smile model" loading="lazy" />
           </div>
         </div>
       </section>
