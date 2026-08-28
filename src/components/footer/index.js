@@ -53,6 +53,7 @@ export default function footer() {
               </p>
               <p class="contact-item">
                 <span class="contact-label">Email Assistance:</span>
+                <a href="mailto:info@platinyaclinic.com" class="contact-link">info@platinyaclinic.com</a>
                 <a href="mailto:info@skyistgroup.com" class="contact-link">info@skyistgroup.com</a>
               </p>
               <p class="contact-item">

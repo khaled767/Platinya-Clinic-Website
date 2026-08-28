@@ -26,8 +26,8 @@ export default function contact() {
               <span class="channel-icon">${icons.email}</span>
               <div>
                 <span class="channel-label">${t("contact.desk")}</span>
-                <a href="mailto:info@skyistgroup.com" class="channel-value">info@skyistgroup.com</a>
-                
+                <a href="mailto:info@platinyaclinic.com" class="channel-value">info@platinyaclinic.com</a>
+                <a href="mailto:info@skyistgroup.com" class="channel-value channel-second">info@skyistgroup.com</a>
               </div>
             </div>
 
@@ -44,7 +44,7 @@ export default function contact() {
         <div class="contact-form-col">
           <form
             class="luxury-form card-luxury"
-            action="https://formsubmit.co/info@skyistgroup.com"
+            action="https://formsubmit.co/info@platinyaclinic.com"
             method="POST"
             target="_blank"
           >
