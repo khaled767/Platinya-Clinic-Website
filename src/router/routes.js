@@ -7,6 +7,7 @@ import contactPage from "../pages/contact";
 import privacyPolicyPage from "../pages/privacy-policy";
 import termsPage from "../pages/terms";
 import hotelPage from "../pages/hotel";
+import dentalPage from "../pages/dental";
 import airportPage from "../pages/airport";
 import conciergePage from "../pages/concierge";
 import transfersPage from "../pages/transfers";
@@ -24,6 +25,7 @@ const routes = {
   "/privacy-policy": privacyPolicyPage,
   "/terms": termsPage,
   "/hotel": hotelPage,
+  "/dental": dentalPage,
   "/airport": airportPage,
   "/concierge": conciergePage,
   "/transfers": transfersPage,
