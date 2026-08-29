@@ -38,37 +38,53 @@
   line-height: var(--line-height-relaxed);
 }
 
-/* Services 3D infinite carousel — active card stays centred, images orbit */
+/* Services infinite carousel — flat, smooth, reliable (no fragile 3D ring).
+   A single horizontal track that advances continuously & loops (infinite). */
 .services-carousel {
   position: relative;
   margin-bottom: var(--space-16);
-  perspective: 1400px;
-  height: 480px;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .carousel-stage {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-}
-
-/* Each card sits on its own spot around the ring; JS sets rotateY+translateZ */
-.carousel-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 320px;
-  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
   will-change: transform;
 }
 
-@media (max-width: 1024px) { .services-carousel { height: 440px; } .carousel-card { width: 280px; } }
+.carousel-card {
+  flex: 0 0 320px;
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+  opacity: 0.45;
+  transform: scale(0.9);
+}
+
+.carousel-card.is-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 3;
+}
+
+.carousel-card.is-peek-left {
+  opacity: 0.75;
+  transform: scale(0.95) translateX(-10px);
+  z-index: 2;
+}
+
+.carousel-card.is-peek-right {
+  opacity: 0.75;
+  transform: scale(0.95) translateX(10px);
+  z-index: 2;
+}
+
+@media (max-width: 1024px) { .carousel-card { flex-basis: 280px; } }
 @media (max-width: 640px) {
-  .services-carousel { height: auto; overflow: hidden; perspective: none; }
-  .carousel-stage { display: block; height: auto; transform-style: flat; }
-  .carousel-card { position: static; width: 100%; left: auto; top: auto; transform: none !important; opacity: 1 !important; margin-bottom: var(--space-4); }
+  .carousel-card, .carousel-card.is-active, .carousel-card.is-peek-left, .carousel-card.is-peek-right {
+    flex-basis: 100%;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .service-card-luxury {

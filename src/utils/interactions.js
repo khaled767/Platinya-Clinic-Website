@@ -139,52 +139,57 @@ export function initRouting() {
   window.addEventListener("hashchange", reloadApp);
 }
 
-// Services 3D infinite carousel — active card stays centred, images orbit around it.
+// Services infinite carousel — reliable flat advancing loop.
+// The active card stays centred; neighbours peek on the sides; auto-advances;
+// hovering slows/pauses. Implemented as a simple flex track (no fragile 3D ring).
 export function initServicesCarousel() {
   const stage = document.querySelector("#carousel-stage");
   if (!stage) return;
-
   const cards = Array.from(stage.querySelectorAll(".carousel-card"));
   const n = cards.length;
   if (n < 2) return;
 
-  const step = 360 / n;
-  const radius = 460;
-  let rotY = 0;
-  let raf = null;
-  let paused = false;
+  let current = 0;
+  let timer = null;
+  let isMobile = window.matchMedia("(max-width: 640px)").matches;
 
-  function layout(angle) {
+  function render() {
     cards.forEach((card, i) => {
-      const y = angle + i * step;
-      // Centre the card, place it on the ring, then counter-rotate so it faces the viewer
-      card.style.transform =
-        `translate(-50%, -50%) rotateY(${-y}deg) translateZ(${radius}px) rotateY(${y}deg)`;
-      // Fade cards that rotate to the back
-      const facing = Math.cos((y % 360) * Math.PI / 180);
-      card.style.opacity = facing >= 0 ? "1" : String(0.25 + 0.75 * (facing + 1));
-      card.style.zIndex = facing >= 0 ? "3" : "1";
+      card.classList.remove("is-active", "is-peek-left", "is-peek-right");
+      if (isMobile) { card.style.display = ""; return; } // on mobile show all stacked
+      const isVisible =
+        i === current ||
+        i === (current + 1) % n ||
+        i === (current + n - 1) % n;
+      card.style.display = isVisible ? "" : "none";
+      if (i === current) card.classList.add("is-active");
+      else if (i === (current + 1) % n) card.classList.add("is-peek-right");
+      else if (i === (current + n - 1) % n) card.classList.add("is-peek-left");
     });
   }
 
-  let last = null;
-  function tick(ts) {
-    if (!last) last = ts;
-    const dt = ts - last;
-    last = ts;
-    if (!paused) {
-      rotY -= dt * 0.06; // smooth continuous rotation
-      layout(rotY);
-    }
-    raf = requestAnimationFrame(tick);
+  function next() {
+    current = (current + 1) % n;
+    render();
+  }
+
+  function restart() {
+    if (timer) clearInterval(timer);
+    timer = setInterval(next, 3200);
   }
 
   const carousel = document.querySelector("#services-carousel");
   if (carousel) {
-    carousel.addEventListener("mouseenter", () => { paused = true; });
-    carousel.addEventListener("mouseleave", () => { paused = false; });
+    // pause (slow) on hover
+    carousel.addEventListener("mouseenter", () => { if (timer) clearInterval(timer); });
+    carousel.addEventListener("mouseleave", restart);
   }
 
-  layout(0);
-  raf = requestAnimationFrame(tick);
+  window.matchMedia("(max-width: 640px)").addEventListener("change", (e) => {
+    isMobile = e.matches;
+    render();
+  });
+
+  render();
+  restart();
 }
