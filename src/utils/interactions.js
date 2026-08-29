@@ -169,18 +169,18 @@ export function initServicesCarousel() {
   }
 
   function next() {
-    current = (current + 1) % n;
+    current = (current + 1) % n; // always wraps -> never halts on the last card
     render();
   }
 
   function restart() {
     if (timer) clearInterval(timer);
-    timer = setInterval(next, 3200);
+    timer = setInterval(next, 2500);
   }
 
   const carousel = document.querySelector("#services-carousel");
   if (carousel) {
-    // pause (slow) on hover
+    // pause on hover only while the pointer is inside
     carousel.addEventListener("mouseenter", () => { if (timer) clearInterval(timer); });
     carousel.addEventListener("mouseleave", restart);
   }

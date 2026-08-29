@@ -38,26 +38,29 @@
   line-height: var(--line-height-relaxed);
 }
 
-/* Services infinite carousel — flat, smooth, reliable (no fragile 3D ring).
-   A single horizontal track that advances continuously & loops (infinite). */
+/* Services infinite carousel — flat, reliable, centred. */
 .services-carousel {
   position: relative;
-  margin-bottom: var(--space-16);
+  margin: 0 0 var(--space-12);
   overflow: hidden;
+  min-height: 420px; /* fixed height so the banner below never shifts */
 }
 
 .carousel-stage {
   display: flex;
   align-items: center;
-  gap: var(--space-6);
-  will-change: transform;
+  justify-content: center; /* keep the visible cards centred */
+  gap: 0;
+  min-height: 420px;
+  position: relative; /* separates its layout from the banner below */
 }
 
 .carousel-card {
   flex: 0 0 320px;
+  margin: 0 var(--space-2);
   transition: transform var(--transition-normal), opacity var(--transition-normal);
-  opacity: 0.45;
-  transform: scale(0.9);
+  opacity: 0.5;
+  transform: scale(0.92);
 }
 
 .carousel-card.is-active {
@@ -67,23 +70,30 @@
 }
 
 .carousel-card.is-peek-left {
-  opacity: 0.75;
-  transform: scale(0.95) translateX(-10px);
+  opacity: 0.8;
+  transform: scale(0.95) translateX(-12px);
   z-index: 2;
 }
 
 .carousel-card.is-peek-right {
-  opacity: 0.75;
-  transform: scale(0.95) translateX(10px);
+  opacity: 0.8;
+  transform: scale(0.95) translateX(12px);
   z-index: 2;
 }
 
-@media (max-width: 1024px) { .carousel-card { flex-basis: 280px; } }
+@media (max-width: 1024px) {
+  .services-carousel, .carousel-stage { min-height: 380px; }
+  .carousel-card { flex-basis: 280px; }
+}
 @media (max-width: 640px) {
+  .services-carousel { min-height: 0; }
+  .carousel-stage { min-height: 0; flex-direction: column; align-items: center; }
   .carousel-card, .carousel-card.is-active, .carousel-card.is-peek-left, .carousel-card.is-peek-right {
     flex-basis: 100%;
+    width: 100%;
     opacity: 1;
     transform: none;
+    margin: var(--space-3) 0;
   }
 }
 
