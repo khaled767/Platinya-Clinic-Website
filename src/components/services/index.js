@@ -55,35 +55,32 @@ export default function services() {
           <p class="section-description">${t("services.desc")}</p>
         </div>
 
-        <!-- Services 3D auto-rotating carousel — all cards on one row -->
+        <!-- Services 3D infinite carousel — all cards on one rotating ring -->
         <div class="services-carousel" id="services-carousel">
           <div class="carousel-stage">
-            ${specs.map((s) => `
-              <article class="service-card-luxury carousel-card">
-                <div class="service-card-media">
-                  <img src="${s.img}" alt="${s.imgAlt}" class="service-card-img" loading="lazy" />
-                </div>
-                <div class="service-card-body">
-                  <div class="card-header-meta">
-                    <span class="service-number">${s.number}</span>
-                    <span class="service-tag">${t("sv.tag." + s.tagKey)}</span>
+            <div class="carousel-ring" id="carousel-ring">
+              ${specs.map((s) => `
+                <article class="service-card-luxury carousel-card">
+                  <div class="service-card-media">
+                    <img src="${s.img}" alt="${s.imgAlt}" class="service-card-img" loading="lazy" />
                   </div>
-                  <h3 class="service-title">${t("sv." + s.key)}</h3>
-                  <p class="service-description">${t("sv." + s.key + ".d")}</p>
-                  <div class="card-footer-action">
-                    <a href="${s.link || '/services'}" data-route class="link-luxury">
-                      <span>${t("services.explore")}</span>
-                      <span class="arrow">→</span>
-                    </a>
+                  <div class="service-card-body">
+                    <div class="card-header-meta">
+                      <span class="service-number">${s.number}</span>
+                      <span class="service-tag">${t("sv.tag." + s.tagKey)}</span>
+                    </div>
+                    <h3 class="service-title">${t("sv." + s.key)}</h3>
+                    <p class="service-description">${t("sv." + s.key + ".d")}</p>
+                    <div class="card-footer-action">
+                      <a href="${s.link || '/services'}" data-route class="link-luxury">
+                        <span>${t("services.explore")}</span>
+                        <span class="arrow">→</span>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </article>
-            `).join('')}
-          </div>
-
-          <!-- Dots / progress for auto-rotation -->
-          <div class="carousel-nav" aria-hidden="true">
-            ${specs.map((_, i) => `<button class="carousel-dot" data-index="${i}" aria-label="card ${i + 1}"></button>`).join('')}
+                </article>
+              `).join('')}
+            </div>
           </div>
         </div>
 

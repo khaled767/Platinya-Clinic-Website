@@ -38,88 +38,51 @@
   line-height: var(--line-height-relaxed);
 }
 
-/* Services 3D auto-rotating carousel — all cards on one row */
+/* Services 3D infinite ring carousel — active card stays centred, images orbit */
 .services-carousel {
   position: relative;
-  margin-bottom: var(--space-16);
+  margin-bottom: var(--space-8);
   perspective: 1400px;
-  overflow: hidden;
+  height: 440px;
+  overflow: visible;
 }
 
 .carousel-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-6);
-  padding: var(--space-6) var(--space-2);
-  will-change: transform;
+}
+
+/* The ring rotates infinitely; each card positioned around a circle */
+.carousel-ring {
+  position: relative;
+  transform-style: preserve-3d;
+  width: 320px;
+  height: 420px;
+  align-self: center;
 }
 
 .carousel-card {
-  /* 3D feel per card: active card full, neighbors slightly rotated/scaled */
-  flex: 0 0 300px;
-  transition: transform var(--transition-normal), opacity var(--transition-normal), filter var(--transition-normal);
-  opacity: 0.4;
-  transform: scale(0.86) rotateY(0deg);
-  filter: saturate(0.7) brightness(0.9);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  will-change: transform;
+  backface-visibility: hidden;
+  transition: transform 0.15s linear, opacity 0.3s ease;
 }
 
-.carousel-card.is-active {
-  flex: 0 0 340px;
-  opacity: 1;
-  transform: scale(1);
-  filter: none;
-  z-index: 3;
-}
-
-.carousel-card.is-left {
-  opacity: 0.7;
-  transform: scale(0.92) rotateY(18deg) translateX(18px);
-  z-index: 1;
-}
-
-.carousel-card.is-right {
-  opacity: 0.7;
-  transform: scale(0.92) rotateY(-18deg) translateX(-18px);
-  z-index: 1;
-}
-
-/* Dots */
-.carousel-nav {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-3);
-  margin-top: var(--space-6);
-}
-
-.carousel-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-accent-gold-500);
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  transition: background var(--transition-fast), width var(--transition-fast);
-}
-
-.carousel-dot.is-active {
-  background: var(--color-accent-gold-500);
-  width: 28px;
-}
-
-@media (max-width: 1024px) {
-  .carousel-card { flex-basis: 260px; }
-  .carousel-card.is-active { flex-basis: 290px; }
-}
+@media (max-width: 1024px) { .services-carousel { height: 400px; } .carousel-ring { width: 280px; } }
 @media (max-width: 640px) {
-  .carousel-stage { flex-wrap: wrap; justify-content: center; gap: var(--space-4); }
-  .carousel-card, .carousel-card.is-active, .carousel-card.is-left, .carousel-card.is-right {
-    flex-basis: 100%;
-    opacity: 1;
-    transform: none;
-    filter: none;
-  }
+  .services-carousel { height: auto; overflow: hidden; }
+  .carousel-stage { display: block; }
+  .carousel-ring { width: 100%; height: auto; transform: none !important; }
+  .carousel-card { position: static; transform: none !important; opacity: 1 !important; margin-bottom: var(--space-4); }
 }
 
 .service-card-luxury {
@@ -253,6 +216,8 @@
   padding: var(--space-12);
   border: 1px solid var(--color-border-accent);
   box-shadow: var(--shadow-luxury);
+  /* Clear separation from the Services carousel above */
+  margin-top: var(--space-12);
 }
 
 .concierge-heading {

@@ -139,57 +139,60 @@ export function initRouting() {
   window.addEventListener("hashchange", reloadApp);
 }
 
-// Services 3D carousel — auto-rotates the cards on a single row.
+// Services 3D infinite ring carousel — the ring rotates continuously, each card
+// counter-rotates to stay readable, and hovering pauses the rotation.
 export function initServicesCarousel() {
-  const stage = document.querySelector(".carousel-stage");
-  if (!stage) return;
+  const ring = document.querySelector("#carousel-ring");
+  if (!ring) return;
 
-  const cards = Array.from(stage.querySelectorAll(".carousel-card"));
-  const dots = Array.from(document.querySelectorAll(".carousel-dot"));
-  if (cards.length < 2) return;
+  const cards = Array.from(ring.querySelectorAll(".carousel-card"));
+  const n = cards.length;
+  if (n < 2) return;
 
-  let current = 0;
-  let timer = null;
+  const radius = getRadius();
+  const step = Math.round(360 / n);
+  let rotY = 0;
+  let raf = null;
+  let paused = false;
 
-  const layout = () => {
+  function getRadius() {
+    const w = ring.clientWidth || 320;
+    return Math.round(w * 1.6); // orbit radius
+  }
+
+  // Position cards around the ring on a circle, counter-rotated to face the viewer
+  function layout(angle) {
     cards.forEach((card, i) => {
-      card.classList.remove("is-active", "is-left", "is-right");
-      if (cards.length === 1) {
-        card.classList.add("is-active");
-        return;
-      }
-      if (i === current) card.classList.add("is-active");
-      else if (i === (current + cards.length - 1) % cards.length) card.classList.add("is-left");
-      else if (i === (current + 1) % cards.length) card.classList.add("is-right");
-      // hide far cards so only active + 2 neighbors are visible
-      const dist = Math.min(
-        Math.abs(i - current),
-        cards.length - Math.abs(i - current)
-      );
-      card.style.display = dist <= 1 ? "" : "none";
-      card.style.pointerEvents = dist <= 1 ? "" : "none";
+      const y = (angle + i * step) % 360;
+      // counter-rotate each card so its front is always readable
+      card.style.transform = `rotateY(${-y}deg) translateZ(${radius}px)`;
+      // fade cards that are at the back (facing away)
+      const facing = Math.cos(((y + 180) % 360) * Math.PI / 180); // -1..1
+      const back = Math.min(0, facing); // negative when facing away
+      card.style.opacity = back === 0 ? "1" : String(0.35);
+      card.style.zIndex = back === 0 ? "3" : "1";
     });
+  }
 
-    dots.forEach((dot, i) => dot.classList.toggle("is-active", i === current));
-  };
+  let last = null;
+  function tick(ts) {
+    if (!last) last = ts;
+    const dt = ts - last;
+    last = ts;
+    if (!paused) {
+      rotY -= dt * 0.07; // smooth continuous rate (deg per ms); ~25s per full loop
+      layout(rotY);
+    }
+    raf = requestAnimationFrame(tick);
+  }
 
-  const goTo = (index) => {
-    current = (index + cards.length) % cards.length;
-    layout();
-    restart();
-  };
+  // Hover to pause
+  const carousel = document.querySelector("#services-carousel");
+  if (carousel) {
+    carousel.addEventListener("mouseenter", () => { paused = true; });
+    carousel.addEventListener("mouseleave", () => { paused = false; });
+  }
 
-  const restart = () => {
-    if (timer) clearInterval(timer);
-    timer = setInterval(() => {
-      current = (current + 1) % cards.length;
-      layout();
-    }, 3500);
-  };
-
-  // Dot clicks
-  dots.forEach((dot) => dot.addEventListener("click", () => goTo(Number(dot.getAttribute("data-index")))));
-
-  layout();
-  restart();
+  layout(0);
+  raf = requestAnimationFrame(tick);
 }
