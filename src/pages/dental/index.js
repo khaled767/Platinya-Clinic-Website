@@ -2,12 +2,13 @@
 import { icons } from "../../components/icons";
 import { t } from "../../i18n";
 
+// Generated photorealistic images in 7 consistent style (no logos/watermarks).
 const specialties = [
-  { key: "smile",  img: "./assets/images/partner-services/dental/dental-smile.webp",  alt: "Hollywood smile result" },
-  { key: "veneer", img: "./assets/images/partner-services/dental/dental-veneer.webp", alt: "Emax veneers on a dental model" },
-  { key: "zircon", img: "./assets/images/partner-services/dental/dental-zirconium.webp", alt: "Zirconium crowns on a tray" },
-  { key: "implant", img: "./assets/images/partner-services/dental/dental-implant.webp", alt: "Dental implants" },
-  { key: "tibar",  img: "./assets/images/partner-services/dental/dental-tibar.webp",  alt: "Titanium bar framework" },
+  { key: "smile",   img: "./assets/images/ai/services/dental/smile.png",    alt: "Hollywood smile result" },
+  { key: "veneer",  img: "./assets/images/ai/services/dental/emax.png",      alt: "Emax veneers on a dental model" },
+  { key: "zircon",  img: "./assets/images/ai/services/dental/zirconium.png", alt: "Zirconium crowns on a tray" },
+  { key: "implant", img: "./assets/images/ai/services/dental/implants.png",  alt: "Dental implants" },
+  { key: "tibar",   img: "./assets/images/ai/services/dental/titanium.png",  alt: "Titanium bar framework" },
 ];
 
 export default function dentalPage() {
