@@ -43,8 +43,19 @@
   position: relative;
   margin: 0 0 var(--space-12);
   overflow: hidden;
-  min-height: 420px; /* fixed height so the banner below never shifts */
+  min-height: 440px; /* fixed height so the banner below never shifts */
 }
+
+/* Whole-card link: click anywhere on a service card opens its page */
+a.service-card-clickable {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+a.service-card-clickable:hover { transform: translateY(-4px); }
+a.service-card-clickable .link-luxury { pointer-events: none; }
 
 .carousel-stage {
   display: flex;

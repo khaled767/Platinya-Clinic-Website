@@ -59,7 +59,12 @@ export default function services() {
         <div class="services-carousel" id="services-carousel">
           <div class="carousel-stage" id="carousel-stage">
             ${specs.map((s) => `
-              <article class="service-card-luxury carousel-card">
+              <a
+                href="${s.link || '/services'}"
+                data-route
+                class="service-card-luxury carousel-card service-card-clickable"
+                aria-label="${t('sv.' + s.key)}"
+              >
                 <div class="service-card-media">
                   <img src="${s.img}" alt="${s.imgAlt}" class="service-card-img" loading="lazy" />
                 </div>
@@ -71,13 +76,13 @@ export default function services() {
                   <h3 class="service-title">${t("sv." + s.key)}</h3>
                   <p class="service-description">${t("sv." + s.key + ".d")}</p>
                   <div class="card-footer-action">
-                    <a href="${s.link || '/services'}" data-route class="link-luxury">
+                    <span class="link-luxury">
                       <span>${t("services.explore")}</span>
                       <span class="arrow">→</span>
-                    </a>
+                    </span>
                   </div>
                 </div>
-              </article>
+              </a>
             `).join('')}
           </div>
         </div>
