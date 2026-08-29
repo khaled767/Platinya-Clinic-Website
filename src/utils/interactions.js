@@ -57,6 +57,7 @@ export function initLanguageSwitcher() {
       initMobileMenu();
       initLanguageSwitcher();
       initHeaderScroll();
+      initServicesCarousel();
     });
   });
 }
@@ -115,6 +116,7 @@ export function initRouting() {
     initMobileMenu();
     initLanguageSwitcher();
     initHeaderScroll();
+    initServicesCarousel();
     // Always jump to the top on route change so the new page is visible immediately
     window.scrollTo({ top: 0, behavior: "auto" });
   };
@@ -135,4 +137,59 @@ export function initRouting() {
 
   // Handle browser back/forward and manual hash changes
   window.addEventListener("hashchange", reloadApp);
+}
+
+// Services infinite carousel — reliable flat advancing loop.
+// The active card stays centred; neighbours peek on the sides; auto-advances;
+// hovering slows/pauses. Implemented as a simple flex track (no fragile 3D ring).
+export function initServicesCarousel() {
+  const stage = document.querySelector("#carousel-stage");
+  if (!stage) return;
+  const cards = Array.from(stage.querySelectorAll(".carousel-card"));
+  const n = cards.length;
+  if (n < 2) return;
+
+  let current = 0;
+  let timer = null;
+  let isMobile = window.matchMedia("(max-width: 640px)").matches;
+
+  function render() {
+    cards.forEach((card, i) => {
+      card.classList.remove("is-active", "is-peek-left", "is-peek-right");
+      if (isMobile) { card.style.display = ""; return; } // on mobile show all stacked
+      const isVisible =
+        i === current ||
+        i === (current + 1) % n ||
+        i === (current + n - 1) % n;
+      card.style.display = isVisible ? "" : "none";
+      if (i === current) card.classList.add("is-active");
+      else if (i === (current + 1) % n) card.classList.add("is-peek-right");
+      else if (i === (current + n - 1) % n) card.classList.add("is-peek-left");
+    });
+  }
+
+  function next() {
+    current = (current + 1) % n; // always wraps -> never halts on the last card
+    render();
+  }
+
+  function restart() {
+    if (timer) clearInterval(timer);
+    timer = setInterval(next, 2500);
+  }
+
+  const carousel = document.querySelector("#services-carousel");
+  if (carousel) {
+    // pause on hover only while the pointer is inside
+    carousel.addEventListener("mouseenter", () => { if (timer) clearInterval(timer); });
+    carousel.addEventListener("mouseleave", restart);
+  }
+
+  window.matchMedia("(max-width: 640px)").addEventListener("change", (e) => {
+    isMobile = e.matches;
+    render();
+  });
+
+  render();
+  restart();
 }

@@ -8,6 +8,7 @@ import {
   initLanguageSwitcher,
   initHeaderScroll,
   initLightbox,
+  initServicesCarousel,
 } from "./utils/interactions";
 
 initI18n();
@@ -19,3 +20,4 @@ initMobileMenu();
 initLanguageSwitcher();
 initHeaderScroll();
 initLightbox();
+initServicesCarousel();

@@ -38,11 +38,74 @@
   line-height: var(--line-height-relaxed);
 }
 
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--space-8);
-  margin-bottom: var(--space-16);
+/* Services infinite carousel — flat, reliable, centred. */
+.services-carousel {
+  position: relative;
+  margin: 0 0 var(--space-12);
+  overflow: hidden;
+  min-height: 440px; /* fixed height so the banner below never shifts */
+}
+
+/* Whole-card link: click anywhere on a service card opens its page */
+a.service-card-clickable {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+a.service-card-clickable:hover { transform: translateY(-4px); }
+a.service-card-clickable .link-luxury { pointer-events: none; }
+
+.carousel-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* keep the visible cards centred */
+  gap: 0;
+  min-height: 420px;
+  position: relative; /* separates its layout from the banner below */
+}
+
+.carousel-card {
+  flex: 0 0 320px;
+  margin: 0 var(--space-2);
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+  opacity: 0.5;
+  transform: scale(0.92);
+}
+
+.carousel-card.is-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 3;
+}
+
+.carousel-card.is-peek-left {
+  opacity: 0.8;
+  transform: scale(0.95) translateX(-12px);
+  z-index: 2;
+}
+
+.carousel-card.is-peek-right {
+  opacity: 0.8;
+  transform: scale(0.95) translateX(12px);
+  z-index: 2;
+}
+
+@media (max-width: 1024px) {
+  .services-carousel, .carousel-stage { min-height: 380px; }
+  .carousel-card { flex-basis: 280px; }
+}
+@media (max-width: 640px) {
+  .services-carousel { min-height: 0; }
+  .carousel-stage { min-height: 0; flex-direction: column; align-items: center; }
+  .carousel-card, .carousel-card.is-active, .carousel-card.is-peek-left, .carousel-card.is-peek-right {
+    flex-basis: 100%;
+    width: 100%;
+    opacity: 1;
+    transform: none;
+    margin: var(--space-3) 0;
+  }
 }
 
 .service-card-luxury {
@@ -176,6 +239,8 @@
   padding: var(--space-12);
   border: 1px solid var(--color-border-accent);
   box-shadow: var(--shadow-luxury);
+  /* Clear separation from the Services carousel above */
+  margin-top: var(--space-12);
 }
 
 .concierge-heading {
