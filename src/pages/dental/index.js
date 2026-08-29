@@ -1,14 +1,15 @@
-// Dental Page — cosmetic & implant dentistry (single-page hero + alternating luxury rows)
+// Dental Page — Aesthetic Dentistry (template approved 27 Aug):
+// full-width luxury clinic hero + service-card-luxury grid for the 5 sub-specialties.
 import { icons } from "../../components/icons";
 import { t } from "../../i18n";
 
-// Gold index number + tag per specialty (luxury approved style, 27 Aug)
+// Gold-numbered luxury cards (approved service-card-luxury style)
 const specialties = [
-  { key: "smile",   num: "01", img: "./assets/images/ai/services/dental/smile.png",    tagKey: "smile",   alt: "Hollywood smile result" },
-  { key: "veneer",  num: "02", img: "./assets/images/ai/services/dental/emax.png",      tagKey: "cosmetic", alt: "Emax veneers on a dental model" },
-  { key: "zircon",  num: "03", img: "./assets/images/ai/services/dental/zirconium.png", tagKey: "crowns",   alt: "Zirconium crowns on a tray" },
-  { key: "implant", num: "04", img: "./assets/images/ai/services/dental/implants.png",  tagKey: "implant",  alt: "Dental implants" },
-  { key: "tibar",   num: "05", img: "./assets/images/ai/services/dental/titanium.png",  tagKey: "arch",     alt: "Titanium bar framework" },
+  { key: "smile",   num: "01", tagKey: "smile",   img: "./assets/images/ai/services/dental/smile.png",    alt: "Hollywood Smile result" },
+  { key: "veneer",  num: "02", tagKey: "cosmetic", img: "./assets/images/ai/services/dental/emax.png",     alt: "E-Max veneers on a dental model" },
+  { key: "zircon",  num: "03", tagKey: "crowns",   img: "./assets/images/ai/services/dental/zirconium.png", alt: "Zirconia crowns on a tray" },
+  { key: "implant", num: "04", tagKey: "implant",  img: "./assets/images/ai/services/dental/implants.png",  alt: "Dental implants" },
+  { key: "tibar",   num: "05", tagKey: "arch",     img: "./assets/images/ai/services/dental/titanium.png",  alt: "Titanium bar full-arch framework" },
 ];
 
 export default function dentalPage() {
@@ -37,30 +38,27 @@ export default function dentalPage() {
         </div>
       </section>
 
-      <!-- Alternating luxury rows: image on one side + 4–5 line explanation on the other -->
+      <!-- Luxury specialty cards — service-card-luxury (gold number + tag) -->
       <section class="section-dental-specialists">
         <div class="container">
-          ${specialties.map((s, i) => {
-            const flip = i % 2 === 1; // alternate sides for a non-monotonous reading flow
-            return `
-              <article class="dental-row ${flip ? "is-flipped" : ""}">
-                <figure class="dental-row-media">
+          <div class="dental-grid">
+            ${specialties.map((s) => `
+              <article class="service-card-luxury dental-card-luxury">
+                <div class="dental-card-media">
                   <img src="${s.img}" alt="${s.alt}" loading="lazy" />
-                </figure>
-                <div class="dental-row-body">
+                </div>
+                <div class="dental-card-body">
                   <div class="dental-card-meta">
                     <span class="dental-card-num">${s.num}</span>
                     <span class="dental-card-tag">${t("dental.tag." + s.tagKey)}</span>
                   </div>
                   <h3 class="dental-card-title">${t("dental.s." + s.key)}</h3>
                   <p class="dental-card-desc">${t("dental.s." + s.key + "d")}</p>
-                  <a href="/contact" data-route class="dental-card-link">
-                    ${t("cta.vip")}<span class="dental-card-arrow"></span>
-                  </a>
+                  <a href="/contact" data-route class="dental-card-link">${t("dental.cta")}<span class="dental-card-arrow"></span></a>
                 </div>
               </article>
-            `;
-          }).join('')}
+            `).join('')}
+          </div>
 
           <div class="dental-cta">
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>

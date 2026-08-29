@@ -396,6 +396,7 @@ const t = {
     "dental.s.implantd": "Permanent, secure tooth replacement that looks and functions like real teeth.",
     "dental.s.tibar": "Titanium Bar (All-on-4)",
     "dental.s.tibard": "Full-arch fixed prosthesis on one titanium bar for stable, all-on-4 results.",
+    "dental.cta": "Plan My Treatment",
   },
   ar: {
     "nav.home": "الرئيسية",
@@ -782,6 +783,7 @@ const t = {
     "dental.s.implantd": "استبدال أسنان دائم وآمن يبدو ويعمل كالأسنان الحقيقية.",
     "dental.s.tibar": "قضيب التيتانيوم (All-on-4)",
     "dental.s.tibard": "طقم ثابت كامل القوس على قضيب تيتانيوم واحد لنتائج all-on-4 مستقرة.",
+    "dental.cta": "خطط لعلاجي",
   },
   fr: {
     "nav.home": "Accueil",
@@ -1168,6 +1170,7 @@ const t = {
     "dental.s.implantd": "Remplacement dentaire permanent et sûr qui ressemble et fonctionne comme de vraies dents.",
     "dental.s.tibar": "Barre en Titane (All-on-4)",
     "dental.s.tibard": "Prothèse fixe complète sur une barre en titane pour des résultats All-on-4 stables.",
+    "dental.cta": "Planifiez Mon Traitement",
   },
   es: {
     "nav.home": "Inicio",
@@ -1554,6 +1557,7 @@ const t = {
     "dental.s.implantd": "Reemplazo dental permanente y seguro que se ve y funciona como dientes reales.",
     "dental.s.tibar": "Barra de Titanio (All-on-4)",
     "dental.s.tibard": "Prótesis fija completa sobre una barra de titanio para resultados All-on-4 estables.",
+    "dental.cta": "Planifique Mi Tratamiento",
   },
   tr: {
     "nav.home": "Ana Sayfa",
@@ -1940,6 +1944,7 @@ const t = {
     "dental.s.implantd": "Gerçek dişler gibi görünen ve çalışan kalıcı, güvenli diş değişimi.",
     "dental.s.tibar": "Titanyum Bar (All-on-4)",
     "dental.s.tibard": "Stabil All-on-4 sonuçlar için tek titanyum bar üzerinde tam ark sabit protez.",
+    "dental.cta": "Tedavimi Planlayın",
   },
   it: {
     "nav.home": "Home",
@@ -2326,6 +2331,7 @@ const t = {
     "dental.s.implantd": "Sostituzione dentale permanente e sicura che appare e funziona come denti veri.",
     "dental.s.tibar": "Barra in Titanio (All-on-4)",
     "dental.s.tibard": "Protesi fissa completa su una barra in titanio per risultati All-on-4 stabili.",
+    "dental.cta": "Pianifica Il Mio Trattamento",
   },
   ru: {
     "nav.home": "Главная",
@@ -2712,6 +2718,7 @@ const t = {
     "dental.s.implantd": "Постоянная надёжная замена зубов, которая выглядит и функционирует как настоящие зубы.",
     "dental.s.tibar": "Титановый бар (All-on-4)",
     "dental.s.tibard": "Полный неподвижный протез на одном титановом баре для стабильных результатов All-on-4.",
+    "dental.cta": "Спланируйте моё лечение",
   },
 };
 
