@@ -1,117 +1,61 @@
 /* ==========================================================================
-   Dental Page (Aesthetic Dentistry / Dental Veneers)
-   Follows the luxury service-card pattern for sub-specialties.
+   Dental Page — cosmetic & implant dentistry
+   Base sections use the site's main background (light) for seamless navigation.
    ========================================================================== */
 
-/* Hero (hotel-style full-width banner) */
-.dental-hero {
-  position: relative;
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: var(--color-primary-900);
+.page-dental { background: var(--color-bg-base); }
+
+/* Specialists grid — light background like the rest of the site */
+.section-dental-specialists {
+  background: var(--color-bg-base);
+  padding: var(--space-12) 0 var(--space-20);
 }
 
-.dental-hero-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.dental-hero-scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(30, 18, 51, 0.45) 55%, rgba(30, 18, 51, 0.15) 100%);
-}
-
-.dental-hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-4);
-}
-
-.dental-hero-icon {
-  width: 96px;
-  height: 96px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-full);
-  background: rgba(212, 175, 55, 0.18);
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  color: var(--color-accent-gold-400);
-  backdrop-filter: blur(6px);
-}
-.dental-hero-icon svg { width: 46px; height: 46px; }
-
-.dental-hero-label {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-4xl);
-  letter-spacing: 0.35em;
-  color: var(--color-bg-base);
-  text-transform: uppercase;
-}
-
-.dental-hero-title {
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-2xl);
-  color: var(--color-bg-base);
-  margin: 0;
-}
-
-.dental-hero-sub {
-  max-width: 560px;
-  font-size: var(--font-size-base);
-  color: var(--color-text-muted);
-  line-height: var(--line-height-relaxed);
-  margin: 0;
-}
-
-/* Intro */
-.section-dental-intro { padding: var(--space-20) 0; background: var(--color-bg-base); }
-.dental-intro-grid {
+.dental-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-12);
-  align-items: center;
-}
-.dental-intro-text .section-title { margin-bottom: var(--space-4); }
-.dental-intro-text .section-description { margin-bottom: var(--space-8); }
-.dental-intro-img img {
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-luxury);
-  object-fit: cover;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-8);
+  margin-bottom: var(--space-12);
 }
 
-/* Sub-specialties: reuses .services-grid + .service-card-luxury from services.css */
-.section-dental-subs { padding: var(--space-20) 0; background: var(--color-bg-base); }
+.dental-card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
 
-/* Final CTA */
-.section-dental-cta { padding: var(--space-20) 0; }
-.dental-cta-content { max-width: 640px; }
-.dental-cta-sub {
-  font-size: var(--font-size-base);
-  color: var(--color-text-muted);
+.dental-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-luxury); }
+
+.dental-card-media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--color-bg-surface-elevated);
+  margin: 0;
+}
+.dental-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--transition-slow); }
+.dental-card:hover .dental-card-media img { transform: scale(1.05); }
+
+.dental-card-body { padding: var(--space-6); }
+
+.dental-card-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xl);
+  color: var(--color-ink);
+  margin-bottom: var(--space-3);
+}
+
+.dental-card-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
-  margin-bottom: var(--space-8);
+  margin: 0;
 }
 
-@media (max-width: 1024px) {
-  .dental-intro-grid { grid-template-columns: 1fr 1fr; }
-}
+.dental-cta { text-align: center; margin-top: var(--space-8); }
+
 @media (max-width: 640px) {
-  .section-dental-intro, .section-dental-subs, .section-dental-cta { padding: var(--space-14) 0; }
-  .dental-intro-grid { grid-template-columns: 1fr; }
-  .dental-hero-label { font-size: var(--font-size-3xl); }
-  .dental-hero { min-height: 60vh; }
+  .section-dental-specialists { padding: var(--space-10) 0; }
 }

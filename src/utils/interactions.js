@@ -57,6 +57,7 @@ export function initLanguageSwitcher() {
       initMobileMenu();
       initLanguageSwitcher();
       initHeaderScroll();
+      initServicesCarousel();
     });
   });
 }
@@ -115,6 +116,7 @@ export function initRouting() {
     initMobileMenu();
     initLanguageSwitcher();
     initHeaderScroll();
+    initServicesCarousel();
     // Always jump to the top on route change so the new page is visible immediately
     window.scrollTo({ top: 0, behavior: "auto" });
   };
@@ -135,4 +137,59 @@ export function initRouting() {
 
   // Handle browser back/forward and manual hash changes
   window.addEventListener("hashchange", reloadApp);
+}
+
+// Services 3D carousel — auto-rotates the cards on a single row.
+export function initServicesCarousel() {
+  const stage = document.querySelector(".carousel-stage");
+  if (!stage) return;
+
+  const cards = Array.from(stage.querySelectorAll(".carousel-card"));
+  const dots = Array.from(document.querySelectorAll(".carousel-dot"));
+  if (cards.length < 2) return;
+
+  let current = 0;
+  let timer = null;
+
+  const layout = () => {
+    cards.forEach((card, i) => {
+      card.classList.remove("is-active", "is-left", "is-right");
+      if (cards.length === 1) {
+        card.classList.add("is-active");
+        return;
+      }
+      if (i === current) card.classList.add("is-active");
+      else if (i === (current + cards.length - 1) % cards.length) card.classList.add("is-left");
+      else if (i === (current + 1) % cards.length) card.classList.add("is-right");
+      // hide far cards so only active + 2 neighbors are visible
+      const dist = Math.min(
+        Math.abs(i - current),
+        cards.length - Math.abs(i - current)
+      );
+      card.style.display = dist <= 1 ? "" : "none";
+      card.style.pointerEvents = dist <= 1 ? "" : "none";
+    });
+
+    dots.forEach((dot, i) => dot.classList.toggle("is-active", i === current));
+  };
+
+  const goTo = (index) => {
+    current = (index + cards.length) % cards.length;
+    layout();
+    restart();
+  };
+
+  const restart = () => {
+    if (timer) clearInterval(timer);
+    timer = setInterval(() => {
+      current = (current + 1) % cards.length;
+      layout();
+    }, 3500);
+  };
+
+  // Dot clicks
+  dots.forEach((dot) => dot.addEventListener("click", () => goTo(Number(dot.getAttribute("data-index")))));
+
+  layout();
+  restart();
 }

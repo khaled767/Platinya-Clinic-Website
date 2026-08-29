@@ -1,135 +1,63 @@
-// Dental Page — Aesthetic Dentistry / Dental Veneers (Hollywood Smile)
-// Layout: fashion-forward hero (hotel-style) + luxury service cards for the sub-specialties.
+// Dental Page — cosmetic & implant dentistry specialties
 import { icons } from "../../components/icons";
 import { t } from "../../i18n";
 
-// Existing approved image used as placeholder until implants/titanium are generated.
-const PLACEHOLDER_IMG = "./assets/images/ai/services/dental-APPROVED-nolamp.webp";
-
-// Generated images for the sub-specialties (implants & titanium pending OpenRouter credits).
-const MEDIA_BASE = "./assets/images/ai/services/dental/";
-
-// The five dental sub-specialties, each rendered as a luxury service card.
-const subs = [
-  {
-    id: "hollywood",
-    number: "01",
-    tagKey: "smile",
-    key: "sub1",
-    img: MEDIA_BASE + "smile.png",
-    imgAlt: "Hollywood smile veneers close-up",
-  },
-  {
-    id: "emax",
-    number: "02",
-    tagKey: "cosmetic",
-    key: "sub2",
-    img: MEDIA_BASE + "emax.png",
-    imgAlt: "Thin translucent E-max veneers being placed",
-  },
-  {
-    id: "zirconium",
-    number: "03",
-    tagKey: "crowns",
-    key: "sub3",
-    img: MEDIA_BASE + "zirconium.png",
-    imgAlt: "Polished zirconium dental crowns",
-  },
-  {
-    id: "implants",
-    number: "04",
-    tagKey: "implant",
-    key: "sub4",
-    img: PLACEHOLDER_IMG,
-    imgAlt: "Modern dental implant procedure in progress",
-  },
-  {
-    id: "titanium",
-    number: "05",
-    tagKey: "arch",
-    key: "sub5",
-    img: PLACEHOLDER_IMG,
-    imgAlt: "Full-arch fixed bridge on a titanium bar",
-  },
+const specialties = [
+  { key: "smile",  img: "./assets/images/partner-services/dental/dental-smile.webp",  alt: "Hollywood smile result" },
+  { key: "veneer", img: "./assets/images/partner-services/dental/dental-veneer.webp", alt: "Emax veneers on a dental model" },
+  { key: "zircon", img: "./assets/images/partner-services/dental/dental-zirconium.webp", alt: "Zirconium crowns on a tray" },
+  { key: "implant", img: "./assets/images/partner-services/dental/dental-implant.webp", alt: "Dental implants" },
+  { key: "tibar",  img: "./assets/images/partner-services/dental/dental-tibar.webp",  alt: "Titanium bar framework" },
 ];
 
 export default function dentalPage() {
   return `
     <div class="page-dental">
 
-      <!-- Hero banner (hotel-style) -->
-      <section class="dental-hero">
-        <img
-          src="./assets/images/ai/services/dental/hero.png"
-          alt="Aesthetic dentistry clinic"
-          class="dental-hero-bg"
-        />
-        <div class="dental-hero-scrim"></div>
-        <div class="container dental-hero-content">
-          <span class="dental-hero-icon">${icons.stethoscope}</span>
-          <span class="dental-hero-label">DENTAL</span>
-          <h1 class="dental-hero-title">${t("dental.title")}</h1>
-          <p class="dental-hero-sub">${t("dental.sub")}</p>
+      <!-- Hero: teeth icon + DENTAL label over a bright clinical banner -->
+      <section class="hotel-hero">
+        <div class="hotel-hero-scrim" style="background: linear-gradient(to top, rgba(20, 15, 40, 0.85) 0%, rgba(30, 18, 51, 0.5) 55%, rgba(30, 18, 51, 0.25) 100%);"></div>
+        <div class="container hotel-hero-content">
+          <span class="hotel-hero-icon">${icons.teeth}</span>
+          <span class="hotel-hero-label">${t("dental.label")}</span>
+          <h1 class="hotel-hero-title">${t("dental.title")}</h1>
+          <p class="hotel-hero-sub">${t("dental.sub")}</p>
         </div>
       </section>
 
       <!-- Intro -->
-      <section class="section-dental-intro">
-        <div class="container dental-intro-grid">
-          <div class="dental-intro-text">
+      <section class="section-hotel-intro">
+        <div class="container">
+          <div class="section-header text-center">
             <span class="section-subtitle">${t("dental.introLbl")}</span>
             <h2 class="section-title">${t("dental.introTitle")}</h2>
             <p class="section-description">${t("dental.intro")}</p>
-            <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
-          </div>
-          <div class="dental-intro-img">
-            <img src="./assets/images/ai/services/dental/hero.png" alt="Hollywood smile model" loading="lazy" />
           </div>
         </div>
       </section>
 
-      <!-- Sub-specialties: luxury service cards -->
-      <section class="section-dental-subs">
+      <!-- Specialities grid (light background = site base, seamless navigation) -->
+      <section class="section-dental-specialists">
         <div class="container">
-          <div class="section-header text-center">
-            <span class="section-subtitle">${t("dental.subsLbl")}</span>
-            <h2 class="section-title">${t("dental.subsTitle")}</h2>
-          </div>
-          <div class="services-grid">
-            ${subs.map((s) => `
-              <article class="service-card-luxury">
-                <div class="service-card-media">
-                  <img src="${s.img}" alt="${s.imgAlt}" class="service-card-img" loading="lazy" />
-                </div>
-                <div class="service-card-body">
-                  <div class="card-header-meta">
-                    <span class="service-number">${s.number}</span>
-                    <span class="service-tag">${t("dental.tag." + s.tagKey)}</span>
-                  </div>
-                  <h3 class="service-title">${t("dental." + s.key + "Title")}</h3>
-                  <p class="service-description">${t("dental." + s.key + "Desc")}</p>
-                  <div class="card-footer-action">
-                    <a href="/contact" data-route class="link-luxury">
-                      <span>${t("services.explore")}</span>
-                      <span class="arrow">→</span>
-                    </a>
-                  </div>
+          <div class="dental-grid">
+            ${specialties.map((s) => `
+              <article class="dental-card">
+                <figure class="dental-card-media">
+                  <img src="${s.img}" alt="${s.alt}" loading="lazy" />
+                </figure>
+                <div class="dental-card-body">
+                  <h3 class="dental-card-title">${t("dental.s." + s.key)}</h3>
+                  <p class="dental-card-desc">${t("dental.s." + s.key + "d")}</p>
                 </div>
               </article>
             `).join('')}
           </div>
-        </div>
-      </section>
 
-      <!-- Final CTA -->
-      <section class="section-dental-cta bg-dark-obsidian">
-        <div class="container text-center dental-cta-content">
-          <h2 class="section-title text-inverse">${t("dental.ctaTitle")}</h2>
-          <p class="dental-cta-sub">${t("dental.ctaSub")}</p>
-          <a href="/contact" data-route class="btn-luxury-gold"><span>${t("dental.ctaBtn")}</span></a>
+          <div class="dental-cta">
+            <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
+          </div>
         </div>
       </section>
     </div>
   `;
 }
-

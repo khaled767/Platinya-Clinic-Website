@@ -38,11 +38,88 @@
   line-height: var(--line-height-relaxed);
 }
 
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--space-8);
+/* Services 3D auto-rotating carousel — all cards on one row */
+.services-carousel {
+  position: relative;
   margin-bottom: var(--space-16);
+  perspective: 1400px;
+  overflow: hidden;
+}
+
+.carousel-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  padding: var(--space-6) var(--space-2);
+  will-change: transform;
+}
+
+.carousel-card {
+  /* 3D feel per card: active card full, neighbors slightly rotated/scaled */
+  flex: 0 0 300px;
+  transition: transform var(--transition-normal), opacity var(--transition-normal), filter var(--transition-normal);
+  opacity: 0.4;
+  transform: scale(0.86) rotateY(0deg);
+  filter: saturate(0.7) brightness(0.9);
+}
+
+.carousel-card.is-active {
+  flex: 0 0 340px;
+  opacity: 1;
+  transform: scale(1);
+  filter: none;
+  z-index: 3;
+}
+
+.carousel-card.is-left {
+  opacity: 0.7;
+  transform: scale(0.92) rotateY(18deg) translateX(18px);
+  z-index: 1;
+}
+
+.carousel-card.is-right {
+  opacity: 0.7;
+  transform: scale(0.92) rotateY(-18deg) translateX(-18px);
+  z-index: 1;
+}
+
+/* Dots */
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-accent-gold-500);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--transition-fast), width var(--transition-fast);
+}
+
+.carousel-dot.is-active {
+  background: var(--color-accent-gold-500);
+  width: 28px;
+}
+
+@media (max-width: 1024px) {
+  .carousel-card { flex-basis: 260px; }
+  .carousel-card.is-active { flex-basis: 290px; }
+}
+@media (max-width: 640px) {
+  .carousel-stage { flex-wrap: wrap; justify-content: center; gap: var(--space-4); }
+  .carousel-card, .carousel-card.is-active, .carousel-card.is-left, .carousel-card.is-right {
+    flex-basis: 100%;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
 }
 
 .service-card-luxury {
