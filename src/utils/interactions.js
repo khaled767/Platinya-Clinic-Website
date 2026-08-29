@@ -139,38 +139,31 @@ export function initRouting() {
   window.addEventListener("hashchange", reloadApp);
 }
 
-// Services 3D infinite ring carousel — the ring rotates continuously, each card
-// counter-rotates to stay readable, and hovering pauses the rotation.
+// Services 3D infinite carousel — active card stays centred, images orbit around it.
 export function initServicesCarousel() {
-  const ring = document.querySelector("#carousel-ring");
-  if (!ring) return;
+  const stage = document.querySelector("#carousel-stage");
+  if (!stage) return;
 
-  const cards = Array.from(ring.querySelectorAll(".carousel-card"));
+  const cards = Array.from(stage.querySelectorAll(".carousel-card"));
   const n = cards.length;
   if (n < 2) return;
 
-  const radius = getRadius();
-  const step = Math.round(360 / n);
+  const step = 360 / n;
+  const radius = 460;
   let rotY = 0;
   let raf = null;
   let paused = false;
 
-  function getRadius() {
-    const w = ring.clientWidth || 320;
-    return Math.round(w * 1.6); // orbit radius
-  }
-
-  // Position cards around the ring on a circle, counter-rotated to face the viewer
   function layout(angle) {
     cards.forEach((card, i) => {
-      const y = (angle + i * step) % 360;
-      // counter-rotate each card so its front is always readable
-      card.style.transform = `rotateY(${-y}deg) translateZ(${radius}px)`;
-      // fade cards that are at the back (facing away)
-      const facing = Math.cos(((y + 180) % 360) * Math.PI / 180); // -1..1
-      const back = Math.min(0, facing); // negative when facing away
-      card.style.opacity = back === 0 ? "1" : String(0.35);
-      card.style.zIndex = back === 0 ? "3" : "1";
+      const y = angle + i * step;
+      // Centre the card, place it on the ring, then counter-rotate so it faces the viewer
+      card.style.transform =
+        `translate(-50%, -50%) rotateY(${-y}deg) translateZ(${radius}px) rotateY(${y}deg)`;
+      // Fade cards that rotate to the back
+      const facing = Math.cos((y % 360) * Math.PI / 180);
+      card.style.opacity = facing >= 0 ? "1" : String(0.25 + 0.75 * (facing + 1));
+      card.style.zIndex = facing >= 0 ? "3" : "1";
     });
   }
 
@@ -180,13 +173,12 @@ export function initServicesCarousel() {
     const dt = ts - last;
     last = ts;
     if (!paused) {
-      rotY -= dt * 0.07; // smooth continuous rate (deg per ms); ~25s per full loop
+      rotY -= dt * 0.06; // smooth continuous rotation
       layout(rotY);
     }
     raf = requestAnimationFrame(tick);
   }
 
-  // Hover to pause
   const carousel = document.querySelector("#services-carousel");
   if (carousel) {
     carousel.addEventListener("mouseenter", () => { paused = true; });

@@ -38,12 +38,12 @@
   line-height: var(--line-height-relaxed);
 }
 
-/* Services 3D infinite ring carousel — active card stays centred, images orbit */
+/* Services 3D infinite carousel — active card stays centred, images orbit */
 .services-carousel {
   position: relative;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-16);
   perspective: 1400px;
-  height: 440px;
+  height: 480px;
   overflow: visible;
 }
 
@@ -52,37 +52,23 @@
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* The ring rotates infinitely; each card positioned around a circle */
-.carousel-ring {
-  position: relative;
-  transform-style: preserve-3d;
-  width: 320px;
-  height: 420px;
-  align-self: center;
-}
-
+/* Each card sits on its own spot around the ring; JS sets rotateY+translateZ */
 .carousel-card {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  top: 50%;
+  left: 50%;
+  width: 320px;
+  transform-style: preserve-3d;
   will-change: transform;
-  backface-visibility: hidden;
-  transition: transform 0.15s linear, opacity 0.3s ease;
 }
 
-@media (max-width: 1024px) { .services-carousel { height: 400px; } .carousel-ring { width: 280px; } }
+@media (max-width: 1024px) { .services-carousel { height: 440px; } .carousel-card { width: 280px; } }
 @media (max-width: 640px) {
-  .services-carousel { height: auto; overflow: hidden; }
-  .carousel-stage { display: block; }
-  .carousel-ring { width: 100%; height: auto; transform: none !important; }
-  .carousel-card { position: static; transform: none !important; opacity: 1 !important; margin-bottom: var(--space-4); }
+  .services-carousel { height: auto; overflow: hidden; perspective: none; }
+  .carousel-stage { display: block; height: auto; transform-style: flat; }
+  .carousel-card { position: static; width: 100%; left: auto; top: auto; transform: none !important; opacity: 1 !important; margin-bottom: var(--space-4); }
 }
 
 .service-card-luxury {
