@@ -1,4 +1,5 @@
 // Footer Component (High-Fidelity)
+import { icons } from "../icons";
 import legalDisclaimer from "../legal-disclaimer";
 import { t } from "../../i18n";
 
@@ -48,8 +49,11 @@ export default function footer() {
             <div class="contact-info">
               <p class="contact-item">
                 <span class="contact-label">24/7 European VIP Line:</span>
-                <a href="tel:+905****7388" class="contact-link">+90 531 945 7388</a>
                 <a href="tel:+905****9487" class="contact-link">+90 530 079 9487</a>
+                <a href="https://wa.me/905300799487" target="_blank" rel="noopener" class="footer-whatsapp contact-link">
+                  <span class="whatsapp-badge">${icons.whatsapp}</span>
+                  <span>WhatsApp</span>
+                </a>
               </p>
               <p class="contact-item">
                 <span class="contact-label">Email Assistance:</span>
@@ -58,7 +62,7 @@ export default function footer() {
               </p>
               <p class="contact-item">
                 <span class="contact-label">Headquarters:</span>
-                <span class="contact-text">Zafer Mah. 185. Sk. Babacan Premium B Blok, Esenyurt / İstanbul</span>
+                <span class="contact-text">Zafer Mah. 185 Sk. Babacan Premium B1 Daire 319, Esenyurt / İstanbul</span>
               </p>
             </div>
         </div>

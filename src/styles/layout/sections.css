@@ -301,6 +301,74 @@
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
 }
 
+/* Country code (type-to-resolve) + local number — elegant phone input */
+.form-phone-row { margin-top: var(--space-4); }
+.form-phone-fields {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.85fr) minmax(0, 1.5fr);
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.country-input { position: relative; }
+.country-input .country-key {
+  width: 100%;
+  padding-right: 74px; /* room for the flag+code chip */
+}
+.country-preview {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: var(--font-family-heading);
+  color: var(--color-ink);
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 999px;
+  padding: 2px 8px;
+  line-height: 1.4;
+}
+.country-preview .flag { font-size: 14px; line-height: 1; }
+
+
+/* Optional photo upload (dashed luxury drop-target) */
+.form-upload-group { margin-top: var(--space-4); }
+.form-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 10px 16px;
+  border: 1px dashed rgba(212, 175, 55, 0.55);
+  border-radius: var(--radius-lg);
+  background: rgba(212, 175, 55, 0.05);
+  color: var(--color-accent-gold-600);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+.form-upload-btn:hover { background: rgba(212, 175, 55, 0.12); border-color: rgba(212, 175, 55, 0.9); }
+.form-upload-icon { display: inline-flex; align-items: center; }
+.form-upload-files {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+}
+.form-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: #d23f3f;
+}
+
 .btn-submit-luxury {
   width: 100%;
   padding: 1rem;

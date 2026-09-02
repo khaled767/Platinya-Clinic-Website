@@ -3,6 +3,7 @@
 
 import renderApp from "../renderApp";
 import { setLang } from "../i18n";
+import { resolveCountry } from "./phoneCountries";
 
 export function initMobileMenu() {
   const toggle = document.querySelector(".mobile-toggle");
@@ -58,6 +59,8 @@ export function initLanguageSwitcher() {
       initLanguageSwitcher();
       initHeaderScroll();
       initServicesCarousel();
+      initContactForm();
+      document.dispatchEvent(new Event("langchange"));
     });
   });
 }
@@ -117,6 +120,7 @@ export function initRouting() {
     initLanguageSwitcher();
     initHeaderScroll();
     initServicesCarousel();
+    initContactForm();
     // Always jump to the top on route change so the new page is visible immediately
     window.scrollTo({ top: 0, behavior: "auto" });
   };
@@ -192,4 +196,73 @@ export function initServicesCarousel() {
 
   render();
   restart();
+}
+
+// Assessment & contact form: validate phone is only digits, resolve the typed
+// country (code or name → flag), combine with local number, show chosen files.
+export function initContactForm() {
+  const form = document.querySelector("#assessment-form");
+  if (!form) return;
+
+  const countryInput = document.getElementById("country-code-input");
+  const preview = document.getElementById("country-preview");
+  const codeHidden = document.getElementById("country-code-hidden");
+  const numberInput = document.getElementById("phone-number");
+  const combined = document.getElementById("phone-combined");
+  const hint = form.querySelector("[data-phone-hint]");
+
+  // Update the flag+code chip + hidden dial code from the typed box
+  const resolveTyped = () => {
+    if (!countryInput || !preview || !codeHidden) return;
+    const c = resolveCountry(countryInput.value);
+    if (c) {
+      preview.innerHTML = `<span class="flag">${c.flag}</span> ${c.dial}`;
+      codeHidden.value = c.dial;
+      countryInput.classList.remove("is-unknown");
+    } else if (countryInput.value.trim() !== "") {
+      preview.innerHTML = "?";
+      codeHidden.value = "";
+      countryInput.classList.add("is-unknown");
+    } else {
+      preview.innerHTML = `<span class="flag">🇸🇾</span> +963`;
+      codeHidden.value = "+963";
+      countryInput.classList.remove("is-unknown");
+    }
+    combinePhone();
+  };
+
+  const combinePhone = () => {
+    if (!numberInput || !combined) return;
+    const raw = numberInput.value;
+    const cleaned = raw.replace(/[^0-9 ]/g, "");
+    if (cleaned !== raw) numberInput.value = cleaned;
+    const dial = (codeHidden && codeHidden.value || "").replace(/\D/g, "");
+    const local = cleaned.replace(/[^0-9]/g, "");
+    combined.value = local ? `+${dial} ${local}` : "";
+    // hint only when digits present but too few to be real
+    const digits = cleaned.replace(/[^0-9]/g, "").length;
+    if (hint) {
+      hint.textContent =
+        cleaned.trim() !== "" && digits !== 0 && digits < 7 ? window.__t_phoneHint || "" : "";
+    }
+  };
+
+  if (countryInput) countryInput.addEventListener("input", resolveTyped);
+  if (numberInput) numberInput.addEventListener("input", combinePhone);
+  if (form) {
+    form.addEventListener("submit", () => { resolveTyped(); combinePhone(); });
+  }
+
+  // Initialize preview
+  if (countryInput) resolveTyped();
+
+  // Show selected photo file names
+  const file = document.getElementById("selfie-upload");
+  const filesEl = form.querySelector("[data-upload-files]");
+  if (file && filesEl) {
+    file.addEventListener("change", () => {
+      const names = Array.from(file.files || []).map((f) => f.name);
+      filesEl.textContent = names.length ? names.join(" · ") : "";
+    });
+  }
 }
