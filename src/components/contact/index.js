@@ -64,26 +64,46 @@ export default function contact() {
               <input type="text" id="full-name" name="full_name" class="form-input" required />
             </div>
 
-            <div class="form-grid-2">
-              <div class="form-group">
-                <label class="form-label" for="email">${t("contact.email")}</label>
-                <input type="email" id="email" name="email" class="form-input" required />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="phone">${t("contact.phone")}</label>
+            <div class="form-group">
+              <label class="form-label" for="email">${t("contact.email")}</label>
+              <input type="email" id="email" name="email" class="form-input" required />
+            </div>
+
+            <div class="form-group form-phone-row">
+              <label class="form-label" for="country-code">${t("contact.phone")}</label>
+              <div class="form-phone-fields">
+                <select id="country-code" name="country_code" class="form-select form-select-code" aria-label="Country code">
+                  <option value="+90" data-country="TR" selected>🇹🇷 +90</option>
+                  <option value="+49" data-country="DE">🇩🇪 +49</option>
+                  <option value="+44" data-country="GB">🇬🇧 +44</option>
+                  <option value="+33" data-country="FR">🇫🇷 +33</option>
+                  <option value="+34" data-country="ES">🇪🇸 +34</option>
+                  <option value="+39" data-country="IT">🇮🇹 +39</option>
+                  <option value="+31" data-country="NL">🇳🇱 +31</option>
+                  <option value="+46" data-country="SE">🇸🇪 +46</option>
+                  <option value="+48" data-country="PL">🇵🇱 +48</option>
+                  <option value="+971" data-country="AE">🇦🇪 +971</option>
+                  <option value="+966" data-country="SA">🇸🇦 +966</option>
+                  <option value="+974" data-country="QA">🇶🇦 +974</option>
+                  <option value="+965" data-country="KW">🇰🇼 +965</option>
+                  <option value="+20" data-country="EG">🇪🇬 +20</option>
+                  <option value="+212" data-country="MA">🇲🇦 +212</option>
+                </select>
                 <input
                   type="tel"
-                  id="phone"
-                  name="phone"
+                  id="phone-number"
                   class="form-input"
+                  name="number_part"
                   inputmode="numeric"
-                  pattern="[0-9+ ]+"
-                  placeholder="+90 5xx xxx xxxx"
+                  pattern="[0-9 ]+"
+                  placeholder="5xx xxx xxxx"
+                  aria-label="Local phone number"
                   required
                 />
-                <small class="form-hint" data-phone-hint></small>
+                <input type="hidden" name="phone" id="phone-combined" />
               </div>
-              </div>
+              <small class="form-hint" data-phone-hint></small>
+            </div>
 
               <div class="form-group">
               <label class="form-label" for="specialty">${t("contact.treatment")}</label>

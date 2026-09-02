@@ -197,27 +197,45 @@ export function initServicesCarousel() {
   restart();
 }
 
-// Assessment & contact form: validate phone is only digits, show chosen files.
+// Assessment & contact form: validate phone is only digits, combine country code
+// with local number, and show chosen photo files.
 export function initContactForm() {
   const form = document.querySelector("#assessment-form");
   if (!form) return;
 
-  const phone = document.getElementById("phone");
+  const codeSel = document.getElementById("country-code");
+  const numberInput = document.getElementById("phone-number");
+  const combined = document.getElementById("phone-combined");
   const hint = form.querySelector("[data-phone-hint]");
-  if (phone && hint) {
-    const stripNonDigits = (v) => v.replace(/[^0-9+ ]/g, "");
-    phone.addEventListener("input", () => {
-      const cleared = stripNonDigits(phone.value);
-      if (cleared !== phone.value) phone.value = cleared;
-      // warn when there are digits but too few → looks like part of a real number
-      const digits = phone.value.replace(/\D/g, "").length;
-      if (phone.value && digits !== 0 && digits < 7) {
+
+  const combineAndValidate = () => {
+    if (!codeSel || !numberInput) return;
+    const raw = numberInput.value;
+    // keep only digits and spaces
+    const cleaned = raw.replace(/[^0-9 ]/g, "");
+    if (cleaned !== raw) numberInput.value = cleaned;
+
+    // build the full international number for the hidden field
+    if (combined) {
+      const code = (codeSel.value || "").replace(/\D/g, "");
+      const local = cleaned.replace(/[^0-9]/g, "");
+      combined.value = local ? `+${code} ${local}` : "";
+    }
+
+    // hint only when there are some digits but too few to be a real number
+    const digits = cleaned.replace(/\D/g, "").length;
+    if (hint) {
+      if (cleaned.trim() !== "" && digits !== 0 && digits < 7) {
         hint.textContent = window.__t_phoneHint || "";
       } else {
         hint.textContent = "";
       }
-    });
-  }
+    }
+  };
+
+  if (numberInput) numberInput.addEventListener("input", combineAndValidate);
+  if (codeSel) codeSel.addEventListener("change", combineAndValidate);
+  if (form) form.addEventListener("submit", combineAndValidate); // ensure combined set on submit
 
   // Show selected photo file names
   const file = document.getElementById("selfie-upload");
