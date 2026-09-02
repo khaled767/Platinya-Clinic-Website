@@ -3,6 +3,7 @@
 
 import renderApp from "../renderApp";
 import { setLang } from "../i18n";
+import { resolveCountry } from "./phoneCountries";
 
 export function initMobileMenu() {
   const toggle = document.querySelector(".mobile-toggle");
@@ -197,45 +198,63 @@ export function initServicesCarousel() {
   restart();
 }
 
-// Assessment & contact form: validate phone is only digits, combine country code
-// with local number, and show chosen photo files.
+// Assessment & contact form: validate phone is only digits, resolve the typed
+// country (code or name → flag), combine with local number, show chosen files.
 export function initContactForm() {
   const form = document.querySelector("#assessment-form");
   if (!form) return;
 
-  const codeSel = document.getElementById("country-code");
+  const countryInput = document.getElementById("country-code-input");
+  const preview = document.getElementById("country-preview");
+  const codeHidden = document.getElementById("country-code-hidden");
   const numberInput = document.getElementById("phone-number");
   const combined = document.getElementById("phone-combined");
   const hint = form.querySelector("[data-phone-hint]");
 
-  const combineAndValidate = () => {
-    if (!codeSel || !numberInput) return;
+  // Update the flag+code chip + hidden dial code from the typed box
+  const resolveTyped = () => {
+    if (!countryInput || !preview || !codeHidden) return;
+    const c = resolveCountry(countryInput.value);
+    if (c) {
+      preview.innerHTML = `<span class="flag">${c.flag}</span> ${c.dial}`;
+      codeHidden.value = c.dial;
+      countryInput.classList.remove("is-unknown");
+    } else if (countryInput.value.trim() !== "") {
+      preview.innerHTML = "?";
+      codeHidden.value = "";
+      countryInput.classList.add("is-unknown");
+    } else {
+      preview.innerHTML = `<span class="flag">🇸🇾</span> +963`;
+      codeHidden.value = "+963";
+      countryInput.classList.remove("is-unknown");
+    }
+    combinePhone();
+  };
+
+  const combinePhone = () => {
+    if (!numberInput || !combined) return;
     const raw = numberInput.value;
-    // keep only digits and spaces
     const cleaned = raw.replace(/[^0-9 ]/g, "");
     if (cleaned !== raw) numberInput.value = cleaned;
-
-    // build the full international number for the hidden field
-    if (combined) {
-      const code = (codeSel.value || "").replace(/\D/g, "");
-      const local = cleaned.replace(/[^0-9]/g, "");
-      combined.value = local ? `+${code} ${local}` : "";
-    }
-
-    // hint only when there are some digits but too few to be a real number
-    const digits = cleaned.replace(/\D/g, "").length;
+    const dial = (codeHidden && codeHidden.value || "").replace(/\D/g, "");
+    const local = cleaned.replace(/[^0-9]/g, "");
+    combined.value = local ? `+${dial} ${local}` : "";
+    // hint only when digits present but too few to be real
+    const digits = cleaned.replace(/[^0-9]/g, "").length;
     if (hint) {
-      if (cleaned.trim() !== "" && digits !== 0 && digits < 7) {
-        hint.textContent = window.__t_phoneHint || "";
-      } else {
-        hint.textContent = "";
-      }
+      hint.textContent =
+        cleaned.trim() !== "" && digits !== 0 && digits < 7 ? window.__t_phoneHint || "" : "";
     }
   };
 
-  if (numberInput) numberInput.addEventListener("input", combineAndValidate);
-  if (codeSel) codeSel.addEventListener("change", combineAndValidate);
-  if (form) form.addEventListener("submit", combineAndValidate); // ensure combined set on submit
+  if (countryInput) countryInput.addEventListener("input", resolveTyped);
+  if (numberInput) numberInput.addEventListener("input", combinePhone);
+  if (form) {
+    form.addEventListener("submit", () => { resolveTyped(); combinePhone(); });
+  }
+
+  // Initialize preview
+  if (countryInput) resolveTyped();
 
   // Show selected photo file names
   const file = document.getElementById("selfie-upload");

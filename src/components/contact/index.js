@@ -72,23 +72,19 @@ export default function contact() {
             <div class="form-group form-phone-row">
               <label class="form-label" for="country-code">${t("contact.phone")}</label>
               <div class="form-phone-fields">
-                <select id="country-code" name="country_code" class="form-select form-select-code" aria-label="Country code">
-                  <option value="+90" data-country="TR" selected>🇹🇷 +90</option>
-                  <option value="+49" data-country="DE">🇩🇪 +49</option>
-                  <option value="+44" data-country="GB">🇬🇧 +44</option>
-                  <option value="+33" data-country="FR">🇫🇷 +33</option>
-                  <option value="+34" data-country="ES">🇪🇸 +34</option>
-                  <option value="+39" data-country="IT">🇮🇹 +39</option>
-                  <option value="+31" data-country="NL">🇳🇱 +31</option>
-                  <option value="+46" data-country="SE">🇸🇪 +46</option>
-                  <option value="+48" data-country="PL">🇵🇱 +48</option>
-                  <option value="+971" data-country="AE">🇦🇪 +971</option>
-                  <option value="+966" data-country="SA">🇸🇦 +966</option>
-                  <option value="+974" data-country="QA">🇶🇦 +974</option>
-                  <option value="+965" data-country="KW">🇰🇼 +965</option>
-                  <option value="+20" data-country="EG">🇪🇬 +20</option>
-                  <option value="+212" data-country="MA">🇲🇦 +212</option>
-                </select>
+                <div class="country-input" id="country-box">
+                  <input
+                    type="text"
+                    id="country-code-input"
+                    class="form-input country-key"
+                    placeholder="+963 / Syria"
+                    autocomplete="off"
+                    maxlength="30"
+                    aria-label="Country phone code or name"
+                  />
+                  <span class="country-preview flag-placeholder" id="country-preview">🇹🇷 +90</span>
+                  <input type="hidden" name="country_code" id="country-code-hidden" value="+90" />
+                </div>
                 <input
                   type="tel"
                   id="phone-number"
