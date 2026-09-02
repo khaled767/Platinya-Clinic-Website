@@ -77,13 +77,13 @@ export default function contact() {
                     type="text"
                     id="country-code-input"
                     class="form-input country-key"
-                    placeholder="+963 / Syria"
+                    placeholder="+963 / Code or country"
                     autocomplete="off"
                     maxlength="30"
                     aria-label="Country phone code or name"
                   />
-                  <span class="country-preview flag-placeholder" id="country-preview">🇹🇷 +90</span>
-                  <input type="hidden" name="country_code" id="country-code-hidden" value="+90" />
+                  <span class="country-preview" id="country-preview" style="display:none"></span>
+                  <input type="hidden" name="country_code" id="country-code-hidden" value="" />
                 </div>
                 <input
                   type="tel"
