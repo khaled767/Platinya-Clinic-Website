@@ -1,47 +1,81 @@
 /* ==========================================================================
-   Dental Page — cosmetic & implant dentistry
-   Base sections use the site's main background (light) for seamless navigation.
+   Dental Page — Aesthetic Dentistry
+   Layout approved from references:
+   - Concierge-banner / hotel luxury hero (full-width on top).
+   - Below: alternating horizontal rows — image one side, 3–4 line text other —
+           each row wrapped in a thin gold frame.
    ========================================================================== */
-
 .page-dental { background: var(--color-bg-base); }
 
-/* Specialists — luxury grid of service-card-luxury style cards (approved 27 Aug) */
-.section-dental-specialists {
+/* Hero intro spacing */
+.section-dental-intro { padding-top: var(--space-14); }
+
+/* Treatments — stacked alternating rows */
+.section-dental-treatments {
   background: var(--color-bg-base);
-  padding: var(--space-12) 0 var(--space-20);
+  padding: var(--space-4) 0 var(--space-20);
 }
 
-.dental-grid {
+/* Each treatment row = gold frame (outer) + white panel (inner) */
+.dental-treatment {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--space-8);
-  margin-bottom: var(--space-12);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-10);
+  margin-bottom: var(--space-14);
+  padding: 10px;                 /* space for the gold frame edge */
+  background: var(--color-bg-surface);
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  border-radius: calc(var(--radius-2xl) + 6px);
 }
 
-/* service-card-luxury base already gives the white/gold rounded card; this pins its media */
-.dental-card-luxury { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
-.dental-card-media {
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: var(--color-bg-surface-elevated);
-  margin: 0;
+/* Inner 2px white divider (double-frame look from the reference card) */
+.dental-treatment::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-2xl);
+  pointer-events: none;
 }
-.dental-card-media img {
+
+.dental-treatment-media {
+  margin: 0;                    /* matches the inset · no inner margin needed */
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg-surface-elevated);
+}
+.dental-treatment-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
   transition: transform var(--transition-slow);
 }
-.dental-card-luxury:hover .dental-card-media img { transform: scale(1.05); }
-.dental-card-body { padding: var(--space-7) var(--space-7) var(--space-6); display: flex; flex-direction: column; flex-grow: 1; }
+.dental-treatment:hover .dental-treatment-media img { transform: scale(1.045); }
 
-/* Gold index number + tag chip — luxury hotel-style card */
+.dental-treatment-body {
+  padding-right: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Alternate image side (right on every odd row, i.e. index 1,3,5) */
+.dental-treatment.is-flipped .dental-treatment-media { order: 2; }
+.dental-treatment.is-flipped .dental-treatment-body { order: 1; padding-right: 0; padding-left: var(--space-4); text-align: right; align-items: flex-end; }
+[dir="rtl"] .dental-treatment-body { text-align: right; align-items: flex-end; padding-right: 0; padding-left: var(--space-4); }
+[dir="rtl"] .dental-treatment.is-flipped .dental-treatment-body { text-align: left; align-items: flex-start; padding-left: 0; padding-right: var(--space-4); }
+
+/* Gold index number + tag chip */
 .dental-card-meta {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
 }
 .dental-card-num {
   font-family: var(--font-family-heading);
@@ -49,7 +83,6 @@
   font-weight: 600;
   line-height: 1;
   color: var(--color-accent-gold-500);
-  /* thin gold underline beside number */
 }
 .dental-card-tag {
   display: inline-flex;
@@ -65,26 +98,57 @@
   letter-spacing: 0.08em;
 }
 
-.dental-card-title {
+.dental-treatment-title {
   font-family: var(--font-family-heading);
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-2xl);
   color: var(--color-ink);
-  margin-bottom: var(--space-3);
+  margin: 0 0 var(--space-3);
+  line-height: 1.2;
 }
 
-.dental-card-desc {
+.dental-treatment-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-ink);
+  line-height: 1.6;
+  margin: 0 0 var(--space-4);
+}
+
+/* 3 short feature lines — the "explainer" the reader can scan */
+.dental-treatment-list {
+  list-style: none;
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.dental-treatment-list li {
+  position: relative;
+  padding-left: 22px;
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-  line-height: var(--line-height-relaxed);
-  margin: 0 0 var(--space-5);
+  line-height: 1.45;
 }
+.dental-treatment-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-accent-gold-500);
+}
+[dir="rtl"] .dental-treatment-list li { padding-left: 0; padding-right: 22px; }
+[dir="rtl"] .dental-treatment-list li::before { left: auto; right: 0; }
 
+/* CTA link */
 .dental-card-link {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--color-accent-gold-600);
@@ -94,7 +158,7 @@
 .dental-card-link:hover { color: var(--color-accent-gold-500); gap: var(--space-3); }
 .dental-card-arrow {
   display: inline-block;
-  width: 20px;
+  width: 22px;
   height: 2px;
   background: currentColor;
   position: relative;
@@ -110,16 +174,25 @@
   border-right: 2px solid currentColor;
   transform: rotate(45deg);
 }
-/* RTL: mirror the arrow for Arabic/Hebrew languages */
 [dir="rtl"] .dental-card-arrow::after { right: auto; left: 0; transform: rotate(-135deg); }
-.dental-card-arrow.dental-card-arrow { background: currentColor; }
 
 .dental-cta { text-align: center; margin-top: var(--space-8); }
 
+/* Hero CTA inline on the hero (concierge style) */
+.hotel-hero-cta { margin-top: var(--space-7); }
+
+/* Media queries */
 @media (max-width: 1024px) {
-  .dental-grid { gap: var(--space-6); }
+  .dental-treatment { gap: var(--space-6); }
+  .dental-treatment.is-flipped .dental-treatment-media { order: 2; }
+  .dental-treatment.is-flipped .dental-treatment-body { order: 1; }
 }
 @media (max-width: 640px) {
-  .section-dental-specialists { padding: var(--space-10) 0; }
-  .dental-grid { grid-template-columns: 1fr; }
+  .dental-treatment { grid-template-columns: 1fr; gap: var(--space-5); }
+  .dental-treatment.is-flipped .dental-treatment-media,
+  .dental-treatment.is-flipped .dental-treatment-body,
+  .dental-treatment .dental-treatment-media,
+  .dental-treatment .dental-treatment-body { order: initial; padding: 0; text-align: left; align-items: flex-start; }
+  .dental-treatment-body { padding: 0 !important; }
+  .section-dental-treatments { padding: var(--space-6) 0 var(--space-16); }
 }
