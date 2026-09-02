@@ -214,19 +214,22 @@ export function initContactForm() {
   // Update the flag+code chip + hidden dial code from the typed box
   const resolveTyped = () => {
     if (!countryInput || !preview || !codeHidden) return;
-    const c = resolveCountry(countryInput.value);
-    if (c) {
+    const empty = (countryInput.value || "").trim() === "";
+    const c = empty ? null : resolveCountry(countryInput.value);
+    if (empty) {
+      preview.style.display = "none";
+      codeHidden.value = "";
+      countryInput.classList.remove("is-unknown");
+    } else if (c) {
       preview.innerHTML = `<span class="flag">${c.flag}</span> ${c.dial}`;
+      preview.style.display = "inline-flex";
       codeHidden.value = c.dial;
       countryInput.classList.remove("is-unknown");
-    } else if (countryInput.value.trim() !== "") {
+    } else {
       preview.innerHTML = "?";
+      preview.style.display = "inline-flex";
       codeHidden.value = "";
       countryInput.classList.add("is-unknown");
-    } else {
-      preview.innerHTML = `<span class="flag">🇸🇾</span> +963`;
-      codeHidden.value = "+963";
-      countryInput.classList.remove("is-unknown");
     }
     combinePhone();
   };
@@ -236,10 +239,9 @@ export function initContactForm() {
     const raw = numberInput.value;
     const cleaned = raw.replace(/[^0-9 ]/g, "");
     if (cleaned !== raw) numberInput.value = cleaned;
-    const dial = (codeHidden && codeHidden.value || "").replace(/\D/g, "");
+    const dial = ((codeHidden && codeHidden.value) || "").replace(/\D/g, "");
     const local = cleaned.replace(/[^0-9]/g, "");
-    combined.value = local ? `+${dial} ${local}` : "";
-    // hint only when digits present but too few to be real
+    combined.value = dial && local ? `+${dial} ${local}` : "";
     const digits = cleaned.replace(/[^0-9]/g, "").length;
     if (hint) {
       hint.textContent =
@@ -253,8 +255,11 @@ export function initContactForm() {
     form.addEventListener("submit", () => { resolveTyped(); combinePhone(); });
   }
 
-  // Initialize preview
-  if (countryInput) resolveTyped();
+  // Neutral initial state — no country preselected
+  if (countryInput) {
+    countryInput.value = "";
+    resolveTyped();
+  }
 
   // Show selected photo file names
   const file = document.getElementById("selfie-upload");
