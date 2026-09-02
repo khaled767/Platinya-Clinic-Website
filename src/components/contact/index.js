@@ -17,8 +17,11 @@ export default function contact() {
               <span class="channel-icon">${icons.phone}</span>
               <div>
                 <span class="channel-label">${t("contact.hotline")}</span>
-                <a href="tel:+905319457388" class="channel-value">+90 531 945 7388</a>
-                <a href="tel:+905300799487" class="channel-value channel-second">+90 530 079 9487</a>
+                <a href="tel:+905****9487" class="channel-value">+90 530 079 9487</a>
+                <a href="https://wa.me/905300799487" target="_blank" rel="noopener" class="channel-whatsapp">
+                  <span class="whatsapp-badge">${icons.whatsapp}</span>
+                  <span>WhatsApp</span>
+                </a>
               </div>
             </div>
 
@@ -43,10 +46,11 @@ export default function contact() {
 
         <div class="contact-form-col">
           <form
+            id="assessment-form"
             class="luxury-form card-luxury"
             action="https://formsubmit.co/info@platinyaclinic.com"
             method="POST"
-            target="_blank"
+            enctype="multipart/form-data"
           >
             <h3 class="form-title">${t("contact.formTitle")}</h3>
             <p class="form-subtitle">${t("contact.privacy")}</p>
@@ -67,11 +71,21 @@ export default function contact() {
               </div>
               <div class="form-group">
                 <label class="form-label" for="phone">${t("contact.phone")}</label>
-                <input type="tel" id="phone" name="phone" class="form-input" required />
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="form-input"
+                  inputmode="numeric"
+                  pattern="[0-9+ ]+"
+                  placeholder="+90 5xx xxx xxxx"
+                  required
+                />
+                <small class="form-hint" data-phone-hint></small>
               </div>
-            </div>
+              </div>
 
-            <div class="form-group">
+              <div class="form-group">
               <label class="form-label" for="specialty">${t("contact.treatment")}</label>
               <select id="specialty" name="treatment" class="form-select" required>
                 <option value="" disabled selected>${t("contact.treatmentPlaceholder")}</option>
@@ -81,12 +95,30 @@ export default function contact() {
                 <option value="bariatric">${t("sv.bariatric")} ${t("sv.surgery")}</option>
                 <option value="aesthetics">${t("sv.aesth")}</option>
               </select>
-            </div>
+              </div>
 
-            <div class="form-group">
+              <div class="form-group">
               <label class="form-label" for="message">${t("contact.message")}</label>
               <textarea id="message" name="message" class="form-textarea" rows="4"></textarea>
-            </div>
+              </div>
+
+              <!-- Optional photo upload → FormSubmit delivers as attachment to your inbox -->
+              <div class="form-group form-upload-group">
+              <label class="form-upload-btn" for="selfie-upload">
+                <span class="form-upload-icon">${icons.paperclip}</span>
+                <span>${t("contact.upload") || "Attach photos of your smile / condition"}</span>
+              </label>
+              <input
+                type="file"
+                id="selfie-upload"
+                name="attachment"
+                accept="image/*"
+                multiple
+                class="form-upload-input"
+                hidden
+              />
+              <span class="form-upload-files" data-upload-files></span>
+              </div>
 
             <button type="submit" class="btn-submit-luxury">
               <span>${t("contact.submit")}</span>

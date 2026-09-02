@@ -1,35 +1,40 @@
 // Dental Page — Aesthetic Dentistry
-// Layout (approved): luxury concierge-style hero + alternating horizontal rows,
-// each row = image on one side + 3–4 line explainer on the other, gold frame.
+// Namespaced dental hero (not hotel) + alternating rows framed in gold each
+// holding an image on one side and a 3-point explainer on the other.
 import { icons } from "../../components/icons";
 import { t } from "../../i18n";
 
 const treatments = [
-  { key: "smile",   num: "01", tagKey: "smile",   img: "./assets/images/ai/services/dental/smile.png",    alt: "Hollywood Smile result" },
-  { key: "veneer",  num: "02", tagKey: "cosmetic", img: "./assets/images/ai/services/dental/emax.png",     alt: "E-Max veneers on a dental model" },
-  { key: "zircon",  num: "03", tagKey: "crowns",   img: "./assets/images/ai/services/dental/zirconium.png", alt: "Zirconia crowns on a tray" },
-  { key: "implant", num: "04", tagKey: "implant",  img: "./assets/images/ai/services/dental/implants.png",  alt: "Dental implants" },
-  { key: "tibar",   num: "05", tagKey: "arch",     img: "./assets/images/ai/services/dental/titanium.png",  alt: "Titanium bar full-arch framework" },
+  { key: "smile",   num: "01", tagKey: "smile",   img: "./assets/images/ai/services/dental/smile.webp",    alt: "Hollywood Smile result" },
+  { key: "veneer",  num: "02", tagKey: "cosmetic", img: "./assets/images/ai/services/dental/emax.webp",     alt: "E-Max veneers on a dental model" },
+  { key: "zircon",  num: "03", tagKey: "crowns",   img: "./assets/images/ai/services/dental/zirconium.webp", alt: "Zirconia crowns on a tray" },
+  { key: "implant", num: "04", tagKey: "implant",  img: "./assets/images/ai/services/dental/implants.webp",  alt: "Dental implants" },
+  { key: "tibar",   num: "05", tagKey: "arch",     img: "./assets/images/ai/services/dental/titanium.webp",  alt: "Titanium bar full-arch framework" },
 ];
 
 export default function dentalPage() {
   return `
     <div class="page-dental">
 
-      <!-- Hero — concierge-banner / hotel style, full width luxury clinic -->
-      <section class="hotel-hero">
-        <div class="hotel-hero-scrim" style="background: linear-gradient(to top, rgba(20, 15, 40, 0.85) 0%, rgba(30, 18, 51, 0.55) 55%, rgba(30, 18, 51, 0.3) 100%);"></div>
-        <div class="container hotel-hero-content">
-          <span class="hotel-hero-icon">${icons.teeth}</span>
-          <span class="hotel-hero-label">${t("dental.label")}</span>
-          <h1 class="hotel-hero-title">${t("dental.title")}</h1>
-          <p class="hotel-hero-sub">${t("dental.sub")}</p>
-          <a href="/contact" data-route class="btn-luxury-gold hotel-hero-cta"><span>${t("cta.vip")}</span></a>
+      <!-- Dental hero (namespace specific to Aesthetic Dentistry) -->
+      <section class="dental-hero">
+        <img
+          class="dental-hero-bg"
+          src="./assets/images/ai/services/dental/hero.webp"
+          alt="Modern Aesthetic Dentistry treatment room"
+        />
+        <div class="dental-hero-scrim"></div>
+        <div class="container dental-hero-content">
+          <span class="dental-hero-icon">${icons.teeth}</span>
+          <span class="dental-hero-label">${t("dental.label")}</span>
+          <h1 class="dental-hero-title">${t("dental.title")}</h1>
+          <p class="dental-hero-sub">${t("dental.sub")}</p>
+          <a href="/contact" data-route class="btn-luxury-gold dental-hero-cta"><span>${t("cta.vip")}</span></a>
         </div>
       </section>
 
       <!-- Intro -->
-      <section class="section-hotel-intro section-dental-intro">
+      <section class="dental-intro">
         <div class="container">
           <div class="section-header text-center">
             <span class="section-subtitle">${t("dental.introLbl")}</span>
@@ -39,27 +44,26 @@ export default function dentalPage() {
         </div>
       </section>
 
-      <!-- Alternating rows: image ⇄ 3–4 line text, inside a gold frame -->
-      <section class="section-dental-treatments">
+      <!-- Alternating treatment rows -->
+      <section class="dental-treatments">
         <div class="container">
           ${treatments.map((s, i) => {
             const flipped = i % 2 === 1;
             return `
-              <article class="dental-treatment ${flipped ? "is-flipped" : ""}">
-                <figure class="dental-treatment-media">
+              <article class="dental-row ${flipped ? "is-flipped" : ""}">
+                <figure class="dental-row-media">
                   <img src="${s.img}" alt="${s.alt}" loading="lazy" />
                 </figure>
-                <div class="dental-treatment-body">
-                  <div class="dental-card-meta">
-                    <span class="dental-card-num">${s.num}</span>
-                    <span class="dental-card-tag">${t("dental.tag." + s.tagKey)}</span>
+                <div class="dental-row-body">
+                  <div class="dental-row-meta">
+                    <span class="dental-row-num">${s.num}</span>
+                    <span class="dental-row-tag">${t("dental.tag." + s.tagKey)}</span>
                   </div>
-                  <h3 class="dental-treatment-title">${t("dental.s." + s.key)}</h3>
-                  <p class="dental-treatment-text">${t("dental.s." + s.key + "d")}</p>
-                  <ul class="dental-treatment-list">
+                  <h3 class="dental-row-title">${t("dental.s." + s.key)}</h3>
+                  <ul class="dental-row-list">
                     ${[1,2,3].map((n) => `<li>${t("dental.s." + s.key + ".f" + n)}</li>`).join('')}
                   </ul>
-                  <a href="/contact" data-route class="dental-card-link">${t("dental.cta")}<span class="dental-card-arrow"></span></a>
+                  <a href="/contact" data-route class="dental-row-link">${t("dental.cta")}<span class="dental-row-arrow"></span></a>
                 </div>
               </article>
             `;

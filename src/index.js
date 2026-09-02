@@ -9,9 +9,15 @@ import {
   initHeaderScroll,
   initLightbox,
   initServicesCarousel,
+  initContactForm,
 } from "./utils/interactions";
+import { getLang, t } from "./i18n";
 
 initI18n();
+
+// Expose the current language's phone hint for the form validator
+const syncPhoneHint = () => { window.__t_phoneHint = t("contact.phoneOnly") || ""; };
+syncPhoneHint();
 
 renderApp();
 
@@ -21,3 +27,6 @@ initLanguageSwitcher();
 initHeaderScroll();
 initLightbox();
 initServicesCarousel();
+initContactForm();
+// keep the hint in sync if the language changes
+document.addEventListener("langchange", syncPhoneHint);

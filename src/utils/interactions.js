@@ -58,6 +58,8 @@ export function initLanguageSwitcher() {
       initLanguageSwitcher();
       initHeaderScroll();
       initServicesCarousel();
+      initContactForm();
+      document.dispatchEvent(new Event("langchange"));
     });
   });
 }
@@ -117,6 +119,7 @@ export function initRouting() {
     initLanguageSwitcher();
     initHeaderScroll();
     initServicesCarousel();
+    initContactForm();
     // Always jump to the top on route change so the new page is visible immediately
     window.scrollTo({ top: 0, behavior: "auto" });
   };
@@ -192,4 +195,37 @@ export function initServicesCarousel() {
 
   render();
   restart();
+}
+
+// Assessment & contact form: validate phone is only digits, show chosen files.
+export function initContactForm() {
+  const form = document.querySelector("#assessment-form");
+  if (!form) return;
+
+  const phone = document.getElementById("phone");
+  const hint = form.querySelector("[data-phone-hint]");
+  if (phone && hint) {
+    const stripNonDigits = (v) => v.replace(/[^0-9+ ]/g, "");
+    phone.addEventListener("input", () => {
+      const cleared = stripNonDigits(phone.value);
+      if (cleared !== phone.value) phone.value = cleared;
+      // warn when there are digits but too few → looks like part of a real number
+      const digits = phone.value.replace(/\D/g, "").length;
+      if (phone.value && digits !== 0 && digits < 7) {
+        hint.textContent = window.__t_phoneHint || "";
+      } else {
+        hint.textContent = "";
+      }
+    });
+  }
+
+  // Show selected photo file names
+  const file = document.getElementById("selfie-upload");
+  const filesEl = form.querySelector("[data-upload-files]");
+  if (file && filesEl) {
+    file.addEventListener("change", () => {
+      const names = Array.from(file.files || []).map((f) => f.name);
+      filesEl.textContent = names.length ? names.join(" · ") : "";
+    });
+  }
 }
