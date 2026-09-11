@@ -79,12 +79,14 @@ export default function hairPage() {
               <h2 class="section-title">${t("hair.techTitle")}</h2>
               <p class="section-description">${t("hair.techSub")}</p>
             </div>
+
+            <figure class="hair-tech-visual">
+              <img src="./assets/images/ai/services/hair/techniques-compare.webp" alt="${t("hair.techTitle")}" loading="lazy" />
+            </figure>
+
             <div class="hair-tech-grid">
               ${techniques.map((x) => `
                 <article class="hair-tech-card">
-                  <figure class="hair-tech-media">
-                    <img src="./assets/images/ai/services/hair/${x.key}-approved.webp" alt="${t("hair." + x.key + ".n")}" loading="lazy" />
-                  </figure>
                   <div class="hair-tech-body">
                     <h3 class="hair-tech-name">${t("hair." + x.key + ".n")}</h3>
                     <p class="hair-tech-desc">${t("hair." + x.key + ".d")}</p>

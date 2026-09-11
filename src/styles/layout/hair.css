@@ -155,6 +155,22 @@
 /* ---------- Techniques ---------- */
 .hair-tech { margin-top: clamp(56px, 8vw, 104px); }
 .hair-tech-head { margin-bottom: var(--space-8); }
+.hair-tech-visual {
+  margin: 0 auto clamp(24px, 3vw, 40px);
+  max-width: 760px;           /* smaller than full width, per request */
+  border-radius: calc(var(--radius-2xl) + 4px);
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  box-shadow: 0 14px 40px -20px rgba(15, 23, 42, 0.22);
+  background: var(--color-bg-surface);
+  padding: clamp(8px, 1vw, 12px);
+}
+.hair-tech-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-xl);
+}
 .hair-tech-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -169,22 +185,21 @@
   background: var(--color-bg-surface);
   box-shadow: 0 14px 40px -20px rgba(15, 23, 42, 0.22);
 }
-.hair-tech-media { margin: 0; aspect-ratio: 16 / 10; overflow: hidden; }
-.hair-tech-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--transition-slow); }
-.hair-tech-card:hover .hair-tech-media img { transform: scale(1.04); }
 .hair-tech-body { padding: var(--space-6) var(--space-6) var(--space-7); display: flex; flex-direction: column; gap: var(--space-3); }
-.hair-tech-name { font-family: var(--font-family-heading); font-size: var(--font-size-2xl); color: var(--color-ink); margin: 0; }
-.hair-tech-desc { font-size: var(--font-size-base); color: var(--color-text-secondary); line-height: var(--line-height-relaxed); margin: 0; max-width: 46ch; }
+.hair-tech-name { font-family: var(--font-family-heading); font-size: var(--font-size-xl); color: var(--color-ink); margin: 0; }
+.hair-tech-desc { font-size: var(--font-size-base); color: var(--color-text-secondary); line-height: var(--line-height-relaxed); margin: 0; }
 .hair-tech-why {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-2);
   align-self: flex-start;
   color: var(--color-accent-gold-600);
-  font-size: 0.86rem;
+  font-size: 0.9rem;
   font-weight: 600;
+  line-height: var(--line-height-relaxed);
+  padding-top: var(--space-1);
 }
-.hair-tech-why svg { width: 16px; height: 16px; }
+.hair-tech-why svg { width: 16px; height: 16px; margin-top: 0.28em; flex: none; }
 
 .hair-cta { text-align: center; margin-top: var(--space-14); }
 

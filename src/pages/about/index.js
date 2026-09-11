@@ -25,10 +25,6 @@ export default function aboutPage() {
             </div>
             <div class="story-stats-card card-luxury">
               <div class="stat-row">
-                <span class="stat-num">15+</span>
-                <span class="stat-text">${t("about.stat")}</span>
-              </div>
-              <div class="stat-row">
                 <span class="stat-num">100%</span>
                 <span class="stat-text">${t("hero.trust1")}</span>
               </div>

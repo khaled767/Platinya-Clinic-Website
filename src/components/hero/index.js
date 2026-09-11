@@ -37,11 +37,6 @@ export default function hero() {
             </div>
             <div class="trust-divider"></div>
             <div class="trust-item">
-              <span class="trust-value">15+</span>
-              <span class="trust-label">${t("hero.trust2")}</span>
-            </div>
-            <div class="trust-divider"></div>
-            <div class="trust-item">
               <span class="trust-value">24/7</span>
               <span class="trust-label">${t("hero.trust3")}</span>
             </div>

@@ -28,15 +28,6 @@ export default function about() {
             <span>${t("about.btn")}</span>
           </a>
         </div>
-
-        <div class="about-media">
-          <div class="about-media-card card-luxury">
-            <div class="media-stat-box">
-              <span class="stat-number">15+</span>
-              <span class="stat-label">${t("about.stat")}</span>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   `;
