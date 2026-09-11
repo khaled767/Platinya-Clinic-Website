@@ -24,7 +24,7 @@
 
 .hero-container {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1.05fr 0.95fr;
   align-items: center;
   gap: var(--space-16);
   position: relative;
@@ -169,7 +169,7 @@
   border: 1px solid var(--color-border-accent);
   border-radius: var(--radius-2xl);
   padding: 0; /* image is full-bleed */
-  min-height: 380px;
+  min-height: 470px;
   display: flex;
   align-items: flex-end;
   overflow: hidden;

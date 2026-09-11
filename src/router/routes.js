@@ -9,6 +9,7 @@ import termsPage from "../pages/terms";
 import hotelPage from "../pages/hotel";
 import dentalPage from "../pages/dental";
 import hairPage from "../pages/hair";
+import plasticPage from "../pages/plastic";
 import airportPage from "../pages/airport";
 import conciergePage from "../pages/concierge";
 import transfersPage from "../pages/transfers";
@@ -28,6 +29,7 @@ const routes = {
   "/hotel": hotelPage,
   "/dental": dentalPage,
   "/hair": hairPage,
+  "/plastic": plasticPage,
   "/airport": airportPage,
   "/concierge": conciergePage,
   "/transfers": transfersPage,
