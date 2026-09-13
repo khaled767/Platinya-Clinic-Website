@@ -8,27 +8,34 @@ import { t } from "../../i18n";
 
 const BASE = "./assets/images/ai/services/plastic/";
 
-// Facial procedures (8) — key matches pf.g.<key> / pf.g.<key>c / pf.f.<key>{1..3}
+// Facial procedures (8) — final order set by the client:
+//   1 Facelift · 2 Eyelids · 3 Brow lift · 4 Rhinoplasty
+//   5 Facial fat injection · 6 Forehead lift · 7 Buccal fat removal
+//   8 Neck lift (moved last)
+// key matches pf.g.<key> / pf.g.<key>c / pf.f.<key>{1..3}
 const FACE = [
   { key: "facelift", num: "01", img: "facelift.webp" },
-  { key: "neck",     num: "02", img: "necklift.webp" },
-  { key: "blepharo", num: "03", img: "blepharo.webp" },
-  { key: "brow",     num: "04", img: "browlift.webp" },
-  { key: "rhino",    num: "05", img: "rhinoplasty.webp" },
+  { key: "blepharo", num: "02", img: "blepharo.webp" },
+  { key: "brow",     num: "03", img: "browlift.webp" },
+  { key: "rhino",    num: "04", img: "rhinoplasty.webp" },
+  { key: "fat",      num: "05", img: "fat-injection.webp" },
   { key: "forehead", num: "06", img: "forehead.webp" },
   { key: "buccal",   num: "07", img: "buccal.webp" },
-  { key: "fat",      num: "08", img: "fat-injection.webp" },
+  { key: "neck",     num: "08", img: "necklift.webp" },
 ];
 
-// Body procedures (6) — key matches pb.g.<key> / pb.g.<key>c / pb.f.<key>{1..3}
+// Body procedures (7) — ordered top-of-body → bottom, per the client:
+//   1 Upper arms · 2 Breasts (implants) · 3 Breasts (lift/reduction)
+//   4 Torso 360 · 5 Tummy tuck · 6 Thighs · 7 Buttocks augmentation (BBL)
+// key matches pb.g.<key> / pb.g.<key>c / pb.f.<key>{1..3}
 const BODY = [
-  { key: "vaser",      num: "01", img: "vaser360.webp" },
-  { key: "arms",       num: "02", img: "arms.webp" },
-  { key: "thighs",     num: "03", img: "thighs.webp" },
-  { key: "tummylift",  num: "04", img: "tummy.webp" },
-  { key: "bbl",        num: "05", img: "bbl.webp" },
-  { key: "breastimp",  num: "06", img: "breast-implant.webp" },
-  { key: "breastlift", num: "07", img: "breast-lift.webp" },
+  { key: "arms",       num: "01", img: "arms.webp" },
+  { key: "breastimp",  num: "02", img: "breast-implant.webp" },
+  { key: "breastlift", num: "03", img: "breast-lift.webp" },
+  { key: "vaser",      num: "04", img: "vaser360.webp" },
+  { key: "tummylift",  num: "05", img: "tummy.webp" },
+  { key: "thighs",     num: "06", img: "thighs.webp" },
+  { key: "bbl",        num: "07", img: "bbl.webp" },
 ];
 
 function row(list, i, prefix) {
