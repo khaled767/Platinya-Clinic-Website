@@ -11,6 +11,8 @@ import dentalPage from "../pages/dental";
 import hairPage from "../pages/hair";
 import plasticPage from "../pages/plastic";
 import plasticBodyPage from "../pages/plastic-body";
+import bariatricPage from "../pages/bariatric";
+import aestheticsPage from "../pages/aesthetics";
 import airportPage from "../pages/airport";
 import conciergePage from "../pages/concierge";
 import transfersPage from "../pages/transfers";
@@ -32,6 +34,8 @@ const routes = {
   "/hair": hairPage,
   "/plastic": plasticPage,
   "/plastic-body": plasticBodyPage,
+  "/bariatric": bariatricPage,
+  "/aesthetics": aestheticsPage,
   "/airport": airportPage,
   "/concierge": conciergePage,
   "/transfers": transfersPage,

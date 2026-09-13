@@ -38,13 +38,14 @@ const BODY = [
   { key: "bbl",        num: "07", img: "bbl.webp" },
 ];
 
-function row(list, i, prefix) {
+function row(list, i, prefix, base) {
   const s = list[i];
+  const assetBase = base || BASE;
   const flipped = i % 2 === 1;
   return `
     <article class="plastic-row ${flipped ? "is-flipped" : ""}">
       <figure class="plastic-row-media">
-        <img src="${BASE}${s.img}" alt="${t(prefix + ".g." + s.key)}" loading="lazy" />
+        <img src="${assetBase}${s.img}" alt="${t(prefix + ".g." + s.key)}" loading="lazy" />
       </figure>
       <div class="plastic-row-body">
         <div class="plastic-row-meta">
@@ -61,13 +62,13 @@ function row(list, i, prefix) {
   `;
 }
 
-export function plasticGroupPage({ prefix, heroImg, icon }) {
-  const list = prefix === "pf" ? FACE : BODY;
-  const total = list.length + 1;
+export function plasticGroupPage({ prefix, heroImg, icon, procedures, base }) {
+  const list = procedures || (prefix === "pf" ? FACE : BODY);
+  const assetBase = base || BASE;
   return `
     <div class="page-plastic">
       <section class="plastic-hero">
-        <img class="plastic-hero-bg" src="${BASE}${heroImg}" alt="${t(prefix + ".title")}" />
+        <img class="plastic-hero-bg" src="${assetBase}${heroImg}" alt="${t(prefix + ".title")}" />
         <div class="plastic-hero-scrim"></div>
         <div class="container plastic-hero-content">
           <span class="plastic-hero-icon">${icon}</span>
@@ -89,7 +90,7 @@ export function plasticGroupPage({ prefix, heroImg, icon }) {
 
       <section class="plastic-areas">
         <div class="container">
-          ${list.map((_, i) => row(list, i, prefix)).join("")}
+          ${list.map((_, i) => row(list, i, prefix, assetBase)).join("")}
 
           <div class="plastic-cta">
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
