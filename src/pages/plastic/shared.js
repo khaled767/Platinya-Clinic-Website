@@ -8,19 +8,20 @@ import { t } from "../../i18n";
 
 const BASE = "./assets/images/ai/services/plastic/";
 
-// Facial procedures (8) — order set by the client:
-//   1 Facelift · 2 Neck lift · 3 Eyelids · 4 Brow lift · 5 Rhinoplasty
-//   6 Facial fat injection · 7 Forehead lift · 8 Buccal fat removal
+// Facial procedures (8) — final order set by the client:
+//   1 Facelift · 2 Eyelids · 3 Brow lift · 4 Rhinoplasty
+//   5 Facial fat injection · 6 Forehead lift · 7 Buccal fat removal
+//   8 Neck lift (moved last)
 // key matches pf.g.<key> / pf.g.<key>c / pf.f.<key>{1..3}
 const FACE = [
   { key: "facelift", num: "01", img: "facelift.webp" },
-  { key: "neck",     num: "02", img: "necklift.webp" },
-  { key: "blepharo", num: "03", img: "blepharo.webp" },
-  { key: "brow",     num: "04", img: "browlift.webp" },
-  { key: "rhino",    num: "05", img: "rhinoplasty.webp" },
-  { key: "fat",      num: "06", img: "fat-injection.webp" },
-  { key: "forehead", num: "07", img: "forehead.webp" },
-  { key: "buccal",   num: "08", img: "buccal.webp" },
+  { key: "blepharo", num: "02", img: "blepharo.webp" },
+  { key: "brow",     num: "03", img: "browlift.webp" },
+  { key: "rhino",    num: "04", img: "rhinoplasty.webp" },
+  { key: "fat",      num: "05", img: "fat-injection.webp" },
+  { key: "forehead", num: "06", img: "forehead.webp" },
+  { key: "buccal",   num: "07", img: "buccal.webp" },
+  { key: "neck",     num: "08", img: "necklift.webp" },
 ];
 
 // Body procedures (6) — key matches pb.g.<key> / pb.g.<key>c / pb.f.<key>{1..3}
