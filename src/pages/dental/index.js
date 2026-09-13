@@ -74,6 +74,32 @@ export default function dentalPage() {
           </div>
         </div>
       </section>
+
+      <!-- Techniques -->
+      <section class="dental-tech">
+        <div class="container">
+          <div class="section-header text-center dental-tech-head">
+            <span class="section-subtitle">${t("dental.techLbl")}</span>
+            <h2 class="section-title">${t("dental.techTitle")}</h2>
+            <p class="section-description">${t("dental.techSub")}</p>
+          </div>
+
+          <figure class="dental-tech-visual">
+            <img src="./assets/images/ai/services/dental/techniques-compare.webp" alt="${t("dental.techTitle")}" loading="lazy" />
+          </figure>
+
+          <div class="dental-tech-grid">
+            ${[1,2,3].map((i) => `
+              <article class="dental-tech-card">
+                <div class="dental-tech-body">
+                  <h3 class="dental-tech-name">${t("dental.tech" + i + ".n")}</h3>
+                  <p class="dental-tech-desc">${t("dental.tech" + i + ".d")}</p>
+                </div>
+              </article>
+            `).join('')}
+          </div>
+        </div>
+      </section>
     </div>
   `;
 }

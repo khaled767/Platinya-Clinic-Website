@@ -65,12 +65,15 @@
   color: #161330;
   border-color: var(--color-accent-gold-500);
 }
-.carousel-arrow--prev { left: 8px; }
-.carousel-arrow--next { right: 8px; }
+/* Positions are intentionally swapped (visual side only) per request:
+   the "prev" button is drawn on the right and the "next" on the left.
+   Each button keeps its original behaviour — only the side changes. */
+.carousel-arrow--prev { right: 8px; }
+.carousel-arrow--next { left: 8px; }
 @media (max-width: 760px) {
   .carousel-arrow { width: 40px; height: 40px; font-size: 1.5rem; }
-  .carousel-arrow--prev { left: 2px; }
-  .carousel-arrow--next { right: 2px; }
+  .carousel-arrow--prev { right: 2px; }
+  .carousel-arrow--next { left: 2px; }
 }
 
 /* Services carousel — flat, reliable, centred. */

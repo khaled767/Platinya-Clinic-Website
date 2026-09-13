@@ -157,6 +157,66 @@
 
 .dental-cta { text-align:center; margin-top: var(--space-4); }
 
+/* ---------- Techniques ---------- */
+.dental-tech { margin-top: clamp(64px, 9vw, 120px); }
+.dental-tech-head { margin-bottom: var(--space-8); }
+.dental-tech-visual {
+  margin: 0 auto clamp(28px, 3.5vw, 48px);
+  max-width: 760px;            /* matches the hair page — not full width */
+  border-radius: calc(var(--radius-2xl) + 4px);
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  box-shadow: 0 14px 40px -20px rgba(15, 23, 42, 0.22);
+  background: var(--color-bg-surface);
+  padding: clamp(8px, 1vw, 12px);
+}
+.dental-tech-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-xl);
+}
+.dental-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 2.6vw, 36px);
+}
+.dental-tech-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: calc(var(--radius-2xl) + 4px);
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  background: var(--color-bg-surface);
+  box-shadow: 0 14px 40px -20px rgba(15, 23, 42, 0.22);
+}
+/* Generous inner padding so the text never touches the gold frame. */
+.dental-tech-body {
+  padding: clamp(30px, 3.2vw, 46px) clamp(28px, 3.2vw, 46px) clamp(34px, 3.4vw, 50px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+/* Title centred on its own line. */
+.dental-tech-name {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xl);
+  color: var(--color-ink);
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+.dental-tech-desc {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  text-align: center;
+}
+
 /* RTL mirroring */
 [dir="rtl"] .dental-row-list li { padding-left:0; padding-right:24px; }
 [dir="rtl"] .dental-row-list li::before { left:auto; right:0; }
@@ -166,6 +226,7 @@
 @media (max-width: 1024px) {
   .dental-hero { min-height: 66vh; }
   .dental-hero-label { font-size: var(--font-size-2xl); }
+  .dental-tech-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
   .dental-row { grid-template-columns: 1fr; gap: var(--space-4); }
