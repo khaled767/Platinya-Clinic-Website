@@ -31,16 +31,17 @@ export default function footer() {
             </ul>
           </div>
 
-          <!-- Column 3: Medical Services — each link opens its own page -->
+          <!-- Column 3: Medical Services — every link goes to the /services page,
+               which lists all treatments stacked vertically (client's chosen behaviour). -->
           <div class="footer-col">
             <h4 class="footer-heading">${t("footer.specHead")}</h4>
             <ul class="footer-links">
-              <li><a href="/hair" data-route>${t("footer.svcHair")}</a></li>
-              <li><a href="/dental" data-route>${t("footer.svcDental")}</a></li>
-              <li><a href="/plastic" data-route>${t("footer.svcFace")}</a></li>
-              <li><a href="/plastic-body" data-route>${t("footer.svcBody")}</a></li>
-              <li><a href="/bariatric" data-route>${t("footer.svcBariatric")}</a></li>
-              <li><a href="/aesthetics" data-route>${t("footer.svcAesthetics")}</a></li>
+              <li><a href="/services" data-route>${t("footer.svcHair")}</a></li>
+              <li><a href="/services" data-route>${t("footer.svcDental")}</a></li>
+              <li><a href="/services" data-route>${t("footer.svcFace")}</a></li>
+              <li><a href="/services" data-route>${t("footer.svcBody")}</a></li>
+              <li><a href="/services" data-route>${t("footer.svcBariatric")}</a></li>
+              <li><a href="/services" data-route>${t("footer.svcAesthetics")}</a></li>
             </ul>
           </div>
 
