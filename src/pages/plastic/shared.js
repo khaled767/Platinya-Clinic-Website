@@ -24,15 +24,18 @@ const FACE = [
   { key: "neck",     num: "08", img: "necklift.webp" },
 ];
 
-// Body procedures (6) — key matches pb.g.<key> / pb.g.<key>c / pb.f.<key>{1..3}
+// Body procedures (7) — ordered top-of-body → bottom, per the client:
+//   1 Upper arms · 2 Breasts (implants) · 3 Breasts (lift/reduction)
+//   4 Torso 360 · 5 Tummy tuck · 6 Thighs · 7 Buttocks augmentation (BBL)
+// key matches pb.g.<key> / pb.g.<key>c / pb.f.<key>{1..3}
 const BODY = [
-  { key: "vaser",      num: "01", img: "vaser360.webp" },
-  { key: "arms",       num: "02", img: "arms.webp" },
-  { key: "thighs",     num: "03", img: "thighs.webp" },
-  { key: "tummylift",  num: "04", img: "tummy.webp" },
-  { key: "bbl",        num: "05", img: "bbl.webp" },
-  { key: "breastimp",  num: "06", img: "breast-implant.webp" },
-  { key: "breastlift", num: "07", img: "breast-lift.webp" },
+  { key: "arms",       num: "01", img: "arms.webp" },
+  { key: "breastimp",  num: "02", img: "breast-implant.webp" },
+  { key: "breastlift", num: "03", img: "breast-lift.webp" },
+  { key: "vaser",      num: "04", img: "vaser360.webp" },
+  { key: "tummylift",  num: "05", img: "tummy.webp" },
+  { key: "thighs",     num: "06", img: "thighs.webp" },
+  { key: "bbl",        num: "07", img: "bbl.webp" },
 ];
 
 function row(list, i, prefix) {
