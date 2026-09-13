@@ -17,19 +17,25 @@ export default function services() {
       imgAlt: "Comfortable dental check-up with open mouth",
     },
     {
-      id: "plastic", number: "03", key: "plastic", tagKey: "surgical",
+      id: "plastic-face", number: "03", key: "pf", tagKey: "surgical",
       link: "/plastic",
       img: "./assets/images/ai/services/plastic/plastic-APPROVED.webp",
-      imgAlt: "Plastic surgery consultation reviewing a facial plan",
+      imgAlt: "Facial plastic surgery consultation reviewing a facial plan",
     },
     {
-      id: "bariatric", number: "04", key: "bariatric", tagKey: "vital",
+      id: "plastic-body", number: "04", key: "pb", tagKey: "surgical",
+      link: "/plastic-body",
+      img: "./assets/images/ai/services/plastic/vaser360.webp",
+      imgAlt: "Body contouring procedure plan",
+    },
+    {
+      id: "bariatric", number: "05", key: "bariatric", tagKey: "vital",
       link: "/bariatric",
       img: "./assets/images/ai/services/bariatric/bariatric-APPROVED.webp",
       imgAlt: "Healthy, energised lifestyle after bariatric treatment",
     },
     {
-      id: "aesthetics", number: "05", key: "aesth", tagKey: "nonsurgical",
+      id: "aesthetics", number: "06", key: "aesth", tagKey: "nonsurgical",
       link: "/aesthetics",
       img: "./assets/images/ai/services/aesthetics/aesthetics-APPROVED.webp",
       imgAlt: "Serene medical-aesthetics facial treatment",
@@ -55,8 +61,11 @@ export default function services() {
           <p class="section-description">${t("services.desc")}</p>
         </div>
 
-        <!-- Services 3D infinite carousel — active card stays centred, images orbit -->
+        <!-- Services carousel — 6 cards; arrows step one card at a time -->
         <div class="services-carousel" id="services-carousel">
+          <button type="button" class="carousel-arrow carousel-arrow--prev" id="carousel-prev" aria-label="Previous service">
+            <span aria-hidden="true">‹</span>
+          </button>
           <div class="carousel-stage" id="carousel-stage">
             ${specs.map((s) => `
               <a
@@ -85,6 +94,9 @@ export default function services() {
               </a>
             `).join('')}
           </div>
+          <button type="button" class="carousel-arrow carousel-arrow--next" id="carousel-next" aria-label="Next service">
+            <span aria-hidden="true">›</span>
+          </button>
         </div>
 
         <!-- All-Inclusive Concierge Package — the full bespoke journey -->

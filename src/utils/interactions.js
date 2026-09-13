@@ -177,6 +177,11 @@ export function initServicesCarousel() {
     render();
   }
 
+  function prev() {
+    current = (current + n - 1) % n; // step backwards, wraps
+    render();
+  }
+
   function restart() {
     if (timer) clearInterval(timer);
     timer = setInterval(next, 2500);
@@ -188,6 +193,12 @@ export function initServicesCarousel() {
     carousel.addEventListener("mouseenter", () => { if (timer) clearInterval(timer); });
     carousel.addEventListener("mouseleave", restart);
   }
+
+  // Manual arrow controls — step one card and reset the auto-advance timer
+  const prevBtn = document.querySelector("#carousel-prev");
+  const nextBtn = document.querySelector("#carousel-next");
+  if (prevBtn) prevBtn.addEventListener("click", (e) => { e.preventDefault(); prev(); restart(); });
+  if (nextBtn) nextBtn.addEventListener("click", (e) => { e.preventDefault(); next(); restart(); });
 
   window.matchMedia("(max-width: 640px)").addEventListener("change", (e) => {
     isMobile = e.matches;

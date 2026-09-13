@@ -38,7 +38,42 @@
   line-height: var(--line-height-relaxed);
 }
 
-/* Services infinite carousel — flat, reliable, centred. */
+/* Manual left/right arrows for the services carousel */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 6;
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  background: rgba(22, 19, 48, 0.55);
+  color: var(--color-accent-gold-400);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background var(--transition-normal), transform var(--transition-normal), border-color var(--transition-normal);
+}
+.carousel-arrow span { display: block; margin-top: -3px; }
+.carousel-arrow:hover {
+  background: rgba(212, 175, 55, 0.9);
+  color: #161330;
+  border-color: var(--color-accent-gold-500);
+}
+.carousel-arrow--prev { left: 8px; }
+.carousel-arrow--next { right: 8px; }
+@media (max-width: 760px) {
+  .carousel-arrow { width: 40px; height: 40px; font-size: 1.5rem; }
+  .carousel-arrow--prev { left: 2px; }
+  .carousel-arrow--next { right: 2px; }
+}
+
+/* Services carousel — flat, reliable, centred. */
 .services-carousel {
   position: relative;
   margin: 0 0 var(--space-12);
