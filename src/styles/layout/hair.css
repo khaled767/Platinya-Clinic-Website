@@ -185,19 +185,40 @@
   background: var(--color-bg-surface);
   box-shadow: 0 14px 40px -20px rgba(15, 23, 42, 0.22);
 }
-.hair-tech-body { padding: var(--space-6) var(--space-6) var(--space-7); display: flex; flex-direction: column; gap: var(--space-3); }
-.hair-tech-name { font-family: var(--font-family-heading); font-size: var(--font-size-xl); color: var(--color-ink); margin: 0; }
-.hair-tech-desc { font-size: var(--font-size-base); color: var(--color-text-secondary); line-height: var(--line-height-relaxed); margin: 0; }
+.hair-tech-body {
+  padding: clamp(28px, 3vw, 44px) clamp(26px, 3vw, 44px) clamp(32px, 3vw, 48px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: center;
+  text-align: center;
+}
+.hair-tech-name {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xl);
+  color: var(--color-ink);
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+.hair-tech-desc {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  text-align: center;
+}
 .hair-tech-why {
   display: inline-flex;
   align-items: flex-start;
+  justify-content: center;
   gap: var(--space-2);
-  align-self: flex-start;
   color: var(--color-accent-gold-600);
   font-size: 0.9rem;
   font-weight: 600;
   line-height: var(--line-height-relaxed);
-  padding-top: var(--space-1);
+  padding: 0 var(--space-2);
+  text-align: center;
 }
 .hair-tech-why svg { width: 16px; height: 16px; margin-top: 0.28em; flex: none; }
 

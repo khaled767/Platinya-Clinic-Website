@@ -155,6 +155,7 @@ export function initServicesCarousel() {
 
   let current = 0;
   let timer = null;
+  let isPaused = false; // true while the pointer hovers the carousel
   let isMobile = window.matchMedia("(max-width: 640px)").matches;
 
   function render() {
@@ -177,17 +178,36 @@ export function initServicesCarousel() {
     render();
   }
 
+  function prev() {
+    current = (current + n - 1) % n; // step backwards, wraps
+    render();
+  }
+
+  // (Re)start the auto-advance timer — but never while the pointer is hovering.
   function restart() {
     if (timer) clearInterval(timer);
+    if (isPaused) return;
     timer = setInterval(next, 2500);
+  }
+
+  // Stop the timer outright.
+  function pause() {
+    isPaused = true;
+    if (timer) { clearInterval(timer); timer = null; }
   }
 
   const carousel = document.querySelector("#services-carousel");
   if (carousel) {
-    // pause on hover only while the pointer is inside
-    carousel.addEventListener("mouseenter", () => { if (timer) clearInterval(timer); });
-    carousel.addEventListener("mouseleave", restart);
+    // Pause on hover — including immediately after a manual arrow click.
+    carousel.addEventListener("mouseenter", pause);
+    carousel.addEventListener("mouseleave", () => { isPaused = false; restart(); });
   }
+
+  // Manual arrow controls — step one card and reset the auto-advance timer
+  const prevBtn = document.querySelector("#carousel-prev");
+  const nextBtn = document.querySelector("#carousel-next");
+  if (prevBtn) prevBtn.addEventListener("click", (e) => { e.preventDefault(); prev(); restart(); });
+  if (nextBtn) nextBtn.addEventListener("click", (e) => { e.preventDefault(); next(); restart(); });
 
   window.matchMedia("(max-width: 640px)").addEventListener("change", (e) => {
     isMobile = e.matches;
