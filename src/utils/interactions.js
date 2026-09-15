@@ -111,9 +111,8 @@ export function initLightbox() {
   });
 }
 
-// Real-path SPA routing: intercept data-route clicks, push a clean URL via the
-// History API, and re-render the app plus re-bind UI interactions after each
-// view change. Legacy #/hash URLs keep working (see router/index.js).
+// Hash-based SPA routing: intercept data-route clicks, navigate via location.hash,
+// and re-render the app plus re-bind UI interactions after each view change.
 export function initRouting() {
   const reloadApp = () => {
     renderApp();
@@ -130,37 +129,18 @@ export function initRouting() {
   document.addEventListener("click", (e) => {
     const link = e.target.closest("a[data-route]");
     if (!link) return;
-
-    // Let the browser handle new-tab / modified clicks natively
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-
     e.preventDefault();
     const href = link.getAttribute("href") || "/";
-
-    if (href === currentLocationPath()) {
+    if ("#" + href === window.location.hash || (href === "/" && (window.location.hash === "" || window.location.hash === "#/"))) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
-
-    // Push the clean URL so the address bar shows /hair/ instead of #/hair
-    try {
-      window.history.pushState({}, "", href === "/" ? "/" : href + "/");
-    } catch (err) {
-      window.location.hash = href;
-    }
+    window.location.hash = href;
     reloadApp();
   });
 
-  // Handle browser back/forward
-  window.addEventListener("popstate", reloadApp);
-  // Handle any legacy hash links still in the wild
+  // Handle browser back/forward and manual hash changes
   window.addEventListener("hashchange", reloadApp);
-}
-
-// The path currently shown in the address bar (without a trailing slash).
-function currentLocationPath() {
-  const p = (window.location.pathname || "/").replace(/\/+$/, "");
-  return p === "" ? "/" : p;
 }
 
 // Services infinite carousel — reliable flat advancing loop.

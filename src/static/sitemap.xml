@@ -7,41 +7,40 @@
     <loc>https://platinyaclinic.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/?lang=en"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/?lang=ar"/>
     <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/?lang=tr"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/?lang=fr"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/?lang=es"/>
     <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/?lang=it"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/"/>
   </url>
 
   <!-- Core pages -->
-  <url><loc>https://platinyaclinic.com/services/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://platinyaclinic.com/about/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://platinyaclinic.com/hospitals/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://platinyaclinic.com/testimonials/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://platinyaclinic.com/contact/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://platinyaclinic.com/#/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://platinyaclinic.com/#/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://platinyaclinic.com/#/hospitals</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://platinyaclinic.com/#/testimonials</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://platinyaclinic.com/#/contact</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 
   <!-- Service pages (highest commercial intent) -->
-  <url><loc>https://platinyaclinic.com/hair/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://platinyaclinic.com/dental/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://platinyaclinic.com/plastic/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://platinyaclinic.com/plastic-body/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://platinyaclinic.com/bariatric/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://platinyaclinic.com/aesthetics/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://platinyaclinic.com/#/hair</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://platinyaclinic.com/#/dental</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://platinyaclinic.com/#/plastic</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://platinyaclinic.com/#/plastic-body</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://platinyaclinic.com/#/bariatric</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://platinyaclinic.com/#/aesthetics</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 
   <!-- Concierge & partner services -->
-  <url><loc>https://platinyaclinic.com/concierge/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://platinyaclinic.com/hotel/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://platinyaclinic.com/airport/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://platinyaclinic.com/transfers/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://platinyaclinic.com/interpreter/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://platinyaclinic.com/#/concierge</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://platinyaclinic.com/#/hotel</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://platinyaclinic.com/#/airport</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://platinyaclinic.com/#/transfers</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://platinyaclinic.com/#/interpreter</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 
   <!-- Legal -->
-  <url><loc>https://platinyaclinic.com/privacy-policy/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://platinyaclinic.com/terms/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://platinyaclinic.com/privacy/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://platinyaclinic.com/#/privacy-policy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://platinyaclinic.com/#/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://platinyaclinic.com/#/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 
 </urlset>
