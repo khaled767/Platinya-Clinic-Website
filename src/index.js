@@ -15,9 +15,13 @@ import { getLang, t } from "./i18n";
 
 initI18n();
 
-// Expose the current language's phone hint for the form validator
-const syncPhoneHint = () => { window.__t_phoneHint = t("contact.phoneOnly") || ""; };
-syncPhoneHint();
+// Expose the current language's form strings for the client-side validators
+const syncFormStrings = () => {
+  window.__t_phoneHint = t("contact.phoneOnly") || "";
+  window.__t_uploadMax = t("contact.uploadMax") || "";
+  window.__t_uploadSize = t("contact.uploadSize") || "";
+};
+syncFormStrings();
 
 renderApp();
 
@@ -28,5 +32,5 @@ initHeaderScroll();
 initLightbox();
 initServicesCarousel();
 initContactForm();
-// keep the hint in sync if the language changes
-document.addEventListener("langchange", syncPhoneHint);
+// keep the strings in sync if the language changes
+document.addEventListener("langchange", syncFormStrings);

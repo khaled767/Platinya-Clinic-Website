@@ -281,13 +281,74 @@ export function initContactForm() {
     resolveTyped();
   }
 
-  // Show selected photo file names
+  // Photo attachments — enforce limits before the form can be submitted:
+  //   · at most 4 images
+  //   · no single image larger than 2 MB
+  // Keeps the inbox safe (FormSubmit forwards attachments by email) and gives
+  // the visitor a clear, translated message when a file is rejected.
+  const MAX_FILES = 4;
+  const MAX_BYTES = 2 * 1024 * 1024; // 2 MB
   const file = document.getElementById("selfie-upload");
   const filesEl = form.querySelector("[data-upload-files]");
+  const fileErr = form.querySelector("[data-upload-error]");
+
+  const msgTooMany = () => window.__t_uploadMax || "You can attach up to 4 photos.";
+  const msgTooBig = (name) =>
+    (window.__t_uploadSize || "Each photo must be smaller than 2 MB.") + " — " + name;
+
+  const showError = (text) => {
+    if (!fileErr) return;
+    fileErr.textContent = text || "";
+    fileErr.style.display = text ? "block" : "none";
+  };
+
+  // Rebuild the input's FileList so it only holds the accepted files.
+  const setFiles = (accepted) => {
+    try {
+      const dt = new DataTransfer();
+      accepted.forEach((f) => dt.items.add(f));
+      file.files = dt.files;
+    } catch (e) {
+      /* very old browsers keep the original list — validation still blocks submit */
+    }
+  };
+
   if (file && filesEl) {
     file.addEventListener("change", () => {
-      const names = Array.from(file.files || []).map((f) => f.name);
-      filesEl.textContent = names.length ? names.join(" · ") : "";
+      let picked = Array.from(file.files || []);
+      let error = "";
+
+      // 1) too many files?
+      if (picked.length > MAX_FILES) {
+        error = msgTooMany();
+        picked = picked.slice(0, MAX_FILES);
+      }
+
+      // 2) any file over the size cap?
+      const oversized = picked.filter((f) => f.size > MAX_BYTES);
+      if (oversized.length) {
+        error = msgTooBig(oversized[0].name);
+        picked = picked.filter((f) => f.size <= MAX_BYTES);
+      }
+
+      setFiles(picked);
+      showError(error);
+      filesEl.textContent = picked.length ? picked.map((f) => f.name).join(" · ") : "";
     });
   }
+
+  // Final guard: if a rejected file is somehow still attached, block submit.
+  form.addEventListener("submit", (e) => {
+    const picked = Array.from((file && file.files) || []);
+    if (picked.length > MAX_FILES) {
+      e.preventDefault();
+      showError(msgTooMany());
+      return;
+    }
+    const oversized = picked.filter((f) => f.size > MAX_BYTES);
+    if (oversized.length) {
+      e.preventDefault();
+      showError(msgTooBig(oversized[0].name));
+    }
+  });
 }

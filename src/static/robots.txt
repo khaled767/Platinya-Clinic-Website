@@ -1,0 +1,19 @@
+# robots.txt — Platinya Clinic Agency
+# https://platinyaclinic.com/
+
+User-agent: *
+Allow: /
+
+# Keep crawlers out of build artefacts and internal docs
+Disallow: /node_modules/
+Disallow: /01_Project_Management/
+Disallow: /02_Brand_Strategy/
+Disallow: /03_Research/
+Disallow: /04_Content_Strategy/
+Disallow: /05_UX_Design/
+Disallow: /06_UI_Design/
+Disallow: /07_Deveplopment/
+Disallow: /99_Archive/
+
+# Sitemap
+Sitemap: https://platinyaclinic.com/sitemap.xml

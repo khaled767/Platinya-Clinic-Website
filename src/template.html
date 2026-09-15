@@ -51,28 +51,89 @@
     />
     <meta name="twitter:image" content="./assets/images/og-clinic.webp" />
 
-    <!-- Alternative languages (SEO hreflang) -->
+    <!-- Alternative languages (SEO hreflang) — all 7 supported languages -->
     <link rel="alternate" hreflang="en" href="https://platinyaclinic.com/" />
-    <link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/#/?lang=ar" />
-    <link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/#/?lang=tr" />
+    <link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/?lang=ar" />
+    <link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/?lang=tr" />
+    <link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/?lang=fr" />
+    <link rel="alternate" hreflang="es" href="https://platinyaclinic.com/?lang=es" />
+    <link rel="alternate" hreflang="it" href="https://platinyaclinic.com/?lang=it" />
+    <link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/?lang=ru" />
     <link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/" />
+
+    <!-- Geo targeting for medical tourism -->
+    <meta name="geo.region" content="TR-34" />
+    <meta name="geo.placename" content="Istanbul" />
+    <meta name="geo.position" content="41.0082;28.9784" />
+    <meta name="ICBM" content="41.0082, 28.9784" />
 
     <!-- Structured Data: MedicalBusiness / Organization -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "MedicalBusiness",
+      "@id": "https://platinyaclinic.com/#organization",
       "name": "Platinya Clinic Agency",
+      "alternateName": "Platinya Clinic",
       "description": "Luxury international healthcare and medical-tourism facilitation services in Istanbul.",
       "url": "https://platinyaclinic.com/",
+      "logo": "https://platinyaclinic.com/assets/images/logo.png",
+      "image": "https://platinyaclinic.com/assets/images/og-clinic.webp",
       "telephone": "+90 530 079 9487",
       "email": "info@platinyaclinic.com",
+      "priceRange": "$$$",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Zafer Mah. 185 Sk. Babacan Premium B1 Daire 319, Esenyurt",
         "addressLocality": "Esenyurt, İstanbul",
+        "addressRegion": "İstanbul",
+        "postalCode": "34517",
         "addressCountry": "TR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.0082,
+        "longitude": 28.9784
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "availableLanguage": ["en","ar","tr","fr","es","it","ru"],
+      "areaServed": [
+        { "@type": "Country", "name": "Türkiye" },
+        { "@type": "Country", "name": "Saudi Arabia" },
+        { "@type": "Country", "name": "United Arab Emirates" },
+        { "@type": "Country", "name": "United Kingdom" },
+        { "@type": "Country", "name": "Germany" }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Medical Treatments",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "MedicalProcedure", "name": "Hair Transplantation", "url": "https://platinyaclinic.com/#/hair" } },
+          { "@type": "Offer", "itemOffered": { "@type": "MedicalProcedure", "name": "Aesthetic Dentistry", "url": "https://platinyaclinic.com/#/dental" } },
+          { "@type": "Offer", "itemOffered": { "@type": "MedicalProcedure", "name": "Facial Plastic & Reconstructive Surgery", "url": "https://platinyaclinic.com/#/plastic" } },
+          { "@type": "Offer", "itemOffered": { "@type": "MedicalProcedure", "name": "Body Plastic & Reconstructive Surgery", "url": "https://platinyaclinic.com/#/plastic-body" } },
+          { "@type": "Offer", "itemOffered": { "@type": "MedicalProcedure", "name": "Bariatric & Metabolic Surgery", "url": "https://platinyaclinic.com/#/bariatric" } },
+          { "@type": "Offer", "itemOffered": { "@type": "MedicalProcedure", "name": "Medical Aesthetics", "url": "https://platinyaclinic.com/#/aesthetics" } }
+        ]
       }
+    }
+    </script>
+
+    <!-- Structured Data: WebSite (enables sitelinks search box) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://platinyaclinic.com/#website",
+      "url": "https://platinyaclinic.com/",
+      "name": "Platinya Clinic Agency",
+      "publisher": { "@id": "https://platinyaclinic.com/#organization" },
+      "inLanguage": ["en","ar","tr","fr","es","it","ru"]
     }
     </script>
   </head>

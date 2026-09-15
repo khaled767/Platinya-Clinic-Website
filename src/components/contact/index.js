@@ -128,12 +128,14 @@ export default function contact() {
                 type="file"
                 id="selfie-upload"
                 name="attachment"
-                accept="image/*"
+                accept="image/jpeg,image/png,image/webp"
                 multiple
                 class="form-upload-input"
                 hidden
               />
+              <span class="form-upload-hint">${t("contact.uploadHint") || "Up to 4 photos · max 2 MB each"}</span>
               <span class="form-upload-files" data-upload-files></span>
+              <span class="form-upload-error" data-upload-error style="display:none"></span>
               </div>
 
             <button type="submit" class="btn-submit-luxury">
