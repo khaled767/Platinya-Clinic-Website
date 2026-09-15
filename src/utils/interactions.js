@@ -283,18 +283,17 @@ export function initContactForm() {
 
   // Photo attachments — enforce limits before the form can be submitted:
   //   · at most 4 images
-  //   · no single image larger than 2 MB
+  //   · 4 MB total across all attachments (≈1 MB each)
   // Keeps the inbox safe (FormSubmit forwards attachments by email) and gives
   // the visitor a clear, translated message when a file is rejected.
   const MAX_FILES = 4;
-  const MAX_BYTES = 2 * 1024 * 1024; // 2 MB
+  const MAX_TOTAL_BYTES = 4 * 1024 * 1024; // 4 MB across all files
   const file = document.getElementById("selfie-upload");
   const filesEl = form.querySelector("[data-upload-files]");
   const fileErr = form.querySelector("[data-upload-error]");
 
-  const msgTooMany = () => window.__t_uploadMax || "You can attach up to 4 photos.";
-  const msgTooBig = (name) =>
-    (window.__t_uploadSize || "Each photo must be smaller than 2 MB.") + " — " + name;
+  const msgTooMany = () => window.__t_uploadMax || "You can attach up to 4 photos (4 MB total).";
+  const msgTooBig = () => window.__t_uploadSize || "Total size must be under 4 MB.";
 
   const showError = (text) => {
     if (!fileErr) return;
@@ -313,6 +312,18 @@ export function initContactForm() {
     }
   };
 
+  // Keep the newest files that fit inside the total budget.
+  const fitToBudget = (files) => {
+    const kept = [];
+    let total = 0;
+    for (const f of files) {
+      if (total + f.size > MAX_TOTAL_BYTES) continue;
+      kept.push(f);
+      total += f.size;
+    }
+    return kept;
+  };
+
   if (file && filesEl) {
     file.addEventListener("change", () => {
       let picked = Array.from(file.files || []);
@@ -324,11 +335,11 @@ export function initContactForm() {
         picked = picked.slice(0, MAX_FILES);
       }
 
-      // 2) any file over the size cap?
-      const oversized = picked.filter((f) => f.size > MAX_BYTES);
-      if (oversized.length) {
-        error = msgTooBig(oversized[0].name);
-        picked = picked.filter((f) => f.size <= MAX_BYTES);
+      // 2) total size over the 4 MB budget?
+      const totalBytes = picked.reduce((sum, f) => sum + f.size, 0);
+      if (totalBytes > MAX_TOTAL_BYTES) {
+        error = msgTooBig();
+        picked = fitToBudget(picked);
       }
 
       setFiles(picked);
@@ -345,10 +356,10 @@ export function initContactForm() {
       showError(msgTooMany());
       return;
     }
-    const oversized = picked.filter((f) => f.size > MAX_BYTES);
-    if (oversized.length) {
+    const totalBytes = picked.reduce((sum, f) => sum + f.size, 0);
+    if (totalBytes > MAX_TOTAL_BYTES) {
       e.preventDefault();
-      showError(msgTooBig(oversized[0].name));
+      showError(msgTooBig());
     }
   });
 }

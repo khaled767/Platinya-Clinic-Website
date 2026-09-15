@@ -77,7 +77,7 @@ export default function contact() {
                     type="text"
                     id="country-code-input"
                     class="form-input country-key"
-                    placeholder="+963 / Code or country"
+                    placeholder="+90 / Code or country"
                     autocomplete="off"
                     maxlength="30"
                     aria-label="Country phone code or name"
