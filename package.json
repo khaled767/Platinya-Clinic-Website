@@ -6,7 +6,9 @@
   "scripts": {
     "start": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "dev": "webpack --config webpack.dev.js"
+    "dev": "webpack --config webpack.dev.js",
+    "prerender": "node tools/prerender.js",
+    "build:full": "npm run build && npm run prerender"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +22,7 @@
     "css-loader": "^7.1.4",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.7",
+    "jsdom": "^30.0.1",
     "style-loader": "^4.0.0",
     "webpack": "^5.108.4",
     "webpack-cli": "^7.2.1",
