@@ -93,5 +93,7 @@ export function resolveCountry(value) {
 
 // Default preview shown before the user types anything.
 export function defaultCountry() {
-  return { flag: "🇸🇾", dial: "+963" };
+  // Neutral fallback when a typed country cannot be resolved — default to the
+  // clinic's own country (Türkiye) rather than any single source market.
+  return { flag: "🇹🇷", dial: "+90" };
 }

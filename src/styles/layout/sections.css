@@ -362,6 +362,20 @@
   font-size: 0.72rem;
   color: var(--color-text-secondary);
 }
+.form-upload-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
+  opacity: 0.85;
+}
+.form-upload-error {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #d23f3f;
+}
 .form-hint {
   display: block;
   margin-top: 4px;

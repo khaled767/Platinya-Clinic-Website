@@ -71,6 +71,12 @@ module.exports = {
           to: "assets",
           noErrorOnMissing: true,
         },
+        {
+          // SEO files served from the site root: /sitemap.xml, /robots.txt
+          from: "src/static",
+          to: ".",
+          noErrorOnMissing: true,
+        },
       ],
     }),
   ],
