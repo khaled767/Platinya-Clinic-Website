@@ -135,6 +135,15 @@ function applyStaticSeo(html, route, seo) {
   const url = "https://platinyaclinic.com" + (route === "/" ? "/" : route + "/");
   let out = html;
 
+  // Pre-rendered pages live in sub-folders (/hair/index.html), but every asset
+  // path in the app is relative (./assets/...). Without a <base> tag the browser
+  // would look for /hair/assets/... and fail to load CSS, images and JS.
+  // Anchoring to "/" makes all relative URLs resolve from the site root, exactly
+  // as they do on the home page.
+  if (route !== "/" && !/<base\s/i.test(out)) {
+    out = out.replace(/<head([^>]*)>/i, `<head$1>\n    <base href="/" />`);
+  }
+
   if (seo.title) {
     out = out.replace(/<title>.*?<\/title>/s, `<title>${attr(seo.title)}</title>`);
     out = out.replace(
