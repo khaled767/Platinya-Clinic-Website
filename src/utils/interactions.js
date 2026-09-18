@@ -380,6 +380,24 @@ export function initContactForm() {
     if (totalBytes > MAX_TOTAL_BYTES) {
       e.preventDefault();
       showError(msgTooBig());
+      return;
+    }
+
+    // The form passed validation and is being sent — record it as a conversion
+    // in Google Analytics so the client can see how many enquiries the site
+    // actually produces (and which page/service they came from).
+    try {
+      if (typeof window.gtag === "function") {
+        const treatmentField = form.querySelector('[name="treatment"]');
+        window.gtag("event", "generate_lead", {
+          event_category: "contact",
+          event_label: treatmentField ? treatmentField.value : "general",
+          page_path: window.location.pathname,
+          value: 1,
+        });
+      }
+    } catch (err) {
+      /* analytics must never block a form submission */
     }
   });
 }
