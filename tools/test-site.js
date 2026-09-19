@@ -76,6 +76,10 @@ function shim(window) {
   };
 }
 
+// Pre-rendered markup exists before the bundle runs, so "content in #app" is not a
+// boot signal — wait for the flag the app sets once its JavaScript has taken over.
+const booted = (d) => d.documentElement.hasAttribute("data-app-booted");
+
 async function load(url, ready, timeoutMs = 15000) {
   const virtualConsole = new VirtualConsole();
   virtualConsole.on("jsdomError", () => {});
@@ -124,7 +128,7 @@ const titleOf = (doc) => doc.title;
   for (const route of ROUTES) {
     const expectedCanonical = SITE + route;
     const expectedTitle = await staticTitle(base, route);
-    const dom = await load(base + route, (d) => (d.getElementById("app") || {}).childElementCount > 0);
+    const dom = await load(base + route, booted);
     const doc = dom.window.document;
     const gotCanonical = canonicalOf(doc);
     const gotTitle = titleOf(doc);
@@ -147,7 +151,7 @@ const titleOf = (doc) => doc.title;
   ar.window.close();
 
   // ---- English page: stylesheet in <head>, no lazy chunk needed ----
-  const en = await load(base + "/hair/", (d) => (d.getElementById("app") || {}).childElementCount > 0);
+  const en = await load(base + "/hair/", booted);
   check("stylesheet linked in <head> (no unstyled flash)", /<link[^>]*href="\.\/styles\.[^"]+\.css"/.test(en.window.document.head.innerHTML));
 
   // ---- switcher pulls the Russian chunk on demand ----

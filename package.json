@@ -10,7 +10,9 @@
     "prerender": "node tools/prerender.js",
     "build:full": "npm run build && npm run prerender",
     "test:live": "node tools/test-site.js --live",
-    "test:site": "node tools/test-site.js"
+    "test:site": "node tools/test-site.js",
+    "test:tracking": "node tools/test-tracking.js",
+    "test": "npm run test:site && npm run test:tracking"
   },
   "keywords": [],
   "author": "",

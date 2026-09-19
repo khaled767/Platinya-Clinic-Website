@@ -2,6 +2,7 @@ import "./styles/main.css";
 
 import renderApp from "./renderApp";
 import { initI18n, getLang, loadLang, t } from "./i18n";
+import { initDwellTracking } from "./utils/tracking";
 import {
   initRouting,
   initMobileMenu,
@@ -30,6 +31,10 @@ function boot() {
   initI18n();
   syncFormStrings();
 
+  // Time-based engagement (page_engaged_3min) — one timer for the whole session,
+  // it resets itself on client-side route changes.
+  initDwellTracking();
+
   renderApp();
 
   initRouting();
@@ -39,6 +44,13 @@ function boot() {
   initLightbox();
   initServicesCarousel();
   initContactForm();
+
+  // Marks that the JavaScript has really taken over the pre-rendered document.
+  // Tests must wait for THIS, not for markup: the pre-rendered HTML already
+  // contains the full page, so "is there content in #app?" is true before the
+  // bundle has run and would make a test assert the served HTML instead of the
+  // rendered DOM — exactly the blind spot that hid the canonical bug.
+  document.documentElement.setAttribute("data-app-booted", "1");
 }
 
 loadLang(getLang())

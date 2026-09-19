@@ -3,6 +3,7 @@
 
 import renderApp from "../renderApp";
 import { setLang, loadLang } from "../i18n";
+import { initLeadFormTracking, trackSubmitBlocked, activeSecondsOnPage } from "./tracking";
 import { resolveCountry } from "./phoneCountries";
 
 export function initMobileMenu() {
@@ -379,12 +380,14 @@ export function initContactForm() {
     if (picked.length > MAX_FILES) {
       e.preventDefault();
       showError(msgTooMany());
+      trackSubmitBlocked("too_many_photos");
       return;
     }
     const totalBytes = picked.reduce((sum, f) => sum + f.size, 0);
     if (totalBytes > MAX_TOTAL_BYTES) {
       e.preventDefault();
       showError(msgTooBig());
+      trackSubmitBlocked("photos_over_size_limit");
       return;
     }
 
@@ -398,6 +401,7 @@ export function initContactForm() {
           event_category: "contact",
           event_label: treatmentField ? treatmentField.value : "general",
           page_path: window.location.pathname,
+          seconds_on_page: activeSecondsOnPage(),
           value: 1,
         });
       }
@@ -405,4 +409,8 @@ export function initContactForm() {
       /* analytics must never block a form submission */
     }
   });
+
+  // Funnel reporting: lead_form_start / lead_form_attempt, re-bound after every
+  // render because the router and the language switcher replace the form markup.
+  initLeadFormTracking();
 }
