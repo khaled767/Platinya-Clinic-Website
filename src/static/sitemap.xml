@@ -2,7 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- Home -->
   <url>
     <loc>https://platinyaclinic.com/</loc>
     <changefreq>weekly</changefreq>
@@ -17,31 +16,270 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/"/>
   </url>
 
-  <!-- Core pages -->
-  <url><loc>https://platinyaclinic.com/services/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://platinyaclinic.com/about/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://platinyaclinic.com/hospitals/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://platinyaclinic.com/testimonials/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://platinyaclinic.com/contact/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url>
+    <loc>https://platinyaclinic.com/services/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/services/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/services/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/services/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/services/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/services/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/services/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/services/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/services/"/>
+  </url>
 
-  <!-- Service pages (highest commercial intent) -->
-  <url><loc>https://platinyaclinic.com/hair/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://platinyaclinic.com/dental/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://platinyaclinic.com/plastic/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://platinyaclinic.com/plastic-body/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://platinyaclinic.com/bariatric/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://platinyaclinic.com/aesthetics/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url>
+    <loc>https://platinyaclinic.com/about/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/about/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/about/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/about/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/about/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/about/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/about/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/about/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/about/"/>
+  </url>
 
-  <!-- Concierge & partner services -->
-  <url><loc>https://platinyaclinic.com/concierge/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://platinyaclinic.com/hotel/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://platinyaclinic.com/airport/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://platinyaclinic.com/transfers/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://platinyaclinic.com/interpreter/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url>
+    <loc>https://platinyaclinic.com/hospitals/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/hospitals/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/hospitals/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/hospitals/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/hospitals/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/hospitals/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/hospitals/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/hospitals/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/hospitals/"/>
+  </url>
 
-  <!-- Legal -->
-  <url><loc>https://platinyaclinic.com/privacy-policy/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://platinyaclinic.com/terms/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://platinyaclinic.com/privacy/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url>
+    <loc>https://platinyaclinic.com/testimonials/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/testimonials/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/testimonials/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/testimonials/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/testimonials/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/testimonials/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/testimonials/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/testimonials/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/testimonials/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/contact/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/contact/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/contact/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/contact/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/contact/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/contact/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/contact/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/contact/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/hair/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/hair/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/hair/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/hair/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/hair/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/hair/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/hair/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/hair/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/hair/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/dental/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/dental/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/dental/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/dental/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/dental/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/dental/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/dental/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/dental/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/dental/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/plastic/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/plastic/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/plastic/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/plastic/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/plastic/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/plastic/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/plastic/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/plastic/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/plastic/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/plastic-body/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/plastic-body/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/plastic-body/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/plastic-body/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/plastic-body/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/plastic-body/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/plastic-body/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/plastic-body/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/plastic-body/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/bariatric/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/bariatric/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/bariatric/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/bariatric/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/bariatric/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/bariatric/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/bariatric/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/bariatric/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/bariatric/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/aesthetics/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/aesthetics/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/aesthetics/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/aesthetics/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/aesthetics/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/aesthetics/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/aesthetics/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/aesthetics/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/aesthetics/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/concierge/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/concierge/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/concierge/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/concierge/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/concierge/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/concierge/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/concierge/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/concierge/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/concierge/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/hotel/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/hotel/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/hotel/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/hotel/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/hotel/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/hotel/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/hotel/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/hotel/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/hotel/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/airport/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/airport/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/airport/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/airport/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/airport/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/airport/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/airport/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/airport/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/airport/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/transfers/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/transfers/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/transfers/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/transfers/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/transfers/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/transfers/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/transfers/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/transfers/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/transfers/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/interpreter/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/interpreter/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/interpreter/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/interpreter/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/interpreter/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/interpreter/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/interpreter/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/interpreter/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/interpreter/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/privacy-policy/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/privacy-policy/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/privacy-policy/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/privacy-policy/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/privacy-policy/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/privacy-policy/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/privacy-policy/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/privacy-policy/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/terms/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/terms/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/terms/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/terms/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/terms/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/terms/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/terms/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/terms/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/terms/"/>
+  </url>
+
+  <url>
+    <loc>https://platinyaclinic.com/privacy/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://platinyaclinic.com/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://platinyaclinic.com/privacy/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://platinyaclinic.com/privacy/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://platinyaclinic.com/privacy/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://platinyaclinic.com/privacy/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://platinyaclinic.com/privacy/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://platinyaclinic.com/privacy/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://platinyaclinic.com/privacy/"/>
+  </url>
 
 </urlset>

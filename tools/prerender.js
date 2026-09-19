@@ -185,6 +185,25 @@ function applyStaticSeo(html, route, seo) {
     `<meta property="og:url" content="${url}" />`
   );
 
+  // Rewrite the hreflang cluster so it references THIS page in every language
+  // instead of the home page. A sub-page whose alternates all point at "/"
+  // tells Google it is a duplicate of the home page, which suppresses its
+  // indexing (this was causing "Alternate page with proper canonical tag"
+  // exclusions in Search Console).
+  const LANGS = ["en", "ar", "tr", "fr", "es", "it", "ru"];
+  const alternates = LANGS.map(
+    (l) =>
+      `    <link rel="alternate" hreflang="${l}" href="${
+        l === "en" ? url : `${url}?lang=${l}`
+      }" />`
+  );
+  alternates.push(`    <link rel="alternate" hreflang="x-default" href="${url}" />`);
+
+  out = out.replace(
+    /(?:\s*<link rel="alternate" hreflang="[^"]+" href="[^"]*"\s*\/?>\s*)+/,
+    "\n" + alternates.join("\n") + "\n"
+  );
+
   return out;
 }
 
