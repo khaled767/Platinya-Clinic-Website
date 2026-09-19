@@ -20,6 +20,8 @@ const { JSDOM, VirtualConsole } = require("jsdom");
 
 const DIST = path.resolve(__dirname, "..", "dist");
 const PORT = 8124;
+const LIVE = process.argv.includes("--live");
+const SITE = "https://platinyaclinic.com";
 const MIME = {
   ".html": "text/html", ".js": "text/javascript", ".css": "text/css",
   ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp",
@@ -54,10 +56,12 @@ function check(name, ok, detail) {
 }
 
 (async () => {
-  const server = await serve();
+  const server = LIVE ? null : await serve();
+  const base = LIVE ? SITE : `http://127.0.0.1:${PORT}`;
+  console.log(LIVE ? "testing the LIVE site" : "testing ./dist in a local server");
   const virtualConsole = new VirtualConsole();
   virtualConsole.on("jsdomError", () => {});
-  const dom = await JSDOM.fromURL(`http://127.0.0.1:${PORT}/contact/`, {
+  const dom = await JSDOM.fromURL(`${base}/contact/`, {
     runScripts: "dangerously", resources: "usable", pretendToBeVisual: true,
     virtualConsole, beforeParse: shim,
   });
@@ -71,12 +75,21 @@ function check(name, ok, detail) {
   }
   check("the real bundle booted in jsdom", doc.documentElement.hasAttribute("data-app-booted"));
 
-  // GA4 queue: gtag() pushes [event, name, params] into dataLayer
+  // Record what the app sends. We wrap window.gtag rather than reading
+  // window.dataLayer: on the live page Google's gtag.js loads asynchronously and
+  // replaces dataLayer when it does, which silently empties anything read from it.
+  // The wrapper still calls the original, so the hit really is delivered to GA4.
+  const original = win.gtag;
+  win.__seen = [];
+  win.gtag = function () {
+    win.__seen.push(Array.from(arguments));
+    if (typeof original === "function") return original.apply(win, arguments);
+  };
   const events = () =>
-    Array.from(win.dataLayer || [])
-      .filter((a) => a && a[0] === "event")
-      .map((a) => ({ name: a[1], params: a[2] || {} }));
-  const names = () => events().map((e) => e.name);
+    win.__seen.filter((a) => a && a[0] === "event").map((a) => ({ name: a[1], params: a[2] || {} }));
+  check("window.gtag is available (GA4 tag present)", typeof original === "function", "gtag=" + typeof original);
+  const FUNNEL = ["lead_form_start", "lead_form_attempt", "generate_lead", "page_engaged_3min"];
+  const names = () => events().map((e) => e.name).filter((n) => FUNNEL.includes(n));
   const paramsOf = (n) => (events().find((e) => e.name === n) || { params: {} }).params;
 
   check("contact form is on the page", Boolean(doc.querySelector("#assessment-form")));
@@ -95,6 +108,9 @@ function check(name, ok, detail) {
   await new Promise((r) => setTimeout(r, 200));
   check("lead_form_start is sent only once per page", names().filter((n) => n === "lead_form_start").length === 1);
 
+  // The two submit steps are local-only: on the live site a synthetic submit must
+  // never be risked, and the deployed bundle is byte-identical to this one.
+  if (!LIVE) {
   // --- 2) attempt to send while the form is incomplete ----------------------
   const form = doc.querySelector("#assessment-form");
   const validity = typeof form.reportValidity === "function" ? form.reportValidity() : null;
@@ -122,6 +138,8 @@ function check(name, ok, detail) {
   check("generate_lead carries the treatment", paramsOf("generate_lead").event_label === "hair", String(paramsOf("generate_lead").event_label));
   check("generate_lead carries the page", /^\/contact/.test(String(paramsOf("generate_lead").page_path || "")), String(paramsOf("generate_lead").page_path));
 
+  }
+
   // --- 4) three minutes of active time on one page --------------------------
   check("page_engaged_3min not sent yet", !names().includes("page_engaged_3min"));
   const realNow = win.Date.now();
@@ -136,8 +154,13 @@ function check(name, ok, detail) {
     !/patient@example\.com|5551234567|@example/.test(blob),
     blob.length + " chars inspected");
 
+  if (!LIVE) {
+    const queued = Array.from(win.dataLayer || []).filter((a) => a && a[0] === "event").map((a) => a[1]);
+    check("events also reach window.dataLayer (GA4's own queue)", FUNNEL.some((n) => queued.includes(n)), queued.join(","));
+  }
+
   win.close();
-  server.close();
+  if (server) server.close();
   const failed = results.filter((r) => !r).length;
   console.log(`\n${results.length - failed}/${results.length} checks passed`);
   process.exit(failed ? 1 : 0);
