@@ -1,8 +1,14 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-module.exports = {
+// `isProd` decides how CSS ships:
+//   dev  -> style-loader (CSS injected by JS, HMR-friendly)
+//   prod -> MiniCssExtractPlugin (a real .css file linked in <head>)
+// Without the prod branch the whole stylesheet travelled inside the JS bundle,
+// so the pre-rendered HTML painted unstyled (flash of unstyled content).
+module.exports = (isProd = false) => ({
   entry: path.resolve(__dirname, "src", "index.js"),
 
   output: {
@@ -22,7 +28,7 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          "style-loader",
+          isProd ? MiniCssExtractPlugin.loader : "style-loader",
           "css-loader",
         ],
       },
@@ -84,4 +90,4 @@ module.exports = {
   resolve: {
     extensions: [".js"],
   },
-};
+});
