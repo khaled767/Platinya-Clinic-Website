@@ -17,7 +17,43 @@ function readSaved() {
   return DEFAULT_LANG;
 }
 
-currentLang = readSaved();
+// Language can also arrive as a URL parameter (?lang=ar) so that each language
+// has its own shareable, crawlable address. This is what the hreflang tags in
+// the pre-rendered pages point at, so it must work for search engines.
+function readUrlLang() {
+  try {
+    const lang = new URLSearchParams(window.location.search).get("lang");
+    if (lang && translations[lang]) return lang;
+  } catch (e) {
+    /* ignore */
+  }
+  return null;
+}
+
+// URL wins over the stored preference (an explicit link is an explicit choice).
+const urlLang = readUrlLang();
+currentLang = urlLang || readSaved();
+
+if (urlLang) {
+  try {
+    localStorage.setItem(STORAGE_KEY, urlLang);
+  } catch (e) {
+    /* ignore */
+  }
+}
+
+// Keep the address bar in step with the chosen language, without adding history
+// entries: /dental/?lang=ar for Arabic, plain /dental/ for the default English.
+function syncUrlLang(lang) {
+  try {
+    const url = new URL(window.location.href);
+    if (lang === DEFAULT_LANG) url.searchParams.delete("lang");
+    else url.searchParams.set("lang", lang);
+    window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+  } catch (e) {
+    /* ignore */
+  }
+}
 
 // Apply the current language's <html lang> + dir attributes (call once on boot).
 export function initI18n() {
@@ -43,6 +79,7 @@ export function setLang(lang) {
   } catch (e) {
     /* ignore */
   }
+  syncUrlLang(lang);
   applyDocLang();
 }
 

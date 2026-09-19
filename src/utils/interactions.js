@@ -142,9 +142,11 @@ export function initRouting() {
       return;
     }
 
-    // Push the clean URL so the address bar shows /hair/ instead of #/hair
+    // Push the clean URL so the address bar shows /hair/ instead of #/hair,
+    // keeping any ?lang= parameter so the chosen language survives navigation.
     try {
-      window.history.pushState({}, "", href === "/" ? "/" : href + "/");
+      const query = window.location.search || "";
+      window.history.pushState({}, "", (href === "/" ? "/" : href + "/") + query);
     } catch (err) {
       window.location.hash = href;
     }
