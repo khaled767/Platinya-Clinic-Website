@@ -56,8 +56,13 @@ export default function contact() {
             <p class="form-subtitle">${t("contact.privacy")}</p>
 
             <input type="hidden" name="_subject" value="New VIP Assessment Request — Platinya Clinic Agency" />
-            <input type="hidden" name="_captcha" value="false" />
+            <!-- CAPTCHA enabled: without it the form is an open door for spam bots
+                 that would flood the clinic inbox and could impersonate patients. -->
+            <input type="hidden" name="_captcha" value="true" />
             <input type="hidden" name="_template" value="table" />
+            <!-- Honeypot: bots fill every field they see; humans never see this one.
+                 FormSubmit drops any submission where a hidden _honey field is filled. -->
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
             <div class="form-group">
               <label class="form-label" for="full-name">${t("contact.name")}</label>
