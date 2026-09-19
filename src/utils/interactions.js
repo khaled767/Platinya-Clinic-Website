@@ -2,7 +2,7 @@
 // Kept in a single-responsibility module so it can be reused everywhere.
 
 import renderApp from "../renderApp";
-import { setLang } from "../i18n";
+import { setLang, loadLang } from "../i18n";
 import { resolveCountry } from "./phoneCountries";
 
 export function initMobileMenu() {
@@ -48,10 +48,13 @@ export function initLanguageSwitcher() {
 
   // Perform the language switch
   switcher.querySelectorAll(".lang-option[data-lang]").forEach((opt) => {
-    opt.addEventListener("click", (e) => {
+    opt.addEventListener("click", async (e) => {
       e.preventDefault();
       e.stopPropagation();
       const lang = opt.getAttribute("data-lang");
+      // Non-English dictionaries are separate chunks: fetch before switching so
+      // the re-render is already translated (English resolves immediately).
+      await loadLang(lang);
       setLang(lang);
       // Re-render current route with the new language, then rebind UI
       renderApp();

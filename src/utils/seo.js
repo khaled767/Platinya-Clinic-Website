@@ -34,11 +34,35 @@ const KEY_BY_ROUTE = {
   "/privacy": "seo.privacy",
 };
 
+// The route the visitor is on. The site is served as real paths (/hair/), so the
+// pathname is the source of truth; the old hash form (#/hair) is still honoured
+// for links saved before the pre-rendering migration.
+//
+// This matters far beyond cosmetics: reading the hash on a pre-rendered page
+// yields "/" and used to overwrite <title> and the canonical of /hair/ with the
+// HOME PAGE's values — declaring the homepage as the canonical of every
+// sub-page, which is what kept them out of Google's index.
+function normalizePath(p) {
+  const clean = "/" + String(p || "").replace(/^\/+/, "").replace(/\/+$/, "");
+  return clean === "/" ? "/" : clean;
+}
+
 function currentPath() {
-  const hash = window.location.hash || "";
-  const raw = hash.replace(/^#/, "");
-  const path = raw.split("?")[0] || "/";
-  return path === "" ? "/" : path;
+  const hashPath = normalizePath((window.location.hash || "").replace(/^#/, "").split("?")[0]);
+  if (hashPath !== "/" && KEY_BY_ROUTE[hashPath]) return hashPath;
+
+  const pathname = window.location.pathname || "/";
+  if (KEY_BY_ROUTE[normalizePath(pathname)]) return normalizePath(pathname);
+
+  // GitHub Pages preview URLs live one folder deeper
+  // (/Platinya-Clinic-Website/hair/) — strip that segment before giving up.
+  const segs = pathname.split("/").filter(Boolean);
+  if (segs.length) {
+    const stripped = normalizePath("/" + segs.slice(1).join("/"));
+    if (KEY_BY_ROUTE[stripped]) return stripped;
+  }
+
+  return normalizePath(pathname);
 }
 
 function setMeta(selector, attr, value) {
@@ -62,10 +86,13 @@ function setLink(rel, href) {
   el.setAttribute("href", href);
 }
 
-// Build a canonical URL that reflects the language the visitor is reading.
+// Build a canonical URL that reflects the route and the language the visitor is
+// reading. It must match the URL the pre-rendered HTML declares and the one in
+// the sitemap, or Google sees two different canonicals for the same page.
 function canonicalFor(path, lang) {
   const suffix = lang && lang !== "en" ? `?lang=${lang}` : "";
-  return `${ORIGIN}/#${path}${suffix}`;
+  const clean = path === "/" ? "/" : `${path}/`;
+  return `${ORIGIN}${clean}${suffix}`;
 }
 
 export function applySeo() {
@@ -78,6 +105,7 @@ export function applySeo() {
 
   const title = t(`${keyBase}.title`) || SITE_NAME;
   const desc = t(`${keyBase}.desc`) || "";
+  const canonical = canonicalFor(path, lang);
 
   // <title>
   document.title = title;
@@ -86,13 +114,13 @@ export function applySeo() {
   setMeta('meta[name="description"]', "content", desc);
   setMeta('meta[name="title"]', "content", title);
 
-  // canonical (language aware)
-  setLink("canonical", canonicalFor(path, lang));
+  // canonical (route + language aware, never a #hash URL)
+  setLink("canonical", canonical);
 
   // Open Graph + Twitter — keep the share card in sync with the page
   setMeta('meta[property="og:title"]', "content", title);
   setMeta('meta[property="og:description"]', "content", desc);
-  setMeta('meta[property="og:url"]', "content", `${ORIGIN}/#${path}`);
+  setMeta('meta[property="og:url"]', "content", canonical);
   setMeta('meta[name="twitter:title"]', "content", title);
   setMeta('meta[name="twitter:description"]', "content", desc);
 

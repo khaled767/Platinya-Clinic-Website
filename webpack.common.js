@@ -13,6 +13,10 @@ module.exports = (isProd = false) => ({
 
   output: {
     filename: "bundle.[contenthash].js",
+    // Async chunks (the per-language dictionaries) keep their own name and hash —
+    // without this they inherit the entry pattern above and become impossible to
+    // tell apart from the main bundle.
+    chunkFilename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
     publicPath: "./", // relative paths so the site works under a GitHub Pages subpath

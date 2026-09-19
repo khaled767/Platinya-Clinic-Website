@@ -8,7 +8,9 @@
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack --config webpack.dev.js",
     "prerender": "node tools/prerender.js",
-    "build:full": "npm run build && npm run prerender"
+    "build:full": "npm run build && npm run prerender",
+    "test:live": "node tools/test-site.js --live",
+    "test:site": "node tools/test-site.js"
   },
   "keywords": [],
   "author": "",

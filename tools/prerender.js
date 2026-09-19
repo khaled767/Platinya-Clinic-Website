@@ -89,20 +89,14 @@ const SEO_KEY_BY_ROUTE = {
 let SEO_CACHE = null;
 
 // Read the English SEO title/description for each route from the source
-// dictionary (src/i18n/translations.js) — reliable and unambiguous, unlike
+// dictionary (src/i18n/locales/en.js) — reliable and unambiguous, unlike
 // scraping the minified bundle where all languages sit side by side.
 function readSeo(route) {
   if (!SEO_CACHE) {
     SEO_CACHE = {};
-    const file = path.resolve(__dirname, "..", "src", "i18n", "translations.js");
-    const src = fs.readFileSync(file, "utf8");
-
-    // Isolate the English block: from `"en": {` up to the next language key.
-    const start = src.indexOf('"en": {');
-    if (start === -1) return { title: "", desc: "" };
-    const rest = src.slice(start + 7);
-    const endMatch = rest.match(/\n\s*"(ar|fr|es|tr|it|ru)": \{/);
-    const enBlock = endMatch ? rest.slice(0, endMatch.index) : rest;
+    // One language per file: the English dictionary is the whole file.
+    const file = path.resolve(__dirname, "..", "src", "i18n", "locales", "en.js");
+    const enBlock = fs.readFileSync(file, "utf8");
 
     const grab = (key) => {
       const re = new RegExp('"' + key.replace(/\./g, "\\.") + '":\\s*"((?:[^"\\\\]|\\\\.)*)"');
@@ -210,6 +204,20 @@ function applyStaticSeo(html, route, seo) {
 async function renderRoute(route, names, template) {
   const hashPath = route === "/" ? "/" : route;
 
+  // jsdom implements no matchMedia (the site's carousel asks for it). Give it a
+  // no-op so the pre-render exercises the same code path a real browser does
+  // instead of silently skipping a module.
+  const SHIM = `<script>
+    window.matchMedia = window.matchMedia || function (query) {
+      return {
+        matches: false, media: String(query), onchange: null,
+        addListener: function () {}, removeListener: function () {},
+        addEventListener: function () {}, removeEventListener: function () {},
+        dispatchEvent: function () { return false; }
+      };
+    };
+  </script>`;
+
   // Inline every bundle in order so jsdom needs no network access at all.
   const scripts = names
     .map((n) => `<script>${fs.readFileSync(path.join(DIST, n), "utf8")}</script>`)
@@ -217,7 +225,7 @@ async function renderRoute(route, names, template) {
 
   const html = template
     .replace(/<script[^>]+src="\.\/bundle\.[^"]+\.js"[^>]*><\/script>/g, "")
-    .replace("</body>", `${scripts}\n</body>`);
+    .replace("</body>", `${SHIM}\n${scripts}\n</body>`);
 
   const virtualConsole = new VirtualConsole();
   virtualConsole.on("jsdomError", () => {}); // ignore incidental errors

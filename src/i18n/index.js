@@ -1,16 +1,61 @@
 // i18n controller: language state, persistence, RTL handling, and t() lookup.
-import translations, { LANGS } from "./translations";
+//
+// English lives inside the app bundle: it is the default language and the one the
+// pre-rendered HTML is written in, so the first render must never wait for a
+// download. The other six languages are separate chunks, fetched by loadLang()
+// only when a visitor actually asks for them (?lang=xx, the switcher, or a stored
+// preference) — a visitor downloads one dictionary instead of all seven.
+import en from "./locales/en";
+import { LANGS } from "./langs";
 
 const STORAGE_KEY = "platinya-lang";
 const DEFAULT_LANG = "en";
 const RTL_LANGS = ["ar"];
 
-let currentLang = DEFAULT_LANG;
+// Loaded dictionaries by language code. Started with English only.
+const tables = { en };
+
+// One lazy loader per non-default language; webpack emits each as its own file at
+// the site root (locale-ar.js, locale-ru.js, ...).
+const LOADERS = {
+  ar: () => import(/* webpackChunkName: "locale-ar" */ "./locales/ar"),
+  fr: () => import(/* webpackChunkName: "locale-fr" */ "./locales/fr"),
+  es: () => import(/* webpackChunkName: "locale-es" */ "./locales/es"),
+  tr: () => import(/* webpackChunkName: "locale-tr" */ "./locales/tr"),
+  it: () => import(/* webpackChunkName: "locale-it" */ "./locales/it"),
+  ru: () => import(/* webpackChunkName: "locale-ru" */ "./locales/ru"),
+};
+
+function isSupported(lang) {
+  return LANGS.some((L) => L.code === lang);
+}
+
+export function isLangLoaded(lang) {
+  return Boolean(tables[lang]);
+}
+
+// Fetch a language's dictionary if needed. Resolves with `true` once it is usable;
+// on a network/chunk failure it resolves `false` so the caller can fall back to
+// English instead of leaving the page blank.
+export function loadLang(lang) {
+  if (!isSupported(lang)) return Promise.resolve(false);
+  if (tables[lang]) return Promise.resolve(true);
+
+  const loader = LOADERS[lang];
+  if (!loader) return Promise.resolve(false);
+
+  return loader()
+    .then((mod) => {
+      tables[lang] = mod && mod.default ? mod.default : mod;
+      return true;
+    })
+    .catch(() => false);
+}
 
 function readSaved() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved && translations[saved]) return saved;
+    if (saved && isSupported(saved)) return saved;
   } catch (e) {
     /* ignore */
   }
@@ -23,7 +68,7 @@ function readSaved() {
 function readUrlLang() {
   try {
     const lang = new URLSearchParams(window.location.search).get("lang");
-    if (lang && translations[lang]) return lang;
+    if (lang && isSupported(lang)) return lang;
   } catch (e) {
     /* ignore */
   }
@@ -32,7 +77,7 @@ function readUrlLang() {
 
 // URL wins over the stored preference (an explicit link is an explicit choice).
 const urlLang = readUrlLang();
-currentLang = urlLang || readSaved();
+let currentLang = urlLang || readSaved();
 
 if (urlLang) {
   try {
@@ -72,7 +117,7 @@ export function getLang() {
 }
 
 export function setLang(lang) {
-  if (!translations[lang]) return;
+  if (!isSupported(lang)) return;
   currentLang = lang;
   try {
     localStorage.setItem(STORAGE_KEY, lang);
@@ -83,17 +128,18 @@ export function setLang(lang) {
   applyDocLang();
 }
 
-// Translate a key for the current language, falling back to English.
+// Translate a key for the current language, falling back to English. The English
+// table is always present, so a key is never rendered as an empty string.
 export function t(key) {
-  const table = translations[currentLang] || translations[DEFAULT_LANG];
+  const table = tables[currentLang] || tables[DEFAULT_LANG];
   return table[key] !== undefined
     ? table[key]
-    : (translations[DEFAULT_LANG][key] !== undefined ? translations[DEFAULT_LANG][key] : key);
+    : (tables[DEFAULT_LANG][key] !== undefined ? tables[DEFAULT_LANG][key] : key);
 }
 
 // Translate a key in a specific language (used by components that render all langs).
 export function tIn(lang, key) {
-  const table = translations[lang] || translations[DEFAULT_LANG];
+  const table = tables[lang] || tables[DEFAULT_LANG];
   return table[key] !== undefined ? table[key] : key;
 }
 
