@@ -69,6 +69,94 @@ const ROUTES = [
   "/privacy",
 ];
 
+// ---------------------------------------------------------------------------
+// Legacy redirects (the WordPress site that lived on this domain before)
+// ---------------------------------------------------------------------------
+// Search Console reports 31 URLs as "Not found (404)" — every one of them is a
+// page of the old WordPress site (/hair-transplant/, /hollywood-smile/,
+// /category/<arabic>/…). Google keeps re-crawling them, so they clutter the
+// report, and any old inbound link or saved bookmark dead-ends.
+//
+// GitHub Pages cannot issue a real 301, but it does serve any file we ship. So
+// each legacy path gets a tiny stub carrying a canonical + a 0-second meta
+// refresh + a JS replace: Google follows it (and files the URL as "Page with
+// redirect", a normal status, not an error) and a visitor lands on the right
+// page immediately. The stub is deliberately NOT noindex, because Google treats
+// a noindexed page as excluded rather than as a redirect, and noindex would stop
+// the old URL's signals from consolidating onto the new one.
+//
+// Legacy path -> the route on the current site that answers the same intent.
+const LEGACY_REDIRECTS = {
+  "/hair-transplant/": "/hair/",
+  "/hair-transplant-operations/": "/hair/",
+  "/sapphire-hair-transplant/": "/hair/",
+  "/hair-implant-hybrid/": "/hair/",
+  "/hair-transplant-for-women/": "/hair/",
+  "/eyebrow-transplant/": "/hair/",
+  "/hollywood-smile/": "/dental/",
+  "/dental-veneers/": "/dental/",
+  "/teeth-whitening/": "/dental/",
+  "/dental-implants/": "/dental/",
+  "/zircon-teeth/": "/dental/",
+  "/cosmetic-dentistry/": "/dental/",
+  "/periodontics/": "/dental/",
+  "/cosmetic-surgery/": "/plastic/",
+  "/facelift-surgery/": "/plastic/",
+  "/chin-implants/": "/plastic/",
+  "/silicone/": "/plastic-body/",
+  "/butt-augmentation-surgery/": "/plastic-body/",
+  "/abdominoplasty/": "/plastic-body/",
+  "/liposuction/": "/plastic-body/",
+  "/gynecomastia/": "/plastic-body/",
+  "/weight-loss-operations/": "/bariatric/",
+  "/gastric-sleeve-surgery/": "/bariatric/",
+  "/stomach-balloon/": "/bariatric/",
+  "/our-services/": "/services/",
+  "/before-after/": "/testimonials/",
+  "/contact-us/": "/contact/",
+  "/about-us/": "/about/",
+  "/category/خدماتنا/عمليات-التجميل/": "/services/",
+};
+
+function writeLegacyRedirects() {
+  const entries = Object.entries(LEGACY_REDIRECTS);
+  const known = new Set(ROUTES.map((r) => (r === "/" ? "/" : r + "/")));
+  let written = 0;
+
+  for (const [from, to] of entries) {
+    if (!known.has(to)) {
+      // A typo here would point every old link at a 404 — fail the build instead.
+      throw new Error(`legacy redirect target ${to} is not a known route (from ${from})`);
+    }
+
+    const target = ORIGIN + to;
+    const dir = path.join(DIST, from.replace(/^\//, ""));
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(
+      path.join(dir, "index.html"),
+      `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Redirecting | Platinya Clinic</title>
+<link rel="canonical" href="${target}" />
+<meta http-equiv="refresh" content="0; url=${to}" />
+<script>location.replace(${JSON.stringify(to)} + location.hash);</script>
+</head>
+<body>
+<p>This page has moved to <a href="${to}">${target}</a>.</p>
+</body>
+</html>
+`,
+      "utf8"
+    );
+    written++;
+  }
+
+  console.log(`  ok    ${String(written).padStart(3)} legacy redirect(s) -> the matching current page`);
+  return written;
+}
+
 // [changefreq, priority] per route for the sitemap.
 const ROUTE_META = {
   "/": ["weekly", "1.0"],
@@ -463,6 +551,8 @@ async function main() {
   console.log(`\npre-rendered ${done} page(s) across ${langs.length} language(s), ${failed} failed.`);
 
   if (!(await write404(names, template))) failed++;
+
+  writeLegacyRedirects();
 
   buildSitemap(langs);
 
