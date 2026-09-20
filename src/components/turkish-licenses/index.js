@@ -19,11 +19,11 @@ export default function turkishLicenses() {
               <button
                 type="button"
                 class="license-zoom"
-                data-lightbox="./assets/images/certifications/health-tourism-cert.jpg"
+                data-lightbox="./assets/images/certifications/health-tourism-cert.webp"
                 aria-label="Expand Health Tourism Authorization Certificate"
               >
                 <img
-                  src="./assets/images/certifications/health-tourism-cert-web.jpg"
+                  src="./assets/images/certifications/health-tourism-cert-web.webp"
                   alt="Official Health Tourism Authorization Certificate — Turkish Ministry of Health (Health Türkiye)"
                   class="license-img"
                   loading="lazy"
@@ -45,11 +45,11 @@ export default function turkishLicenses() {
               <button
                 type="button"
                 class="license-zoom"
-                data-lightbox="./assets/images/certifications/trademark-cert-p1.jpg"
+                data-lightbox="./assets/images/certifications/trademark-cert-p1.webp"
                 aria-label="Expand Registered Trademark Certificate"
               >
                 <img
-                  src="./assets/images/certifications/trademark-cert-p1-web.jpg"
+                  src="./assets/images/certifications/trademark-cert-p1-web.webp"
                   alt="Registered Trademark Certificate for PLATINYA CLINIC — Turkish Patent and Trademark Office"
                   class="license-img"
                   loading="lazy"

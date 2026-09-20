@@ -1,6 +1,15 @@
 // Private VIP Transfers page
 import { icons } from "../../components/icons";
 import { t } from "../../i18n";
+import faqSection from "../../components/faq";
+
+// The ride, in the order the patient lives it.
+const STEPS = [
+  { icon: icons.mapPin, key: "s1" },
+  { icon: icons.user, key: "s2" },
+  { icon: icons.hotel, key: "s3" },
+  { icon: icons.shield, key: "s4" },
+];
 
 export default function transfersPage() {
   return `
@@ -35,6 +44,29 @@ export default function transfersPage() {
         </div>
       </section>
 
+      <!-- How a transfer runs, step by step -->
+      <section class="section-hotel-amenities bg-dark-obsidian">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="section-subtitle text-gold">${t("transfers.howLbl")}</span>
+            <h2 class="section-title text-inverse">${t("transfers.howTitle")}</h2>
+            <p class="section-description text-inverse">${t("transfers.howDesc")}</p>
+          </div>
+          <div class="steps-grid">
+            ${STEPS.map((s, i) => `
+              <div class="amenity-card">
+                <span class="amenity-icon">${s.icon}</span>
+                <span class="journey-index-line">${String(i + 1).padStart(2, "0")}</span>
+                <h4 class="amenity-title">${t("transfers." + s.key)}</h4>
+                <p class="amenity-desc">${t("transfers." + s.key + "d")}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+
+      ${faqSection("transfers")}
+
       <section class="section-hotel-amenities bg-dark-obsidian">
         <div class="container">
           <div class="section-header text-center">
@@ -50,6 +82,14 @@ export default function transfersPage() {
               </div>
             `).join('')}
           </div>
+        </div>
+      </section>
+
+      <!-- Closing CTA -->
+      <section class="section-hotel-intro">
+        <div class="container text-center">
+          <p class="section-description">${t("transfers.sub")}</p>
+          <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
         </div>
       </section>
     </div>

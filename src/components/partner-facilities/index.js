@@ -4,25 +4,25 @@ import { t } from "../../i18n";
 export default function partnerFacilities() {
   const partners = [
     {
-      logo: "./assets/images/partner-clinics/bm-logo.png",
+      logo: "./assets/images/partner-clinics/bm-logo.webp",
       logoAlt: "Partner clinic logo",
-      img: "./assets/images/partner-clinics/bm-treatment-web.jpg",
+      img: "./assets/images/partner-clinics/bm-treatment-web.webp",
       imgAlt: "Advanced dental treatment suite",
       module: "Dental Excellence",
       capKey: "pf.f1.d",
     },
     {
-      logo: "./assets/images/partner-clinics/efc-logo.png",
+      logo: "./assets/images/partner-clinics/efc-logo.webp",
       logoAlt: "Partner clinic logo",
-      img: "./assets/images/partner-clinics/efc-building-web.jpg",
+      img: "./assets/images/partner-clinics/efc-building-web.webp",
       imgAlt: "Modern surgical medical centre building",
       module: "Surgical & Medical Centre",
       capKey: "pf.f2.d",
     },
     {
-      logo: "./assets/images/partner-clinics/hlc-logo.png",
+      logo: "./assets/images/partner-clinics/hlc-logo.webp",
       logoAlt: "Partner clinic logo",
-      img: "./assets/images/partner-clinics/hlc-waiting-web.jpg",
+      img: "./assets/images/partner-clinics/hlc-waiting-web.webp",
       imgAlt: "Modern dental clinic waiting lounge",
       module: "Oral & Aesthetic Care",
       capKey: "pf.f3.d",

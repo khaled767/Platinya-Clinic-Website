@@ -12,10 +12,10 @@ export default function footer() {
           <!-- Column 1: Brand & Concierge Statement -->
           <div class="footer-col footer-brand">
             <a href="/" data-route class="logo-link">
-              <img src="./assets/images/logo.png" alt="Platinya Clinic Agency Logo" class="brand-logo-img-footer" />
+              <img src="./assets/images/logo.webp" alt="Platinya Clinic Agency Logo" class="brand-logo-img-footer" />
             </a>
             <p class="brand-description">
-              Curating premier medical journeys for European patients with end-to-end luxury hospitality, medical expertise, and dedicated personal coordinators.
+              ${t("footer.tagline")}
             </p>
           </div>
 
@@ -76,11 +76,11 @@ export default function footer() {
 
         <!-- Footer Bottom Bar -->
         <div class="footer-bottom">
-          <p class="copyright">&copy; ${new Date().getFullYear()} Platinya Clinic Agency. All rights reserved. International Medical Concierge Services.</p>
+          <p class="copyright">&copy; ${new Date().getFullYear()} Platinya Clinic Agency. ${t("footer.copyright")}</p>
           <div class="legal-links">
-            <a href="/privacy-policy" data-route>Privacy Policy</a>
+            <a href="/privacy-policy" data-route>${t("footer.privacy")}</a>
             <span class="divider">•</span>
-            <a href="/terms" data-route>Terms of Service</a>
+            <a href="/terms" data-route>${t("footer.terms")}</a>
           </div>
         </div>
       </div>

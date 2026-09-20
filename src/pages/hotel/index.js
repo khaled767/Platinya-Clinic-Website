@@ -1,15 +1,24 @@
 // Hotel Page — Luxury 5-Star Accommodation
 import { icons } from "../../components/icons";
 import { t } from "../../i18n";
+import faqSection from "../../components/faq";
+
+// How the stay is arranged, in the order the patient lives it.
+const STEPS = [
+  { icon: icons.mapPin, key: "s1" },
+  { icon: icons.hotel, key: "s2" },
+  { icon: icons.room, key: "s3" },
+  { icon: icons.phone, key: "s4" },
+];
 
 // Hotel photo gallery (clearly-named copies of the client's WhatsApp images)
 const gallery = [
-  { src: "./assets/images/partner-services/hotel/hotel-1.jpg", key: "g1" },
-  { src: "./assets/images/partner-services/hotel/hotel-3.jpg", key: "g2" },
-  { src: "./assets/images/partner-services/hotel/hotel-5.jpg", key: "g3" },
-  { src: "./assets/images/partner-services/hotel/hotel-7.jpg", key: "g4" },
-  { src: "./assets/images/partner-services/hotel/hotel-9.jpg", key: "g5" },
-  { src: "./assets/images/partner-services/hotel/hotel-12.jpg", key: "g6" },
+  { src: "./assets/images/partner-services/hotel/hotel-1.webp", key: "g1" },
+  { src: "./assets/images/partner-services/hotel/hotel-3.webp", key: "g2" },
+  { src: "./assets/images/partner-services/hotel/hotel-5.webp", key: "g3" },
+  { src: "./assets/images/partner-services/hotel/hotel-7.webp", key: "g4" },
+  { src: "./assets/images/partner-services/hotel/hotel-9.webp", key: "g5" },
+  { src: "./assets/images/partner-services/hotel/hotel-12.webp", key: "g6" },
 ];
 
 export default function hotelPage() {
@@ -20,7 +29,7 @@ export default function hotelPage() {
            its base background -->
       <section class="hotel-hero">
         <img
-          src="./assets/images/partner-services/hotel/hotel-1.jpg"
+          src="./assets/images/partner-services/hotel/hotel-1.webp"
           alt="Luxury hotel exterior"
           class="hotel-hero-bg"
         />
@@ -43,7 +52,7 @@ export default function hotelPage() {
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
           </div>
           <div class="hotel-intro-img">
-            <img src="./assets/images/partner-services/hotel/hotel-2.jpg" alt="Luxury suite" loading="lazy" />
+            <img src="./assets/images/partner-services/hotel/hotel-2.webp" alt="Luxury suite" loading="lazy" />
           </div>
         </div>
       </section>
@@ -66,6 +75,29 @@ export default function hotelPage() {
           </div>
         </div>
       </section>
+
+      <!-- How the stay is arranged, step by step -->
+      <section class="section-hotel-amenities bg-dark-obsidian">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="section-subtitle text-gold">${t("hotel.howLbl")}</span>
+            <h2 class="section-title text-inverse">${t("hotel.howTitle")}</h2>
+            <p class="section-description text-inverse">${t("hotel.howDesc")}</p>
+          </div>
+          <div class="steps-grid">
+            ${STEPS.map((s, i) => `
+              <div class="amenity-card">
+                <span class="amenity-icon">${s.icon}</span>
+                <span class="journey-index-line">${String(i + 1).padStart(2, "0")}</span>
+                <h4 class="amenity-title">${t("hotel." + s.key)}</h4>
+                <p class="amenity-desc">${t("hotel." + s.key + "d")}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+
+      ${faqSection("hotel")}
 
       <!-- Gallery -->
       <section class="section-hotel-gallery">

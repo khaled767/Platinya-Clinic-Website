@@ -1,6 +1,15 @@
 // Airport VIP Reception page
 import { icons } from "../../components/icons";
 import { t } from "../../i18n";
+import faqSection from "../../components/faq";
+
+// The arrival sequence, in the order the patient lives it.
+const STEPS = [
+  { icon: icons.email, key: "s1" },
+  { icon: icons.user, key: "s2" },
+  { icon: icons.phone, key: "s3" },
+  { icon: icons.hotel, key: "s4" },
+];
 
 export default function airportPage() {
   return `
@@ -37,6 +46,29 @@ export default function airportPage() {
         </div>
       </section>
 
+      <!-- How the arrival actually runs, step by step -->
+      <section class="section-hotel-amenities bg-dark-obsidian">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="section-subtitle text-gold">${t("airport.howLbl")}</span>
+            <h2 class="section-title text-inverse">${t("airport.howTitle")}</h2>
+            <p class="section-description text-inverse">${t("airport.howDesc")}</p>
+          </div>
+          <div class="steps-grid">
+            ${STEPS.map((s, i) => `
+              <div class="amenity-card">
+                <span class="amenity-icon">${s.icon}</span>
+                <span class="journey-index-line">${String(i + 1).padStart(2, "0")}</span>
+                <h4 class="amenity-title">${t("airport." + s.key)}</h4>
+                <p class="amenity-desc">${t("airport." + s.key + "d")}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+
+      ${faqSection("airport")}
+
       <!-- What's included -->
       <section class="section-hotel-amenities bg-dark-obsidian">
         <div class="container">
@@ -53,6 +85,14 @@ export default function airportPage() {
               </div>
             `).join('')}
           </div>
+        </div>
+      </section>
+
+      <!-- Closing CTA -->
+      <section class="section-hotel-intro">
+        <div class="container text-center">
+          <p class="section-description">${t("airport.sub")}</p>
+          <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
         </div>
       </section>
     </div>

@@ -1,6 +1,15 @@
 // Personal Concierge Manager page
 import { icons } from "../../components/icons";
 import { t } from "../../i18n";
+import faqSection from "../../components/faq";
+
+// The concierge day, in the order the patient lives it.
+const STEPS = [
+  { icon: icons.whatsapp, key: "s1" },
+  { icon: icons.shield, key: "s2" },
+  { icon: icons.mapPin, key: "s3" },
+  { icon: icons.phone, key: "s4" },
+];
 
 export default function conciergePage() {
   return `
@@ -37,6 +46,29 @@ export default function conciergePage() {
         </div>
       </section>
 
+      <!-- How the concierge works, step by step -->
+      <section class="section-hotel-amenities bg-dark-obsidian">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="section-subtitle text-gold">${t("concierge.howLbl")}</span>
+            <h2 class="section-title text-inverse">${t("concierge.howTitle")}</h2>
+            <p class="section-description text-inverse">${t("concierge.howDesc")}</p>
+          </div>
+          <div class="steps-grid">
+            ${STEPS.map((s, i) => `
+              <div class="amenity-card">
+                <span class="amenity-icon">${s.icon}</span>
+                <span class="journey-index-line">${String(i + 1).padStart(2, "0")}</span>
+                <h4 class="amenity-title">${t("concierge." + s.key)}</h4>
+                <p class="amenity-desc">${t("concierge." + s.key + "d")}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
+
+      ${faqSection("concierge")}
+
       <!-- Services -->
       <section class="section-hotel-amenities bg-dark-obsidian">
         <div class="container">
@@ -53,6 +85,14 @@ export default function conciergePage() {
               </div>
             `).join('')}
           </div>
+        </div>
+      </section>
+
+      <!-- Closing CTA -->
+      <section class="section-hotel-intro">
+        <div class="container text-center">
+          <p class="section-description">${t("concierge.sub")}</p>
+          <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
         </div>
       </section>
     </div>

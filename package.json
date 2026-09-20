@@ -12,7 +12,8 @@
     "test:live": "node tools/test-site.js --live",
     "test:site": "node tools/test-site.js",
     "test:tracking": "node tools/test-tracking.js",
-    "test": "npm run test:site && npm run test:tracking"
+    "test:i18n": "node tools/i18n-check.mjs",
+    "test": "npm run test:i18n && npm run test:site && npm run test:tracking"
   },
   "keywords": [],
   "author": "",
