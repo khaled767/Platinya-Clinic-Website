@@ -14,6 +14,8 @@ HOST="https://platinyaclinic.com"
 UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36"
 
 ROUTES="/ /services/ /about/ /hospitals/ /testimonials/ /contact/ /hair/ /dental/ /plastic/ /plastic-body/ /bariatric/ /aesthetics/ /concierge/ /hotel/ /airport/ /transfers/ /interpreter/ /privacy-policy/ /terms/ /privacy/"
+# Languages are real path prefixes (each one is its own pre-rendered file).
+LANG_ROUTES="/ar/ /ar/dental/ /ar/contact/ /ru/hair/ /tr/ /es/services/ /fr/ /it/hospitals/"
 
 echo "HOST $HOST"
 echo "UA Googlebot-like"
@@ -46,6 +48,36 @@ PY
 done
 
 echo
+echo "== LANGUAGE PAGES (status | lang/dir | translated text in the served HTML) =="
+for r in $LANG_ROUTES; do
+  code="$(curl -sS -A "$UA" --max-time 30 -o "$tmp/l.html" -w '%{http_code}' "$HOST$r" || echo 000)"
+  line="$(python3 - "$tmp/l.html" <<'PY'
+import re, sys, os
+p = sys.argv[1]
+if not os.path.exists(p) or os.path.getsize(p) == 0:
+    print("EMPTY||"); raise SystemExit
+h = open(p, encoding="utf-8", errors="ignore").read()
+tag = re.search(r"<html[^>]*>", h)
+lang = re.search(r'lang="([^"]+)"', tag.group(0)) if tag else None
+d = re.search(r'dir="([^"]+)"', tag.group(0)) if tag else None
+canon = re.search(r'<link rel="canonical" href="([^"]+)"', h)
+# Text in a non-Latin script that a crawler can only get from the served bytes.
+script = 0
+for pat in (r"[\u0600-\u06FF]{6,}", r"[\u0400-\u04FF]{6,}", r"[\u0590-\u05FF]{6,}"):
+    script += len(re.findall(pat, h))
+print("%s/%s|%s|canonical=%s|nonlatin-runs=%d" % (
+    lang.group(1) if lang else "?",
+    d.group(1) if d else "?",
+    canon.group(1) if canon else "none",
+    "yes" if canon else "NO",
+    script,
+))
+PY
+)"
+  printf '%-18s %s | %s\n' "$r" "$code" "$line"
+done
+
+echo
 echo "== ASSETS referenced by the homepage =="
 curl -sS -A "$UA" --max-time 30 -o "$tmp/home.html" "$HOST/" || true
 python3 - "$tmp/home.html" "$HOST" > "$tmp/assets.txt" <<'PY'
@@ -70,7 +102,10 @@ python3 - "$tmp/sitemap.xml" "$tmp/robots.txt" <<'PY'
 import re, sys
 x = open(sys.argv[1], encoding="utf-8", errors="ignore").read()
 locs = re.findall(r"<loc>([^<]+)</loc>", x)
-print(f"sitemap urls={len(locs)} hreflang={len(re.findall('hreflang=', x))}")
+lastmods = len(re.findall(r"<lastmod>", x))
+lang_urls = len([u for u in locs if re.search(r"platinyaclinic\.com/(ar|fr|es|tr|it|ru)/", u)])
+print(f"sitemap urls={len(locs)} (localized={lang_urls}) hreflang={len(re.findall('hreflang=', x))} lastmod={lastmods}")
+print("sitemap has no ?lang= URLs=%s" % ("yes" if "?lang=" not in x else "NO"))
 r = open(sys.argv[2], encoding="utf-8", errors="ignore").read()
 print("robots allows-root=%s blocks-docs=%s has-sitemap=%s" % (
     "yes" if re.search(r"Allow: /$", r, re.M) else "NO",

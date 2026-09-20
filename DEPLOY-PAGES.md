@@ -66,9 +66,32 @@ git push origin main
 
 ## Notes on the site itself
 
-- Built with webpack (static SPA).
-- Uses **hash-based routing** so internal pages (`#/services`, `#/about`)
-  never 404 under GitHub Pages.
-- Asset paths are **relative** (`./bundle…`) so they resolve under the
-  `/Platinya-Clinic-Website/` subpath.
-- A `404.html` fallback is included for safety.
+- Built with webpack (static SPA) and **pre-rendered to real HTML files** by
+  `tools/prerender.js` (`npm run build:full`): every route exists as
+  `/route/index.html`, so crawlers get finished HTML and visitors get clean URLs
+  (`/hair/`, `/services/`, …) instead of `#/hash` links.
+- **7 languages as path prefixes**: English at the root, the others under
+  `/<lang>/` — `/ar/dental/`, `/ru/hair/`, … Each one is its own pre-rendered file
+  with `<html lang>`/`dir`, translated copy, a self-referencing canonical and an
+  hreflang cluster. Query-string languages (`?lang=ar`) are still accepted for old
+  links, but they cannot be indexed on a static host (the file served for
+  `/dental/?lang=ar` was byte-identical to the English page), so they are no longer
+  advertised anywhere.
+- `dist/sitemap.xml` is **generated at build time** (140 URLs × hreflang +
+  `lastmod`) — do not edit it by hand. `robots.txt` and the verification files are
+  still static sources in `src/static/`.
+- Every deploy announces the sitemap to **IndexNow** (Bing, Yandex, Seznam, Naver)
+  via the `notify-indexnow` job, and Google Analytics 4 reports the enquiry funnel
+  (`lead_form_start` → `lead_form_attempt` → `generate_lead`).
+- Asset paths are **relative** (`./bundle…`) with `<base href="/">` on sub-pages,
+  so they resolve both on the custom domain and under
+  `/Platinya-Clinic-Website/`.
+- `dist/404.html` is the pre-rendered not-found page, marked `noindex`.
+- Verify before pushing:
+  ```bash
+  npm run build:full     # build + pre-render (all languages)
+  npm test               # site + tracking checks against ./dist
+  npm run test:live      # the same checks against the deployed site
+  bash tools/site-health.sh   # deterministic digest of the live site
+  ```
+  `PRERENDER_LANGS=en,ar npm run prerender` pre-renders a subset (fast local loop).

@@ -56,6 +56,8 @@ export function initLanguageSwitcher() {
       // Non-English dictionaries are separate chunks: fetch before switching so
       // the re-render is already translated (English resolves immediately).
       await loadLang(lang);
+      // setLang() also moves the address bar to this page's language path
+      // (/ar/dental/), which is the URL Google indexes.
       setLang(lang);
       // Re-render current route with the new language, then rebind UI
       renderApp();
@@ -141,16 +143,17 @@ export function initRouting() {
     e.preventDefault();
     const href = link.getAttribute("href") || "/";
 
-    if (href === currentLocationPath()) {
+    // Already there (allowing for the trailing slash of the real file path)?
+    if (href === currentLocationPath() || href + "/" === (window.location.pathname || "")) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
-    // Push the clean URL so the address bar shows /hair/ instead of #/hair,
-    // keeping any ?lang= parameter so the chosen language survives navigation.
+    // Push the clean URL so the address bar shows /hair/ — or /ar/hair/ when the
+    // visitor is reading Arabic. The href is already language-localised (see
+    // setAppContent), so the path prefix is carried through navigation here.
     try {
-      const query = window.location.search || "";
-      window.history.pushState({}, "", (href === "/" ? "/" : href + "/") + query);
+      window.history.pushState({}, "", href === "/" ? "/" : href + "/");
     } catch (err) {
       window.location.hash = href;
     }

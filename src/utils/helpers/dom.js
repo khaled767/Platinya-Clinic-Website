@@ -1,4 +1,6 @@
 
+import { localizeRouteLinks } from "../../i18n";
+
 export function getAppRoot() {
   return document.getElementById("app");
 }
@@ -11,6 +13,10 @@ export function clearApp() {
   }
 }
 
+// Inject a rendered view and localise its internal links. Components keep
+// writing plain hrefs ("/hair"); the i18n controller rewrites them to the
+// current language's path ("/ar/hair") so the pre-rendered HTML ships real,
+// crawlable links and SPA navigation stays inside the chosen language.
 export function setAppContent(content) {
   const app = getAppRoot();
 
@@ -19,4 +25,5 @@ export function setAppContent(content) {
   }
 
   app.innerHTML = content;
+  localizeRouteLinks(app);
 }

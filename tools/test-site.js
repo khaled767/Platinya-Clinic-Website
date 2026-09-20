@@ -2,21 +2,24 @@
 /**
  * Functional test for the pre-rendered site, in a real DOM (jsdom).
  *
- * It checks the two things that decide whether Google can index the pages, plus
- * the lazy language chunks:
+ * What it protects (in the order the checks appear below):
  *
- *   1. after the JavaScript has run, every route keeps its OWN canonical URL
- *      (a hash URL or the home page's canonical here is what made Search Console
- *      report the sub-pages as duplicates and refuse to index them);
- *   2. after the JavaScript has run, every route keeps the <title> the
- *      pre-rendered HTML shipped, instead of falling back to the home page copy;
- *   3. the six non-English dictionaries arrive as separate chunks and are applied
- *      before the first render (?lang=ar) and when the switcher is used;
- *   4. the stylesheet is linked in <head> (no flash of unstyled content).
+ *   1. after the JavaScript has run, every English route keeps its OWN canonical
+ *      URL and <title> (a hash URL or the home page's canonical here is what made
+ *      Search Console refuse to index the sub-pages);
+ *   2. every language is a REAL page: /ar/dental/ is served with <html lang="ar">
+ *      dir="rtl", translated copy and a self-referencing canonical without any
+ *      JavaScript — a query parameter (?lang=ar) served byte-identical English
+ *      HTML on GitHub Pages, so those URLs could never be indexed;
+ *   3. the legacy ?lang=ar links still work and move the address bar to /ar/…;
+ *   4. the stylesheet is in <head> (no flash of unstyled content);
+ *   5. the language switcher pulls the lazy dictionary chunk;
+ *   6. sitemap.xml lists every language URL with hreflang alternates + lastmod,
+ *      and 404.html is marked noindex.
  *
  * Usage:
- *   node tools/test-langs.js              # against ./dist (run after build:full)
- *   node tools/test-langs.js --live       # against https://platinyaclinic.com
+ *   node tools/test-site.js              # against ./dist (run after build:full)
+ *   node tools/test-site.js --live       # against https://platinyaclinic.com
  *
  * Exits non-zero when any expectation fails.
  */
@@ -29,6 +32,9 @@ const DIST = path.resolve(__dirname, "..", "dist");
 const PORT = 8123;
 const LIVE = process.argv.includes("--live");
 const SITE = "https://platinyaclinic.com";
+
+const LANGS = ["en", "ar", "fr", "es", "tr", "it", "ru"];
+const RTL_LANGS = ["ar"];
 
 const ROUTES = [
   "/", "/services/", "/about/", "/hospitals/", "/testimonials/", "/contact/",
@@ -80,6 +86,8 @@ function shim(window) {
 // boot signal — wait for the flag the app sets once its JavaScript has taken over.
 const booted = (d) => d.documentElement.hasAttribute("data-app-booted");
 
+let BASE = "";
+
 async function load(url, ready, timeoutMs = 15000) {
   const virtualConsole = new VirtualConsole();
   virtualConsole.on("jsdomError", () => {});
@@ -98,6 +106,18 @@ async function load(url, ready, timeoutMs = 15000) {
   return dom;
 }
 
+// The bytes a crawler receives — no JavaScript, no DOM. This is the only thing
+// Google sees before rendering, so the translated pages must be complete here.
+async function rawHtml(url) {
+  if (LIVE) {
+    const res = await fetch(url);
+    return res.text();
+  }
+  const rel = url.slice(BASE.length).split("?")[0];
+  const file = path.join(DIST, rel === "/" ? "index.html" : path.join(rel, "index.html"));
+  return fs.readFileSync(file, "utf8");
+}
+
 const results = [];
 function check(name, ok, detail) {
   results.push(Boolean(ok));
@@ -110,9 +130,28 @@ const canonicalOf = (doc) => {
 };
 const titleOf = (doc) => doc.title;
 
+const hasScript = (text, re) => re.test(text);
+
+// The <title> a dictionary ships for a route (source of truth = the locale file).
+function dictTitle(lang, page) {
+  const file = path.resolve(__dirname, "..", "src", "i18n", "locales", `${lang}.js`);
+  const src = fs.readFileSync(file, "utf8");
+  const m = src.match(new RegExp(`"seo\\.${page}\\.title":\\s*"((?:[^"\\\\]|\\\\.)*)"`));
+  if (!m) return "";
+  try {
+    return JSON.parse(`"${m[1]}"`);
+  } catch (e) {
+    return m[1];
+  }
+}
+
+const unescapeHtml = (s) =>
+  s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+
 (async () => {
   const server = LIVE ? null : await serve();
-  const base = LIVE ? SITE : `http://127.0.0.1:${PORT}`;
+  BASE = LIVE ? SITE : `http://127.0.0.1:${PORT}`;
   console.log(LIVE ? "testing the LIVE site" : "testing ./dist in a local server");
 
   if (!LIVE) {
@@ -122,13 +161,15 @@ const titleOf = (doc) => doc.title;
     check("no chunk for English (inside the main bundle)", !chunks.some((c) => /locale-en/.test(c)));
   }
 
-  // ---- the whole route set: canonical + title must survive the JS boot ----
+  // ---- 1. English route set: canonical + title must survive the JS boot ----
   let canonicalOk = 0, titleOk = 0;
   const problems = [];
   for (const route of ROUTES) {
     const expectedCanonical = SITE + route;
-    const expectedTitle = await staticTitle(base, route);
-    const dom = await load(base + route, booted);
+    const html = await rawHtml(BASE + route);
+    const t = html.match(/<title>([\s\S]*?)<\/title>/i);
+    const expectedTitle = t ? unescapeHtml(t[1]).trim() : "";
+    const dom = await load(BASE + route, booted);
     const doc = dom.window.document;
     const gotCanonical = canonicalOf(doc);
     const gotTitle = titleOf(doc);
@@ -138,54 +179,129 @@ const titleOf = (doc) => doc.title;
     else problems.push(`${route} title "${gotTitle.slice(0, 50)}" != "${String(expectedTitle).slice(0, 50)}"`);
     dom.window.close();
   }
-  check(`all ${ROUTES.length} routes keep their own canonical after JS`, canonicalOk === ROUTES.length, `${canonicalOk}/${ROUTES.length}` + (problems.length ? " | " + problems.slice(0, 3).join(" ; ") : ""));
-  check(`all ${ROUTES.length} routes keep their pre-rendered title after JS`, titleOk === ROUTES.length, `${titleOk}/${ROUTES.length}`);
+  check(`all ${ROUTES.length} English routes keep their own canonical after JS`, canonicalOk === ROUTES.length, `${canonicalOk}/${ROUTES.length}` + (problems.length ? " | " + problems.slice(0, 3).join(" ; ") : ""));
+  check(`all ${ROUTES.length} English routes keep their pre-rendered title after JS`, titleOk === ROUTES.length, `${titleOk}/${ROUTES.length}`);
 
-  // ---- Arabic: chunk fetched at boot, RTL, canonical carries ?lang=ar ----
-  const ar = await load(base + "/dental/?lang=ar", (d) => d.documentElement.lang === "ar" && /[\u0600-\u06FF]/.test(d.body.textContent || ""));
+  // ---- 2. Every language is a real, pre-rendered page (no JavaScript) ----
+  console.log("\n  -- pre-rendered language pages (served HTML, no JS) --");
+  const enTitle = dictTitle("en", "dental");
+  for (const lang of LANGS) {
+    const prefix = lang === "en" ? "" : `/${lang}`;
+    const url = `${BASE}${prefix}/dental/`;
+    const html = await rawHtml(url);
+    const expectedTitle = dictTitle(lang, "dental");
+    const expectedCanonical = `${SITE}${prefix}/dental/`;
+
+    const htmlTag = (html.match(/<html[^>]*>/i) || [""])[0];
+    const canonical = (html.match(/rel="canonical" href="([^"]+)"/) || [])[1] || "(none)";
+    const title = unescapeHtml(((html.match(/<title>([\s\S]*?)<\/title>/i) || [])[1] || "")).trim();
+    const dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
+    const translated = lang === "en" || title !== enTitle;
+
+    let ok = new RegExp(`lang="${lang}"`, "i").test(htmlTag) &&
+      new RegExp(`dir="${dir}"`, "i").test(htmlTag) &&
+      canonical === expectedCanonical &&
+      title === expectedTitle &&
+      translated &&
+      html.includes(`<base href="/"`);
+
+    // Arabic and Russian must carry their own script in the served bytes.
+    if (lang === "ar") ok = ok && hasScript(html, /[\u0600-\u06FF]{6,}/);
+    if (lang === "ru") ok = ok && hasScript(html, /[\u0400-\u04FF]{6,}/);
+
+    // A localised page must also link to its own language, not only to English.
+    if (lang !== "en") ok = ok && html.includes(`href="${prefix}"`) && !/href="\/dental"[^>]*data-route/.test(html);
+
+    check(`${lang.padEnd(2)} /dental/ is a real ${lang} page`, ok,
+      `lang/dir=${lang}/${dir} canonical=${canonical} title="${title.slice(0, 34)}"`);
+
+    // hreflang cluster: all 7 languages + x-default, as paths.
+    const alts = (html.match(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g) || []);
+    const altLangs = alts.map((a) => (a.match(/hreflang="([^"]+)"/) || [])[1]);
+    const missing = [...LANGS, "x-default"].filter((l) => !altLangs.includes(l));
+    check(`${lang.padEnd(2)} /dental/ has a complete hreflang cluster`, missing.length === 0,
+      missing.length ? "missing " + missing.join(",") : `${alts.length} alternates`);
+  }
+  console.log("");
+
+  // ---- 2b. The same pages, WITH JavaScript: the language must survive boot ----
+  // The pre-rendered Arabic must not be replaced by English when the bundle runs
+  // (the lazy chunk is resolved through <base href="/">), and internal navigation
+  // must stay inside the language prefix.
+  for (const lang of ["ar", "ru"]) {
+    const prefix = `/${lang}`;
+    const dom = await load(`${BASE}${prefix}/dental/`, booted);
+    const doc = dom.window.document;
+    const text = (doc.getElementById("app") || {}).textContent || "";
+    const scriptRe = lang === "ar" ? /[\u0600-\u06FF]{4,}/ : /[\u0400-\u04FF]{4,}/;
+    check(`${lang} /dental/ stays ${lang} after the JS boot`, doc.documentElement.lang === lang && scriptRe.test(text), `lang=${doc.documentElement.lang}`);
+    check(`${lang} /dental/ keeps its own canonical after the JS boot`, canonicalOf(doc) === `${SITE}${prefix}/dental/`, canonicalOf(doc));
+
+    const contact = doc.querySelector(`a[data-route][href="${prefix}/contact"]`);
+    check(`${lang} internal links stay inside ${prefix}/`, Boolean(contact), contact ? contact.getAttribute("href") : "none");
+
+    if (lang === "ar" && contact) {
+      contact.dispatchEvent(new dom.window.MouseEvent("click", { bubbles: true }));
+      const started = Date.now();
+      while (Date.now() - started < 5000 && dom.window.location.pathname !== "/ar/contact/") await new Promise((r) => setTimeout(r, 100));
+      const nd = dom.window.document;
+      check("SPA navigation inside Arabic lands on /ar/contact/", dom.window.location.pathname === "/ar/contact/", dom.window.location.pathname);
+      check("Arabic stays Arabic after navigation", nd.documentElement.lang === "ar" && /[\u0600-\u06FF]{4,}/.test((nd.getElementById("app") || {}).textContent || ""), `lang=${nd.documentElement.lang}`);
+      check("canonical follows the route in Arabic", canonicalOf(nd) === SITE + "/ar/contact/", canonicalOf(nd));
+    }
+
+    dom.window.close();
+  }
+  console.log("");
+
+  // ---- 3. Legacy ?lang=ar still works and lands on the path URL ----
+  const ar = await load(BASE + "/dental/?lang=ar", (d) => d.documentElement.lang === "ar" && /[\u0600-\u06FF]/.test(d.body.textContent || ""));
   const adoc = ar.window.document;
-  check("?lang=ar -> <html lang=\"ar\">", adoc.documentElement.lang === "ar", "lang=" + adoc.documentElement.lang);
-  check("?lang=ar -> dir=rtl", adoc.documentElement.getAttribute("dir") === "rtl", "dir=" + adoc.documentElement.getAttribute("dir"));
+  check("legacy ?lang=ar -> <html lang=\"ar\">", adoc.documentElement.lang === "ar", "lang=" + adoc.documentElement.lang);
+  check("legacy ?lang=ar -> dir=rtl", adoc.documentElement.getAttribute("dir") === "rtl", "dir=" + adoc.documentElement.getAttribute("dir"));
   check("Arabic rendered on the first paint", /[\u0600-\u06FF]{4,}/.test((adoc.getElementById("app") || {}).textContent || ""));
-  check("canonical is /dental/?lang=ar", canonicalOf(adoc) === SITE + "/dental/?lang=ar", canonicalOf(adoc));
+  check("legacy ?lang=ar moves the address bar to /ar/dental/", ar.window.location.pathname === "/ar/dental/", ar.window.location.pathname);
+  check("canonical is /ar/dental/ (not ?lang=ar)", canonicalOf(adoc) === SITE + "/ar/dental/", canonicalOf(adoc));
   ar.window.close();
 
-  // ---- English page: stylesheet in <head>, no lazy chunk needed ----
-  const en = await load(base + "/hair/", booted);
+  // ---- 4. English page: stylesheet in <head>, no lazy chunk needed ----
+  const en = await load(BASE + "/hair/", booted);
   check("stylesheet linked in <head> (no unstyled flash)", /<link[^>]*href="\.\/styles\.[^"]+\.css"/.test(en.window.document.head.innerHTML));
 
-  // ---- switcher pulls the Russian chunk on demand ----
+  // ---- 5. Switcher pulls the Russian chunk and moves to /ru/hair/ ----
   const opt = en.window.document.querySelector('.lang-option[data-lang="ru"]');
   check("language switcher offers Russian", Boolean(opt));
   if (opt) {
+    check("switcher link points at the path URL", opt.getAttribute("href") === "/ru/hair", opt.getAttribute("href"));
     opt.dispatchEvent(new en.window.MouseEvent("click", { bubbles: true }));
     const doc = en.window.document;
     const started = Date.now();
     while (Date.now() - started < 8000 && doc.documentElement.lang !== "ru") await new Promise((r) => setTimeout(r, 100));
     check("switching to Russian applies its chunk", doc.documentElement.lang === "ru", "lang=" + doc.documentElement.lang);
     check("Russian text rendered after the switch", /[\u0400-\u04FF]{4,}/.test((doc.getElementById("app") || {}).textContent || ""));
+    check("switching updates the URL to /ru/hair/", en.window.location.pathname === "/ru/hair/", en.window.location.pathname);
+    check("canonical follows the language path", canonicalOf(doc) === SITE + "/ru/hair/", canonicalOf(doc));
     en.window.close();
   }
+
+  // ---- 6. sitemap + 404 ----
+  const sitemap = LIVE
+    ? await (await fetch(SITE + "/sitemap.xml")).text()
+    : fs.readFileSync(path.join(DIST, "sitemap.xml"), "utf8");
+  const locs = sitemap.match(/<loc>[^<]+<\/loc>/g) || [];
+  const hreflangs = sitemap.match(/hreflang=/g) || [];
+  const lastmods = sitemap.match(/<lastmod>/g) || [];
+  check("sitemap lists every language URL", locs.length === ROUTES.length * LANGS.length, `${locs.length} URLs (expected ${ROUTES.length * LANGS.length})`);
+  check("sitemap carries hreflang alternates", hreflangs.length === locs.length * (LANGS.length + 1), `${hreflangs.length} alternates`);
+  check("sitemap carries lastmod", lastmods.length === locs.length, `${lastmods.length} lastmod values`);
+  check("sitemap contains /ar/dental/", sitemap.includes("<loc>" + SITE + "/ar/dental/</loc>"));
+  check("sitemap contains no ?lang= URL", !sitemap.includes("?lang="));
+
+  const notFound = LIVE ? await (await fetch(SITE + "/404.html")).text() : fs.readFileSync(path.join(DIST, "404.html"), "utf8");
+  check("404.html is noindex", /name="robots"\s+content="noindex/.test(notFound));
 
   if (server) server.close();
   const failed = results.filter((r) => !r).length;
   console.log(`\n${results.length - failed}/${results.length} checks passed`);
   process.exit(failed ? 1 : 0);
 })();
-
-// The <title> the pre-rendered HTML ships for a route (what a crawler reads).
-async function staticTitle(base, route) {
-  if (LIVE) {
-    const res = await fetch(SITE + route);
-    const html = await res.text();
-    const m = html.match(/<title>([\s\S]*?)<\/title>/i);
-    return m ? decode(m[1]) : "";
-  }
-  const file = path.join(DIST, route === "/" ? "index.html" : path.join(route, "index.html"));
-  const m = fs.readFileSync(file, "utf8").match(/<title>([\s\S]*?)<\/title>/i);
-  return m ? decode(m[1]) : "";
-}
-
-function decode(s) {
-  return s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
-}

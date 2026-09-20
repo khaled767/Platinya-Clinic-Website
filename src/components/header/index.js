@@ -1,9 +1,13 @@
 import navigation from "../navigation";
 import { icons } from "../icons";
-import { LANGS, t, getLang } from "../../i18n";
+import { LANGS, t, getLang, localizedHref, currentRoutePath } from "../../i18n";
 
 export default function header() {
   const current = getLang();
+  // Every option links to THIS page in that language ("/ar/dental/"), so the
+  // links are real hrefs a crawler can follow — that is how Google discovers the
+  // translated pages.
+  const route = currentRoutePath();
 
   return `
     <header class="site-header">
@@ -36,7 +40,7 @@ export default function header() {
             </button>
             <div class="lang-dropdown">
               ${LANGS.map((L) => `
-                <a href="#" class="lang-option ${L.code === current ? "active" : ""}" data-lang="${L.code}">
+                <a href="${localizedHref(route, L.code)}" class="lang-option ${L.code === current ? "active" : ""}" data-lang="${L.code}" hreflang="${L.code}" rel="alternate">
                   <span>${L.label}</span> <span class="flag">${L.flag}</span>
                 </a>
               `).join('')}
