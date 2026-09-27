@@ -33,6 +33,9 @@ const { JSDOM, VirtualConsole } = require("jsdom");
 
 const ROOT = path.resolve(__dirname, "..");
 const DIST = path.join(ROOT, "dist");
+// The one pre-rendered file that is served from the site root: relative asset
+// paths already resolve correctly there, every other file needs <base href="/">.
+const ROOT_INDEX = path.join(DIST, "index.html");
 const ORIGIN = "https://platinyaclinic.com";
 
 // Must match src/i18n/langs.js (order included: it is the hreflang order).
@@ -281,11 +284,18 @@ function applyStaticSeo(html, route, lang, table) {
     `<html lang="${lang}" dir="${RTL_LANGS.includes(lang) ? "rtl" : "ltr"}">`
   );
 
-  // Pre-rendered pages live in sub-folders (/hair/index.html, /ar/hair/index.html),
+  // Pre-rendered pages live in sub-folders (/hair/index.html, /ar/index.html),
   // but every asset path in the app is relative (./assets/...). Without a <base>
-  // tag the browser would look for /ar/hair/assets/... and fail to load CSS,
-  // images and JS. Anchoring to "/" makes all relative URLs resolve from the root.
-  if (route !== "/" && !/<base\s/i.test(out)) {
+  // tag the browser would look for /ar/assets/... and fail to load CSS, images
+  // and JavaScript. Anchoring to "/" makes all relative URLs resolve from the
+  // root.
+  //
+  // The test is "is this file served from the site root?", not "is the route the
+  // home route?": the language home pages ARE route "/" (/ar/ is written to
+  // dist/ar/index.html). A route-based test skipped exactly those, so /ar/,
+  // /fr/, /es/, /tr/, /it/ and /ru/ shipped with no stylesheet, no bundles and
+  // no images — every ./assets/... request 404'd.
+  if (fileFor(route, lang) !== ROOT_INDEX && !/<base\s/i.test(out)) {
     out = out.replace(/<head([^>]*)>/i, `<head$1>\n    <base href="/" />`);
   }
 
@@ -412,6 +422,14 @@ async function write404(names, template) {
   }
 
   let out = template.replace(/<div id="app">\s*<\/div>/, `<div id="app">${res.markup}</div>`);
+
+  // GitHub Pages serves this one file for EVERY unmatched path, at any depth
+  // (/foo/bar/), so a relative ./assets/... would be requested under that path
+  // and 404 a second time. Same root anchor as the pre-rendered pages.
+  if (!/<base\s/i.test(out)) {
+    out = out.replace(/<head([^>]*)>/i, `<head$1>\n    <base href="/" />`);
+  }
+
   out = out.replace(
     /<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/,
     `<meta name="robots" content="noindex, follow" />`

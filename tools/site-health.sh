@@ -15,7 +15,10 @@ UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, l
 
 ROUTES="/ /services/ /about/ /hospitals/ /testimonials/ /contact/ /hair/ /dental/ /plastic/ /plastic-body/ /bariatric/ /aesthetics/ /concierge/ /hotel/ /airport/ /transfers/ /interpreter/ /privacy-policy/ /terms/ /privacy/"
 # Languages are real path prefixes (each one is its own pre-rendered file).
-LANG_ROUTES="/ar/ /ar/dental/ /ar/contact/ /ru/hair/ /tr/ /es/services/ /fr/ /it/hospitals/"
+LANG_ROUTES="/ar/ /ar/dental/ /ar/contact/ /ru/ /ru/hair/ /tr/ /es/ /es/services/ /fr/ /it/ /it/hospitals/"
+# Language HOME pages: the ones pre-rendered from route "/" (a route-based test
+# used to skip their <base href="/">, which 404'd their CSS, bundles and images).
+LANG_HOMES="/ar/ /fr/ /es/ /tr/ /it/ /ru/"
 
 echo "HOST $HOST"
 echo "UA Googlebot-like"
@@ -61,13 +64,15 @@ tag = re.search(r"<html[^>]*>", h)
 lang = re.search(r'lang="([^"]+)"', tag.group(0)) if tag else None
 d = re.search(r'dir="([^"]+)"', tag.group(0)) if tag else None
 canon = re.search(r'<link rel="canonical" href="([^"]+)"', h)
+base = "yes" if re.search(r'<base\s+href="/"', h) else "NO"
 # Text in a non-Latin script that a crawler can only get from the served bytes.
 script = 0
 for pat in (r"[\u0600-\u06FF]{6,}", r"[\u0400-\u04FF]{6,}", r"[\u0590-\u05FF]{6,}"):
     script += len(re.findall(pat, h))
-print("%s/%s|%s|canonical=%s|nonlatin-runs=%d" % (
+print("%s/%s|base=%s|%s|canonical=%s|nonlatin-runs=%d" % (
     lang.group(1) if lang else "?",
     d.group(1) if d else "?",
+    base,
     canon.group(1) if canon else "none",
     "yes" if canon else "NO",
     script,
@@ -93,6 +98,34 @@ for ref in refs:
     print(f"{ref} -> {out}")
 PY
 cat "$tmp/assets.txt"
+
+echo
+echo "== LANGUAGE HOME PAGES: relative assets resolve? (stylesheet, bundle, logo, hero) =="
+for r in $LANG_HOMES; do
+  curl -sS -A "$UA" --max-time 30 -o "$tmp/lh.html" "$HOST$r" || true
+  python3 - "$tmp/lh.html" "$HOST" "$r" <<'PY'
+import re, sys, subprocess
+h = open(sys.argv[1], encoding="utf-8", errors="ignore").read()
+host, route = sys.argv[2], sys.argv[3]
+base = re.search(r'<base\s+href="([^"]+)"', h)
+prefix = base.group(1) if base else route
+refs = sorted(set(re.findall(r'(?:src|href)="\./([^"]+)"', h)))
+want = ([r for r in refs if re.search(r'styles\..*\.css$', r)][:1]
+        + [r for r in refs if re.search(r'bundle\..*\.js$', r)][:1]
+        + [r for r in refs if r.startswith("assets/")][:2])
+broken = []
+for ref in want:
+    code = subprocess.run(
+        ["curl", "-sS", "-o", "/dev/null", "-w", "%{http_code}", "--max-time", "30",
+         f"{host}{prefix}{ref}"],
+        capture_output=True, text=True).stdout.strip()
+    if code != "200":
+        broken.append(f"{ref}={code}")
+print("%-5s base=%-4s probed=%d broken=%d%s" % (
+    route, "yes" if base else "NO", len(want), len(broken),
+    (" -> " + ", ".join(broken[:3])) if broken else ""))
+PY
+done
 
 echo
 echo "== SITEMAP / ROBOTS =="

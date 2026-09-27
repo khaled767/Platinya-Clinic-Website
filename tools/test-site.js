@@ -15,7 +15,9 @@
  *   4. the stylesheet is in <head> (no flash of unstyled content);
  *   5. the language switcher pulls the lazy dictionary chunk;
  *   6. sitemap.xml lists every language URL with hreflang alternates + lastmod,
- *      and 404.html is marked noindex.
+ *      and 404.html is marked noindex;
+ *   7. every language HOME page (/ar/, /ru/, …) anchors its relative assets to
+ *      the site root, so its CSS, bundles and images actually load.
  *
  * Usage:
  *   node tools/test-site.js              # against ./dist (run after build:full)
@@ -254,6 +256,50 @@ const unescapeHtml = (s) =>
   }
   console.log("");
 
+  // ---- 2c. Language HOME pages (/ar/, /ru/ …) can load their own assets ----
+  // The language homes are pre-rendered from route "/" into /ar/index.html, so a
+  // route-based "skip the home route" test left them WITHOUT <base href="/">:
+  // /ar/assets/..., /ar/styles.*.css and /ar/bundle.*.js all 404'd, and the page
+  // rendered unstyled with no images and no JavaScript. Asset URLs in this app
+  // are relative (./assets/...), so every page that is not served from the site
+  // root must anchor them.
+  for (const lang of LANGS) {
+    const prefix = lang === "en" ? "" : `/${lang}`;
+    const html = await rawHtml(`${BASE}${prefix}/`);
+    const hasBase = /<base\s+href="\/"/i.test(html);
+    const refs = [...new Set((html.match(/(?:href|src)="(\.\/[^"]+)"/g) || []))].map(
+      (r) => r.replace(/.*="\.\//, "").replace(/"$/, "")
+    );
+
+    // The English home page IS the site root, so it needs no <base>; every other
+    // home page does.
+    const anchored = prefix === "" || hasBase;
+    let missing = [];
+    if (LIVE) {
+      // Fetch one real asset exactly the way a browser resolves it.
+      const logo = refs.find((r) => r.startsWith("assets/"));
+      if (anchored && logo) {
+        const res = await fetch(`${SITE}/${logo}`);
+        if (res.status !== 200) missing = [`${logo} -> ${res.status}`];
+      }
+    } else {
+      // Local: every relative reference must resolve to a file on disk — from the
+      // root when the page is anchored (or is the root itself), under the page's
+      // own folder when it is not.
+      for (const ref of refs) {
+        const file = anchored ? path.join(DIST, ref) : path.join(DIST, prefix, ref);
+        if (!fs.existsSync(file)) missing.push(ref);
+      }
+    }
+
+    check(`${(prefix || "/").padEnd(4)} home page loads its own CSS, JS and images`,
+      anchored && missing.length === 0,
+      anchored
+        ? (missing.length ? `${missing.length} unresolved: ${missing.slice(0, 3).join(", ")}` : `${refs.length} refs resolve from the root`)
+        : 'no <base href="/">');
+  }
+  console.log("");
+
   // ---- 3. Legacy ?lang=ar still works and lands on the path URL ----
   const ar = await load(BASE + "/dental/?lang=ar", (d) => d.documentElement.lang === "ar" && /[\u0600-\u06FF]/.test(d.body.textContent || ""));
   const adoc = ar.window.document;
@@ -299,6 +345,9 @@ const unescapeHtml = (s) =>
 
   const notFound = LIVE ? await (await fetch(SITE + "/404.html")).text() : fs.readFileSync(path.join(DIST, "404.html"), "utf8");
   check("404.html is noindex", /name="robots"\s+content="noindex/.test(notFound));
+  // It is served for unmatched URLs at ANY depth, so its relative assets need the
+  // same root anchor as the pre-rendered pages.
+  check("404.html anchors its assets to the site root", /<base\s+href="\/"/i.test(notFound));
 
   if (server) server.close();
   const failed = results.filter((r) => !r).length;
