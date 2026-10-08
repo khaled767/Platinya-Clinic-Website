@@ -118,6 +118,8 @@ const LEGACY_REDIRECTS = {
   "/before-after/": "/testimonials/",
   "/contact-us/": "/contact/",
   "/about-us/": "/about/",
+  "/filler/": "/aesthetics/",
+  "/blepharoplasty/": "/plastic/",
   "/category/خدماتنا/عمليات-التجميل/": "/services/",
 };
 
