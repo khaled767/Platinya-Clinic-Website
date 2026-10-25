@@ -5,7 +5,7 @@
 // of the page. Closing it does not silence the coordinator forever: it steps
 // back and returns later with the next message. Only the last message ends it.
 //
-// Timing: 6s → 24s → 50s from the first page view. Closing snoozes the next
+// Timing: 6s → 18s → 50s from the first page view. Closing snoozes the next
 // message by 40s instead of cancelling it.
 //
 // The state (how many messages were shown, when the next one is due) lives in
@@ -21,7 +21,7 @@ import { isRealBrowser, prefersReducedMotion } from "./motion";
 const STATE_KEY = "platinya:wa-state";
 const MESSAGES = ["wa.teaser1", "wa.teaser2", "wa.teaser3"];
 const FIRST_DELAY = 6000;
-const MILESTONES_MS = [6000, 24000, 50000];
+const MILESTONES_MS = [6000, 18000, 50000];
 const SNOOZE_MS = 40000;
 const TYPING_MS = 1500;
 
