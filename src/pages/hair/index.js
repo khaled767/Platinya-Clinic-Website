@@ -3,6 +3,7 @@
 // treatment-area rows in gold frames + a dedicated Techniques section (DHI / FUE).
 import { icons } from "../../components/icons";
 import { t } from "../../i18n";
+import treatmentLinks from "../../components/treatment-links";
 
 const areas = [
   { key: "scalp",  num: "01", img: "./assets/images/ai/services/hair/hairline-approved.webp", alt: "Hairline restoration map" },
@@ -102,6 +103,8 @@ export default function hairPage() {
           </div>
         </div>
       </section>
+
+      ${treatmentLinks("/hair")}
     </div>
   `;
 }

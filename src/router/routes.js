@@ -20,7 +20,7 @@ import interpreterPage from "../pages/interpreter";
 import privacyServicePage from "../pages/privacy-service";
 import notFoundPage from "../pages/not-found";
 import treatmentPage from "../pages/treatment";
-import abdominoplasty from "../content/abdominoplasty";
+import treatments from "../content";
 
 const routes = {
   "/": homePage,
@@ -44,9 +44,15 @@ const routes = {
   "/interpreter": interpreterPage,
   "/privacy": privacyServicePage,
 
-  // Treatment pages — real pages, one per operation, not redirects to the group.
-  "/abdominoplasty": () => treatmentPage(abdominoplasty),
 };
+
+// Treatment pages — one real page per operation, built from src/content/. The
+// route is the slug the module declares, so adding a page means adding a file.
+const treatmentRoutes = Object.fromEntries(
+  treatments.map((content) => [content.slug, () => treatmentPage(content)])
+);
+
+Object.assign(routes, treatmentRoutes);
 
 export { notFoundPage };
 export default routes;

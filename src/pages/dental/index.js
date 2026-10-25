@@ -3,6 +3,7 @@
 // holding an image on one side and a 3-point explainer on the other.
 import { icons } from "../../components/icons";
 import { t } from "../../i18n";
+import treatmentLinks from "../../components/treatment-links";
 
 const treatments = [
   { key: "smile",   num: "01", tagKey: "smile",   img: "./assets/images/ai/services/dental/smile.webp",    alt: "Hollywood Smile result" },
@@ -100,6 +101,8 @@ export default function dentalPage() {
           </div>
         </div>
       </section>
+
+      ${treatmentLinks("/dental")}
     </div>
   `;
 }

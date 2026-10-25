@@ -1,0 +1,232 @@
+{
+  "/abdominoplasty": {
+    "en": {
+      "title": "Tummy Tuck (Abdominoplasty) in Istanbul | Platinya Clinic",
+      "desc": "Tummy tuck in Istanbul: excess skin removed and the abdominal muscles tightened. One to two nights in hospital, back to work in two to three weeks."
+    },
+    "ar": {
+      "title": "شد البطن (أبدومينوبلاستي) في إسطنبول | عيادة بلاتينيا",
+      "desc": "شدّ البطن في إسطنبول: إزالة الجلد المترهّل وشدّ عضلات البطن. إقامة ليلة إلى ليلتين وعودة للعمل خلال أسبوعين إلى ثلاثة."
+    }
+  },
+  "/hair-transplant": {
+    "en": {
+      "title": "Hair Transplant in Istanbul (FUE) | Platinya Clinic",
+      "desc": "FUE hair transplant in Istanbul: your own follicles moved to the thinning areas. One day at the clinic, final result at 12 to 18 months."
+    },
+    "ar": {
+      "title": "زراعة الشعر في إسطنبول (FUE) | عيادة بلاتينيا",
+      "desc": "زراعة الشعر بتقنية FUE في إسطنبول: نقل بصيلاتك إلى المناطق الخفيفة. يوم واحد في العيادة والنتيجة النهائية بعد ١٢–١٨ شهراً."
+    }
+  },
+  "/sapphire-hair-transplant": {
+    "en": {
+      "title": "Sapphire FUE Hair Transplant in Istanbul | Platinya",
+      "desc": "Sapphire FUE in Istanbul: finer channels, less crusting, faster healing. Honest limits of the technique and graft counts explained."
+    },
+    "ar": {
+      "title": "زراعة الشعر بالسفير في إسطنبول | عيادة بلاتينيا",
+      "desc": "زراعة الشعر بطريقة السفير في إسطنبول: قنوات أدقّ وقشور أقل وشفاء أسرع. حدود التقنية وعدد البصيلات بصراحة."
+    }
+  },
+  "/hair-implant-hybrid": {
+    "en": {
+      "title": "Hybrid Hair Transplant (FUE + FUT) in Istanbul | Platinya",
+      "desc": "Hybrid hair transplant in Istanbul: strip and extraction in one session for larger bald areas. Graft counts, the linear scar and healing explained."
+    },
+    "ar": {
+      "title": "زراعة الشعر المختلطة (FUE + FUT) في إسطنبول | بلاتينيا",
+      "desc": "زراعة الشعر المختلطة في إسطنبول: شريط واقتطاف في جلسة واحدة للمناطق الواسعة. عدد البصيلات والأثر الخطّي والشفاء بشرح واضح."
+    }
+  },
+  "/hair-transplant-for-women": {
+    "en": {
+      "title": "Hair Transplant for Women in Istanbul | Platinya Clinic",
+      "desc": "Female hair loss in Istanbul: causes checked first, then transplant without shaving where possible. Density planning and honest limits explained."
+    },
+    "ar": {
+      "title": "زراعة الشعر للنساء في إسطنبول | عيادة بلاتينيا",
+      "desc": "تساقط الشعر عند النساء في إسطنبول: فحص الأسباب أولاً ثم زراعة بلا حلاقة حين يمكن. تخطيط الكثافة وحدودها بصراحة."
+    }
+  },
+  "/eyebrow-transplant": {
+    "en": {
+      "title": "Eyebrow Transplant in Istanbul | Platinya Clinic",
+      "desc": "Eyebrow transplant in Istanbul with single-hair grafts placed at the natural angle. Three to four hours, final shape at six to nine months."
+    },
+    "ar": {
+      "title": "زراعة الحواجب في إسطنبول | عيادة بلاتينيا",
+      "desc": "زراعة الحواجب في إسطنبول ببصيلات مفردة وبالزاوية الطبيعية. ثلاث إلى أربع ساعات والشكل النهائي بعد ٦–٩ أشهر."
+    }
+  },
+  "/hollywood-smile": {
+    "en": {
+      "title": "Hollywood Smile in Istanbul | Platinya Clinic",
+      "desc": "Hollywood Smile in Istanbul: veneers, crowns and gum contouring planned together, usually within five to seven days of your visit."
+    },
+    "ar": {
+      "title": "هوليوود سمايل في إسطنبول | عيادة بلاتينيا",
+      "desc": "هوليوود سمايل في إسطنبول: فينير وتيجان وتشكيل اللثة بخطة واحدة، غالباً خلال خمسة إلى سبعة أيام من زيارتك."
+    }
+  },
+  "/dental-veneers": {
+    "en": {
+      "title": "Porcelain Veneers in Istanbul (E-max) | Platinya Clinic",
+      "desc": "Porcelain veneers in Istanbul: minimal-prep E-max, shade and shape chosen with you. What enamel removal means in the long term."
+    },
+    "ar": {
+      "title": "فينير الأسنان في إسطنبول (E-max) | عيادة بلاتينيا",
+      "desc": "فينير الأسنان في إسطنبول: E-max بأقل تحضير، واللون والشكل يُختاران معك. وماذا يعني برد المينا على المدى الطويل."
+    }
+  },
+  "/teeth-whitening": {
+    "en": {
+      "title": "Teeth Whitening in Istanbul | Platinya Clinic",
+      "desc": "Professional teeth whitening in Istanbul: in-office and at-home options, expected shades, and why crowns and fillings do not whiten."
+    },
+    "ar": {
+      "title": "تبييض الأسنان في إسطنبول | عيادة بلاتينيا",
+      "desc": "تبييض الأسنان في إسطنبول: خيارات في العيادة وفي المنزل، والدرجات المتوقّعة، ولماذا لا تبيضّ التيجان والحشوات."
+    }
+  },
+  "/dental-implants": {
+    "en": {
+      "title": "Dental Implants in Istanbul | Platinya Clinic",
+      "desc": "Dental implants in Istanbul: titanium implants, bone grafting when needed, and healing times of three to six months before the final crown."
+    },
+    "ar": {
+      "title": "زراعة الأسنان في إسطنبول | عيادة بلاتينيا",
+      "desc": "زراعة الأسنان في إسطنبول: غرسات تيتانيوم وتطعيم عظم عند الحاجة، وشفاء من ثلاثة إلى ستة أشهر قبل التاج النهائي."
+    }
+  },
+  "/zircon-teeth": {
+    "en": {
+      "title": "Zirconia Crowns in Istanbul | Platinya Clinic",
+      "desc": "Zirconia crowns in Istanbul: strength, colour and the absence of a grey gum line. Compared honestly with metal-ceramic crowns."
+    },
+    "ar": {
+      "title": "تلبيس الأسنان بالزيركون في إسطنبول | عيادة بلاتينيا",
+      "desc": "تلبيس الأسنان بالزيركون في إسطنبول: القوة واللون وغياب الخط الرمادي عند اللثة. مقارنة صريحة مع التيجان المعدنية."
+    }
+  },
+  "/periodontics": {
+    "en": {
+      "title": "Gum Treatment (Periodontics) in Istanbul | Platinya",
+      "desc": "Gum disease treatment in Istanbul: scaling, deep cleaning and follow-up for bleeding gums and receding gums, before any cosmetic work."
+    },
+    "ar": {
+      "title": "علاج اللثة في إسطنبول | عيادة بلاتينيا",
+      "desc": "علاج أمراض اللثة في إسطنبول: تنظيف وتنظيف عميق ومتابعة لنزيف اللثة وانحسارها، قبل أي عمل تجميلي."
+    }
+  },
+  "/facelift-surgery": {
+    "en": {
+      "title": "Facelift Surgery in Istanbul | Platinya Clinic",
+      "desc": "Facelift in Istanbul: skin and the deeper layer lifted, with scars hidden around the ear. Two to three weeks of social downtime."
+    },
+    "ar": {
+      "title": "شد الوجه في إسطنبول | عيادة بلاتينيا",
+      "desc": "شدّ الوجه في إسطنبول: رفع الجلد والطبقة العميقة بأثر مخفي حول الأذن. فترة انسحاب اجتماعي من أسبوعين إلى ثلاثة."
+    }
+  },
+  "/chin-implants": {
+    "en": {
+      "title": "Chin Augmentation in Istanbul | Platinya Clinic",
+      "desc": "Chin augmentation in Istanbul: implant, bone sliding or filler, chosen by how much projection is needed. Swelling settles in one to two weeks."
+    },
+    "ar": {
+      "title": "تجميل الذقن في إسطنبول | عيادة بلاتينيا",
+      "desc": "تجميل الذقن في إسطنبول: غرسة أو إزاحة عظم أو فيلر، حسب مقدار البروز المطلوب. التورّم يهدأ خلال أسبوع إلى أسبوعين."
+    }
+  },
+  "/blepharoplasty": {
+    "en": {
+      "title": "Eyelid Surgery (Blepharoplasty) in Istanbul | Platinya",
+      "desc": "Upper and lower eyelid surgery in Istanbul: excess skin and bags removed, sutures out in five to seven days. Risks stated plainly."
+    },
+    "ar": {
+      "title": "شد الجفون في إسطنبول | عيادة بلاتينيا",
+      "desc": "شدّ الجفون العلوية والسفلية في إسطنبول: إزالة الجلد الزائد والانتفاخات، ونزع القطب بعد ٥–٧ أيام. المخاطر بصراحة."
+    }
+  },
+  "/silicone": {
+    "en": {
+      "title": "Breast Augmentation in Istanbul | Platinya Clinic",
+      "desc": "Breast augmentation in Istanbul: cohesive silicone implants, round or anatomical, one night in hospital. Capsular contracture and BIA-ALCL explained."
+    },
+    "ar": {
+      "title": "تجميل الصدر في إسطنبول | عيادة بلاتينيا",
+      "desc": "تجميل الصدر في إسطنبول: حشوات سيليكون متماسكة، دائرية أو تشريحية، وليلة واحدة في المستشفى. تشرّن المحفظة وBIA-ALCL بشرح صريح."
+    }
+  },
+  "/butt-augmentation-surgery": {
+    "en": {
+      "title": "BBL & Gluteal Augmentation in Istanbul | Platinya",
+      "desc": "Gluteal augmentation in Istanbul: fat transfer or implant, with honest numbers on fat survival, sitting restrictions and the rare serious risks."
+    },
+    "ar": {
+      "title": "تجميل المؤخرة (BBL) في إسطنبول | عيادة بلاتينيا",
+      "desc": "تجميل المؤخرة في إسطنبول: نقل دهون أو حشوة، بأرقام صريحة عن بقاء الدهون وقيود الجلوس والمخاطر النادرة الخطيرة."
+    }
+  },
+  "/liposuction": {
+    "en": {
+      "title": "Liposuction (VASER) in Istanbul | Platinya Clinic",
+      "desc": "Liposuction in Istanbul: VASER and tumescent techniques, compression for four to six weeks. Why it is contouring, not weight loss."
+    },
+    "ar": {
+      "title": "شفط الدهون في إسطنبول | عيادة بلاتينيا",
+      "desc": "شفط الدهون في إسطنبول: تقنيات VASER والمحلول الموضعي، مع ضغط من أربعة إلى ستة أسابيع. ولماذا هو نحت لا تنحيف."
+    }
+  },
+  "/gynecomastia": {
+    "en": {
+      "title": "Gynecomastia Surgery in Istanbul | Platinya Clinic",
+      "desc": "Male breast reduction in Istanbul: gland removal with liposuction, after ruling out hormonal and drug causes. Three to four weeks of compression."
+    },
+    "ar": {
+      "title": "جراحة التثدّي عند الرجال في إسطنبول | عيادة بلاتينيا",
+      "desc": "تصغير الثدي عند الرجال في إسطنبول: إزالة الغدة مع شفط الدهون، بعد استبعاد الأسباب الهرمونية والدوائية. ضغط من ٣–٤ أسابيع."
+    }
+  },
+  "/gastric-sleeve-surgery": {
+    "en": {
+      "title": "Gastric Sleeve in Istanbul | Platinya Clinic",
+      "desc": "Laparoscopic gastric sleeve in Istanbul: about 70% of the stomach removed, two to three nights in hospital, lifelong vitamin follow-up."
+    },
+    "ar": {
+      "title": "تكميم المعدة في إسطنبول | عيادة بلاتينيا",
+      "desc": "تكميم المعدة بالمنظار في إسطنبول: إزالة نحو ٧٠٪ من المعدة، ليلتان إلى ثلاث في المستشفى، ومتابعة فيتامينات مدى الحياة."
+    }
+  },
+  "/stomach-balloon": {
+    "en": {
+      "title": "Gastric Balloon in Istanbul | Platinya Clinic",
+      "desc": "Gastric balloon in Istanbul: six to twelve months of appetite control, placed endoscopically or by capsule. What happens after removal."
+    },
+    "ar": {
+      "title": "بالون المعدة في إسطنبول | عيادة بلاتينيا",
+      "desc": "بالون المعدة في إسطنبول: ستة إلى اثني عشر شهراً من كبح الشهية، يُوضع بالمنظار أو بالكبسولة. وماذا يحدث بعد إزالته."
+    }
+  },
+  "/filler": {
+    "en": {
+      "title": "Dermal Fillers in Istanbul | Platinya Clinic",
+      "desc": "Hyaluronic acid fillers in Istanbul: thirty to sixty minutes, six to eighteen months. Vascular risks, and why more is not better."
+    },
+    "ar": {
+      "title": "الفيلر في إسطنبول | عيادة بلاتينيا",
+      "desc": "فيلر حمض الهيالورونيك في إسطنبول: ثلاثون إلى ستون دقيقة، ونتيجة تدوم ٦–١٨ شهراً. المخاطر الوعائية ولماذا الزيادة ليست أفضل."
+    }
+  },
+  "/face-botox": {
+    "en": {
+      "title": "Botulinum Toxin (Botox) in Istanbul | Platinya Clinic",
+      "desc": "Botulinum toxin in Istanbul for the upper face: full effect in ten to fourteen days, three to four months per treatment. Who should not have it."
+    },
+    "ar": {
+      "title": "البوتوكس في إسطنبول | عيادة بلاتينيا",
+      "desc": "البوتوكس في إسطنبول للنصف العلوي من الوجه: النتيجة الكاملة بعد ١٠–١٤ يوماً وتدوم ٣–٤ أشهر. ومن لا يجب أن يجريه."
+    }
+  }
+}

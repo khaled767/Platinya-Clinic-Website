@@ -1,3 +1,94 @@
 {
-  "/abdominoplasty": ["en", "ar"]
+  "/abdominoplasty": [
+    "en",
+    "ar"
+  ],
+  "/hair-transplant": [
+    "en",
+    "ar"
+  ],
+  "/sapphire-hair-transplant": [
+    "en",
+    "ar"
+  ],
+  "/hair-implant-hybrid": [
+    "en",
+    "ar"
+  ],
+  "/hair-transplant-for-women": [
+    "en",
+    "ar"
+  ],
+  "/eyebrow-transplant": [
+    "en",
+    "ar"
+  ],
+  "/hollywood-smile": [
+    "en",
+    "ar"
+  ],
+  "/dental-veneers": [
+    "en",
+    "ar"
+  ],
+  "/teeth-whitening": [
+    "en",
+    "ar"
+  ],
+  "/dental-implants": [
+    "en",
+    "ar"
+  ],
+  "/zircon-teeth": [
+    "en",
+    "ar"
+  ],
+  "/periodontics": [
+    "en",
+    "ar"
+  ],
+  "/facelift-surgery": [
+    "en",
+    "ar"
+  ],
+  "/chin-implants": [
+    "en",
+    "ar"
+  ],
+  "/blepharoplasty": [
+    "en",
+    "ar"
+  ],
+  "/silicone": [
+    "en",
+    "ar"
+  ],
+  "/butt-augmentation-surgery": [
+    "en",
+    "ar"
+  ],
+  "/liposuction": [
+    "en",
+    "ar"
+  ],
+  "/gynecomastia": [
+    "en",
+    "ar"
+  ],
+  "/gastric-sleeve-surgery": [
+    "en",
+    "ar"
+  ],
+  "/stomach-balloon": [
+    "en",
+    "ar"
+  ],
+  "/filler": [
+    "en",
+    "ar"
+  ],
+  "/face-botox": [
+    "en",
+    "ar"
+  ]
 }

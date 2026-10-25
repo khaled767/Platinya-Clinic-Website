@@ -78,8 +78,16 @@ const ROUTES = [
   "/privacy-policy",
   "/terms",
   "/privacy",
-  "/abdominoplasty",
 ];
+
+// Treatment pages are declared once, in src/data/route-langs.json, and appended
+// here so the pre-renderer and the language list can never drift apart.
+ROUTES.push(...Object.keys(ROUTE_LANGS).map((slug) => (slug.startsWith("/") ? slug : `/${slug}`)));
+
+// A route without its leading slash still "works" in file paths but produces
+// broken canonicals and sitemap entries — refuse to build instead.
+const badRoute = ROUTES.find((r) => !r.startsWith("/"));
+if (badRoute) throw new Error(`route "${badRoute}" must start with "/"`);
 
 // ---------------------------------------------------------------------------
 // Legacy redirects (the WordPress site that lived on this domain before)
@@ -99,36 +107,36 @@ const ROUTES = [
 //
 // Legacy path -> the route on the current site that answers the same intent.
 const LEGACY_REDIRECTS = {
-  "/hair-transplant/": "/hair/",
+  // now a real page: "/hair-transplant/": "/hair/",
   "/hair-transplant-operations/": "/hair/",
-  "/sapphire-hair-transplant/": "/hair/",
-  "/hair-implant-hybrid/": "/hair/",
-  "/hair-transplant-for-women/": "/hair/",
-  "/eyebrow-transplant/": "/hair/",
-  "/hollywood-smile/": "/dental/",
-  "/dental-veneers/": "/dental/",
-  "/teeth-whitening/": "/dental/",
-  "/dental-implants/": "/dental/",
-  "/zircon-teeth/": "/dental/",
+  // now a real page: "/sapphire-hair-transplant/": "/hair/",
+  // now a real page: "/hair-implant-hybrid/": "/hair/",
+  // now a real page: "/hair-transplant-for-women/": "/hair/",
+  // now a real page: "/eyebrow-transplant/": "/hair/",
+  // now a real page: "/hollywood-smile/": "/dental/",
+  // now a real page: "/dental-veneers/": "/dental/",
+  // now a real page: "/teeth-whitening/": "/dental/",
+  // now a real page: "/dental-implants/": "/dental/",
+  // now a real page: "/zircon-teeth/": "/dental/",
   "/cosmetic-dentistry/": "/dental/",
-  "/periodontics/": "/dental/",
+  // now a real page: "/periodontics/": "/dental/",
   "/cosmetic-surgery/": "/plastic/",
-  "/facelift-surgery/": "/plastic/",
-  "/chin-implants/": "/plastic/",
-  "/silicone/": "/plastic-body/",
-  "/butt-augmentation-surgery/": "/plastic-body/",
-  "/liposuction/": "/plastic-body/",
-  "/gynecomastia/": "/plastic-body/",
+  // now a real page: "/facelift-surgery/": "/plastic/",
+  // now a real page: "/chin-implants/": "/plastic/",
+  // now a real page: "/silicone/": "/plastic-body/",
+  // now a real page: "/butt-augmentation-surgery/": "/plastic-body/",
+  // now a real page: "/liposuction/": "/plastic-body/",
+  // now a real page: "/gynecomastia/": "/plastic-body/",
   "/weight-loss-operations/": "/bariatric/",
-  "/gastric-sleeve-surgery/": "/bariatric/",
-  "/stomach-balloon/": "/bariatric/",
+  // now a real page: "/gastric-sleeve-surgery/": "/bariatric/",
+  // now a real page: "/stomach-balloon/": "/bariatric/",
   "/our-services/": "/services/",
   "/before-after/": "/testimonials/",
   "/contact-us/": "/contact/",
   "/about-us/": "/about/",
-  "/filler/": "/aesthetics/",
-  "/blepharoplasty/": "/plastic/",
-  "/face-botox/": "/aesthetics/",
+  // now a real page: "/filler/": "/aesthetics/",
+  // now a real page: "/blepharoplasty/": "/plastic/",
+  // now a real page: "/face-botox/": "/aesthetics/",
   "/abdomenoplasty/": "/abdominoplasty/", // the old site spelled it with an extra syllable
   "/category/خدماتنا/عمليات-التجميل/": "/services/",
 };
@@ -283,12 +291,17 @@ function bundleScripts(template) {
   return names.filter((n) => fs.existsSync(path.join(DIST, n)));
 }
 
+// Treatment pages carry their own title/description next to their copy — one
+// file per route rather than 23 keys x 7 dictionaries.
+const TREATMENT_SEO = require("../src/data/treatment-seo.json");
+
 // Bake everything a crawler reads WITHOUT running JavaScript: language, dir,
 // title, description, canonical, share tags and the hreflang cluster.
 function applyStaticSeo(html, route, lang, table) {
   const seoPage = SEO_KEY_BY_ROUTE[route] || "home";
-  const title = table[`seo.${seoPage}.title`] || "";
-  const desc = table[`seo.${seoPage}.desc`] || "";
+  const own = (TREATMENT_SEO[route] || {})[lang] || {};
+  const title = own.title || table[`seo.${seoPage}.title`] || "";
+  const desc = own.desc || table[`seo.${seoPage}.desc`] || "";
   const url = urlFor(route, lang);
   let out = html;
 

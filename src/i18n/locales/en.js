@@ -186,6 +186,7 @@ const en = {
   "contact.uploadSize": "Total size must be under 4 MB.",
   "contact.vip": "VIP Consultation",
       "tr.more": "Treatment details",
+  "tr.explore": "Detailed treatment pages",
 "tr.crumbs": "Breadcrumb",
 "cta.vip": "VIP Consultation",
   "dental.cta": "Plan My Treatment",

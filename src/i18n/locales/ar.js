@@ -186,6 +186,7 @@ const ar = {
   "contact.uploadSize": "يجب أن يكون الحجم الإجمالي أقل من 4 ميغابايت.",
   "contact.vip": "استشارة VIP",
       "tr.more": "تفاصيل العملية",
+  "tr.explore": "صفحات العمليات بالتفصيل",
 "tr.crumbs": "مسار التنقّل",
 "cta.vip": "استشارة VIP",
   "dental.cta": "خطط لعلاجي",

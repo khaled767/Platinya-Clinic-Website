@@ -6,6 +6,15 @@
 import { icons } from "../../components/icons";
 import { t, getLang, localizedHref } from "../../i18n";
 import ROUTE_LANGS from "../../data/route-langs.json";
+import treatmentLinks from "../../components/treatment-links";
+
+// prefix -> the route whose treatment pages belong to this group page
+const GROUP_ROUTE = {
+  pf: "/plastic",
+  pb: "/plastic-body",
+  bariatric: "/bariatric",
+  aesthetics: "/aesthetics",
+};
 
 const BASE = "./assets/images/ai/services/plastic/";
 
@@ -102,6 +111,9 @@ export function plasticGroupPage({ prefix, heroImg, icon, procedures, base }) {
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
           </div>
         </div>
+      </section>
+
+      ${treatmentLinks(GROUP_ROUTE[prefix])}
       </section>
     </div>
   `;
