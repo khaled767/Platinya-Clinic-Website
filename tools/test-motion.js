@@ -240,6 +240,26 @@ async function boot(url, { withIO, reduced }) {
     dom.window.close();
   }
 
+
+  console.log("\n6) phase 3 — the gold rule is decoration, not a precondition");
+  {
+    const css = fs.readdirSync(DIST).filter((f) => f.endsWith(".css"))
+      .map((f) => fs.readFileSync(path.join(DIST, f), "utf8")).join("\n")
+      // collapse newlines/indentation but keep the single spaces that separate
+      // descendant selectors
+      .replace(/\s+/g, " ");
+    check(css.includes(".section-header .section-title::after"),
+      "the rule is defined for section titles");
+    check(/\.section-header \.section-title::after\s*\{[^}]*transform:\s*scaleX\(1\)/.test(css),
+      "it is drawn by default — no JS, no empty gap");
+    check(/\.section-header\[data-reveal\] \.section-title::after\s*\{\s*transform:\s*scaleX\(0\)/.test(css),
+      "the motion layer collapses it only after claiming the header");
+    check(/\.section-header\.is-visible \.section-title::after[^{]*\{\s*transform:\s*scaleX\(1\)/.test(css),
+      "and draws it out once the header is on screen");
+    check(css.includes(".section-header .section-subtitle::before"),
+      "the eyebrow dash uses the same treatment");
+  }
+
   server.close();
   console.log(`\n${failures === 0 ? "all motion checks passed" : failures + " check(s) failed"}`);
   process.exit(failures === 0 ? 0 : 1);

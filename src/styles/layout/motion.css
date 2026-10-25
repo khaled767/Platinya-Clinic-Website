@@ -210,3 +210,63 @@ html.has-smooth-scroll {
 @media (prefers-reduced-motion: reduce) {
   #carousel-stage { cursor: default; }
 }
+
+/* ==========================================================================
+   Phase 3 — the gold rule
+   A hairline under each section title that draws itself out from the centre as
+   the heading arrives, plus a small dash beside the eyebrow label.
+
+   Both are VISIBLE BY DEFAULT and only collapsed once JavaScript has marked the
+   header for reveal. A visitor without JS, or a crawler, therefore sees a
+   finished static rule instead of an empty gap — the same rule as the rest of
+   the motion layer: enhancement, never a precondition.
+   ========================================================================== */
+.section-header .section-title::after {
+  content: "";
+  display: block;
+  width: min(88px, 42%);
+  height: 2px;
+  margin: var(--space-4) auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-accent-gold-500) 22%,
+    var(--color-accent-gold-500) 78%,
+    transparent 100%
+  );
+  transform: scaleX(1);
+  transform-origin: center;
+  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.18s;
+}
+
+.section-header .section-subtitle::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  margin-inline-end: 0.6rem;
+  vertical-align: middle;
+  background: var(--color-accent-gold-500);
+  transform: scaleX(1);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+}
+
+html[dir="rtl"] .section-header .section-subtitle::before { transform-origin: right; }
+html[dir="ltr"] .section-header .section-subtitle::before { transform-origin: left; }
+
+/* Collapsed only once the motion layer has taken responsibility for it. */
+.section-header[data-reveal] .section-title::after { transform: scaleX(0); }
+.section-header[data-reveal] .section-subtitle::before { transform: scaleX(0); }
+
+.section-header.is-visible .section-title::after,
+.section-header.is-visible .section-subtitle::before { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .section-header .section-title::after,
+  .section-header .section-subtitle::before,
+  .section-header[data-reveal] .section-title::after,
+  .section-header[data-reveal] .section-subtitle::before {
+    transform: none;
+    transition: none;
+  }
+}
