@@ -41,6 +41,12 @@ const REVEAL_SELECTOR = [
   ".hotel-hero-content",
   ".dental-row",
   ".hair-row",
+  // about + licences + carousel + contact
+  ".about-content",
+  ".about-highlights",
+  ".license-card",
+  ".services-carousel",
+  ".contact-channels",
   // forms
   ".contact-form",
   ".contact-info",
@@ -120,9 +126,10 @@ export function initMotion() {
   });
 
   byParent.forEach((siblings) => {
-    // The hero gets a slightly slower, more deliberate cascade.
+    // The hero is the one place the cascade should be felt: a slower, deliberate
+    // entrance, then the rest of the page moves at a normal reading pace.
     const isHero = Boolean(siblings[0].closest(".hero-section"));
-    const step = isHero ? 95 : siblings.length <= 3 ? 90 : 65;
+    const step = isHero ? 150 : siblings.length <= 3 ? 110 : 85;
     siblings.forEach((el, i) => {
       el.style.setProperty("--reveal-delay", `${Math.min(i, 6) * step}ms`);
     });
@@ -137,8 +144,10 @@ export function initMotion() {
       });
     },
     // threshold 0 + a bottom margin: tall blocks (a whole form) reveal as soon
-    // as their top edge is properly on screen, which 0.12 would never reach.
-    { threshold: 0, rootMargin: "0px 0px -64px 0px" }
+    // as their top edge is on screen. The negative 12% margin delays the trigger
+    // until the block is already 12% into the viewport, so the visitor watches it
+    // arrive instead of finding it already finished.
+    { threshold: 0, rootMargin: "0px 0px -12% 0px" }
   );
 
   nodes.forEach((el) => observer.observe(el));
