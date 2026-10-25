@@ -146,6 +146,10 @@ export default function contact() {
             <button type="submit" class="btn-submit-luxury">
               <span>${t("contact.submit")}</span>
             </button>
+
+            <!-- Live region: the AJAX submit writes "sending…" and then the
+                 result here, so the visitor never leaves the page. -->
+            <p class="form-status" id="form-status" role="status" aria-live="polite" hidden></p>
           </form>
         </div>
 

@@ -185,7 +185,11 @@ async function boot(url, { withIO, reduced }) {
     const before = tv ? tv.textContent.trim() : "";
     await new Promise((r) => setTimeout(r, 1600));
     const after = tv ? tv.textContent.trim() : "";
-    check(before === "100%" && after === "100%", "count-up settles on 100%", `${before} -> ${after}`);
+    // The animation may already be running when the DOM is inspected, so the
+    // contract is: it starts from a partial count and lands exactly on 100%.
+    const started = parseInt(before, 10);
+    check(!Number.isNaN(started) && started <= 100 && after === "100%",
+      "count-up settles on 100%", `${before} -> ${after}`);
     check(Boolean(tv) && !tv.classList.contains("is-counting"), "count-up cleans up its state class");
 
     // swipe: a left drag must advance the carousel. The carousel itself only

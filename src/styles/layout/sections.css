@@ -385,6 +385,7 @@
 
 .btn-submit-luxury {
   width: 100%;
+  position: relative;
   padding: 1rem;
   background: linear-gradient(135deg, #D4AF37 0%, #B89535 100%);
   color: #0F172A;
@@ -403,6 +404,74 @@
 .btn-submit-luxury:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 28px rgba(212, 175, 55, 0.35);
+}
+
+/* In-flight state: the button keeps its size, loses its lift, and shows a
+   spinner on the leading edge (inset-inline-start flips with the RTL layout). */
+.btn-submit-luxury:disabled,
+.btn-submit-luxury.is-sending {
+  cursor: progress;
+  transform: none;
+  box-shadow: 0 6px 14px rgba(212, 175, 55, 0.18);
+}
+
+.btn-submit-luxury.is-sending::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 1.15rem;
+  top: 50%;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-top: -0.45rem;
+  border-radius: 50%;
+  border: 2px solid rgba(15, 23, 42, 0.22);
+  border-top-color: #0f172a;
+  animation: form-spin 0.7s linear infinite;
+}
+
+@keyframes form-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* The answer to "did it send?" — visible without leaving the page. */
+.form-status {
+  margin: 0.9rem 0 0;
+  padding: 0.75rem 0.95rem;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  line-height: 1.65;
+  text-align: center;
+  border: 1px solid transparent;
+  animation: form-status-in 0.35s ease both;
+}
+
+.form-status.is-sending {
+  color: var(--color-text-secondary, #475569);
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.28);
+}
+
+.form-status.is-success {
+  color: #14603c;
+  background: rgba(20, 96, 60, 0.09);
+  border-color: rgba(20, 96, 60, 0.28);
+}
+
+.form-status.is-error {
+  color: #8a2020;
+  background: rgba(210, 63, 63, 0.08);
+  border-color: rgba(210, 63, 63, 0.3);
+}
+
+@keyframes form-status-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Motion is decoration here too: the spinner still turns, but nothing slides. */
+@media (prefers-reduced-motion: reduce) {
+  .form-status { animation: none; }
+  .btn-submit-luxury.is-sending::after { animation-duration: 1.6s; }
 }
 
 @media (max-width: 1024px) {

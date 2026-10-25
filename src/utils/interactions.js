@@ -2,9 +2,22 @@
 // Kept in a single-responsibility module so it can be reused everywhere.
 
 import renderApp from "../renderApp";
-import { setLang, loadLang } from "../i18n";
+import { setLang, loadLang, t } from "../i18n";
 import { initLeadFormTracking, trackSubmitBlocked, activeSecondsOnPage } from "./tracking";
 import { resolveCountry } from "./phoneCountries";
+
+/**
+ * Safe media query. A DOM without matchMedia (the pre-renderer, some embedded
+ * webviews) used to throw here — and because the carousel initialises before the
+ * contact form, that single TypeError silently switched the enquiry form off.
+ */
+function mediaMatches(query) {
+  try {
+    return Boolean(window.matchMedia && window.matchMedia(query).matches);
+  } catch (e) {
+    return false;
+  }
+}
 
 export function initMobileMenu() {
   const toggle = document.querySelector(".mobile-toggle");
@@ -185,7 +198,7 @@ export function initServicesCarousel() {
   let current = 0;
   let timer = null;
   let isPaused = false; // true while the pointer hovers the carousel
-  let isMobile = window.matchMedia("(max-width: 640px)").matches;
+  let isMobile = mediaMatches("(max-width: 640px)");
 
   function render() {
     cards.forEach((card, i) => {
@@ -238,10 +251,16 @@ export function initServicesCarousel() {
   if (prevBtn) prevBtn.addEventListener("click", (e) => { e.preventDefault(); prev(); restart(); });
   if (nextBtn) nextBtn.addEventListener("click", (e) => { e.preventDefault(); next(); restart(); });
 
-  window.matchMedia("(max-width: 640px)").addEventListener("change", (e) => {
-    isMobile = e.matches;
-    render();
-  });
+  try {
+    if (window.matchMedia) {
+      window.matchMedia("(max-width: 640px)").addEventListener("change", (e) => {
+        isMobile = e.matches;
+        render();
+      });
+    }
+  } catch (e) {
+    /* no media queries here: the carousel simply keeps its first breakpoint */
+  }
 
   render();
   restart();
@@ -411,6 +430,89 @@ export function initContactForm() {
     } catch (err) {
       /* analytics must never block a form submission */
     }
+  });
+
+  // Send the enquiry without navigating away.
+  //
+  // The form's native action is formsubmit.co, which answers with its own
+  // "your message is on its way" page: the visitor loses the site mid-request
+  // and the Arabic/Turkish experience breaks at the most important moment.
+  // Instead the same payload goes to FormSubmit's AJAX endpoint, the button
+  // reports "sending…", and the result appears in the live region below it. Any
+  // failure falls back to the plain browser post, so a lead is never lost.
+  const statusEl = document.querySelector("#form-status");
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const submitLabel = submitBtn ? submitBtn.querySelector("span") : null;
+  const idleLabel = submitLabel ? submitLabel.textContent : "";
+  let sending = false;
+
+  const setStatus = (state, message) => {
+    if (!statusEl) return;
+    statusEl.hidden = !message;
+    statusEl.textContent = message || "";
+    statusEl.className = "form-status" + (state ? " is-" + state : "");
+  };
+
+  const restoreButton = () => {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.classList.remove("is-sending");
+      submitBtn.removeAttribute("aria-busy");
+    }
+    if (submitLabel) submitLabel.textContent = idleLabel;
+  };
+
+  form.addEventListener("submit", (e) => {
+    // A blocked submission (bad photo, oversized file) already called
+    // preventDefault — let it stay blocked and silent here.
+    if (e.defaultPrevented || sending) return;
+
+    const action = form.getAttribute("action") || "";
+    if (!/formsubmit\.co\//i.test(action) || typeof window.fetch !== "function") return;
+
+    e.preventDefault();
+    sending = true;
+
+    const payload = new FormData(form);
+    // The hosted captcha belongs to the HTML endpoint; the AJAX one refuses it.
+    payload.delete("_captcha");
+
+    setStatus("sending", t("form.sending"));
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.classList.add("is-sending");
+      submitBtn.setAttribute("aria-busy", "true");
+    }
+    if (submitLabel) submitLabel.textContent = t("form.sending");
+
+    fetch(action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
+      method: "POST",
+      body: payload,
+      headers: { Accept: "application/json" },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("http " + res.status);
+        return res.json().catch(() => ({ success: "true" }));
+      })
+      .then((json) => {
+        if (String(json.success) === "false") throw new Error(json.message || "rejected");
+
+        form.reset();
+        const fileList = form.querySelector("[data-upload-files]");
+        if (fileList) fileList.textContent = "";
+        restoreButton();
+        setStatus("success", t("form.success"));
+        sending = false;
+      })
+      .catch(() => {
+        // FormSubmit unreachable, or the AJAX endpoint is not enabled for this
+        // address: hand the visitor back to the native post rather than show a
+        // dead end. The browser leaves the page, exactly as it did before.
+        sending = false;
+        restoreButton();
+        setStatus("", "");
+        HTMLFormElement.prototype.submit.call(form);
+      });
   });
 
   // Funnel reporting: lead_form_start / lead_form_attempt, re-bound after every

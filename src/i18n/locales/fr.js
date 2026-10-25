@@ -920,7 +920,10 @@ const fr = {
   "lic.tTmark": "Marque déposée — « Platinya Clinic »",
   "lic.dTmark": "Certificat d'enregistrement de marque (Marka Tescil Belgesi) délivré par l'Office turc des brevets et marques — protégeant juridiquement la marque « PLATINYA CLINIC » pour les services médicaux, de voyage et d'hébergement.",
   "lic.ariaHealth": "Agrandir le certificat d'autorisation de tourisme de santé",
-  "lic.ariaTmark": "Agrandir le certificat de marque déposée"
+  "lic.ariaTmark": "Agrandir le certificat de marque déposée",
+  "form.sending": "Envoi de votre demande…",
+  "form.success": "Votre demande a bien été envoyée. Notre coordinatrice vous contactera très prochainement.",
+  "form.error": "Votre demande n'a pas pu être envoyée. Réessayez ou écrivez à info@platinyaclinic.com."
 };
 
 export default fr;

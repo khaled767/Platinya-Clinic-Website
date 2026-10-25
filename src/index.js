@@ -37,13 +37,18 @@ function boot() {
 
   renderApp();
 
-  initRouting();
-  initMobileMenu();
-  initLanguageSwitcher();
-  initHeaderScroll();
-  initLightbox();
-  initServicesCarousel();
-  initContactForm();
+  // Each module is isolated: one unsupported browser API inside the carousel
+  // must never switch off the contact form that comes after it. Before this,
+  // the whole boot aborted at the first throw and the enquiry form silently had
+  // no submit handler at all.
+  [initRouting, initMobileMenu, initLanguageSwitcher, initHeaderScroll,
+   initLightbox, initServicesCarousel, initContactForm].forEach((init) => {
+    try {
+      init();
+    } catch (err) {
+      console.error(`Platinya: ${init.name} failed —`, err);
+    }
+  });
 
   // Marks that the JavaScript has really taken over the pre-rendered document.
   // Tests must wait for THIS, not for markup: the pre-rendered HTML already

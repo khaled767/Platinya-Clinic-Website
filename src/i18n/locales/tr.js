@@ -920,7 +920,10 @@ const tr = {
   "lic.tTmark": "Tescilli Marka — \"Platinya Clinic\"",
   "lic.dTmark": "Türk Patent ve Marka Kurumu'ndan alınan Marka Tescil Belgesi — \"PLATINYA CLINIC\" markasını tıbbi, seyahat ve konaklama hizmetlerinde yasal olarak korur.",
   "lic.ariaHealth": "Sağlık Turizmi Yetki Belgesini büyüt",
-  "lic.ariaTmark": "Tescilli Marka Belgesini büyüt"
+  "lic.ariaTmark": "Tescilli Marka Belgesini büyüt",
+  "form.sending": "Başvurunuz gönderiliyor…",
+  "form.success": "Başvurunuz başarıyla gönderildi. Bakım koordinatörümüz kısa süre içinde sizinle iletişime geçecek.",
+  "form.error": "Başvurunuz gönderilemedi. Lütfen tekrar deneyin veya info@platinyaclinic.com adresine yazın."
 };
 
 export default tr;
