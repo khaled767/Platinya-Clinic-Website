@@ -1,0 +1,52 @@
+/* ==========================================================================
+   Arabic typography
+   --------------------------------------------------------------------------
+   The site loads Playfair Display (headings) and Plus Jakarta Sans (body).
+   Neither contains a single Arabic glyph, so every Arabic page was silently
+   falling back to the DEVICE default — Times New Roman on Windows, a different
+   face on Android, Geeza Pro on Apple. Three visitors, three designs.
+
+   IBM Plex Sans Arabic is a real, complete Arabic family with the same
+   humanist proportions as Plus Jakarta Sans, so the Arabic pages now match the
+   Latin ones instead of looking like an unstyled page.
+
+   It is overridden through the design tokens, so every component — hero,
+   cards, footer, forms — picks it up without touching a single component.
+   ========================================================================== */
+
+html[lang="ar"] {
+  --font-family-heading: "IBM Plex Sans Arabic", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-family-body: "IBM Plex Sans Arabic", "Plus Jakarta Sans", system-ui, sans-serif;
+
+  /* Arabic sits on a deeper baseline than Latin: slightly looser leading keeps
+     the diacritics and descenders from colliding. */
+  --line-height-tight: 1.35;
+  --line-height-snug: 1.5;
+  --line-height-normal: 1.7;
+  --line-height-relaxed: 1.9;
+}
+
+/* Letter-spacing BREAKS Arabic: the script is cursive, and tracking separates
+   the joined letters into disconnected shapes. The design uses 0.12em tracking
+   on badges, buttons and section subtitles — correct for Latin caps, wrong for
+   Arabic. Neutralise it across the whole Arabic page. */
+html[lang="ar"] body * {
+  letter-spacing: normal !important;
+}
+
+/* The brand's italic accent is a Playfair-italic look. Arabic has no italic
+   tradition and a synthesised slant reads as a rendering bug, so the accent
+   keeps the gold colour and drops the slope. */
+html[lang="ar"] .title-highlight,
+html[lang="ar"] em,
+html[lang="ar"] i {
+  font-style: normal;
+}
+
+/* Latin fragments inside Arabic (brand name, e-mail, phone) keep the Latin
+   family so they do not render in an Arabic face with odd metrics. */
+html[lang="ar"] .lang-option,
+html[lang="ar"] .brand-latin,
+html[lang="ar"] .nav-link[data-latin] {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}

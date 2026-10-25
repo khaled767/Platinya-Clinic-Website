@@ -1,0 +1,181 @@
+/* ==========================================================================
+   Motion layer — progressive enhancement ONLY
+   --------------------------------------------------------------------------
+   Nothing here hides a single pixel unless JavaScript has added the class
+   .motion-ready to <html>. That means:
+     • the pre-rendered HTML Google crawls is always fully visible,
+     • a visitor with JS blocked still sees the complete page,
+     • the animation is a bonus, never a requirement.
+
+   Transforms use the individual `translate` / `scale` properties instead of
+   `transform`, because the components already animate `transform` on hover
+   (card lift, button rise). Sharing one property would let the reveal rule win
+   on specificity and silently kill every hover effect on the site.
+   ========================================================================== */
+
+html.motion-ready [data-reveal] {
+  opacity: 0;
+  translate: 0 var(--reveal-y, 26px);
+  will-change: opacity, translate;
+  transition:
+    opacity var(--reveal-dur, 700ms) cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    translate var(--reveal-dur, 700ms) cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    scale var(--reveal-dur, 700ms) cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+}
+
+html.motion-ready [data-reveal].is-visible {
+  opacity: 1;
+  translate: 0 0;
+  will-change: auto;
+}
+
+/* Images drift less and settle from a very slight zoom — the classic
+   editorial "the photo was already there" feel. */
+html.motion-ready [data-reveal="image"] {
+  --reveal-y: 14px;
+  --reveal-dur: 950ms;
+  scale: 1.045;
+}
+
+html.motion-ready [data-reveal="image"].is-visible {
+  scale: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Reading-progress bar — a 2px gold hairline that fills as the visitor scrolls.
+   Gold on obsidian: reads as "expensive" without adding visual noise.
+   -------------------------------------------------------------------------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 9998;
+  pointer-events: none;
+  background: transparent;
+}
+
+.scroll-progress__fill {
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #b89535 0%, #d4af37 45%, #f2d98a 100%);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.55);
+}
+
+html[dir="rtl"] .scroll-progress__fill {
+  transform-origin: 100% 50%;
+}
+
+/* --------------------------------------------------------------------------
+   Gold buttons: a single specular sweep on hover, clipped to the button.
+   -------------------------------------------------------------------------- */
+html.motion-ready .btn-luxury-gold,
+html.motion-ready .btn-hero-primary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+html.motion-ready .btn-luxury-gold::after,
+html.motion-ready .btn-hero-primary::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  background: linear-gradient(
+    105deg,
+    transparent 34%,
+    rgba(255, 255, 255, 0.42) 47%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0.42) 53%,
+    transparent 66%
+  );
+  translate: -130% 0;
+  transition: translate 780ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.motion-ready .btn-luxury-gold:hover::after,
+html.motion-ready .btn-hero-primary:hover::after {
+  translate: 130% 0;
+}
+
+html[dir="rtl"].motion-ready .btn-luxury-gold::after,
+html[dir="rtl"].motion-ready .btn-hero-primary::after {
+  translate: 130% 0;
+}
+
+html[dir="rtl"].motion-ready .btn-luxury-gold:hover::after,
+html[dir="rtl"].motion-ready .btn-hero-primary:hover::after {
+  translate: -130% 0;
+}
+
+/* --------------------------------------------------------------------------
+   Hero photograph: a slow push-in on hover.
+   -------------------------------------------------------------------------- */
+html.motion-ready .hero-card-luxury .hero-card-img {
+  transition: scale 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.motion-ready .hero-card-luxury:hover .hero-card-img {
+  scale: 1.05;
+}
+
+/* --------------------------------------------------------------------------
+   Ambient life: everything below is decoration and is switched off completely
+   for visitors who asked their device to reduce motion.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  html.motion-ready .badge-dot {
+    animation: pl-badge-pulse 2600ms ease-in-out infinite;
+  }
+
+  html.motion-ready .hero-backdrop-glow {
+    animation: pl-glow-drift 16s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes pl-badge-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.55);
+    opacity: 1;
+  }
+  60% {
+    box-shadow: 0 0 0 7px rgba(212, 175, 55, 0);
+    opacity: 0.75;
+  }
+}
+
+@keyframes pl-glow-drift {
+  from {
+    translate: 0 0;
+    opacity: 0.85;
+  }
+  to {
+    translate: -34px 26px;
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hard stop. A visitor who set "reduce motion" in their OS gets the finished
+   page immediately: no reveals, no sweeps, no pulsing.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html.motion-ready [data-reveal],
+  html.motion-ready [data-reveal="image"] {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  html.motion-ready .btn-luxury-gold::after,
+  html.motion-ready .btn-hero-primary::after {
+    display: none;
+  }
+}

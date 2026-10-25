@@ -8,6 +8,7 @@
 /* 2. Base */
 @import './base/reset.css';
 @import './base/globals.css';
+@import './base/arabic.css';
 
 /* 3. Layout */
 @import './layout/container.css';
@@ -35,3 +36,6 @@
 
 /* 4. Utilities */
 @import './utilities/utilities.css';
+
+/* 5. Motion — progressive enhancement, loaded last so it never overrides layout */
+@import './layout/motion.css';
