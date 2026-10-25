@@ -71,11 +71,10 @@ async function boot(url, { withIO, reduced }) {
       if (withIO) {
         // Simulates a real observer: only the elements already on screen (the
         // first few in document order) fire; the rest wait for a scroll.
-        let above = 5;
         window.IntersectionObserver = class {
-          constructor(cb) { this.cb = cb; }
+          constructor(cb) { this.cb = cb; this.above = 5; }
           observe(el) {
-            if (above-- <= 0) return;
+            if (this.above-- <= 0) return;
             setTimeout(() => this.cb([{ target: el, isIntersecting: true }], this), 0);
           }
           unobserve() {}
@@ -171,6 +170,69 @@ async function boot(url, { withIO, reduced }) {
     check(/html\[lang="ar"\]/.test(css), "html[lang=ar] rules shipped in the stylesheet");
     check(/letter-spacing:\s*normal\s*!important/.test(css),
       "Arabic letter-spacing neutralised (cursive joins stay intact)");
+    dom.window.close();
+  }
+
+
+  console.log("\n5) phase 2 — count-up, swipe, parallax");
+  {
+    const dom = await boot(base + "/", { withIO: true, reduced: false });
+    const w = dom.window;
+    const d = w.document;
+
+    // count-up: starts at the real number and lands back on it, digit by digit
+    const tv = d.querySelector(".trust-value");
+    const before = tv ? tv.textContent.trim() : "";
+    await new Promise((r) => setTimeout(r, 1600));
+    const after = tv ? tv.textContent.trim() : "";
+    check(before === "100%" && after === "100%", "count-up settles on 100%", `${before} -> ${after}`);
+    check(Boolean(tv) && !tv.classList.contains("is-counting"), "count-up cleans up its state class");
+
+    // swipe: a left drag must advance the carousel. The carousel itself only
+    // paints its active card once the interaction layer runs, so the test spies
+    // on the control the drag is supposed to press.
+    const stage = d.querySelector("#carousel-stage");
+    const nextBtn = d.querySelector("#carousel-next");
+    let forward = 0;
+    let backward = 0;
+    if (nextBtn) nextBtn.addEventListener("click", () => forward++);
+    if (d.querySelector("#carousel-prev")) d.querySelector("#carousel-prev").addEventListener("click", () => backward++);
+
+    const ev = (type, x, y) => {
+      const e = new w.Event(type, { bubbles: true });
+      Object.defineProperty(e, "clientX", { value: x });
+      Object.defineProperty(e, "clientY", { value: y });
+      Object.defineProperty(e, "pointerType", { value: "touch" });
+      Object.defineProperty(e, "button", { value: 0 });
+      return e;
+    };
+    stage.dispatchEvent(ev("pointerdown", 300, 100));
+    stage.dispatchEvent(ev("pointermove", 200, 100));
+    stage.dispatchEvent(ev("pointerup", 200, 100));
+    check(forward === 1 && backward === 0, "swiping left advances the carousel", `forward=${forward} backward=${backward}`);
+    check(!stage.classList.contains("is-dragging"), "drag state is cleaned up on release");
+
+    // a vertical drag belongs to the page, not the carousel
+    stage.dispatchEvent(ev("pointerdown", 300, 100));
+    stage.dispatchEvent(ev("pointermove", 290, 220));
+    stage.dispatchEvent(ev("pointerup", 290, 220));
+    check(forward === 1, "a vertical drag does not change the slide", `forward=${forward}`);
+
+    // a tiny nudge is not a swipe
+    stage.dispatchEvent(ev("pointerdown", 300, 100));
+    stage.dispatchEvent(ev("pointerup", 285, 100));
+    check(forward === 1, "a 15px nudge is ignored", `forward=${forward}`);
+
+    // parallax: scrolling nudges the hero photo
+    Object.defineProperty(w, "scrollY", { value: 400, configurable: true });
+    w.dispatchEvent(new w.Event("scroll"));
+    await new Promise((r) => setTimeout(r, 120));
+    const t = d.querySelector(".hero-card-img")?.style.transform || "";
+    check(/translate3d\(\s*0(?:px)?,\s*-?[\d.]+px/.test(t), "hero photo drifts with the scroll", t || "(none)");
+
+    // Lenis must never load inside a pre-render / no-scroll environment
+    check(!d.documentElement.classList.contains("has-smooth-scroll"),
+      "smooth-scroll library stays out of the static document");
     dom.window.close();
   }
 

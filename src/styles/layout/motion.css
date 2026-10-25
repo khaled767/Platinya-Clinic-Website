@@ -179,3 +179,34 @@ html.motion-ready .hero-card-luxury:hover .hero-card-img {
     display: none;
   }
 }
+
+/* ==========================================================================
+   Phase 2 — smooth scroll, counters, swipeable carousel
+   ========================================================================== */
+
+/* Lenis drives the scroll position itself; native smooth scrolling would fight
+   it. Also lets anchor jumps stay instant while the script is in charge. */
+html.has-smooth-scroll {
+  scroll-behavior: auto;
+}
+
+/* The number that counts up must not jitter the line while its width changes. */
+.trust-value.is-counting {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* The carousel is draggable with a finger or the mouse. */
+#carousel-stage {
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+#carousel-stage.is-dragging {
+  cursor: grabbing;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #carousel-stage { cursor: default; }
+}

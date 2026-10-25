@@ -57,7 +57,7 @@ const IMAGE_SELECTOR = ".hero-media, .hotel-intro-img";
 let observer = null;
 let progressBound = false;
 
-function isRealBrowser() {
+export function isRealBrowser() {
   if (typeof window === "undefined" || typeof document === "undefined") return false;
   // The single reliable signal: jsdom (the pre-renderer) has no
   // IntersectionObserver, and neither does any browser old enough to matter.

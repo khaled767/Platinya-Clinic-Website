@@ -35,7 +35,10 @@ module.exports = merge(common(true), {
     runtimeChunk: "single",
 
     splitChunks: {
-      chunks: "all",
+      // "initial" instead of "all": async-only code (the smooth-scroll library
+      // imported on demand) keeps its own lazily loaded chunk instead of being
+      // folded into the vendor bundle that every visitor downloads.
+      chunks: "initial",
 
       cacheGroups: {
         vendors: {
