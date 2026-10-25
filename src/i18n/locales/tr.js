@@ -923,7 +923,8 @@ const tr = {
   "lic.ariaTmark": "Tescilli Marka Belgesini büyüt",
   "form.sending": "Başvurunuz gönderiliyor…",
   "form.success": "Başvurunuz başarıyla gönderildi. Bakım koordinatörümüz kısa süre içinde sizinle iletişime geçecek.",
-  "form.error": "Başvurunuz gönderilemedi. Lütfen tekrar deneyin veya info@platinyaclinic.com adresine yazın."
+  "form.error": "Başvurunuz gönderilemedi. Lütfen tekrar deneyin veya info@platinyaclinic.com adresine yazın.",
+  "wa.chat": "WhatsApp'tan koordinatörle görüşün"
 };
 
 export default tr;

@@ -49,7 +49,9 @@ export default function hero() {
               src="./assets/images/ai/hero-APPROVED.webp"
               alt="${t("alt.heroLounge")}"
               class="hero-card-img"
-              loading="lazy"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
             />
             <div class="hero-card-tint"></div>
             <div class="card-glow"></div>

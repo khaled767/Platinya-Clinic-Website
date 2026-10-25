@@ -923,7 +923,8 @@ const es = {
   "lic.ariaTmark": "Ampliar el certificado de marca registrada",
   "form.sending": "Enviando tu solicitud…",
   "form.success": "Tu solicitud se ha enviado correctamente. Nuestra coordinadora se pondrá en contacto contigo en breve.",
-  "form.error": "No se pudo enviar tu solicitud. Inténtalo de nuevo o escribe a info@platinyaclinic.com."
+  "form.error": "No se pudo enviar tu solicitud. Inténtalo de nuevo o escribe a info@platinyaclinic.com.",
+  "wa.chat": "Hablar con un coordinador por WhatsApp"
 };
 
 export default es;

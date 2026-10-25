@@ -923,7 +923,8 @@ const fr = {
   "lic.ariaTmark": "Agrandir le certificat de marque déposée",
   "form.sending": "Envoi de votre demande…",
   "form.success": "Votre demande a bien été envoyée. Notre coordinatrice vous contactera très prochainement.",
-  "form.error": "Votre demande n'a pas pu être envoyée. Réessayez ou écrivez à info@platinyaclinic.com."
+  "form.error": "Votre demande n'a pas pu être envoyée. Réessayez ou écrivez à info@platinyaclinic.com.",
+  "wa.chat": "Discuter avec un coordinateur sur WhatsApp"
 };
 
 export default fr;

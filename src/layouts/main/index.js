@@ -1,6 +1,7 @@
 import header from "../../components/header";
 import footer from "../../components/footer";
 import { icons } from "../../components/icons";
+import { t } from "../../i18n";
 
 export default function mainLayout(pageContent) {
   return `
@@ -18,10 +19,20 @@ export default function mainLayout(pageContent) {
         target="_blank"
         rel="noopener"
         class="whatsapp-float"
-        aria-label="Chat on WhatsApp"
-        title="Chat on WhatsApp"
+        aria-label="${t("wa.chat")}"
+        title="${t("wa.chat")}"
       >
-        <span class="whatsapp-float-badge">${icons.whatsapp}</span>
+        <span class="whatsapp-float-photo">
+          <img
+            src="./assets/images/ui/whatsapp-agent.webp"
+            alt=""
+            width="60"
+            height="60"
+            loading="lazy"
+            decoding="async"
+          />
+        </span>
+        <span class="whatsapp-float-glyph" aria-hidden="true">${icons.whatsapp}</span>
       </a>
     </div>
   `;

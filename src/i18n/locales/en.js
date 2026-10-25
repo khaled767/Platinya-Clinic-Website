@@ -923,7 +923,8 @@ const en = {
   "lic.ariaTmark": "Expand Registered Trademark Certificate",
   "form.sending": "Sending your application…",
   "form.success": "Your application has been sent successfully. Our care coordinator will contact you shortly.",
-  "form.error": "We could not send your application. Please try again, or write to info@platinyaclinic.com."
+  "form.error": "We could not send your application. Please try again, or write to info@platinyaclinic.com.",
+  "wa.chat": "Chat with a coordinator on WhatsApp"
 };
 
 export default en;

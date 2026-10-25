@@ -923,7 +923,8 @@ const ar = {
   "lic.ariaTmark": "تكبير شهادة العلامة التجارية المسجّلة",
   "form.sending": "جارٍ إرسال طلبك…",
   "form.success": "تم إرسال طلبك بنجاح. سيتواصل معك منسّق الرعاية قريباً.",
-  "form.error": "تعذّر إرسال طلبك. أعد المحاولة، أو راسلنا على info@platinyaclinic.com."
+  "form.error": "تعذّر إرسال طلبك. أعد المحاولة، أو راسلنا على info@platinyaclinic.com.",
+  "wa.chat": "تحدّث مع منسّق الرعاية على واتساب"
 };
 
 export default ar;
