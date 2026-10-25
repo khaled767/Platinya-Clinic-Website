@@ -1,6 +1,7 @@
 import navigation from "../navigation";
 import { icons } from "../icons";
 import { LANGS, t, getLang, localizedHref, currentRoutePath } from "../../i18n";
+import ROUTE_LANGS from "../../data/route-langs.json";
 
 export default function header() {
   const current = getLang();
@@ -8,6 +9,10 @@ export default function header() {
   // links are real hrefs a crawler can follow — that is how Google discovers the
   // translated pages.
   const route = currentRoutePath();
+  // A treatment page may exist in only some languages. Sending the visitor to
+  // "/fr/abdominoplasty/" would be a 404, so untranslated options fall back to
+  // that language's home page instead of advertising a page that does not exist.
+  const translated = ROUTE_LANGS[route];
 
   return `
     <header class="site-header">
@@ -39,11 +44,15 @@ export default function header() {
               <span class="lang-arrow">▾</span>
             </button>
             <div class="lang-dropdown">
-              ${LANGS.map((L) => `
-                <a href="${localizedHref(route, L.code)}" class="lang-option ${L.code === current ? "active" : ""}" data-lang="${L.code}" hreflang="${L.code}" rel="alternate">
+              ${LANGS.map((L) => {
+                const unavailable = Array.isArray(translated) && !translated.includes(L.code);
+                const href = unavailable ? localizedHref("/", L.code) : localizedHref(route, L.code);
+                return `
+                <a href="${href}" class="lang-option ${L.code === current ? "active" : ""}" data-lang="${L.code}" hreflang="${L.code}" rel="alternate">
                   <span>${L.label}</span> <span class="flag">${L.flag}</span>
                 </a>
-              `).join('')}
+              `;
+              }).join('')}
             </div>
           </div>
 

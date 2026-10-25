@@ -42,6 +42,14 @@ const ORIGIN = "https://platinyaclinic.com";
 const LANGS = ["en", "ar", "fr", "es", "tr", "it", "ru"];
 const DEFAULT_LANG = "en";
 const RTL_LANGS = ["ar"];
+
+// Not every route is published in every language yet. A treatment page ships in
+// the languages whose copy has actually been written and reviewed — a machine
+// translation of medical text is worse than no page. Declared in
+// src/data/route-langs.json so the browser and this pre-renderer agree.
+const ROUTE_LANGS = require("../src/data/route-langs.json");
+const langsFor = (route) =>
+  Array.isArray(ROUTE_LANGS[route]) ? LANGS.filter((l) => ROUTE_LANGS[route].includes(l)) : LANGS;
 const OG_LOCALE = {
   en: "en_US", ar: "ar_AR", fr: "fr_FR", es: "es_ES",
   tr: "tr_TR", it: "it_IT", ru: "ru_RU",
@@ -70,6 +78,7 @@ const ROUTES = [
   "/privacy-policy",
   "/terms",
   "/privacy",
+  "/abdominoplasty",
 ];
 
 // ---------------------------------------------------------------------------
@@ -108,7 +117,6 @@ const LEGACY_REDIRECTS = {
   "/chin-implants/": "/plastic/",
   "/silicone/": "/plastic-body/",
   "/butt-augmentation-surgery/": "/plastic-body/",
-  "/abdominoplasty/": "/plastic-body/",
   "/liposuction/": "/plastic-body/",
   "/gynecomastia/": "/plastic-body/",
   "/weight-loss-operations/": "/bariatric/",
@@ -121,7 +129,7 @@ const LEGACY_REDIRECTS = {
   "/filler/": "/aesthetics/",
   "/blepharoplasty/": "/plastic/",
   "/face-botox/": "/aesthetics/",
-  "/abdomenoplasty/": "/plastic-body/", // the old site spelled it with an extra syllable
+  "/abdomenoplasty/": "/abdominoplasty/", // the old site spelled it with an extra syllable
   "/category/خدماتنا/عمليات-التجميل/": "/services/",
 };
 
@@ -173,6 +181,7 @@ const ROUTE_META = {
   "/dental": ["monthly", "1.0"],
   "/plastic": ["monthly", "1.0"],
   "/plastic-body": ["monthly", "1.0"],
+  "/abdominoplasty": ["monthly", "1.0"],
   "/bariatric": ["monthly", "1.0"],
   "/aesthetics": ["monthly", "1.0"],
   "/about": ["monthly", "0.7"],
@@ -200,6 +209,7 @@ const SEO_KEY_BY_ROUTE = {
   "/dental": "dental",
   "/plastic": "plastic",
   "/plastic-body": "plasticBody",
+  "/abdominoplasty": "abdominoplasty",
   "/bariatric": "bariatric",
   "/aesthetics": "aesthetics",
   "/concierge": "concierge",
@@ -346,10 +356,12 @@ function applyStaticSeo(html, route, lang, table) {
   );
 
   // hreflang cluster: this page, in every language, as real paths.
-  const alternates = LANGS.map(
+  const routeLangs = langsFor(route);
+  const alternates = routeLangs.map(
     (l) => `    <link rel="alternate" hreflang="${l}" href="${urlFor(route, l)}" />`
   );
-  alternates.push(`    <link rel="alternate" hreflang="x-default" href="${urlFor(route, DEFAULT_LANG)}" />`);
+  const xDefault = routeLangs.includes(DEFAULT_LANG) ? DEFAULT_LANG : routeLangs[0];
+  alternates.push(`    <link rel="alternate" hreflang="x-default" href="${urlFor(route, xDefault)}" />`);
 
   out = out.replace(
     /(?:\s*<link rel="alternate" hreflang="[^"]+" href="[^"]*"\s*\/?>\s*)+/,
@@ -471,14 +483,19 @@ function buildSitemap(langs) {
   const stamp = lastmod();
   const blocks = [];
 
-  for (const lang of langs) {
-    for (const route of ROUTES) {
+  for (const route of ROUTES) {
+    // Only the languages this route is actually published in.
+    const routeLangs = langsFor(route).filter((l) => langs.includes(l));
+    if (!routeLangs.length) continue;
+    const xDefault = routeLangs.includes(DEFAULT_LANG) ? DEFAULT_LANG : routeLangs[0];
+
+    for (const lang of routeLangs) {
       const [changefreq, priority] = ROUTE_META[route] || ["monthly", "0.5"];
-      const alternates = LANGS.map(
+      const alternates = routeLangs.map(
         (l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${urlFor(route, l)}"/>`
       );
       alternates.push(
-        `    <xhtml:link rel="alternate" hreflang="x-default" href="${urlFor(route, DEFAULT_LANG)}"/>`
+        `    <xhtml:link rel="alternate" hreflang="x-default" href="${urlFor(route, xDefault)}"/>`
       );
 
       blocks.push(
@@ -543,6 +560,7 @@ async function main() {
     const table = readTable(lang);
 
     for (const route of ROUTES) {
+      if (!langsFor(route).includes(lang)) continue; // not written in this language yet
       const res = await renderRoute(route, lang, table, names, template);
 
       if (!res.ok) {

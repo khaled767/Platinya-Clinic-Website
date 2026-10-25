@@ -337,8 +337,15 @@ const unescapeHtml = (s) =>
   const locs = sitemap.match(/<loc>[^<]+<\/loc>/g) || [];
   const hreflangs = sitemap.match(/hreflang=/g) || [];
   const lastmods = sitemap.match(/<lastmod>/g) || [];
-  check("sitemap lists every language URL", locs.length === ROUTES.length * LANGS.length, `${locs.length} URLs (expected ${ROUTES.length * LANGS.length})`);
-  check("sitemap carries hreflang alternates", hreflangs.length === locs.length * (LANGS.length + 1), `${hreflangs.length} alternates`);
+  // Structural, not a fixed total: treatment pages ship in fewer languages than
+  // the rest of the site, so "140 URLs" stopped being the right number.
+  const paths = locs.map((l) => l.replace(/<\/?loc>/g, "").replace(SITE, ""));
+  const missingRoutes = ROUTES.filter((r) => !paths.includes(r.endsWith("/") ? r : r + "/"));
+  check("sitemap lists every route in the default language", missingRoutes.length === 0, missingRoutes.slice(0, 3).join(", "));
+  check("sitemap has no duplicate URL", new Set(paths).size === paths.length, `${paths.length} URLs`);
+  const blocks = sitemap.split("<url>").slice(1);
+  const incomplete = blocks.filter((b) => (b.match(/hreflang="/g) || []).length < 3);
+  check("every sitemap entry carries its hreflang cluster", incomplete.length === 0, `${incomplete.length} incomplete, ${hreflangs.length} alternates`);
   check("sitemap carries lastmod", lastmods.length === locs.length, `${lastmods.length} lastmod values`);
   check("sitemap contains /ar/dental/", sitemap.includes("<loc>" + SITE + "/ar/dental/</loc>"));
   check("sitemap contains no ?lang= URL", !sitemap.includes("?lang="));

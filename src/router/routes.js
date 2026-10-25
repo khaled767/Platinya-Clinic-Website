@@ -19,6 +19,8 @@ import transfersPage from "../pages/transfers";
 import interpreterPage from "../pages/interpreter";
 import privacyServicePage from "../pages/privacy-service";
 import notFoundPage from "../pages/not-found";
+import treatmentPage from "../pages/treatment";
+import abdominoplasty from "../content/abdominoplasty";
 
 const routes = {
   "/": homePage,
@@ -41,6 +43,9 @@ const routes = {
   "/transfers": transfersPage,
   "/interpreter": interpreterPage,
   "/privacy": privacyServicePage,
+
+  // Treatment pages — real pages, one per operation, not redirects to the group.
+  "/abdominoplasty": () => treatmentPage(abdominoplasty),
 };
 
 export { notFoundPage };

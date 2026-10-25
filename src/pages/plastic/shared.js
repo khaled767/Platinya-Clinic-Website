@@ -4,7 +4,8 @@
 // Both use the same alternated-row layout in a gold frame as the other
 // service pages (hair / dental), namespaced under .plastic-*.
 import { icons } from "../../components/icons";
-import { t } from "../../i18n";
+import { t, getLang, localizedHref } from "../../i18n";
+import ROUTE_LANGS from "../../data/route-langs.json";
 
 const BASE = "./assets/images/ai/services/plastic/";
 
@@ -33,7 +34,8 @@ const BODY = [
   { key: "breastimp",  num: "02", img: "breast-implant.webp" },
   { key: "breastlift", num: "03", img: "breast-lift.webp" },
   { key: "vaser",      num: "04", img: "vaser360.webp" },
-  { key: "tummylift",  num: "05", img: "tummy.webp" },
+  // The tummy tuck has its own page; the row links to it where it exists.
+  { key: "tummylift",  num: "05", img: "tummy.webp", href: "/abdominoplasty" },
   { key: "thighs",     num: "06", img: "thighs.webp" },
   { key: "bbl",        num: "07", img: "bbl.webp" },
 ];
@@ -56,7 +58,11 @@ function row(list, i, prefix, base) {
         <ul class="plastic-row-list">
           ${[1, 2, 3].map((n) => `<li>${t(prefix + ".f." + s.key + n)}</li>`).join("")}
         </ul>
-        <a href="/contact" data-route class="plastic-row-link">${t(prefix + ".plan")}<span class="plastic-row-arrow"></span></a>
+        ${
+          s.href && (ROUTE_LANGS[s.href] || []).includes(getLang())
+            ? `<a href="${localizedHref(s.href, getLang())}" data-route class="plastic-row-link">${t("tr.more")}<span class="plastic-row-arrow"></span></a>`
+            : `<a href="/contact" data-route class="plastic-row-link">${t(prefix + ".plan")}<span class="plastic-row-arrow"></span></a>`
+        }
       </div>
     </article>
   `;
