@@ -212,7 +212,7 @@ const unescapeHtml = (s) =>
     if (lang === "ru") ok = ok && hasScript(html, /[\u0400-\u04FF]{6,}/);
 
     // A localised page must also link to its own language, not only to English.
-    if (lang !== "en") ok = ok && html.includes(`href="${prefix}"`) && !/href="\/dental"[^>]*data-route/.test(html);
+    if (lang !== "en") ok = ok && html.includes(`href="${prefix}/"`) && !/href="\/dental"[^>]*data-route/.test(html);
 
     check(`${lang.padEnd(2)} /dental/ is a real ${lang} page`, ok,
       `lang/dir=${lang}/${dir} canonical=${canonical} title="${title.slice(0, 34)}"`);
@@ -239,7 +239,7 @@ const unescapeHtml = (s) =>
     check(`${lang} /dental/ stays ${lang} after the JS boot`, doc.documentElement.lang === lang && scriptRe.test(text), `lang=${doc.documentElement.lang}`);
     check(`${lang} /dental/ keeps its own canonical after the JS boot`, canonicalOf(doc) === `${SITE}${prefix}/dental/`, canonicalOf(doc));
 
-    const contact = doc.querySelector(`a[data-route][href="${prefix}/contact"]`);
+    const contact = doc.querySelector(`a[data-route][href="${prefix}/contact/"]`);
     check(`${lang} internal links stay inside ${prefix}/`, Boolean(contact), contact ? contact.getAttribute("href") : "none");
 
     if (lang === "ar" && contact) {
@@ -318,7 +318,7 @@ const unescapeHtml = (s) =>
   const opt = en.window.document.querySelector('.lang-option[data-lang="ru"]');
   check("language switcher offers Russian", Boolean(opt));
   if (opt) {
-    check("switcher link points at the path URL", opt.getAttribute("href") === "/ru/hair", opt.getAttribute("href"));
+    check("switcher link points at the path URL (with its trailing slash)", opt.getAttribute("href") === "/ru/hair/", opt.getAttribute("href"));
     opt.dispatchEvent(new en.window.MouseEvent("click", { bubbles: true }));
     const doc = en.window.document;
     const started = Date.now();

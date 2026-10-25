@@ -114,9 +114,16 @@ export function langPrefix(lang) {
   return code && code !== DEFAULT_LANG ? "/" + code : "";
 }
 
-// The href of a route in a given language: localizedHref("/dental", "ar") -> "/ar/dental"
+// The href of a route in a given language, always with its trailing slash:
+// localizedHref("/dental", "ar") -> "/ar/dental/". GitHub Pages answers a URL
+// without the slash with a 301, so every internal link that omits it makes the
+// crawler take a redirect hop before reaching the page — 4,600 of them were
+// doing exactly that.
 export function localizedHref(routePath, lang) {
-  const clean = !routePath || routePath === "/" ? "/" : routePath;
+  const clean =
+    !routePath || routePath === "/"
+      ? "/"
+      : "/" + String(routePath).replace(/^\/+/, "").replace(/\/+$/, "") + "/";
   return langPrefix(lang) + clean;
 }
 
@@ -127,13 +134,17 @@ export function localizedHref(routePath, lang) {
 export function localizeRouteLinks(root) {
   if (!root || typeof root.querySelectorAll !== "function") return;
   const prefix = langPrefix();
-  if (!prefix) return;
 
   root.querySelectorAll("a[data-route]").forEach((a) => {
-    const href = a.getAttribute("href");
+    let href = a.getAttribute("href");
     if (!href || href.charAt(0) !== "/") return;
-    if (href === prefix || href.indexOf(prefix + "/") === 0) return;
-    a.setAttribute("href", prefix + (href === "/" ? "" : href));
+    // Drop a language prefix that is already there, then put it back, so the
+    // rewrite is idempotent and always ends with a trailing slash (English too).
+    if (prefix && href !== prefix && href.indexOf(prefix + "/") === 0) {
+      href = href.slice(prefix.length) || "/";
+    }
+    const withSlash = href === "/" ? "/" : href.replace(/\/+$/, "") + "/";
+    a.setAttribute("href", prefix + withSlash);
   });
 }
 

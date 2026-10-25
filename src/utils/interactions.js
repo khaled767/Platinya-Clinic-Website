@@ -157,7 +157,8 @@ export function initRouting() {
     const href = link.getAttribute("href") || "/";
 
     // Already there (allowing for the trailing slash of the real file path)?
-    if (href === currentLocationPath() || href + "/" === (window.location.pathname || "")) {
+    const bare = href === "/" ? "/" : href.replace(/\/+$/, "");
+    if (bare === currentLocationPath() || bare + "/" === (window.location.pathname || "")) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
@@ -166,7 +167,8 @@ export function initRouting() {
     // visitor is reading Arabic. The href is already language-localised (see
     // setAppContent), so the path prefix is carried through navigation here.
     try {
-      window.history.pushState({}, "", href === "/" ? "/" : href + "/");
+      const target = href === "/" ? "/" : href.replace(/\/+$/, "") + "/";
+      window.history.pushState({}, "", target);
     } catch (err) {
       window.location.hash = href;
     }

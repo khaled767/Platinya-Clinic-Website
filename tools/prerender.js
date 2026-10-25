@@ -120,6 +120,8 @@ const LEGACY_REDIRECTS = {
   "/about-us/": "/about/",
   "/filler/": "/aesthetics/",
   "/blepharoplasty/": "/plastic/",
+  "/face-botox/": "/aesthetics/",
+  "/abdomenoplasty/": "/plastic-body/", // the old site spelled it with an extra syllable
   "/category/خدماتنا/عمليات-التجميل/": "/services/",
 };
 
