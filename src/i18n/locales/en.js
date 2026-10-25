@@ -924,7 +924,13 @@ const en = {
   "form.sending": "Sending your application…",
   "form.success": "Your application has been sent successfully. Our care coordinator will contact you shortly.",
   "form.error": "We could not send your application. Please try again, or write to info@platinyaclinic.com.",
-  "wa.chat": "Chat with a coordinator on WhatsApp"
+  "wa.chat": "Chat with a coordinator on WhatsApp",
+  "wa.name": "Care Coordinator",
+  "wa.close": "Close message",
+  "wa.prefill": "Hello, I have a question about treatment at Platinya Clinic.",
+  "wa.teaser1": "Hi 👋 I'm here if you need anything — would you like help planning your treatment?",
+  "wa.teaser2": "Still browsing? Tell me what you're considering and I'll get you a doctor's opinion.",
+  "wa.teaser3": "We reply within minutes, 24/7. Shall I pass your details to a coordinator?"
 };
 
 export default en;

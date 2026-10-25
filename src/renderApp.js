@@ -4,6 +4,7 @@ import { setAppContent } from "./utils/helpers";
 import { applySeo } from "./utils/seo";
 import { initMotion } from "./utils/motion";
 import { initMotionPlus, resetScroll } from "./utils/motion-plus";
+import { initWaTeaser } from "./utils/wa-teaser";
 
 function createApp() {
   const currentPage = resolveRoute();
@@ -20,6 +21,9 @@ function renderApp() {
   initMotion();
   // Phase 2: smooth scroll, counters, hero parallax, swipeable carousel.
   initMotionPlus();
+  // Re-bind the proactive WhatsApp greeting to the page just painted; the timer
+  // itself lives at module level so navigating does not restart the countdown.
+  initWaTeaser();
   // A new route always starts at the top, even while Lenis owns the scrolling.
   resetScroll();
 }

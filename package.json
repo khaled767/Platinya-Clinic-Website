@@ -13,9 +13,10 @@
     "test:site": "node tools/test-site.js",
     "test:tracking": "node tools/test-tracking.js",
     "test:i18n": "node tools/i18n-check.mjs",
-    "test": "npm run test:i18n && npm run test:site && npm run test:tracking && npm run test:motion && npm run test:form",
+    "test": "npm run test:i18n && npm run test:site && npm run test:tracking && npm run test:motion && npm run test:form && npm run test:teaser",
     "test:motion": "node tools/test-motion.js",
-    "test:form": "node tools/test-form.js"
+    "test:form": "node tools/test-form.js",
+    "test:teaser": "node tools/test-teaser.js"
   },
   "keywords": [],
   "author": "",

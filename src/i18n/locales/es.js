@@ -924,7 +924,13 @@ const es = {
   "form.sending": "Enviando tu solicitud…",
   "form.success": "Tu solicitud se ha enviado correctamente. Nuestra coordinadora se pondrá en contacto contigo en breve.",
   "form.error": "No se pudo enviar tu solicitud. Inténtalo de nuevo o escribe a info@platinyaclinic.com.",
-  "wa.chat": "Hablar con un coordinador por WhatsApp"
+  "wa.chat": "Hablar con un coordinador por WhatsApp",
+  "wa.name": "Coordinador de atención",
+  "wa.close": "Cerrar mensaje",
+  "wa.prefill": "Hola, tengo una pregunta sobre un tratamiento en Platinya Clinic.",
+  "wa.teaser1": "Hola 👋 Estoy aquí si necesitas algo — ¿te ayudo a planificar tu tratamiento?",
+  "wa.teaser2": "¿Sigues mirando? Cuéntame qué te interesa y te consigo la opinión de un médico.",
+  "wa.teaser3": "Respondemos en minutos, 24/7. ¿Paso tus datos a un coordinador?"
 };
 
 export default es;

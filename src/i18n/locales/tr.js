@@ -924,7 +924,13 @@ const tr = {
   "form.sending": "Başvurunuz gönderiliyor…",
   "form.success": "Başvurunuz başarıyla gönderildi. Bakım koordinatörümüz kısa süre içinde sizinle iletişime geçecek.",
   "form.error": "Başvurunuz gönderilemedi. Lütfen tekrar deneyin veya info@platinyaclinic.com adresine yazın.",
-  "wa.chat": "WhatsApp'tan koordinatörle görüşün"
+  "wa.chat": "WhatsApp'tan koordinatörle görüşün",
+  "wa.name": "Hasta Koordinatörü",
+  "wa.close": "Mesajı kapat",
+  "wa.prefill": "Merhaba, Platinya Clinic'teki tedaviler hakkında bir sorum var.",
+  "wa.teaser1": "Merhaba 👋 Bir şeye ihtiyacınız olursa buradayım — tedavi planınızda yardımcı olabilir miyim?",
+  "wa.teaser2": "Hâlâ göz atıyorsunuz? Ne düşündüğünüzü söyleyin, size bir doktor görüşü alalım.",
+  "wa.teaser3": "Dakikalar içinde, 7/24 yanıt veriyoruz. Bilgilerinizi koordinatöre ileteyim mi?"
 };
 
 export default tr;
