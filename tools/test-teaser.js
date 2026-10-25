@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 /**
- * Proactive WhatsApp greeting test.
+ * Proactive WhatsApp greeting — behaviour suite (jsdom, against the built bundle).
  *
- * Proves, against the built bundle in jsdom:
- *   1. nothing is visible on arrival — the bubble ships hidden and empty;
- *   2. the first message appears in the language of the page (Arabic on /ar/,
- *      Russian on /ru/) once the visitor has stayed a while;
- *   3. a second and a third message follow as they stay longer, and then it stops;
- *   4. each message plays the chime (Web Audio, stubbed here);
- *   5. closing it ends it for the session, and the button still opens WhatsApp
- *      with a ready-typed question.
- *
- * jsdom has no AudioContext and no IntersectionObserver, so both are stubbed in
- * beforeParse — the same trick the motion suite uses.
+ * Proves:
+ *   1. nothing is visible on arrival: the bubble ships hidden and empty;
+ *   2. it greets after 6 seconds (real timers, no hook);
+ *   3. a second and third message follow, then it stops;
+ *   4. closing with × does NOT end the conversation — the next message returns
+ *      after the snooze, and the visitor never sees message one twice;
+ *   5. the greeting follows the page language in all seven locales;
+ *   6. state survives a page change (the site is a multi-page SPA);
+ *   7. every message chimes, the button opens WhatsApp with a pre-typed question,
+ *      and the served HTML contains no popup for crawlers.
  */
 
 const http = require("http");
@@ -21,7 +20,7 @@ const path = require("path");
 const { JSDOM, VirtualConsole } = require("jsdom");
 
 const DIST = path.resolve(__dirname, "..", "dist");
-const PORT = 8131;
+const PORT = 8132;
 
 let checks = 0;
 let failures = 0;
@@ -55,7 +54,7 @@ function serve() {
   });
 }
 
-async function boot(route, timings) {
+async function boot(route, opts = {}) {
   const vc = new VirtualConsole();
   vc.on("jsdomError", () => {});
   const dom = await JSDOM.fromURL(`http://127.0.0.1:${PORT}${route}`, {
@@ -64,7 +63,7 @@ async function boot(route, timings) {
     pretendToBeVisual: true,
     virtualConsole: vc,
     beforeParse(window) {
-      // jsdom lacks these two APIs; the app reads their presence as "a browser".
+      // jsdom lacks both APIs; the app reads their presence as "a real browser".
       window.IntersectionObserver = class {
         constructor() {}
         observe() {}
@@ -90,86 +89,130 @@ async function boot(route, timings) {
       }
       window.AudioContext = FakeCtx;
 
-      // Compress the 10s / 32s / 62s timeline into milliseconds.
-      window.__PLATINYA_WA_TIMING__ = timings;
-      window.__PLATINYA_WA_TYPING__ = 15;
+      if (opts.timing) {
+        window.__PLATINYA_WA_TIMING__ = opts.timing;
+        window.__PLATINYA_WA_TYPING__ = 15;
+        window.__PLATINYA_WA_SNOOZE__ = opts.snooze || 90;
+        window.__PLATINYA_WA_FIRST__ = opts.timing[0];
+      }
+      // Simulate a visitor who already saw an earlier message on another page.
+      if (opts.seedState) {
+        try {
+          window.sessionStorage.setItem("platinya:wa-state", JSON.stringify(opts.seedState));
+        } catch (e) {}
+      }
     },
   });
 
   const started = Date.now();
   while (Date.now() - started < 10000) {
     if (dom.window.document.documentElement.hasAttribute("data-app-booted")) break;
-    await new Promise((r) => setTimeout(r, 50));
+    await new Promise((r) => setTimeout(r, 40));
   }
   return dom;
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const text = (d) => d.querySelector(".wa-teaser-text").textContent;
 
 (async () => {
   const server = await serve();
-  const base = `http://127.0.0.1:${PORT}`;
 
-  console.log("1) Arabic page — greeting, then two follow-ups");
+  console.log("1) 6 seconds, real timers — the visitor is left alone first");
   {
-    const dom = await boot("/ar/", [60, 260, 460]);
+    const dom = await boot("/ar/");
     const d = dom.window.document;
     const box = d.getElementById("wa-teaser");
-
     check(!!box, "the bubble exists in the layout");
-    check(box && box.hidden === true, "it is hidden on arrival");
-    check(d.querySelector(".wa-teaser-text").textContent === "", "and carries no text in the served HTML");
-
-    await sleep(140);
-    check(box.hidden === false && box.classList.contains("is-open"), "it opens after the visitor stays");
-    const first = d.querySelector(".wa-teaser-text").textContent;
-    check(/أهلاً بك/.test(first), "first message is the Arabic greeting", JSON.stringify(first));
-
-    await sleep(260);
-    const second = d.querySelector(".wa-teaser-text").textContent;
-    check(/تتصفّح/.test(second), "a second message follows", JSON.stringify(second));
-
-    await sleep(280);
-    const third = d.querySelector(".wa-teaser-text").textContent;
-    check(/نرد خلال دقائق/.test(third), "and a third", JSON.stringify(third));
-
-    await sleep(300);
-    check(d.querySelector(".wa-teaser-text").textContent === third, "and then it stops (no nagging)");
-
-    // two oscillators per chime, three messages
-    check(dom.window.__osc === 6, "every message plays the chime", `oscillators=${dom.window.__osc}`);
-
-    const link = d.querySelector(".wa-teaser-open");
-    const href = link ? link.getAttribute("href") : "";
-    check(/wa\.me\/905300799487\?text=/.test(href), "the bubble opens WhatsApp", href.slice(0, 46));
-    check(/مرحباً/.test(decodeURIComponent(href)), "with a ready-typed question in Arabic");
-
-    const closeBtn = d.querySelector(".wa-teaser-close");
-    check(!!closeBtn && closeBtn.getAttribute("aria-label") === "إغلاق الرسالة", "the close button is labelled in Arabic");
-    closeBtn.dispatchEvent(new dom.window.MouseEvent("click", { bubbles: true }));
-    await sleep(30);
-    check(box.hidden === true, "closing hides it");
-    check(dom.window.sessionStorage.getItem("platinya:wa-teaser") === "closed", "and remembers the dismissal");
+    check(box.hidden === true, "hidden on arrival");
+    await sleep(3200);
+    check(box.hidden === true, "still hidden at 3 seconds");
+    await sleep(3300); // ~6.5s
+    check(box.hidden === false, "it appears just after 6 seconds");
+    await sleep(1200);
+    check(/أهلاً بك/.test(text(d)), "then greets in Arabic", JSON.stringify(text(d).slice(0, 24)));
     dom.window.close();
   }
 
-  console.log("\n2) Russian page — the same greeting, in Russian");
+  console.log("\n2) The sequence: greet → nudge → last word → silence");
   {
-    const dom = await boot("/ru/", [60, 260, 460]);
+    const dom = await boot("/ar/", { timing: [60, 260, 460] });
     const d = dom.window.document;
+    const box = d.getElementById("wa-teaser");
     await sleep(140);
-    const text = d.querySelector(".wa-teaser-text").textContent;
-    check(/Здравствуйте/.test(text), "the greeting follows the page language", JSON.stringify(text));
+    check(/أهلاً بك/.test(text(d)), "message 1");
+    await sleep(260);
+    check(/تتصفّح/.test(text(d)), "message 2");
+    await sleep(280);
+    const third = text(d);
+    check(/نرد خلال دقائق/.test(third), "message 3");
+    await sleep(320);
+    check(text(d) === third, "and then it stops nagging");
+    check(dom.window.__osc === 6, "each message plays the chime (2 notes × 3)", `oscillators=${dom.window.__osc}`);
     const href = d.querySelector(".wa-teaser-open").getAttribute("href");
-    check(/Здравствуйте/.test(decodeURIComponent(href)), "and so does the pre-typed WhatsApp message");
+    check(/wa\.me\/905300799487\?text=/.test(href) && /مرحباً/.test(decodeURIComponent(href)),
+      "it opens WhatsApp with a pre-typed Arabic question");
+    check(d.querySelector(".wa-teaser-close").getAttribute("aria-label") === "إغلاق الرسالة",
+      "the close button is labelled in Arabic");
     dom.window.close();
   }
 
-  console.log("\n3) The served HTML never contains an open popup");
+  console.log("\n3) Closing with × postpones — it does not silence");
+  {
+    const dom = await boot("/ar/", { timing: [60, 4000, 8000], snooze: 120 });
+    const d = dom.window.document;
+    const box = d.getElementById("wa-teaser");
+    await sleep(150);
+    check(/أهلاً بك/.test(text(d)), "message 1 arrived");
+
+    d.querySelector(".wa-teaser-close").dispatchEvent(new dom.window.MouseEvent("click", { bubbles: true }));
+    await sleep(60);
+    check(!box.classList.contains("is-open"), "× hides the bubble");
+
+    await sleep(400); // past the snooze + typing
+    check(box.classList.contains("is-open"), "it comes back on its own");
+    check(/تتصفّح/.test(text(d)), "with the NEXT message, not a repeat of the first", JSON.stringify(text(d).slice(0, 24)));
+
+    const saved = JSON.parse(dom.window.sessionStorage.getItem("platinya:wa-state") || "{}");
+    check(saved.shown === 2, "progress is remembered after a close", `shown=${saved.shown}`);
+    dom.window.close();
+  }
+
+  console.log("\n4) Every language greets in its own words");
+  const locales = [
+    ["/", /I'm here if you need anything/],
+    ["/tr/", /buradayım/],
+    ["/fr/", /Je suis là/],
+    ["/es/", /Estoy aquí/],
+    ["/it/", /Sono qui/],
+    ["/ru/", /Здравствуйте/],
+  ];
+  for (const [route, pattern] of locales) {
+    const dom = await boot(route, { timing: [60, 260, 460] });
+    await sleep(150);
+    const t = text(dom.window.document);
+    check(pattern.test(t), `${route} greets correctly`, JSON.stringify(t.slice(0, 30)));
+    const href = decodeURIComponent(dom.window.document.querySelector(".wa-teaser-open").getAttribute("href"));
+    check(/wa\.me\/905300799487\?text=.+/.test(href), `${route} pre-fills the chat message`);
+    dom.window.close();
+  }
+
+  console.log("\n5) A visitor who already saw message 1 on another page continues, not restarts");
+  {
+    const dom = await boot("/fr/", {
+      timing: [60, 260, 460],
+      seedState: { shown: 1, nextAt: Date.now() + 60 },
+    });
+    await sleep(200);
+    check(/hésitez encore/.test(text(dom.window.document)), "the French page opens with message 2", JSON.stringify(text(dom.window.document).slice(0, 26)));
+    dom.window.close();
+  }
+
+  console.log("\n6) The served HTML never contains a popup");
   {
     const html = fs.readFileSync(path.join(DIST, "ar", "index.html"), "utf8");
     check(/id="wa-teaser"[^>]*hidden/.test(html.replace(/\s+/g, " ")), "the bubble ships hidden");
-    check(!/أهلاً بك/.test(html), "no greeting text in the static HTML (nothing for crawlers to index)");
+    check(!/أهلاً بك/.test(html), "no greeting text in the static HTML");
   }
 
   server.close();

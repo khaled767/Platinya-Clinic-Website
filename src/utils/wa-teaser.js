@@ -1,57 +1,70 @@
 // Proactive WhatsApp greeting.
 //
-// A visitor reads for a while, then a small message appears beside the support
-// button: a greeting, a question, and — if they stay longer — one more nudge.
-// Everything is in the language of the page they are on, because the text comes
-// from the same locale files as the rest of the site.
+// A visitor reads for a few seconds, then a small message appears beside the
+// support button: a greeting, a question, one more nudge — each in the language
+// of the page. Closing it does not silence the coordinator forever: it steps
+// back and returns later with the next message. Only the last message ends it.
 //
-// Rules that matter:
-//   * nothing happens in jsdom (the pre-renderer) or without JavaScript — the
-//     bubble ships hidden and empty;
-//   * the countdown starts at the FIRST page view and keeps running across SPA
-//     navigations, so a visitor who browses five pages still gets greeted once
-//     rather than never;
-//   * closing it ends it for the browser session (sessionStorage), and it never
-//     reappears on the next page;
-//   * the chime is synthesised with Web Audio (no audio file, 0 KB) and fails
-//     silently when the browser blocks sound before the first interaction.
+// Timing: 6s → 24s → 50s from the first page view. Closing snoozes the next
+// message by 40s instead of cancelling it.
+//
+// The state (how many messages were shown, when the next one is due) lives in
+// sessionStorage, because every internal link is a real page load: without it a
+// visitor would meet message one again on every page of the site.
+//
+// Nothing happens in jsdom (the pre-renderer) or without JavaScript — the bubble
+// ships hidden and empty.
 
 import { t } from "../i18n";
 import { isRealBrowser, prefersReducedMotion } from "./motion";
 
-const DISMISS_KEY = "platinya:wa-teaser";
+const STATE_KEY = "platinya:wa-state";
 const MESSAGES = ["wa.teaser1", "wa.teaser2", "wa.teaser3"];
-// Cumulative seconds from the first page view.
-const MILESTONES_MS = [10000, 32000, 62000];
+const FIRST_DELAY = 6000;
+const MILESTONES_MS = [6000, 24000, 50000];
+const SNOOZE_MS = 40000;
 const TYPING_MS = 1500;
 
-// Test hook: the suite cannot sit through a 62-second sequence, so the timeline
-// can be compressed from outside. Absent in production, these are undefined.
-function timeline() {
-  const o = typeof window !== "undefined" ? window.__PLATINYA_WA_TIMING__ : null;
-  return Array.isArray(o) && o.length ? o : MILESTONES_MS;
-}
-function typingDelay() {
-  const o = typeof window !== "undefined" ? window.__PLATINYA_WA_TYPING__ : null;
-  return Number.isFinite(o) ? o : TYPING_MS;
-}
-
-let startedAt = 0;
-let shown = 0;
 let timers = [];
 let audioCtx = null;
 let audioUnlocked = false;
+
+// The suite cannot sit through a 50-second sequence, so the timeline can be
+// compressed from outside. Absent in production, these are undefined.
+function config() {
+  const w = typeof window !== "undefined" ? window : {};
+  const gaps = Array.isArray(w.__PLATINYA_WA_TIMING__) && w.__PLATINYA_WA_TIMING__.length
+    ? w.__PLATINYA_WA_TIMING__
+    : MILESTONES_MS;
+  return {
+    milestones: gaps,
+    first: Number.isFinite(w.__PLATINYA_WA_FIRST__) ? w.__PLATINYA_WA_FIRST__ : FIRST_DELAY,
+    snooze: Number.isFinite(w.__PLATINYA_WA_SNOOZE__) ? w.__PLATINYA_WA_SNOOZE__ : SNOOZE_MS,
+    typing: Number.isFinite(w.__PLATINYA_WA_TYPING__) ? w.__PLATINYA_WA_TYPING__ : TYPING_MS,
+  };
+}
 
 function clearTimers() {
   timers.forEach((id) => clearTimeout(id));
   timers = [];
 }
 
-function dismissed() {
+function readState() {
   try {
-    return sessionStorage.getItem(DISMISS_KEY) === "closed";
+    const raw = sessionStorage.getItem(STATE_KEY);
+    const s = raw ? JSON.parse(raw) : null;
+    if (s && typeof s === "object" && Number.isFinite(s.shown)) return s;
   } catch (e) {
-    return false;
+    /* private mode */
+  }
+  return null;
+}
+
+function saveState(state) {
+  try {
+    sessionStorage.setItem(STATE_KEY, JSON.stringify(state));
+  } catch (e) {
+    /* private mode: the greeting just restarts on the next page */
   }
 }
 
@@ -107,57 +120,69 @@ function unlockAudioOnce() {
   );
 }
 
-export function resetWaTeaser() {
-  clearTimers();
-  startedAt = 0;
-  shown = 0;
+/** Never greet a tab that is in the background. */
+function whenVisible(fn) {
+  if (!document.hidden) return fn();
+  const onShown = () => {
+    if (document.hidden) return;
+    document.removeEventListener("visibilitychange", onShown);
+    fn();
+  };
+  document.addEventListener("visibilitychange", onShown);
 }
 
 export function initWaTeaser() {
   const box = document.getElementById("wa-teaser");
-  if (!box || !isRealBrowser() || dismissed()) return;
-
+  if (!box || !isRealBrowser()) return;
   const textEl = box.querySelector(".wa-teaser-text");
   if (!textEl) return;
 
-  clearTimers();
-  if (!startedAt) startedAt = Date.now();
+  const c = config();
+  const state = readState() || { shown: 0, nextAt: Date.now() + c.first };
+  if (state.done || state.shown >= MESSAGES.length) {
+    state.done = true;
+    saveState(state);
+    return;
+  }
+  if (!Number.isFinite(state.nextAt)) state.nextAt = Date.now() + c.first;
 
-  // Never greet a tab that is in the background: a visitor who switched away
-  // should meet the first message on return, not the third.
-  const whenVisible = (fn) => {
-    if (!document.hidden) return fn();
-    const onShown = () => {
-      if (document.hidden) return;
-      document.removeEventListener("visibilitychange", onShown);
-      fn();
-    };
-    document.addEventListener("visibilitychange", onShown);
+  clearTimers();
+
+  const reveal = () => {
+    whenVisible(() => {
+      if (state.done) return;
+      box.hidden = false;
+      box.classList.add("is-typing");
+      timers.push(
+        setTimeout(() => {
+          if (state.done) return;
+          box.classList.remove("is-typing");
+          textEl.textContent = t(MESSAGES[state.shown]);
+          box.classList.add("is-open");
+          if (!prefersReducedMotion()) chime();
+          state.shown += 1;
+          if (state.shown < MESSAGES.length) {
+            // distance between this milestone and the next one in the timeline
+            const gap = c.milestones[state.shown] - c.milestones[state.shown - 1];
+            state.nextAt = Date.now() + Math.max(0, gap);
+          } else {
+            state.nextAt = null;
+            state.done = true;
+          }
+          saveState(state);
+          if (!state.done) schedule(); // arm the next message
+        }, prefersReducedMotion() ? 0 : c.typing)
+      );
+    });
   };
 
-  const reveal = (index) => whenVisible(() => {
-    box.hidden = false;
-    box.classList.add("is-typing");
-    const typing = setTimeout(() => {
-      box.classList.remove("is-typing");
-      textEl.textContent = t(MESSAGES[index]);
-      box.classList.add("is-open");
-      if (!prefersReducedMotion()) chime();
-      shown = index + 1;
-    }, prefersReducedMotion() ? 0 : typingDelay());
-    timers.push(typing);
-  });
+  const schedule = () => {
+    const remaining = state.nextAt - Date.now();
+    if (remaining <= 0) reveal();
+    else timers.push(setTimeout(reveal, remaining));
+  };
 
-  // Continue the sequence from wherever this page view joins it.
-  timeline().forEach((at, index) => {
-    if (index < shown) return;
-    const remaining = at - (Date.now() - startedAt);
-    if (remaining <= 0) {
-      reveal(index);
-      return;
-    }
-    timers.push(setTimeout(() => reveal(index), remaining));
-  });
+  schedule();
 
   const close = box.querySelector(".wa-teaser-close");
   if (close && !close.dataset.bound) {
@@ -166,16 +191,29 @@ export function initWaTeaser() {
       e.preventDefault();
       e.stopPropagation();
       clearTimers();
-      shown = MESSAGES.length;
       box.classList.remove("is-open");
-      box.hidden = true;
-      try {
-        sessionStorage.setItem(DISMISS_KEY, "closed");
-      } catch (err) {
-        /* private mode: it will simply show again next visit */
+      timers.push(setTimeout(() => { box.hidden = true; }, 300));
+      if (state.shown < MESSAGES.length) {
+        // Not a refusal — just "later". The remaining messages still arrive.
+        state.nextAt = Date.now() + c.snooze;
+        saveState(state);
+        schedule();
+      } else {
+        state.done = true;
+        saveState(state);
       }
     });
   }
 
   unlockAudioOnce();
+}
+
+/** Used by the suite to start from a clean session. */
+export function resetWaTeaser() {
+  clearTimers();
+  try {
+    sessionStorage.removeItem(STATE_KEY);
+  } catch (e) {
+    /* ignore */
+  }
 }
