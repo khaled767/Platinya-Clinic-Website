@@ -1,15 +1,18 @@
 // Turkish Licenses Section (Health Tourism + Trademark certifications)
+//
+// Every word here comes from the locale files: the section used to carry its
+// copy inline in English, so the Arabic (and Turkish, French…) pages showed an
+// English block in the middle of an Arabic page.
+import { t } from "../../i18n";
 
 export default function turkishLicenses() {
   return `
     <section class="section-licenses">
       <div class="container">
         <div class="section-header text-center">
-          <span class="section-subtitle text-gold">Official Registration</span>
-          <h2 class="section-title text-inverse">Turkish Ministry of Health & Trade Licenses</h2>
-          <p class="section-description text-muted">
-            Platinya Clinic operates fully under the official authorisation and registrations of the Republic of Türkiye — verified by the Ministry of Health and the Turkish Patent and Trademark Office.
-          </p>
+          <span class="section-subtitle text-gold">${t("lic.sub")}</span>
+          <h2 class="section-title text-inverse">${t("lic.title")}</h2>
+          <p class="section-description text-muted">${t("lic.desc")}</p>
         </div>
 
         <div class="licenses-grid">
@@ -20,22 +23,20 @@ export default function turkishLicenses() {
                 type="button"
                 class="license-zoom"
                 data-lightbox="./assets/images/certifications/health-tourism-cert.webp"
-                aria-label="Expand Health Tourism Authorization Certificate"
+                aria-label="${t("lic.ariaHealth")}"
               >
                 <img
                   src="./assets/images/certifications/health-tourism-cert-web.webp"
-                  alt="Official Health Tourism Authorization Certificate — Turkish Ministry of Health (Health Türkiye)"
+                  alt="${t("alt.certHealthTourism")}"
                   class="license-img"
                   loading="lazy"
                 />
               </button>
             </div>
             <figcaption class="license-caption">
-              <span class="license-badge">Ministry of Health — Health Türkiye</span>
-              <h3 class="license-title">Health Tourism Authorization Certificate</h3>
-              <p class="license-desc">
-                International Health Tourism Authorization (Uluslararası Sağlık Turizmi Yetki Belgesi) issued by the Republic of Türkiye Ministry of Health — certifying Platinya Clinic's legitimate operation in health-tourism intermediary services.
-              </p>
+              <span class="license-badge">${t("lic.badgeHealth")}</span>
+              <h3 class="license-title">${t("lic.tHealth")}</h3>
+              <p class="license-desc">${t("lic.dHealth")}</p>
             </figcaption>
           </figure>
 
@@ -46,22 +47,20 @@ export default function turkishLicenses() {
                 type="button"
                 class="license-zoom"
                 data-lightbox="./assets/images/certifications/trademark-cert-p1.webp"
-                aria-label="Expand Registered Trademark Certificate"
+                aria-label="${t("lic.ariaTmark")}"
               >
                 <img
                   src="./assets/images/certifications/trademark-cert-p1-web.webp"
-                  alt="Registered Trademark Certificate for PLATINYA CLINIC — Turkish Patent and Trademark Office"
+                  alt="${t("alt.certTrademark")}"
                   class="license-img"
                   loading="lazy"
                 />
               </button>
             </div>
             <figcaption class="license-caption">
-              <span class="license-badge">TÜRKPATENT</span>
-              <h3 class="license-title">Registered Trademark — "Platinya Clinic"</h3>
-              <p class="license-desc">
-                Trademark Registration Certificate (Marka Tescil Belgesi) from the Turkish Patent and Trademark Office — legally protecting the "PLATINYA CLINIC" brand across medical, travel and accommodation services.
-              </p>
+              <span class="license-badge">${t("lic.badgeTmark")}</span>
+              <h3 class="license-title">${t("lic.tTmark")}</h3>
+              <p class="license-desc">${t("lic.dTmark")}</p>
             </figcaption>
           </figure>
         </div>

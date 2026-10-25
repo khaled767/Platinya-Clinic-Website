@@ -12,7 +12,7 @@ export default function footer() {
           <!-- Column 1: Brand & Concierge Statement -->
           <div class="footer-col footer-brand">
             <a href="/" data-route class="logo-link">
-              <img src="./assets/images/logo.webp" alt="Platinya Clinic Agency Logo" class="brand-logo-img-footer" />
+              <img src="./assets/images/logo.webp" alt="${t("alt.brandLogoFooter")}" class="brand-logo-img-footer" />
             </a>
             <p class="brand-description">
               ${t("footer.tagline")}

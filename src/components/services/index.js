@@ -8,37 +8,37 @@ export default function services() {
       id: "hair", number: "01", key: "hair", tagKey: "popular",
       link: "/hair",
       img: "./assets/images/ai/services/hair-APPROVED.webp",
-      imgAlt: "Hair transplantation in progress with drawn hairline",
+      imgAlt: t("alt.svcHair"),
     },
     {
       id: "dental", number: "02", key: "dental", tagKey: "cosmetic",
       link: "/dental",
       img: "./assets/images/ai/services/dental-APPROVED-nolamp.webp",
-      imgAlt: "Comfortable dental check-up with open mouth",
+      imgAlt: t("alt.svcDental"),
     },
     {
       id: "plastic-face", number: "03", key: "pf", tagKey: "surgical",
       link: "/plastic",
       img: "./assets/images/ai/services/plastic/plastic-APPROVED.webp",
-      imgAlt: "Facial plastic surgery consultation reviewing a facial plan",
+      imgAlt: t("alt.svcPlastic"),
     },
     {
       id: "plastic-body", number: "04", key: "pb", tagKey: "surgical",
       link: "/plastic-body",
       img: "./assets/images/ai/services/plastic/vaser360.webp",
-      imgAlt: "Body contouring procedure plan",
+      imgAlt: t("alt.svcBody"),
     },
     {
       id: "bariatric", number: "05", key: "bariatric", tagKey: "vital",
       link: "/bariatric",
       img: "./assets/images/ai/services/bariatric/bariatric-APPROVED.webp",
-      imgAlt: "Healthy, energised lifestyle after bariatric treatment",
+      imgAlt: t("alt.svcBariatric"),
     },
     {
       id: "aesthetics", number: "06", key: "aesth", tagKey: "nonsurgical",
       link: "/aesthetics",
       img: "./assets/images/ai/services/aesthetics/aesthetics-APPROVED.webp",
-      imgAlt: "Serene medical-aesthetics facial treatment",
+      imgAlt: t("alt.svcAesthetic"),
     },
   ];
 

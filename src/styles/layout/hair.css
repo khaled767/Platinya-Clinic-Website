@@ -87,7 +87,9 @@
 .hair-row {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  /* Text leads, photo supports: the media column was wider than the copy, which
+     made the close-up shots dominate the card. */
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1fr);
   align-items: center;
   gap: clamp(28px, 4vw, 64px);
   margin-top: clamp(40px, 6vw, 72px);
@@ -109,7 +111,10 @@
   margin: 0;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  aspect-ratio: 4 / 3;
+  /* Capped height + inner padding: the photo stays a comfortable size on wide
+     screens and sits inside the gold frame instead of filling it edge to edge. */
+  height: clamp(240px, 25vw, 380px);
+  padding: clamp(6px, 0.8vw, 10px);
   background: var(--color-bg-surface-elevated);
 }
 .hair-row-media img {
@@ -117,9 +122,12 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: calc(var(--radius-xl) - 8px);
   transition: transform var(--transition-slow);
 }
-.hair-row:hover .hair-row-media img { transform: scale(1.04); }
+@media (hover: hover) and (pointer: fine) {
+  .hair-row:hover .hair-row-media img { transform: scale(1.02); }
+}
 .hair-row-body {
   display: flex;
   flex-direction: column;
@@ -238,7 +246,7 @@
   .hair-row { grid-template-columns: 1fr; gap: var(--space-4); }
   .hair-row.is-flipped .hair-row-media,
   .hair-row.is-flipped .hair-row-body { order: initial; }
-  .hair-row-media { aspect-ratio: 4 / 3; }
+  .hair-row-media { height: auto; aspect-ratio: 4 / 3; }
   .hair-tech-grid { grid-template-columns: 1fr; }
   .hair-cta { margin-top: var(--space-10); }
 }

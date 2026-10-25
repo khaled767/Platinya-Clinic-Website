@@ -26,7 +26,7 @@ export default function hairPage() {
         <img
           class="hair-hero-bg"
           src="./assets/images/ai/services/hair/hero.webp"
-          alt="Luxury hair-restoration clinic"
+          alt="${t("alt.hairClinic")}"
         />
         <div class="hair-hero-scrim"></div>
         <div class="container hair-hero-content">

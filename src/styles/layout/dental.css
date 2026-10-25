@@ -90,7 +90,10 @@
 .dental-row {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  /* The photo used to take a slightly larger share than the copy (1.05fr vs
+     1fr). It is a tight macro shot, and at that width it dominated the card and
+     felt uncomfortable to look at. The text now leads, the photo supports. */
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1fr);
   align-items: center;
   gap: clamp(28px, 4vw, 64px);
   margin-bottom: clamp(44px, 6vw, 84px);
@@ -113,7 +116,11 @@
   margin: 0;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  aspect-ratio: 4 / 3;
+  /* A capped height instead of a fixed 4:3 box: the photo can no longer grow
+     into a wall-sized image on a wide screen, and the extra padding makes it
+     sit inside the gold frame with room to breathe. */
+  height: clamp(240px, 25vw, 380px);
+  padding: clamp(6px, 0.8vw, 10px);
   background: var(--color-bg-surface-elevated);
 }
 .dental-row-media img {
@@ -121,9 +128,12 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: calc(var(--radius-xl) - 8px);
   transition: transform var(--transition-slow);
 }
-.dental-row:hover .dental-row-media img { transform: scale(1.04); }
+@media (hover: hover) and (pointer: fine) {
+  .dental-row:hover .dental-row-media img { transform: scale(1.02); }
+}
 
 .dental-row-body {
   display: flex;
@@ -232,6 +242,6 @@
   .dental-row { grid-template-columns: 1fr; gap: var(--space-4); }
   .dental-row.is-flipped .dental-row-media,
   .dental-row.is-flipped .dental-row-body { order: initial; }
-  .dental-row-media { aspect-ratio: 4 / 3; }
+  .dental-row-media { height: auto; aspect-ratio: 4 / 3; }
   .dental-treatments { padding-bottom: var(--space-16); }
 }

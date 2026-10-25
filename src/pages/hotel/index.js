@@ -30,7 +30,7 @@ export default function hotelPage() {
       <section class="hotel-hero">
         <img
           src="./assets/images/partner-services/hotel/hotel-1.webp"
-          alt="Luxury hotel exterior"
+          alt="${t("alt.hotelExterior")}"
           class="hotel-hero-bg"
         />
         <div class="hotel-hero-scrim"></div>
@@ -52,7 +52,7 @@ export default function hotelPage() {
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
           </div>
           <div class="hotel-intro-img">
-            <img src="./assets/images/partner-services/hotel/hotel-2.webp" alt="Luxury suite" loading="lazy" />
+            <img src="./assets/images/partner-services/hotel/hotel-2.webp" alt="${t("alt.hotelSuite")}" loading="lazy" />
           </div>
         </div>
       </section>

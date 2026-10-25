@@ -47,7 +47,7 @@ export default function hero() {
           <div class="hero-card-luxury">
             <img
               src="./assets/images/ai/hero-APPROVED.webp"
-              alt="Luxury medical concierge lounge"
+              alt="${t("alt.heroLounge")}"
               class="hero-card-img"
               loading="lazy"
             />

@@ -19,7 +19,7 @@ export default function airportPage() {
       <section class="hotel-hero">
         <img
           src="./assets/images/partner-services/airport/airport-hero.webp"
-          alt="VIP airport reception"
+          alt="${t("alt.airportReception")}"
           class="hotel-hero-bg"
         />
         <div class="hotel-hero-scrim"></div>
@@ -41,7 +41,7 @@ export default function airportPage() {
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
           </div>
           <div class="hotel-intro-img">
-            <img src="./assets/images/partner-services/airport/airport-car.webp" alt="Private chauffeur" loading="lazy" />
+            <img src="./assets/images/partner-services/airport/airport-car.webp" alt="${t("alt.airportCar")}" loading="lazy" />
           </div>
         </div>
       </section>

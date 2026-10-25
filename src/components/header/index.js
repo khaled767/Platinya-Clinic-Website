@@ -14,7 +14,7 @@ export default function header() {
       <div class="container header-container">
         <div class="header-logo">
           <a href="/" data-route class="logo-link">
-            <img src="./assets/images/logo.webp" alt="Platinya Clinic Logo" class="brand-logo-img" />
+            <img src="./assets/images/logo.webp" alt="${t("alt.brandLogo")}" class="brand-logo-img" />
           </a>
         </div>
 
@@ -54,7 +54,7 @@ export default function header() {
           <!-- Ministry of Health / Health Türkiye trust badge — after VIP CTA -->
           <img
             src="./assets/images/health-turkiye-logo.webp"
-            alt="Health Türkiye — Turkish Ministry of Health"
+            alt="${t("alt.healthTurkiye")}"
             class="health-badge"
             loading="lazy"
           />

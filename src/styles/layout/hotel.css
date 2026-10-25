@@ -86,7 +86,10 @@
 .hotel-intro-text .section-description { margin-bottom: var(--space-8); }
 .hotel-intro-img img {
   width: 100%;
-  height: auto;
+  /* Capped so the hotel photo matches the breathing room of the treatment rows
+     instead of towering over the text column. */
+  height: clamp(260px, 28vw, 420px);
+  aspect-ratio: auto;
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-luxury);
   object-fit: cover;

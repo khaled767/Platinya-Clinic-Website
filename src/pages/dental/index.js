@@ -21,7 +21,7 @@ export default function dentalPage() {
         <img
           class="dental-hero-bg"
           src="./assets/images/ai/services/dental/hero.webp"
-          alt="Modern Aesthetic Dentistry treatment room"
+          alt="${t("alt.dentalRoom")}"
         />
         <div class="dental-hero-scrim"></div>
         <div class="container dental-hero-content">

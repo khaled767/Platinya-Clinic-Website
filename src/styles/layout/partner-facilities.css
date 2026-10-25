@@ -94,9 +94,14 @@
 
 .partner-caption {
   font-size: var(--font-size-sm);
-  color: var(--color-bg-base);
+  /* Was var(--color-bg-base): near-black text on a dark violet card, which made
+     the description almost unreadable (and looked like clipped text). */
+  color: var(--color-text-muted);
   line-height: var(--line-height-relaxed);
   margin: 0;
+  /* Long Turkish/German-style compounds and Arabic without spaces must wrap
+     instead of pushing the card wider than its grid column. */
+  overflow-wrap: anywhere;
 }
 
 /* Responsive */
