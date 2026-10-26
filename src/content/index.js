@@ -26,7 +26,20 @@ import stomachBalloon from "./stomach-balloon";
 import filler from "./filler";
 import faceBotox from "./face-botox";
 
-export default [
+import tr from "./i18n/tr";
+import fr from "./i18n/fr";
+import es from "./i18n/es";
+import it from "./i18n/it";
+import ru from "./i18n/ru";
+
+// A language is only advertised for a page when the page actually exists in it.
+// The translation tables are merged over the en/ar modules here, so every
+// consumer (routes, hreflang, sitemap, language switcher, group links) sees a
+// page that is genuinely written in that language — never an English fallback
+// behind a /tr/ URL.
+const TRANSLATIONS = { tr, fr, es, it, ru };
+
+const BASE = [
   abdominoplasty,
   hairTransplant,
   sapphireHairTransplant,
@@ -51,3 +64,12 @@ export default [
   filler,
   faceBotox,
 ];
+
+export default BASE.map((page) => {
+  const merged = { ...page };
+  for (const [lang, table] of Object.entries(TRANSLATIONS)) {
+    const copy = table && table[page.slug];
+    if (copy) merged[lang] = copy;
+  }
+  return merged;
+});

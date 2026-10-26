@@ -1,94 +1,209 @@
 {
   "/abdominoplasty": [
     "en",
-    "ar"
-  ],
-  "/hair-transplant": [
-    "en",
-    "ar"
-  ],
-  "/sapphire-hair-transplant": [
-    "en",
-    "ar"
-  ],
-  "/hair-implant-hybrid": [
-    "en",
-    "ar"
-  ],
-  "/hair-transplant-for-women": [
-    "en",
-    "ar"
-  ],
-  "/eyebrow-transplant": [
-    "en",
-    "ar"
-  ],
-  "/hollywood-smile": [
-    "en",
-    "ar"
-  ],
-  "/dental-veneers": [
-    "en",
-    "ar"
-  ],
-  "/teeth-whitening": [
-    "en",
-    "ar"
-  ],
-  "/dental-implants": [
-    "en",
-    "ar"
-  ],
-  "/zircon-teeth": [
-    "en",
-    "ar"
-  ],
-  "/periodontics": [
-    "en",
-    "ar"
-  ],
-  "/facelift-surgery": [
-    "en",
-    "ar"
-  ],
-  "/chin-implants": [
-    "en",
-    "ar"
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
   ],
   "/blepharoplasty": [
     "en",
-    "ar"
-  ],
-  "/silicone": [
-    "en",
-    "ar"
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
   ],
   "/butt-augmentation-surgery": [
     "en",
-    "ar"
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
   ],
-  "/liposuction": [
+  "/chin-implants": [
     "en",
-    "ar"
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
   ],
-  "/gynecomastia": [
+  "/dental-implants": [
     "en",
-    "ar"
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
   ],
-  "/gastric-sleeve-surgery": [
+  "/dental-veneers": [
     "en",
-    "ar"
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
   ],
-  "/stomach-balloon": [
+  "/eyebrow-transplant": [
     "en",
-    "ar"
-  ],
-  "/filler": [
-    "en",
-    "ar"
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
   ],
   "/face-botox": [
     "en",
-    "ar"
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/facelift-surgery": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/filler": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/gastric-sleeve-surgery": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/gynecomastia": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/hair-implant-hybrid": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/hair-transplant-for-women": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/hair-transplant": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/hollywood-smile": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/liposuction": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/periodontics": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/sapphire-hair-transplant": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/silicone": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/stomach-balloon": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/teeth-whitening": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
+  ],
+  "/zircon-teeth": [
+    "en",
+    "ar",
+    "tr",
+    "fr",
+    "es",
+    "it",
+    "ru"
   ]
 }
