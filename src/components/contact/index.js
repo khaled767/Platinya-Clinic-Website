@@ -17,7 +17,7 @@ export default function contact() {
               <span class="channel-icon">${icons.phone}</span>
               <div>
                 <span class="channel-label">${t("contact.hotline")}</span>
-                <a href="tel:+905****9487" class="channel-value">+90 530 079 9487</a>
+                <a href="tel:+905****9487" class="channel-value"><bdi dir="ltr">+90 530 079 9487</bdi></a>
                 <a href="https://wa.me/905300799487" target="_blank" rel="noopener" class="channel-whatsapp">
                   <span class="whatsapp-badge">${icons.whatsapp}</span>
                   <span>WhatsApp</span>
@@ -29,8 +29,8 @@ export default function contact() {
               <span class="channel-icon">${icons.email}</span>
               <div>
                 <span class="channel-label">${t("contact.desk")}</span>
-                <a href="mailto:info@platinyaclinic.com" class="channel-value">info@platinyaclinic.com</a>
-                <a href="mailto:info@skyistgroup.com" class="channel-value channel-second">info@skyistgroup.com</a>
+                <a href="mailto:info@platinyaclinic.com" class="channel-value"><bdi dir="ltr">info@platinyaclinic.com</bdi></a>
+                <a href="mailto:info@skyistgroup.com" class="channel-value channel-second"><bdi dir="ltr">info@skyistgroup.com</bdi></a>
               </div>
             </div>
 
@@ -38,7 +38,7 @@ export default function contact() {
               <span class="channel-icon">${icons.mapPin}</span>
               <div>
                 <span class="channel-label">${t("contact.hq")}</span>
-                <span class="channel-value">${t("contact.location")}</span>
+                <span class="channel-value channel-address">${t("contact.location")}</span>
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@ export default function contact() {
 
             <div class="form-group">
               <label class="form-label" for="email">${t("contact.email")}</label>
-              <input type="email" id="email" name="email" class="form-input" required />
+              <input type="email" id="email" name="email" class="form-input" dir="ltr" placeholder="name@email.com" required />
             </div>
 
             <div class="form-group form-phone-row">
@@ -82,7 +82,8 @@ export default function contact() {
                     type="text"
                     id="country-code-input"
                     class="form-input country-key"
-                    placeholder="+90 / Code or country"
+                    dir="ltr"
+                    placeholder="+90"
                     autocomplete="off"
                     maxlength="30"
                     aria-label="Country phone code or name"
@@ -94,6 +95,7 @@ export default function contact() {
                   type="tel"
                   id="phone-number"
                   class="form-input"
+                  dir="ltr"
                   name="number_part"
                   inputmode="numeric"
                   pattern="[0-9 ]+"

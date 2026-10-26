@@ -167,7 +167,7 @@ const ru = {
   "contact.email": "Адрес эл. почты",
   "contact.formTitle": "Запросить частную консультацию",
   "contact.hotline": "VIP-линии консьержа 24/7",
-  "contact.hq": "Штаб международных отношений",
+  "contact.hq": "Головной офис",
   "contact.location": "Zafer Mah. 185 Sk. Babacan Premium B1 Daire 319, Esenyurt / Стамбул, Турция",
   "contact.message": "Чем может помочь вам наша команда консьержа?",
   "contact.name": "Полное имя",

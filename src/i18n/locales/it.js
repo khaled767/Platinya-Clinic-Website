@@ -167,7 +167,7 @@ const it = {
   "contact.email": "Indirizzo Email",
   "contact.formTitle": "Richiedi una Valutazione Privata",
   "contact.hotline": "Linee Concierge VIP 24/7",
-  "contact.hq": "Sede delle Relazioni Internazionali",
+  "contact.hq": "Sede centrale",
   "contact.location": "Zafer Mah. 185 Sk. Babacan Premium B1 Daire 319, Esenyurt / Istanbul, Turchia",
   "contact.message": "Come può aiutarti il nostro team concierge?",
   "contact.name": "Nome Completo",

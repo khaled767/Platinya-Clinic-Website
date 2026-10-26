@@ -167,7 +167,7 @@ const en = {
   "contact.email": "Email Address",
   "contact.formTitle": "Request Private Assessment",
   "contact.hotline": "24/7 VIP Concierge Hotlines",
-  "contact.hq": "International Relations HQ",
+  "contact.hq": "Head Office",
   "contact.location": "Zafer Mah. 185 Sk. Babacan Premium B1 Daire 319, Esenyurt / İstanbul, Türkiye",
   "contact.message": "How can our concierge team assist you?",
   "contact.name": "Full Name",

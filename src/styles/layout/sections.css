@@ -516,3 +516,45 @@
     gap: var(--space-4);
   }
 }
+
+/* --- Bidirectional text hygiene -------------------------------------------
+   Arabic pages mix Latin runs (phone numbers, e-mails, "B1", "319") into RTL
+   copy. Without isolation the bidi algorithm reorders those runs and a phone
+   number reads "9487 079 530 90+" and an address looks like another language.
+   Latin runs are isolated in the markup with <bdi dir="ltr">; these rules make
+   the same isolation survive for any element that opts in. */
+[dir="rtl"] .channel-value bdi,
+[dir="rtl"] .contact-link bdi,
+.form-input[dir="ltr"],
+.country-preview,
+.country-key {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.form-input[dir="ltr"] {
+  text-align: left;
+}
+
+.channel-preview,
+.country-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Arabic paragraph containing Latin fragments: let the paragraph keep its own
+   direction instead of inheriting a stray strong character from a child. */
+.channel-address {
+  unicode-bidi: plaintext;
+  line-height: var(--line-height-relaxed);
+  overflow-wrap: anywhere;
+}
+
+/* A <select> in an RTL page keeps its text left-aligned by default. */
+[dir="rtl"] select.form-input,
+[dir="rtl"] .form-select {
+  text-align: right;
+  padding-right: var(--space-3);
+  padding-left: var(--space-8);
+}

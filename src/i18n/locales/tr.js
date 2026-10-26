@@ -167,7 +167,7 @@ const tr = {
   "contact.email": "E-posta Adresi",
   "contact.formTitle": "Özel Değerlendirme Talebi",
   "contact.hotline": "7/24 VIP Danışmanlık Hatları",
-  "contact.hq": "Uluslararası İlişkiler Merkezi",
+  "contact.hq": "Merkez Ofis",
   "contact.location": "Zafer Mah. 185 Sk. Babacan Premium B1 Daire 319, Esenyurt / İstanbul, Türkiye",
   "contact.message": "Consiyeri ekibimiz size nasıl yardımcı olabilir?",
   "contact.name": "Ad Soyad",

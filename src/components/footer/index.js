@@ -51,7 +51,7 @@ export default function footer() {
             <div class="contact-info">
               <p class="contact-item">
                 <span class="contact-label">${t("footer.vipLine")}:</span>
-                <a href="tel:+905****9487" class="contact-link">+90 530 079 9487</a>
+                <a href="tel:+905****9487" class="contact-link"><bdi dir="ltr">+90 530 079 9487</bdi></a>
                 <a href="https://wa.me/905300799487" target="_blank" rel="noopener" class="footer-whatsapp contact-link">
                   <span class="whatsapp-badge">${icons.whatsapp}</span>
                   <span>WhatsApp</span>
@@ -59,8 +59,8 @@ export default function footer() {
               </p>
               <p class="contact-item">
                 <span class="contact-label">${t("footer.emailHelp")}:</span>
-                <a href="mailto:info@platinyaclinic.com" class="contact-link">info@platinyaclinic.com</a>
-                <a href="mailto:info@skyistgroup.com" class="contact-link">info@skyistgroup.com</a>
+                <a href="mailto:info@platinyaclinic.com" class="contact-link"><bdi dir="ltr">info@platinyaclinic.com</bdi></a>
+                <a href="mailto:info@skyistgroup.com" class="contact-link"><bdi dir="ltr">info@skyistgroup.com</bdi></a>
               </p>
               <p class="contact-item">
                 <span class="contact-label">${t("footer.hq")}:</span>
