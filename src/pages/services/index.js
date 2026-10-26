@@ -1,5 +1,32 @@
 // Services Page Module (High-Fidelity)
-import { t } from "../../i18n";
+import { t, getLang, localizedHref } from "../../i18n";
+import treatments from "../../content";
+import ROUTE_LANGS from "../../data/route-langs.json";
+
+// The catalogue used to be a dead end: six described sections and a booking
+// button, no way to reach the section itself. Each card now links to its section
+// and lists that section's treatment pages, so /services/ is a real hub:
+// home -> section -> treatment.
+function treatmentChips(groupHref, lang) {
+  const pages = treatments.filter(
+    (content) =>
+      content.group && content.group.href === groupHref && (ROUTE_LANGS[content.slug] || []).includes(lang)
+  );
+  if (!pages.length) return "";
+
+  return `
+    <div class="detail-chips">
+      <span class="detail-chips-label">${t("sv.chips")}</span>
+      ${pages
+        .map((content) => {
+          const title = (content[lang] || content.en).title
+            .replace(/\s+في إسطنبول$/, "")
+            .replace(/\s+in Istanbul$/, "");
+          return `<a class="detail-chip" href="${localizedHref(content.slug, lang)}" data-route>${title}</a>`;
+        })
+        .join("")}
+    </div>`;
+}
 
 const medias = {
   hair: "/assets/images/ai/services/hair-APPROVED.webp",
@@ -12,42 +39,42 @@ const medias = {
 export default function servicesPage() {
   const services = [
     {
-      id: "hair-transplant", num: "01", tag: "Hair Restoration",
+      id: "hair-transplant", href: "/hair", num: "01", tag: "Hair Restoration",
       titleKey: "sd.hair.title", descKey: "sd.hair.desc",
       img: medias.hair, alt: "Hair transplantation in progress",
       badgeKey: "sd.life", ctaKey: "sd.hair.cta",
       feats: ["sd.life", "sv.hair.needlefree", "sd.hair.f3"],
     },
     {
-      id: "dental", num: "02", tag: "Aesthetic Dentistry",
+      id: "dental", href: "/dental", num: "02", tag: "Aesthetic Dentistry",
       titleKey: "sd.dental.title", descKey: "sd.dental.desc",
       img: medias.dental, alt: "Comfortable dental check-up",
       badgeKey: "sd.dental.badge", ctaKey: "sd.dental.cta",
       feats: ["sd.dental.f1", "sd.dental.f2", "sv.dental.f3"],
     },
     {
-      id: "plastic-face", num: "03", tag: "Cosmetic & Reconstructive",
+      id: "plastic-face", href: "/plastic", num: "03", tag: "Cosmetic & Reconstructive",
       titleKey: "sd.pf.title", descKey: "sd.pf.desc",
       img: medias.plastic, alt: "Facial plastic surgery consultation",
       badgeKey: "sd.plastic.badge", ctaKey: "sd.plastic.cta",
       feats: ["sd.plastic.f1", "sd.plastic.f2", "sv.plastic.f3"],
     },
     {
-      id: "plastic-body", num: "04", tag: "Cosmetic & Reconstructive",
+      id: "plastic-body", href: "/plastic-body", num: "04", tag: "Cosmetic & Reconstructive",
       titleKey: "sd.pb.title", descKey: "sd.pb.desc",
       img: "/assets/images/ai/services/plastic/vaser360.webp", alt: "Body contouring plan",
       badgeKey: "sd.plastic.badge", ctaKey: "sd.plastic.cta",
       feats: ["sd.pb.f1", "sd.pb.f2", "sv.plastic.f3"],
     },
     {
-      id: "bariatric", num: "05", tag: "Metabolic Health",
+      id: "bariatric", href: "/bariatric", num: "05", tag: "Metabolic Health",
       titleKey: "sd.bariatric.title", descKey: "sd.bariatric.desc",
       img: medias.bariatric, alt: "Healthy lifestyle after bariatric treatment",
       badgeKey: "sd.bariatric.badge", ctaKey: "sd.bariatric.cta",
       feats: ["sd.bariatric.f1", "sd.bariatric.f2", "sv.bariatric.f3"],
     },
     {
-      id: "aesthetics", num: "06", tag: "Aesthetic Medicine",
+      id: "aesthetics", href: "/aesthetics", num: "06", tag: "Aesthetic Medicine",
       titleKey: "sd.aesth.title", descKey: "sd.aesth.desc",
       img: medias.aesthetics, alt: "Serene medical-aesthetics facial treatment",
       badgeKey: "sd.aesth.badge", ctaKey: "sd.aesth.cta",
@@ -77,7 +104,11 @@ export default function servicesPage() {
                   <ul class="detail-features">
                     ${s.feats.map((f) => `<li>✓ ${t(f)}</li>`).join("")}
                   </ul>
-                  <a href="/contact" data-route class="btn-luxury-gold"><span>${t(s.ctaKey)}</span></a>
+                  ${treatmentChips(s.href, getLang())}
+                  <div class="detail-actions">
+                    <a href="${localizedHref(s.href, getLang())}" data-route class="btn-luxury-gold"><span>${t("sv.visit")}</span></a>
+                    <a href="/contact" data-route class="detail-contact">${t(s.ctaKey)}</a>
+                  </div>
                 </div>
                 <div class="detail-media">
                   <div class="media-box-luxury">

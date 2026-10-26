@@ -766,6 +766,8 @@ const fr = {
   "services.j8d": "Un soutien 24h/24 et des suivis virtuels se poursuivent bien après votre retour.",
   "services.sub": "Portefeuille Chirurgical et Esthétique",
   "services.title": "Services Que Nous Proposons",
+  "sv.visit": "Voir la section",
+  "sv.chips": "Fiches de soins",
   "sv.aesth": "Esthétique médicale",
   "sv.aesth.d": "Médecine esthétique non chirurgicale — injections, boosters cutanés, resurfaçage et rajeunissement au laser — conçue pour rafraîchir votre apparence avec peu ou pas de temps d'arrêt.",
   "sv.aesth.f2": "Dermatologie au Laser et Rajeunissement Cutané",

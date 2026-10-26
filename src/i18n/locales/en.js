@@ -766,6 +766,8 @@ const en = {
   "services.j8d": "Round-the-clock support and virtual check-ups continue long after you have returned home.",
   "services.sub": "Surgical & Aesthetic Portfolio",
   "services.title": "Services We Provide",
+  "sv.visit": "Explore this section",
+  "sv.chips": "Treatment pages",
   "sv.aesth": "Medical Aesthetics",
   "sv.aesth.d": "Non-surgical aesthetic medicine — injectables, skin boosters, laser resurfacing and rejuvenation — designed to refresh your look with little to no downtime.",
   "sv.aesth.f2": "Laser Dermatology & Skin Rejuvenation",

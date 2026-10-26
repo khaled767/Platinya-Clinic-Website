@@ -766,6 +766,8 @@ const es = {
   "services.j8d": "El apoyo 24/7 y los seguimientos virtuales continúan mucho después de su regreso a casa.",
   "services.sub": "Cartera Quirúrgica y Estética",
   "services.title": "Servicios Que Ofrecemos",
+  "sv.visit": "Ver la sección",
+  "sv.chips": "Fichas de tratamientos",
   "sv.aesth": "Estética médica",
   "sv.aesth.d": "Medicina estética no quirúrgica — inyectables, boosters cutáneos, resurfacing con láser y rejuvenecimiento — diseñada para renovar tu aspecto con poco o ningún tiempo de recuperación.",
   "sv.aesth.f2": "Dermatología Láser y Rejuvenecimiento Cutáneo",

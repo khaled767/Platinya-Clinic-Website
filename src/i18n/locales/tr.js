@@ -766,6 +766,8 @@ const tr = {
   "services.j8d": "Eve döndükten çok sonra bile 7/24 destek ve sanal kontroller devam eder.",
   "services.sub": "Cerrahi ve Estetik Portföyü",
   "services.title": "Sunduğumuz Hizmetler",
+  "sv.visit": "Bölümü görüntüle",
+  "sv.chips": "Tedavi sayfaları",
   "sv.aesth": "Tıbbi Estetik",
   "sv.aesth.d": "Cerrahi olmayan estetik tıp — enjeksiyonlar, cilt bakım booster'ları, lazer cilt yenileme ve gençleştirme — çok az veya hiç dinlenme süresi olmadan görünümünüzü tazelemek için tasarlandı.",
   "sv.aesth.f2": "Lazer Dermatoloji ve Cilt Gençleştirme",

@@ -766,6 +766,8 @@ const it = {
   "services.j8d": "Supporto 24/7 e controlli virtuali continuano molto dopo il vostro ritorno a casa.",
   "services.sub": "Portfolio Chirurgico ed Estetico",
   "services.title": "Servizi Che Offriamo",
+  "sv.visit": "Vedi la sezione",
+  "sv.chips": "Schede dei trattamenti",
   "sv.aesth": "Estetica medica",
   "sv.aesth.d": "Medicina estetica non chirurgica — iniettabili, booster cutanei, resurfacing laser e ringiovanimento — pensata per rinnovare il tuo aspetto con poco o nessun tempo di recupero.",
   "sv.aesth.f2": "Dermatologia Laser e Ringiovanimento Cutaneo",
