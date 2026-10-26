@@ -46,7 +46,7 @@ export default function hero() {
         <div class="hero-media">
           <div class="hero-card-luxury">
             <img
-              src="./assets/images/ai/hero-APPROVED.webp"
+              src="/assets/images/ai/hero-APPROVED.webp"
               alt="${t("alt.heroLounge")}"
               class="hero-card-img"
               loading="eager"

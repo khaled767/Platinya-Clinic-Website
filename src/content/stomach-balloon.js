@@ -8,7 +8,7 @@
 export default {
   slug: "/stomach-balloon",
   group: { href: "/bariatric", label: { en: "Weight-loss surgery", ar: "جراحة السمنة" } },
-  heroImage: "./assets/images/ai/services/bariatric/balloon.webp",
+  heroImage: "/assets/images/ai/services/bariatric/balloon.webp",
 
   en: {
     title: "Gastric Balloon in Istanbul",

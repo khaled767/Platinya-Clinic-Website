@@ -15,7 +15,7 @@
 export default {
   slug: "/abdominoplasty",
   group: { href: "/plastic-body", label: { en: "Body contouring", ar: "نحت القوام" } },
-  heroImage: "./assets/images/ai/services/plastic/tummy.webp",
+  heroImage: "/assets/images/ai/services/plastic/tummy.webp",
 
   en: {
     title: "Tummy Tuck (Abdominoplasty) in Istanbul",

@@ -1,7 +1,7 @@
 export default {
   slug: "/hollywood-smile",
   group: { href: "/dental", label: { en: "Dental care", ar: "طب الأسنان" } },
-  heroImage: "./assets/images/ai/services/dental/smile.webp",
+  heroImage: "/assets/images/ai/services/dental/smile.webp",
 
   en: {
     title: "Hollywood Smile in Istanbul",

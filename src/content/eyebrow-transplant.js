@@ -1,7 +1,7 @@
 export default {
   slug: "/eyebrow-transplant",
   group: { href: "/hair", label: { en: "Hair restoration", ar: "زراعة الشعر" } },
-  heroImage: "./assets/images/ai/services/hair/brows-approved.webp",
+  heroImage: "/assets/images/ai/services/hair/brows-approved.webp",
 
   en: {
     title: "Eyebrow Transplant in Istanbul",

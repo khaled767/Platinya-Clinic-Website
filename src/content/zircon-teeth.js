@@ -1,7 +1,7 @@
 export default {
   slug: "/zircon-teeth",
   group: { href: "/dental", label: { en: "Dental care", ar: "طب الأسنان" } },
-  heroImage: "./assets/images/ai/services/dental/zirconium.webp",
+  heroImage: "/assets/images/ai/services/dental/zirconium.webp",
 
   en: {
     title: "Zirconia Crowns in Istanbul",

@@ -2,15 +2,16 @@
 // Namespaced hair- hero (clinic photo we approved as the hero) + alternating
 // treatment-area rows in gold frames + a dedicated Techniques section (DHI / FUE).
 import { icons } from "../../components/icons";
-import { t } from "../../i18n";
+import { t, getLang, localizedHref } from "../../i18n";
+import ROUTE_LANGS from "../../data/route-langs.json";
 import treatmentLinks from "../../components/treatment-links";
 
 const areas = [
-  { key: "scalp",  num: "01", img: "./assets/images/ai/services/hair/hairline-approved.webp", alt: "Hairline restoration map" },
-  { key: "beard",  num: "02", img: "./assets/images/ai/services/hair/beard-approved.webp",     alt: "Beard transplant map" },
-  { key: "must",   num: "03", img: "./assets/images/ai/services/hair/mustache-approved.webp",   alt: "Mustache transplant map" },
-  { key: "brows",  num: "04", img: "./assets/images/ai/services/hair/brows-approved.webp",      alt: "Eyebrow transplant map" },
-  { key: "lashes", num: "05", img: "./assets/images/ai/services/hair/lashes-approved.webp",     alt: "Eyelash transplant map" },
+  { key: "scalp",  num: "01", img: "/assets/images/ai/services/hair/hairline-approved.webp", alt: "Hairline restoration map", href: "/hair-transplant" },
+  { key: "beard",  num: "02", img: "/assets/images/ai/services/hair/beard-approved.webp",     alt: "Beard transplant map" },
+  { key: "must",   num: "03", img: "/assets/images/ai/services/hair/mustache-approved.webp",   alt: "Mustache transplant map" },
+  { key: "brows",  num: "04", img: "/assets/images/ai/services/hair/brows-approved.webp",      alt: "Eyebrow transplant map", href: "/eyebrow-transplant" },
+  { key: "lashes", num: "05", img: "/assets/images/ai/services/hair/lashes-approved.webp",     alt: "Eyelash transplant map" },
 ];
 
 const techniques = [
@@ -26,7 +27,7 @@ export default function hairPage() {
       <section class="hair-hero">
         <img
           class="hair-hero-bg"
-          src="./assets/images/ai/services/hair/hero.webp"
+          src="/assets/images/ai/services/hair/hero.webp"
           alt="${t("alt.hairClinic")}"
         />
         <div class="hair-hero-scrim"></div>
@@ -68,7 +69,11 @@ export default function hairPage() {
                   <ul class="hair-row-list">
                     ${[1, 2, 3].map((n) => `<li>${t("hair.f." + s.key + n)}</li>`).join("")}
                   </ul>
-                  <a href="/contact" data-route class="hair-row-link">${t("hair.plan")}<span class="hair-row-arrow"></span></a>
+                  ${
+                    s.href && (ROUTE_LANGS[s.href] || []).includes(getLang())
+                      ? `<a href="${localizedHref(s.href, getLang())}" data-route class="hair-row-link">${t("tr.more")}<span class="hair-row-arrow"></span></a>`
+                      : `<a href="/contact" data-route class="hair-row-link">${t("hair.plan")}<span class="hair-row-arrow"></span></a>`
+                  }
                 </div>
               </article>
             `;
@@ -82,7 +87,7 @@ export default function hairPage() {
             </div>
 
             <figure class="hair-tech-visual">
-              <img src="./assets/images/ai/services/hair/techniques-compare.webp" alt="${t("hair.techTitle")}" loading="lazy" />
+              <img src="/assets/images/ai/services/hair/techniques-compare.webp" alt="${t("hair.techTitle")}" loading="lazy" />
             </figure>
 
             <div class="hair-tech-grid">

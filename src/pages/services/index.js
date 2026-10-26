@@ -2,11 +2,11 @@
 import { t } from "../../i18n";
 
 const medias = {
-  hair: "./assets/images/ai/services/hair-APPROVED.webp",
-  dental: "./assets/images/ai/services/dental-APPROVED-nolamp.webp",
-  plastic: "./assets/images/ai/services/plastic/plastic-APPROVED.webp",
-  bariatric: "./assets/images/ai/services/bariatric/bariatric-APPROVED.webp",
-  aesthetics: "./assets/images/ai/services/aesthetics/aesthetics-APPROVED.webp",
+  hair: "/assets/images/ai/services/hair-APPROVED.webp",
+  dental: "/assets/images/ai/services/dental-APPROVED-nolamp.webp",
+  plastic: "/assets/images/ai/services/plastic/plastic-APPROVED.webp",
+  bariatric: "/assets/images/ai/services/bariatric/bariatric-APPROVED.webp",
+  aesthetics: "/assets/images/ai/services/aesthetics/aesthetics-APPROVED.webp",
 };
 
 export default function servicesPage() {
@@ -35,7 +35,7 @@ export default function servicesPage() {
     {
       id: "plastic-body", num: "04", tag: "Cosmetic & Reconstructive",
       titleKey: "sd.pb.title", descKey: "sd.pb.desc",
-      img: "./assets/images/ai/services/plastic/vaser360.webp", alt: "Body contouring plan",
+      img: "/assets/images/ai/services/plastic/vaser360.webp", alt: "Body contouring plan",
       badgeKey: "sd.plastic.badge", ctaKey: "sd.plastic.cta",
       feats: ["sd.pb.f1", "sd.pb.f2", "sv.plastic.f3"],
     },

@@ -15,7 +15,7 @@
 export default {
   slug: "/silicone",
   group: { href: "/plastic-body", label: { en: "Body contouring", ar: "نحت القوام" } },
-  heroImage: "./assets/images/ai/services/plastic/breast-implant.webp",
+  heroImage: "/assets/images/ai/services/plastic/breast-implant.webp",
 
   en: {
     title: "Breast Augmentation with Silicone Implants in Istanbul",

@@ -18,7 +18,7 @@ export default function conciergePage() {
       <!-- Hero: concierge icon + "CONCIERGE" label over main photo -->
       <section class="hotel-hero">
         <img
-          src="./assets/images/partner-services/concierge/concierge-hero.webp"
+          src="/assets/images/partner-services/concierge/concierge-hero.webp"
           alt="${t("alt.conciergePerson")}"
           class="hotel-hero-bg"
         />
@@ -41,7 +41,7 @@ export default function conciergePage() {
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
           </div>
           <div class="hotel-intro-img">
-            <img src="./assets/images/partner-services/concierge/concierge-desk.webp" alt="${t("alt.conciergeDesk")}" loading="lazy" />
+            <img src="/assets/images/partner-services/concierge/concierge-desk.webp" alt="${t("alt.conciergeDesk")}" loading="lazy" />
           </div>
         </div>
       </section>

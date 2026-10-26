@@ -28,7 +28,7 @@ export default function mainLayout(pageContent) {
       >
         <span class="whatsapp-float-photo">
           <img
-            src="./assets/images/ui/whatsapp-agent.webp"
+            src="/assets/images/ui/whatsapp-agent.webp"
             alt=""
             width="60"
             height="60"
@@ -44,7 +44,7 @@ export default function mainLayout(pageContent) {
            in the pre-rendered HTML, so no crawler and no no-JS visitor sees it. -->
       <div class="wa-teaser" id="wa-teaser" hidden>
         <span class="wa-teaser-avatar">
-          <img src="./assets/images/ui/whatsapp-agent.webp" alt="" width="36" height="36" />
+          <img src="/assets/images/ui/whatsapp-agent.webp" alt="" width="36" height="36" />
         </span>
         <div class="wa-teaser-body">
           <span class="wa-teaser-name">${t("wa.name")}</span>

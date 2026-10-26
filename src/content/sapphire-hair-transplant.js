@@ -1,7 +1,7 @@
 export default {
   slug: "/sapphire-hair-transplant",
   group: { href: "/hair", label: { en: "Hair restoration", ar: "زراعة الشعر" } },
-  heroImage: "./assets/images/ai/services/hair/hero.webp",
+  heroImage: "/assets/images/ai/services/hair/hero.webp",
 
   en: {
     title: "Sapphire FUE Hair Transplant in Istanbul",

@@ -7,7 +7,7 @@
 export default {
   slug: "/face-botox",
   group: { href: "/aesthetics", label: { en: "Aesthetic medicine", ar: "الطب التجميلي" } },
-  heroImage: "./assets/images/ai/services/aesthetics/botox.webp",
+  heroImage: "/assets/images/ai/services/aesthetics/botox.webp",
 
   en: {
     title: "Face Botox in Istanbul",

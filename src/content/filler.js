@@ -7,7 +7,7 @@
 export default {
   slug: "/filler",
   group: { href: "/aesthetics", label: { en: "Aesthetic medicine", ar: "الطب التجميلي" } },
-  heroImage: "./assets/images/ai/services/aesthetics/filler.webp",
+  heroImage: "/assets/images/ai/services/aesthetics/filler.webp",
 
   en: {
     title: "Dermal Fillers in Istanbul",

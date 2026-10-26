@@ -16,7 +16,7 @@ const GROUP_ROUTE = {
   aesthetics: "/aesthetics",
 };
 
-const BASE = "./assets/images/ai/services/plastic/";
+const BASE = "/assets/images/ai/services/plastic/";
 
 // Facial procedures (8) — final order set by the client:
 //   1 Facelift · 2 Eyelids · 3 Brow lift · 4 Rhinoplasty
@@ -24,8 +24,8 @@ const BASE = "./assets/images/ai/services/plastic/";
 //   8 Neck lift (moved last)
 // key matches pf.g.<key> / pf.g.<key>c / pf.f.<key>{1..3}
 const FACE = [
-  { key: "facelift", num: "01", img: "facelift.webp" },
-  { key: "blepharo", num: "02", img: "blepharo.webp" },
+  { key: "facelift", num: "01", img: "facelift.webp", href: "/facelift-surgery" },
+  { key: "blepharo", num: "02", img: "blepharo.webp", href: "/blepharoplasty" },
   { key: "brow",     num: "03", img: "browlift.webp" },
   { key: "rhino",    num: "04", img: "rhinoplasty.webp" },
   { key: "fat",      num: "05", img: "fat-injection.webp" },
@@ -40,13 +40,13 @@ const FACE = [
 // key matches pb.g.<key> / pb.g.<key>c / pb.f.<key>{1..3}
 const BODY = [
   { key: "arms",       num: "01", img: "arms.webp" },
-  { key: "breastimp",  num: "02", img: "breast-implant.webp" },
+  { key: "breastimp",  num: "02", img: "breast-implant.webp", href: "/silicone" },
   { key: "breastlift", num: "03", img: "breast-lift.webp" },
-  { key: "vaser",      num: "04", img: "vaser360.webp" },
+  { key: "vaser",      num: "04", img: "vaser360.webp", href: "/liposuction" },
   // The tummy tuck has its own page; the row links to it where it exists.
   { key: "tummylift",  num: "05", img: "tummy.webp", href: "/abdominoplasty" },
   { key: "thighs",     num: "06", img: "thighs.webp" },
-  { key: "bbl",        num: "07", img: "bbl.webp" },
+  { key: "bbl",        num: "07", img: "bbl.webp", href: "/butt-augmentation-surgery" },
 ];
 
 function row(list, i, prefix, base) {
@@ -114,7 +114,6 @@ export function plasticGroupPage({ prefix, heroImg, icon, procedures, base }) {
       </section>
 
       ${treatmentLinks(GROUP_ROUTE[prefix])}
-      </section>
     </div>
   `;
 }

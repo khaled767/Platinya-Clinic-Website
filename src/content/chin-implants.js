@@ -15,7 +15,7 @@
 export default {
   slug: "/chin-implants",
   group: { href: "/plastic", label: { en: "Facial plastic surgery", ar: "تجميل الوجه" } },
-  heroImage: "./assets/images/ai/services/plastic/hero.webp",
+  heroImage: "/assets/images/ai/services/plastic/hero.webp",
 
   en: {
     title: "Chin Augmentation in Istanbul (Implant and Genioplasty)",

@@ -1,7 +1,7 @@
 export default {
   slug: "/dental-implants",
   group: { href: "/dental", label: { en: "Dental care", ar: "طب الأسنان" } },
-  heroImage: "./assets/images/ai/services/dental/implants.webp",
+  heroImage: "/assets/images/ai/services/dental/implants.webp",
 
   en: {
     title: "Dental Implants in Istanbul",

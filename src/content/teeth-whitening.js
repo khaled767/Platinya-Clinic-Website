@@ -1,7 +1,7 @@
 export default {
   slug: "/teeth-whitening",
   group: { href: "/dental", label: { en: "Dental care", ar: "طب الأسنان" } },
-  heroImage: "./assets/images/ai/services/dental/hero.webp",
+  heroImage: "/assets/images/ai/services/dental/hero.webp",
 
   en: {
     title: "Teeth Whitening in Istanbul",

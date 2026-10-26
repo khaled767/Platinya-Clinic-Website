@@ -13,12 +13,12 @@ const STEPS = [
 
 // Hotel photo gallery (clearly-named copies of the client's WhatsApp images)
 const gallery = [
-  { src: "./assets/images/partner-services/hotel/hotel-1.webp", key: "g1" },
-  { src: "./assets/images/partner-services/hotel/hotel-3.webp", key: "g2" },
-  { src: "./assets/images/partner-services/hotel/hotel-5.webp", key: "g3" },
-  { src: "./assets/images/partner-services/hotel/hotel-7.webp", key: "g4" },
-  { src: "./assets/images/partner-services/hotel/hotel-9.webp", key: "g5" },
-  { src: "./assets/images/partner-services/hotel/hotel-12.webp", key: "g6" },
+  { src: "/assets/images/partner-services/hotel/hotel-1.webp", key: "g1" },
+  { src: "/assets/images/partner-services/hotel/hotel-3.webp", key: "g2" },
+  { src: "/assets/images/partner-services/hotel/hotel-5.webp", key: "g3" },
+  { src: "/assets/images/partner-services/hotel/hotel-7.webp", key: "g4" },
+  { src: "/assets/images/partner-services/hotel/hotel-9.webp", key: "g5" },
+  { src: "/assets/images/partner-services/hotel/hotel-12.webp", key: "g6" },
 ];
 
 export default function hotelPage() {
@@ -29,7 +29,7 @@ export default function hotelPage() {
            its base background -->
       <section class="hotel-hero">
         <img
-          src="./assets/images/partner-services/hotel/hotel-1.webp"
+          src="/assets/images/partner-services/hotel/hotel-1.webp"
           alt="${t("alt.hotelExterior")}"
           class="hotel-hero-bg"
         />
@@ -52,7 +52,7 @@ export default function hotelPage() {
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
           </div>
           <div class="hotel-intro-img">
-            <img src="./assets/images/partner-services/hotel/hotel-2.webp" alt="${t("alt.hotelSuite")}" loading="lazy" />
+            <img src="/assets/images/partner-services/hotel/hotel-2.webp" alt="${t("alt.hotelSuite")}" loading="lazy" />
           </div>
         </div>
       </section>

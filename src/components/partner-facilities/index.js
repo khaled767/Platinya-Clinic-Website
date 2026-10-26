@@ -4,25 +4,25 @@ import { t } from "../../i18n";
 export default function partnerFacilities() {
   const partners = [
     {
-      logo: "./assets/images/partner-clinics/bm-logo.webp",
+      logo: "/assets/images/partner-clinics/bm-logo.webp",
       logoAlt: t("alt.partnerLogo"),
-      img: "./assets/images/partner-clinics/bm-treatment-web.webp",
+      img: "/assets/images/partner-clinics/bm-treatment-web.webp",
       imgAlt: t("alt.partnerDental"),
       module: "Dental Excellence",
       capKey: "pf.f1.d",
     },
     {
-      logo: "./assets/images/partner-clinics/efc-logo.webp",
+      logo: "/assets/images/partner-clinics/efc-logo.webp",
       logoAlt: t("alt.partnerLogo"),
-      img: "./assets/images/partner-clinics/efc-building-web.webp",
+      img: "/assets/images/partner-clinics/efc-building-web.webp",
       imgAlt: t("alt.partnerSurgical"),
       module: "Surgical & Medical Centre",
       capKey: "pf.f2.d",
     },
     {
-      logo: "./assets/images/partner-clinics/hlc-logo.webp",
+      logo: "/assets/images/partner-clinics/hlc-logo.webp",
       logoAlt: t("alt.partnerLogo"),
-      img: "./assets/images/partner-clinics/hlc-waiting-web.webp",
+      img: "/assets/images/partner-clinics/hlc-waiting-web.webp",
       imgAlt: t("alt.partnerWaiting"),
       module: "Oral & Aesthetic Care",
       capKey: "pf.f3.d",

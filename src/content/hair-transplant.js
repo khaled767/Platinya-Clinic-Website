@@ -1,7 +1,7 @@
 export default {
   slug: "/hair-transplant",
   group: { href: "/hair", label: { en: "Hair restoration", ar: "زراعة الشعر" } },
-  heroImage: "./assets/images/ai/services/hair/hairline-approved.webp",
+  heroImage: "/assets/images/ai/services/hair/hairline-approved.webp",
 
   en: {
     title: "Hair Transplant in Istanbul (FUE)",

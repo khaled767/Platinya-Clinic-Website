@@ -1,7 +1,7 @@
 export default {
   slug: "/hair-implant-hybrid",
   group: { href: "/hair", label: { en: "Hair restoration", ar: "زراعة الشعر" } },
-  heroImage: "./assets/images/ai/services/hair/techniques-compare.webp",
+  heroImage: "/assets/images/ai/services/hair/techniques-compare.webp",
 
   en: {
     title: "Hybrid Hair Transplant (FUE + FUT) in Istanbul",

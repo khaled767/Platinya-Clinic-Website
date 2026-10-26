@@ -17,7 +17,7 @@ export default function interpreterPage() {
 
       <section class="hotel-hero">
         <img
-          src="./assets/images/partner-services/interpreter/interpreter-hero.webp"
+          src="/assets/images/partner-services/interpreter/interpreter-hero.webp"
           alt="${t("alt.interpreterPerson")}"
           class="hotel-hero-bg"
         />
@@ -39,7 +39,7 @@ export default function interpreterPage() {
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
           </div>
           <div class="hotel-intro-img">
-            <img src="./assets/images/partner-services/interpreter/interpreter-desk.webp" alt="${t("alt.interpreterDesk")}" loading="lazy" />
+            <img src="/assets/images/partner-services/interpreter/interpreter-desk.webp" alt="${t("alt.interpreterDesk")}" loading="lazy" />
           </div>
         </div>
       </section>

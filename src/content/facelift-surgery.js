@@ -15,7 +15,7 @@
 export default {
   slug: "/facelift-surgery",
   group: { href: "/plastic", label: { en: "Facial plastic surgery", ar: "تجميل الوجه" } },
-  heroImage: "./assets/images/ai/services/plastic/facelift.webp",
+  heroImage: "/assets/images/ai/services/plastic/facelift.webp",
 
   en: {
     title: "Facelift Surgery in Istanbul (Deep-Plane Facelift)",

@@ -8,7 +8,7 @@
 export default {
   slug: "/gastric-sleeve-surgery",
   group: { href: "/bariatric", label: { en: "Weight-loss surgery", ar: "جراحة السمنة" } },
-  heroImage: "./assets/images/ai/services/bariatric/sleeve.webp",
+  heroImage: "/assets/images/ai/services/bariatric/sleeve.webp",
 
   en: {
     title: "Gastric Sleeve Surgery in Istanbul",

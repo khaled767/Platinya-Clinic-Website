@@ -15,7 +15,7 @@
 export default {
   slug: "/blepharoplasty",
   group: { href: "/plastic", label: { en: "Facial plastic surgery", ar: "تجميل الوجه" } },
-  heroImage: "./assets/images/ai/services/plastic/blepharo.webp",
+  heroImage: "/assets/images/ai/services/plastic/blepharo.webp",
 
   en: {
     title: "Eyelid Surgery (Blepharoplasty) in Istanbul",

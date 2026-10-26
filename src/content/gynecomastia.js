@@ -15,7 +15,7 @@
 export default {
   slug: "/gynecomastia",
   group: { href: "/plastic-body", label: { en: "Body contouring", ar: "نحت القوام" } },
-  heroImage: "./assets/images/ai/services/plastic/hero-body.webp",
+  heroImage: "/assets/images/ai/services/plastic/hero-body.webp",
 
   en: {
     title: "Gynecomastia Surgery (Male Breast Reduction) in Istanbul",

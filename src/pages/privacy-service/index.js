@@ -8,7 +8,7 @@ export default function privacyServicePage() {
 
       <section class="hotel-hero">
         <img
-          src="./assets/images/partner-services/privacy/privacy-hero.webp"
+          src="/assets/images/partner-services/privacy/privacy-hero.webp"
           alt="${t("alt.privacyPerson")}"
           class="hotel-hero-bg"
         />
@@ -30,7 +30,7 @@ export default function privacyServicePage() {
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
           </div>
           <div class="hotel-intro-img">
-            <img src="./assets/images/partner-services/privacy/privacy-hero.webp" alt="${t("alt.privacyConsult")}" loading="lazy" />
+            <img src="/assets/images/partner-services/privacy/privacy-hero.webp" alt="${t("alt.privacyConsult")}" loading="lazy" />
           </div>
         </div>
       </section>

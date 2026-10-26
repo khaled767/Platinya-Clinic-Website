@@ -1,7 +1,7 @@
 export default {
   slug: "/hair-transplant-for-women",
   group: { href: "/hair", label: { en: "Hair restoration", ar: "زراعة الشعر" } },
-  heroImage: "./assets/images/ai/services/hair/lashes-approved.webp",
+  heroImage: "/assets/images/ai/services/hair/lashes-approved.webp",
 
   en: {
     title: "Hair Transplant for Women in Istanbul",

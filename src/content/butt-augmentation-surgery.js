@@ -15,7 +15,7 @@
 export default {
   slug: "/butt-augmentation-surgery",
   group: { href: "/plastic-body", label: { en: "Body contouring", ar: "نحت القوام" } },
-  heroImage: "./assets/images/ai/services/plastic/bbl.webp",
+  heroImage: "/assets/images/ai/services/plastic/bbl.webp",
 
   en: {
     title: "Buttock Augmentation (BBL) in Istanbul",

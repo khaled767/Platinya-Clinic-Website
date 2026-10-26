@@ -22,11 +22,11 @@ export default function turkishLicenses() {
               <button
                 type="button"
                 class="license-zoom"
-                data-lightbox="./assets/images/certifications/health-tourism-cert.webp"
+                data-lightbox="/assets/images/certifications/health-tourism-cert.webp"
                 aria-label="${t("lic.ariaHealth")}"
               >
                 <img
-                  src="./assets/images/certifications/health-tourism-cert-web.webp"
+                  src="/assets/images/certifications/health-tourism-cert-web.webp"
                   alt="${t("alt.certHealthTourism")}"
                   class="license-img"
                   loading="lazy"
@@ -46,11 +46,11 @@ export default function turkishLicenses() {
               <button
                 type="button"
                 class="license-zoom"
-                data-lightbox="./assets/images/certifications/trademark-cert-p1.webp"
+                data-lightbox="/assets/images/certifications/trademark-cert-p1.webp"
                 aria-label="${t("lic.ariaTmark")}"
               >
                 <img
-                  src="./assets/images/certifications/trademark-cert-p1-web.webp"
+                  src="/assets/images/certifications/trademark-cert-p1-web.webp"
                   alt="${t("alt.certTrademark")}"
                   class="license-img"
                   loading="lazy"

@@ -1,7 +1,7 @@
 export default {
   slug: "/periodontics",
   group: { href: "/dental", label: { en: "Dental care", ar: "طب الأسنان" } },
-  heroImage: "./assets/images/ai/services/dental/titanium.webp",
+  heroImage: "/assets/images/ai/services/dental/titanium.webp",
 
   en: {
     title: "Gum Treatment (Periodontics) in Istanbul",

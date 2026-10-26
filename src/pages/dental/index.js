@@ -2,15 +2,16 @@
 // Namespaced dental hero (not hotel) + alternating rows framed in gold each
 // holding an image on one side and a 3-point explainer on the other.
 import { icons } from "../../components/icons";
-import { t } from "../../i18n";
+import { t, getLang, localizedHref } from "../../i18n";
+import ROUTE_LANGS from "../../data/route-langs.json";
 import treatmentLinks from "../../components/treatment-links";
 
 const treatments = [
-  { key: "smile",   num: "01", tagKey: "smile",   img: "./assets/images/ai/services/dental/smile.webp",    alt: "Hollywood Smile result" },
-  { key: "veneer",  num: "02", tagKey: "cosmetic", img: "./assets/images/ai/services/dental/emax.webp",     alt: "E-Max veneers on a dental model" },
-  { key: "zircon",  num: "03", tagKey: "crowns",   img: "./assets/images/ai/services/dental/zirconium.webp", alt: "Zirconia crowns on a tray" },
-  { key: "implant", num: "04", tagKey: "implant",  img: "./assets/images/ai/services/dental/implants.webp",  alt: "Dental implants" },
-  { key: "tibar",   num: "05", tagKey: "arch",     img: "./assets/images/ai/services/dental/titanium.webp",  alt: "Titanium bar full-arch framework" },
+  { key: "smile",   num: "01", tagKey: "smile",   img: "/assets/images/ai/services/dental/smile.webp",    alt: "Hollywood Smile result", href: "/hollywood-smile" },
+  { key: "veneer",  num: "02", tagKey: "cosmetic", img: "/assets/images/ai/services/dental/emax.webp",     alt: "E-Max veneers on a dental model", href: "/dental-veneers" },
+  { key: "zircon",  num: "03", tagKey: "crowns",   img: "/assets/images/ai/services/dental/zirconium.webp", alt: "Zirconia crowns on a tray", href: "/zircon-teeth" },
+  { key: "implant", num: "04", tagKey: "implant",  img: "/assets/images/ai/services/dental/implants.webp",  alt: "Dental implants", href: "/dental-implants" },
+  { key: "tibar",   num: "05", tagKey: "arch",     img: "/assets/images/ai/services/dental/titanium.webp",  alt: "Titanium bar full-arch framework" },
 ];
 
 export default function dentalPage() {
@@ -21,7 +22,7 @@ export default function dentalPage() {
       <section class="dental-hero">
         <img
           class="dental-hero-bg"
-          src="./assets/images/ai/services/dental/hero.webp"
+          src="/assets/images/ai/services/dental/hero.webp"
           alt="${t("alt.dentalRoom")}"
         />
         <div class="dental-hero-scrim"></div>
@@ -64,7 +65,11 @@ export default function dentalPage() {
                   <ul class="dental-row-list">
                     ${[1,2,3].map((n) => `<li>${t("dental.s." + s.key + ".f" + n)}</li>`).join('')}
                   </ul>
-                  <a href="/contact" data-route class="dental-row-link">${t("dental.cta")}<span class="dental-row-arrow"></span></a>
+                  ${
+                    s.href && (ROUTE_LANGS[s.href] || []).includes(getLang())
+                      ? `<a href="${localizedHref(s.href, getLang())}" data-route class="dental-row-link">${t("tr.more")}<span class="dental-row-arrow"></span></a>`
+                      : `<a href="/contact" data-route class="dental-row-link">${t("dental.cta")}<span class="dental-row-arrow"></span></a>`
+                  }
                 </div>
               </article>
             `;
@@ -86,7 +91,7 @@ export default function dentalPage() {
           </div>
 
           <figure class="dental-tech-visual">
-            <img src="./assets/images/ai/services/dental/techniques-compare.webp" alt="${t("dental.techTitle")}" loading="lazy" />
+            <img src="/assets/images/ai/services/dental/techniques-compare.webp" alt="${t("dental.techTitle")}" loading="lazy" />
           </figure>
 
           <div class="dental-tech-grid">

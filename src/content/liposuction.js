@@ -15,7 +15,7 @@
 export default {
   slug: "/liposuction",
   group: { href: "/plastic-body", label: { en: "Body contouring", ar: "نحت القوام" } },
-  heroImage: "./assets/images/ai/services/plastic/vaser360.webp",
+  heroImage: "/assets/images/ai/services/plastic/vaser360.webp",
 
   en: {
     title: "Liposuction in Istanbul (VASER and Tumescent)",

@@ -1,7 +1,7 @@
 export default {
   slug: "/dental-veneers",
   group: { href: "/dental", label: { en: "Dental care", ar: "طب الأسنان" } },
-  heroImage: "./assets/images/ai/services/dental/emax.webp",
+  heroImage: "/assets/images/ai/services/dental/emax.webp",
 
   en: {
     title: "Porcelain Veneers (E-max) in Istanbul",

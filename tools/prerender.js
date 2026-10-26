@@ -297,6 +297,18 @@ const TREATMENT_SEO = require("../src/data/treatment-seo.json");
 
 // Bake everything a crawler reads WITHOUT running JavaScript: language, dir,
 // title, description, canonical, share tags and the hreflang cluster.
+// "./assets/x.webp" only resolves correctly at "/". On /ar/liposuction/ the
+// browser asks for /ar/liposuction/assets/x.webp and every image is broken until
+// the bundle hydrates and rewrites src — which is exactly what visitors saw as
+// "images are broken, reload a few times and they appear". Make them absolute in
+// the HTML itself so the first paint is already correct.
+function absolutizeAssets(html) {
+  return html
+    .replace(/(src|href|poster|data-lightbox)="\.\/assets\//g, '$1="/assets/')
+    .replace(/(srcset|imagesrcset)="\.\/assets\//g, '$1="/assets/')
+    .replace(/url\((["']?)\.\/assets\//g, "url($1/assets/");
+}
+
 function applyStaticSeo(html, route, lang, table) {
   const seoPage = SEO_KEY_BY_ROUTE[route] || "home";
   const own = (TREATMENT_SEO[route] || {})[lang] || {};
@@ -583,7 +595,7 @@ async function main() {
       }
 
       const out = template.replace(/<div id="app">\s*<\/div>/, `<div id="app">${res.markup}</div>`);
-      const withSeo = applyStaticSeo(out, route, lang, table);
+      const withSeo = absolutizeAssets(applyStaticSeo(out, route, lang, table));
 
       const target = fileFor(route, lang);
       fs.mkdirSync(path.dirname(target), { recursive: true });

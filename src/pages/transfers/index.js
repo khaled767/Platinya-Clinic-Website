@@ -17,7 +17,7 @@ export default function transfersPage() {
 
       <section class="hotel-hero">
         <img
-          src="./assets/images/partner-services/transfers/transfers-hero.webp"
+          src="/assets/images/partner-services/transfers/transfers-hero.webp"
           alt="${t("alt.transfersCar")}"
           class="hotel-hero-bg"
         />
@@ -39,7 +39,7 @@ export default function transfersPage() {
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
           </div>
           <div class="hotel-intro-img">
-            <img src="./assets/images/partner-services/transfers/transfers-route.webp" alt="${t("alt.transfersRoute")}" loading="lazy" />
+            <img src="/assets/images/partner-services/transfers/transfers-route.webp" alt="${t("alt.transfersRoute")}" loading="lazy" />
           </div>
         </div>
       </section>

@@ -18,7 +18,7 @@ export default function airportPage() {
       <!-- Hero: VIP airport icon + "AIRPORT" label over the main reception photo -->
       <section class="hotel-hero">
         <img
-          src="./assets/images/partner-services/airport/airport-hero.webp"
+          src="/assets/images/partner-services/airport/airport-hero.webp"
           alt="${t("alt.airportReception")}"
           class="hotel-hero-bg"
         />
@@ -41,7 +41,7 @@ export default function airportPage() {
             <a href="/contact" data-route class="btn-luxury-gold"><span>${t("cta.vip")}</span></a>
           </div>
           <div class="hotel-intro-img">
-            <img src="./assets/images/partner-services/airport/airport-car.webp" alt="${t("alt.airportCar")}" loading="lazy" />
+            <img src="/assets/images/partner-services/airport/airport-car.webp" alt="${t("alt.airportCar")}" loading="lazy" />
           </div>
         </div>
       </section>
