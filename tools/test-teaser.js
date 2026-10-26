@@ -4,14 +4,16 @@
  *
  * Proves:
  *   1. nothing is visible on arrival: the bubble ships hidden and empty;
- *   2. it greets after 6 seconds (real timers, no hook);
+ *   2. it greets after 10 seconds (real timers, no hook), never before;
  *   3. a second and third message follow, then it stops;
  *   4. closing with × does NOT end the conversation — the next message returns
  *      after the snooze, and the visitor never sees message one twice;
  *   5. the greeting follows the page language in all seven locales;
  *   6. state survives a page change (the site is a multi-page SPA);
  *   7. every message chimes, the button opens WhatsApp with a pre-typed question,
- *      and the served HTML contains no popup for crawlers.
+ *      and the served HTML contains no popup for crawlers;
+ *   8. a saved state older than 30 minutes is discarded — the greeting comes
+ *      back on a later visit instead of staying silent forever.
  */
 
 const http = require("http");
@@ -118,17 +120,17 @@ const text = (d) => d.querySelector(".wa-teaser-text").textContent;
 (async () => {
   const server = await serve();
 
-  console.log("1) 6 seconds, real timers — the visitor is left alone first");
+  console.log("1) 10 seconds, real timers — the visitor is left alone first");
   {
     const dom = await boot("/ar/");
     const d = dom.window.document;
     const box = d.getElementById("wa-teaser");
     check(!!box, "the bubble exists in the layout");
     check(box.hidden === true, "hidden on arrival");
-    await sleep(3200);
-    check(box.hidden === true, "still hidden at 3 seconds");
-    await sleep(3300); // ~6.5s
-    check(box.hidden === false, "it appears just after 6 seconds");
+    await sleep(6200);
+    check(box.hidden === true, "still hidden at 6 seconds (it no longer greets early)");
+    await sleep(4600); // ~10.8s
+    check(box.hidden === false, "it appears just after 10 seconds");
     await sleep(1200);
     check(/أهلاً بك/.test(text(d)), "then greets in Arabic", JSON.stringify(text(d).slice(0, 24)));
     dom.window.close();
@@ -197,18 +199,41 @@ const text = (d) => d.querySelector(".wa-teaser-text").textContent;
     dom.window.close();
   }
 
-  console.log("\n5) A visitor who already saw message 1 on another page continues, not restarts");
+  console.log("5) A visitor who already saw message 1 on another page continues, not restarts");
   {
     const dom = await boot("/fr/", {
       timing: [60, 260, 460],
-      seedState: { shown: 1, nextAt: Date.now() + 60 },
+      seedState: { shown: 1, nextAt: Date.now() + 60, updatedAt: Date.now() },
     });
     await sleep(200);
     check(/hésitez encore/.test(text(dom.window.document)), "the French page opens with message 2", JSON.stringify(text(dom.window.document).slice(0, 26)));
     dom.window.close();
   }
 
-  console.log("\n6) The served HTML never contains a popup");
+  console.log("\n6) A state left from an earlier visit expires, it does not silence the greeting");
+  {
+    // 31 minutes ago the visitor saw all three messages. Same tab, later visit:
+    // they must be greeted again — this is the "messages are broken" report.
+    const dom = await boot("/ar/", {
+      timing: [60, 260, 460],
+      seedState: { shown: 3, done: true, nextAt: null, updatedAt: Date.now() - 31 * 60 * 1000 },
+    });
+    await sleep(200);
+    check(/أهلاً بك/.test(text(dom.window.document)), "an expired state starts the greeting over", JSON.stringify(text(dom.window.document).slice(0, 24)));
+    dom.window.close();
+  }
+  {
+    // Five minutes ago, same tab: the visit is still in progress, stay quiet.
+    const dom = await boot("/ar/", {
+      timing: [60, 260, 460],
+      seedState: { shown: 3, done: true, nextAt: null, updatedAt: Date.now() - 5 * 60 * 1000 },
+    });
+    await sleep(200);
+    check(text(dom.window.document) === "", "a recent state is still respected (no nagging)");
+    dom.window.close();
+  }
+
+  console.log("\n7) The served HTML never contains a popup");
   {
     const html = fs.readFileSync(path.join(DIST, "ar", "index.html"), "utf8");
     check(/id="wa-teaser"[^>]*hidden/.test(html.replace(/\s+/g, " ")), "the bubble ships hidden");

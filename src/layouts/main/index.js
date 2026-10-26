@@ -2,11 +2,13 @@ import header from "../../components/header";
 import footer from "../../components/footer";
 import { icons } from "../../components/icons";
 import { t } from "../../i18n";
+import { waHref } from "../../utils/wa-link";
 
 export default function mainLayout(pageContent) {
   // One number, one greeted message: the chat opens with the visitor's own
-  // question already typed, in the language they are reading.
-  const waHref = `https://wa.me/905300799487?text=${encodeURIComponent(t("wa.prefill"))}`;
+  // question already typed, in the language they are reading. The number and
+  // the encoding live in utils/wa-link.js — never retyped by hand.
+  const waLink = waHref(t("wa.prefill"));
 
   return `
     <div class="app-layout">
@@ -19,7 +21,7 @@ export default function mainLayout(pageContent) {
       ${footer()}
 
       <a
-        href="${waHref}"
+        href="${waLink}"
         target="_blank"
         rel="noopener"
         class="whatsapp-float"
@@ -51,7 +53,7 @@ export default function mainLayout(pageContent) {
           <p class="wa-teaser-text" id="wa-teaser-text" role="status" aria-live="polite"></p>
           <span class="wa-teaser-dots" aria-hidden="true"><i></i><i></i><i></i></span>
         </div>
-        <a class="wa-teaser-open" href="${waHref}" target="_blank" rel="noopener" aria-label="${t("wa.chat")}"></a>
+        <a class="wa-teaser-open" href="${waLink}" target="_blank" rel="noopener" aria-label="${t("wa.chat")}"></a>
         <button type="button" class="wa-teaser-close" aria-label="${t("wa.close")}">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
         </button>

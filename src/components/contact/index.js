@@ -1,6 +1,7 @@
 // Contact Component (High-Fidelity Concierge Form)
 import { icons } from "../icons";
 import { t } from "../../i18n";
+import { waHref } from "../../utils/wa-link";
 
 export default function contact() {
   return `
@@ -18,7 +19,7 @@ export default function contact() {
               <div>
                 <span class="channel-label">${t("contact.hotline")}</span>
                 <a href="tel:+905****9487" class="channel-value"><bdi dir="ltr">+90 530 079 9487</bdi></a>
-                <a href="https://wa.me/905300799487" target="_blank" rel="noopener" class="channel-whatsapp">
+                <a href="${waHref()}" target="_blank" rel="noopener" class="channel-whatsapp">
                   <span class="whatsapp-badge">${icons.whatsapp}</span>
                   <span>WhatsApp</span>
                 </a>

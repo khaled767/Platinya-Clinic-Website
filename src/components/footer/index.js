@@ -2,6 +2,7 @@
 import { icons } from "../icons";
 import legalDisclaimer from "../legal-disclaimer";
 import { t } from "../../i18n";
+import { waHref } from "../../utils/wa-link";
 
 export default function footer() {
   return `
@@ -52,7 +53,7 @@ export default function footer() {
               <p class="contact-item">
                 <span class="contact-label">${t("footer.vipLine")}:</span>
                 <a href="tel:+905****9487" class="contact-link"><bdi dir="ltr">+90 530 079 9487</bdi></a>
-                <a href="https://wa.me/905300799487" target="_blank" rel="noopener" class="footer-whatsapp contact-link">
+                <a href="${waHref()}" target="_blank" rel="noopener" class="footer-whatsapp contact-link">
                   <span class="whatsapp-badge">${icons.whatsapp}</span>
                   <span>WhatsApp</span>
                 </a>

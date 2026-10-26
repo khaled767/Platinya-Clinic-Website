@@ -5,12 +5,18 @@
 // of the page. Closing it does not silence the coordinator forever: it steps
 // back and returns later with the next message. Only the last message ends it.
 //
-// Timing: 6s → 18s → 50s from the first page view. Closing snoozes the next
+// Timing: 10s → 22s → 50s from the first page view. Closing snoozes the next
 // message by 40s instead of cancelling it.
 //
 // The state (how many messages were shown, when the next one is due) lives in
 // sessionStorage, because every internal link is a real page load: without it a
 // visitor would meet message one again on every page of the site.
+//
+// The state EXPIRES after 30 minutes of inactivity (STATE_TTL_MS). Without that
+// expiry a tab that had already shown all three messages went permanently
+// silent: reopen the site in the same tab hours later and nothing ever appears,
+// which reads as "the WhatsApp messages are broken again". Quiet for half an
+// hour is a new visit; a visitor who really is mid-session is untouched.
 //
 // Nothing happens in jsdom (the pre-renderer) or without JavaScript — the bubble
 // ships hidden and empty.
@@ -20,10 +26,12 @@ import { isRealBrowser, prefersReducedMotion } from "./motion";
 
 const STATE_KEY = "platinya:wa-state";
 const MESSAGES = ["wa.teaser1", "wa.teaser2", "wa.teaser3"];
-const FIRST_DELAY = 6000;
-const MILESTONES_MS = [6000, 18000, 50000];
+const FIRST_DELAY = 10000;
+const MILESTONES_MS = [10000, 22000, 50000];
 const SNOOZE_MS = 40000;
 const TYPING_MS = 1500;
+// How long a saved state stays valid. Past this, the visit starts over.
+const STATE_TTL_MS = 30 * 60 * 1000;
 
 let timers = [];
 let audioCtx = null;
@@ -53,7 +61,15 @@ function readState() {
   try {
     const raw = sessionStorage.getItem(STATE_KEY);
     const s = raw ? JSON.parse(raw) : null;
-    if (s && typeof s === "object" && Number.isFinite(s.shown)) return s;
+    if (s && typeof s === "object" && Number.isFinite(s.shown)) {
+      // A state left behind by an earlier visit is not this visit's business.
+      const age = Date.now() - (Number.isFinite(s.updatedAt) ? s.updatedAt : 0);
+      if (age > STATE_TTL_MS) {
+        sessionStorage.removeItem(STATE_KEY);
+        return null;
+      }
+      return s;
+    }
   } catch (e) {
     /* private mode */
   }
@@ -61,6 +77,7 @@ function readState() {
 }
 
 function saveState(state) {
+  state.updatedAt = Date.now();
   try {
     sessionStorage.setItem(STATE_KEY, JSON.stringify(state));
   } catch (e) {
